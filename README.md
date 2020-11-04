@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+##iTranslate Proposal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**What Tech Stack will you be implementing?**
 
-## Available Scripts
+I will be using React / Node / Javascript / Express / PostgreSQL.
 
-In the project directory, you can run:
+**Will you be focusing on front-end UI or back-end?**
 
-### `yarn start`
+I will be focusing on the both. At the moment, both are equally interesting and import to me.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Website or mobile app? Something else?**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This will be a web app.
 
-### `yarn test`
+**What goal will your project be designed to achieve?**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+My goal is to have a user friendly and efficient app that allows users to find lyrics of songs sung in Spanish translated to English and vice versa.
 
-### `yarn build`
+**What is the demographic of the users?**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I know that I have a bias towards Reggaeton and Pop music coming from Hispanic artists. I’ll most likely be designing my app with the teen and twenty-something English speaking music fans who either enjoy Latin or Spanish music and would like to better understand it, or those who really enjoy using the music as a way to better learn Spanish.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**What kind of data will your site be using?**
+The site will be using pretty simple database entries consisting of a song artist, tile, spanish lyrics, english lyrics, and possibly some category types like “Reggaeton, pop, etc”.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**How are you planning on collecting data?**
 
-### `yarn eject`
+I’ll be collecting song lyric data from Lyrics API (https://lyricsovh.docs.apiary.io/#reference/0/lyrics-of-a-song/search?console=1) and then collecting the translated lyrics by utilzing IBM Watson translation API (https://www.ibm.com/watson/services/language-translator/).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Outline your approach to designing this app?**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I plan on creating a backend using Express that will handle retrieving data from the API’s and then storing that info into the Database. React will then be responsible for making async calls to the DB to pull artist/song information and displaying it.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**What does your database schema look like?**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+At the moment it's pretty simple. No relationships. Just a entry that contains a PK, the Artist’s name who released the track, original lyrics, translated lyrics, release date, and genres that it falls into.
 
-## Learn More
+**What kinds of issues might you run into with your API?**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Definitely a lot of potential issues. One big one is going to be accuracy of translation from one language to another. Especially, when you consider a lot of lyrics contain slang and metaphors. Another is the general availability of lyrics. There will definitely not be lyrics out there for all the songs I want to include. Speaking of including, since I will only be able to host this on the free account of Heroku. I will only be able to have 10k db entries. And since I plan on creating a DB first approach where all songs that are queried for a lyric translation on the site will first be stored into DB then retrieved and shown to the user, this will limit the number of songs I'll have available for translation.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Is there any sensitive information you need to secure?**
 
-### Code Splitting
+Besides API keys, I may have to store user information if I end up implementing a stretch goal of allowing user profiles to be created where they can update lyrics to be more accurate.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**What functionality will your app include?**
 
-### Analyzing the Bundle Size
+The app will allow users to search for songs stored in our DB and if not included in the DB we will inform them we are retrieving lyrics and then add to DOM once we have the translated lyrics. Potentially be able to sort songs by genre or artists.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**What will the user flow look like?**
 
-### Making a Progressive Web App
+A User will first interact with a landing page with a large search bar prompting them to enter a name of a song or artist to find translated lyrics for. If a song can’t be found in the Lyrics API and there is not one already stored in the DB, a prompt will let the user know that unfortunately we can not translate that song, and to pick another. If the user found a song that is already in the DB a page will be loaded dynamically using React-Router. If that song is found on the Lyrics API, but not in DB. We will display a loading icon while we fetch the data and then shortly display the translated song lyric page after inserting into the DB.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**What features make your site more than a CRUD app?**
 
-### Advanced Configuration
+I don’t know if this site will really be a true CRUD application. If I am able to implement user profiles where a user can update and potentially delete song translations, as well as updating and deleting their profiles, then it definitely should fit into that model. Otherwise, it’s more focused on creating and reading aspects.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**What are your stretch goals?**
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I have a couple stretch goals. One that i’m hopeful to implement is having user profiles where a user can update a translation to be more accurate. And I may need to assign certain users, obviously probably myself to start out with, be admins to approve any changes made so that they aren't malicious translations. Another, would be to imbed music videos of the songs using YouTube’s API. Also, incorporating a healthy sorting ability between genres, artists, and potentially tempo and valence using Spotify’s API.
