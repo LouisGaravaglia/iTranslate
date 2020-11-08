@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import SpotifyAPI from "./SpotifyAPI";
+import LyricsAPI from "./LyricsAPI";
 
 const Home = () => {
   const INITIAL_VALUE = {artist:"", track:""}
@@ -20,6 +21,7 @@ const Home = () => {
     console.log("handleSubmit: ", formData.artist, formData.track);
     const [artist, album, track, image] = await SpotifyAPI.requestSearch(formData.artist, formData.track);
     console.log("WOOT WOOT!: ", artist, album, track, image);
+    const lyrics = await LyricsAPI.requestLyrics(artist, track)
     setFormData(INITIAL_VALUE)
   }
 

@@ -4,9 +4,6 @@ import SpotifyAPI from "./SpotifyAPI";
 
 const SPOTIFY_URL = "https://api.spotify.com/v1/search?q="
 
-// curl -X GET "https://api.spotify.com/v1/search?q=Maluma%20La%20Cura&type=artist,track,album" 
-// -H "Authorization: Bearer BQC5Wiu-4J35XORh7Xkg-UDgZCNidX-VmAzMfvvCOmyPlVJW61LlLt7ePIXgGO5r-k6EVvgd7Qbk0gfQZ3g"
-
 ////////////////////////////////// GET ALL POSTS //////////////////////////////////
 
 // function replaceSpaces(str) {
