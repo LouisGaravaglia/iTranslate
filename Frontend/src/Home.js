@@ -18,8 +18,8 @@ const Home = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("handleSubmit: ", formData.artist, formData.track);
-    const res = await SpotifyAPI.requestSearch(formData.artist, formData.track);
-    console.log("WOOT WOOT!: ", res);
+    const [artist, album, track, image] = await SpotifyAPI.requestSearch(formData.artist, formData.track);
+    console.log("WOOT WOOT!: ", artist, album, track, image);
     setFormData(INITIAL_VALUE)
   }
 
