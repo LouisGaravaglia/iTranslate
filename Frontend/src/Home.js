@@ -21,7 +21,8 @@ const Home = () => {
     console.log("handleSubmit: ", formData.artist, formData.track);
     const [artist, album, track, image] = await SpotifyAPI.requestSearch(formData.artist, formData.track);
     console.log("WOOT WOOT!: ", artist, album, track, image);
-    const lyrics = await LyricsAPI.requestLyrics(artist, track)
+    const lyrics = await LyricsAPI.requestLyrics(artist, track);
+    console.log("These are the lyrics: ", lyrics);
     setFormData(INITIAL_VALUE)
   }
 
