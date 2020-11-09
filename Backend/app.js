@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
 // app.use(express.json());
-const artistRoutes = require("./routes/artist");
+const translateRoutes = require("./routes/translate");
+const artistRoutes = require("./routes/artists");
 
-app.use("/artist", artistRoutes);
-
+app.use("/translate", translateRoutes);
+app.use("/artists", artistRoutes);
 
 /** 404 handler */
 
