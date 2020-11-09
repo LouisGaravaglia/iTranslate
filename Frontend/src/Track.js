@@ -3,21 +3,16 @@ import './App.css';
 import SpotifyApi from "./SpotifyAPI";
 
 
-function Track({name, id}) {
-  const [albums, setAlbums] = useState([]);
+function Track({trackName, id, handleTrackClick, artistName}) {
 
-  const handleClick = async () => {
-
-
-
+  const handleClick = () => {
+    handleTrackClick(id, artistName, trackName);
   }
+
 
   return (
     <div className="Track">
-       <button onClick={handleClick}>{name}</button>
-      
-    
-
+       <button onClick={handleClick}>{trackName}</button>
     </div>
   );
 }

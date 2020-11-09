@@ -10,6 +10,9 @@ class SpotifyAPI {
       const accessToken = await requestAccessToken();
 
       try {
+        const artist = await this.getArtistId(search);
+        console.log("This is the artist: ", artist);
+
         const res = await axios({
           method: "get",
           url: `${SEARCH_URL}/${minifiedSearchParam}&type=track`,
