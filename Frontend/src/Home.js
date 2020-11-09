@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import SpotifyAPI from "./SpotifyAPI";
 import LyricsAPI from "./LyricsAPI";
+import IBMWatsonAPI from "./IBMWatsonAPI";
 
 const Home = () => {
   const INITIAL_VALUE = {artist:"", track:""}
@@ -23,6 +24,8 @@ const Home = () => {
     console.log("WOOT WOOT!: ", artist, album, track, image);
     const lyrics = await LyricsAPI.requestLyrics(artist, track);
     console.log("These are the lyrics: ", lyrics);
+    const translation = await IBMWatsonAPI.getTranslation(lyrics);
+    // console.log("This is the transation: ", translation);
     setFormData(INITIAL_VALUE)
   }
 
