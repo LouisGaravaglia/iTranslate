@@ -39,10 +39,11 @@ function Browse() {
   }
 
   const handleTrackClick = async (trackID, artist, track) => {
-    const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
-    const lyrics = await LyricsApi.getLyrics(artist, track);
-    const parsedLyrics = parseLyrics(lyrics);
-    const translatedLyrics = await IBMWatsonAPI.getTranslation(parsedLyrics);
+    // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
+    const trackLyrics = await LyricsApi.getLyrics(artist, track);
+    setLyrics(trackLyrics);
+    // const parsedLyrics = parseLyrics(lyrics);
+    // const translatedLyrics = await IBMWatsonAPI.getTranslation(parsedLyrics);
 
   }
 
@@ -56,6 +57,9 @@ function Browse() {
       </div>
       <div className="Browse-Tracks">
         {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)}
+      </div>
+      <div className="Browse-Lyrics">
+        <p>{lyrics}</p>
       </div>
     </div>
   );
