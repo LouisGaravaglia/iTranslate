@@ -33,7 +33,7 @@ router.get("/", async function(req, res, next) {
     languageTranslator.translate(translateParams)
     .then(translationResult => {
       console.log(JSON.stringify(translationResult, null, 2));
-      return JSON.stringify(translationResult, null, 2);
+      return res.json(translationResult.result.translations[0].translation)
     })
     .catch(err => {
       console.log('error:', err);
