@@ -29,14 +29,20 @@ router.get("/", async function(req, res, next) {
 };
 
   try {
-    const result =  await languageTranslator.translate(translateParams);
-    console.log("RES translation: ", result.result.translations[0].translation);
+    
+    const response =  await languageTranslator.translate(translateParams);
+    console.log("RES translation: ", response.result.translations[0].translation);
+    console.log("RES translation: ", response);
 
-    // return res.json(JSON.stringify(res.result.translations[0].translation));
-  //  return JSON.stringify(res.result.translations[0].translation);
-      // return res.result.translations[0].translation;
-      // return res.json(res)
-      return res.json(result);
+
+    // return res.json(JSON.stringify(response.result.translations[0].translation));
+  //  return JSON.stringify(response.result.translations[0].translation);
+      // return response.result.translations[0].translation;
+      // return res.json(response)
+
+
+      return res.json(response.result.translations[0].translation);
+       
 
 
   }

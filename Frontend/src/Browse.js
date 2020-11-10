@@ -50,11 +50,16 @@ function Browse() {
 
   return (
     <div className="Browse">
+      <div className="Browse-Landing">
+        <h1 className="Browse-Header">Artists</h1>
+        <h1 className="Browse-Header">Genre</h1>
+        <h1 className="Browse-Header">Danceability</h1>
+      </div>
       <div className="Browse-Artists">
         {artists.map(artist => <button onClick={() => handleArtistClick(artist.id, artist.name)}>{artist.name}</button>)}
       </div>
       <div className="Browse-Albums">
-        {albums.map(a => <Album key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
+        {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
       </div>
       <div className="Browse-Tracks">
         {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)}

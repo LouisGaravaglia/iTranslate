@@ -11,11 +11,11 @@ class IBMWatsonAPI {
      const res = await axios({
         method: "get",
         url: `http://localhost:3001/translate`,
-        params: {lyrics}
+        params: {lyrics},
      });
       
-      
-      console.log("THE TRANSLATION: ", res);
+      // console.log("THE TRANSLATION1: ", JSON.parse(res.result.translations[0].translation));
+      console.log("THE TRANSLATION2: ", res);
       
         
       } catch(err) {
