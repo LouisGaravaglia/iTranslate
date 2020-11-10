@@ -14,10 +14,7 @@ const languageTranslator = new LanguageTranslatorV3({
   serviceUrl: IBM_URL,
 });
 
-const translateParams = {
-  text: 'Hello friend',
-  modelId: 'en-es',
-};
+
 
 
 
@@ -25,21 +22,24 @@ const translateParams = {
 
 
 router.get("/", async function(req, res, next) {
+  const lyrics = req.query.lyrics;
+  const translateParams = {
+  text: lyrics,
+  modelId: 'es-en',
+};
 
   try {
-    console.log("API KEY", IBM_API_KEY);
-    console.log("API URL", IBM_URL);
-    // console.log("IBM VERSION", IBM_VERSION);
-    languageTranslator.translate(translateParams)
-    .then(translationResult => {
-      console.log(JSON.stringify(translationResult, null, 2));
-      return res.json(translationResult.result.translations[0].translation)
-    })
-    .catch(err => {
-      console.log('error:', err);
-    });
-  }
+    const result =  await languageTranslator.translate(translateParams);
+    console.log("RES translation: ", res.result.translations[0].translation);
 
+    // return res.json(JSON.stringify(res.result.translations[0].translation));
+  //  return JSON.stringify(res.result.translations[0].translation);
+      // return res.result.translations[0].translation;
+      // return res.json(res)
+      return res.json(result);
+
+
+  }
   catch (err) {
     return next(err);
   }
