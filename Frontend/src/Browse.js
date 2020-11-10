@@ -15,7 +15,6 @@ function Browse() {
   const [lyrics, setLyrics] = useState("");
   const [translation, setTranslation] = useState("");
   const [selectedArtist, setSelectedArtist] = useState("");
-
   const artists = useSelector(store => store.artists);
   const dispatch = useDispatch();
 
@@ -24,8 +23,6 @@ function Browse() {
     setAlbums(albums);
     setSelectedArtist(artistName);
     console.log("here are the alubms", albums);
-
-
   }
 
   const handleAlbumClick = async (albumID) => {
@@ -34,19 +31,12 @@ function Browse() {
     console.log("here are the tracks", tracks);
   }
 
-  const parseLyrics = () => {
-
-  }
-
   const handleTrackClick = async (trackID, artist, track) => {
     // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
     const trackLyrics = await LyricsApi.getLyrics(artist, track);
     setLyrics(trackLyrics);
-
-    // const parsedLyrics = parseLyrics(lyrics);
     const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
     setTranslation(translatedLyrics);
-
   }
 
   return (
