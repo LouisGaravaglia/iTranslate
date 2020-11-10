@@ -158,12 +158,6 @@
   margin: auto;
   border: 2px solid  rgb(86, 182, 255);
   border-radius: 4px;
-    /* padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1; */
 }
 
 .Search-Field button{
@@ -176,19 +170,10 @@
   position: absolute;
   text-align: center;
   right:0;
-    height: 54px;
-    width: 56px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-  /* float: left;
-  width: 20%;
-  padding: 10px;
-  background: #2196F3;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none; 
-  cursor: pointer;  */
+  height: 54px;
+  width: 56px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .Search-Field button:hover{
@@ -211,4 +196,28 @@
 .Search-Input-Container {
   position: relative;
 
+}
+
+/* //////////////////////////////////////  SEARCH RESULT  ////////////////////////////////////// */
+
+.Search-Results {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.SearchResult {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  background-color: white;
+  border: none;
+  color: rgb(86, 182, 255);
+  margin: 10px 40px;
+  padding: 6px 12px;
+  flex: 0 1 100%;
+}
+
+.SearchResult:hover {
+  color: rgb(19, 57, 154);
 }

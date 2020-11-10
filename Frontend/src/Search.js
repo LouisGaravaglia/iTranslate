@@ -5,7 +5,6 @@ import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 
 const Search = () => {
-  // const INITIAL_VALUE = {artist:"", track:""}
   const [searchVal, setSearchVal] = useState("")
   const [searchResults, setSearchResults] = useState([]);
   const [lyrics, setLyrics] = useState("");
@@ -22,10 +21,6 @@ const Search = () => {
     const resultsArray = await SpotifyAPI.requestSearch(searchVal);
     console.log("resultArray: ", resultsArray);
     setSearchResults(resultsArray);
-    // const lyrics = await LyricsAPI.requestLyrics(artist, track);
-    // console.log("These are the lyrics: ", lyrics);
-    // const translation = await IBMWatsonAPI.getTranslation(lyrics);
-    // console.log("This is the transation: ", translation);
     setSearchVal("")
   }
 
@@ -48,14 +43,6 @@ const Search = () => {
             value={searchVal}
             onChange={handleChange}
           />
-        {/* <label forHtml="artist">Track</label>
-          <input
-            type="text"
-            id="track"
-            name="track"
-            value={formData.track}
-            onChange={handleChange}
-          /> */}
           <button type="submit"><i class="fa fa-search icon"></i></button>
         </div>
       </form>
