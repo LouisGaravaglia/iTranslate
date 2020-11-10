@@ -38,24 +38,28 @@ const Search = () => {
 
   return (
     <div className="Search">
-
+      <div className="Search-Field">
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="searchVal"
-          value={searchVal}
-          onChange={handleChange}
-        />
-      {/* <label forHtml="artist">Track</label>
-        <input
-          type="text"
-          id="track"
-          name="track"
-          value={formData.track}
-          onChange={handleChange}
-        /> */}
-        <button>Submit</button>
+      <div className="Search-Input-Container">
+          <input
+            type="text"
+            id="SearchVal"
+            name="searchVal"
+            value={searchVal}
+            onChange={handleChange}
+          />
+        {/* <label forHtml="artist">Track</label>
+          <input
+            type="text"
+            id="track"
+            name="track"
+            value={formData.track}
+            onChange={handleChange}
+          /> */}
+          <button type="submit"><i class="fa fa-search icon"></i></button>
+        </div>
       </form>
+      </div>
       <div className="Search-Results">
         {searchResults.map(r => <SearchResult getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
       </div>

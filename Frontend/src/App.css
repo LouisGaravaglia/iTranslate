@@ -140,3 +140,75 @@
   color: white;
   margin: 40px 40px;
 }
+
+/* //////////////////////////////////////  SEARCH BAR  ////////////////////////////////////// */
+
+.Search-Field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100vw;
+  height: 100vh;
+}
+
+.Search-Field input {
+  width: 40vw;
+  height: 50px;
+  margin: auto;
+  border: 2px solid  rgb(86, 182, 255);
+  border-radius: 4px;
+    /* padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1; */
+}
+
+.Search-Field button{
+  background-color: rgb(86, 182, 255);
+  border: none;
+  font-size: 1rem;
+  color: white;
+  padding: 6px 12px;
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  right:0;
+    height: 54px;
+    width: 56px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  /* float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; 
+  cursor: pointer;  */
+}
+
+.Search-Field button:hover{
+  background-color: rgb(41, 162, 255);
+}
+
+#SearchVal {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: rgb(55, 55, 55);
+  padding-left: 25px;
+  outline:none;
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+.Search-Input-Container {
+  position: relative;
+
+}
