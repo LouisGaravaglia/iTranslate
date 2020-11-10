@@ -65,12 +65,15 @@ function Browse() {
       <div className="Browse-Tracks">
         {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)}
       </div>
-      <div className="Browse-Lyrics">
-        <p>{lyrics}</p>
-      </div>
-    <p>TRANSLATION</p>
-      <div className="Browse-Translation">
-        <p>{translation}</p>
+      <div className="Browse-Lyrics-Translation">
+        <div className="Browse-Lyrics-Container">
+          <p className="Browse-Lyrics">ORIGINAL LYRICS</p>
+          <p className="Browse-Lyrics">{lyrics}</p>
+        </div>
+        <div className="Browse-Translation-Container">
+          <p className="Browse-Translation">TRANSLATED LYRICS</p>
+          <p className="Browse-Translation">{translation}</p>
+        </div>
       </div>
     </div>
   );
