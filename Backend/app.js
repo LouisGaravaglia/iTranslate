@@ -4,11 +4,12 @@ const app = express();
 const cors = require('cors');
 // app.use(express.json());
 const translateRoutes = require("./routes/translate");
-
-app.use("/translate", translateRoutes);
-
 app.use(cors({origin: true, credentials: true}));
 app.options('*', cors()) 
+app.use("/translate", translateRoutes);
+
+
+
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*');

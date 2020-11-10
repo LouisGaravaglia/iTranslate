@@ -45,6 +45,7 @@ function Browse() {
 
     // const parsedLyrics = parseLyrics(lyrics);
     const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
+    setTranslation(translatedLyrics);
 
   }
 
@@ -66,6 +67,10 @@ function Browse() {
       </div>
       <div className="Browse-Lyrics">
         <p>{lyrics}</p>
+      </div>
+    <p>TRANSLATION</p>
+      <div className="Browse-Translation">
+        <p>{translation}</p>
       </div>
     </div>
   );

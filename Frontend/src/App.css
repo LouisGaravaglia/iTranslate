@@ -80,7 +80,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
 }
@@ -96,4 +96,16 @@
 
 .Browse-Tracks button:hover{
   background-color: rgb(41, 162, 255);
+}
+
+/* //////////////////////////////////////  DISPLAY LYRICS  ////////////////////////////////////// */
+
+.Browse-Lyrics {
+  white-space: pre-line;
+}
+
+/* //////////////////////////////////////  DISPLAY TRANSLATION  ////////////////////////////////////// */
+
+.Browse-Translation {
+  white-space: pre-line;
 }

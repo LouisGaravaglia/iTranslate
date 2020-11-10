@@ -29,7 +29,7 @@ router.get("/", async function(req, res, next) {
 };
 
   try {
-    
+
     const response =  await languageTranslator.translate(translateParams);
     console.log("RES translation: ", response.result.translations[0].translation);
     console.log("RES translation: ", response);
@@ -41,12 +41,14 @@ router.get("/", async function(req, res, next) {
       // return res.json(response)
 
 
-      return res.json(response.result.translations[0].translation);
+      // return res.json(response.result.translations[0].translation);
+      return res.json(JSON.stringify({response: response.result.translations[0].translation}));
        
 
 
   }
   catch (err) {
+    console.log(err);
     return next(err);
   }
 });
