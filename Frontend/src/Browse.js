@@ -42,8 +42,9 @@ function Browse() {
     // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
     const trackLyrics = await LyricsApi.getLyrics(artist, track);
     setLyrics(trackLyrics);
+
     // const parsedLyrics = parseLyrics(lyrics);
-    // const translatedLyrics = await IBMWatsonAPI.getTranslation(parsedLyrics);
+    const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
 
   }
 

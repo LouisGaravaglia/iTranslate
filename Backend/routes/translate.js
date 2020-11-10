@@ -30,7 +30,7 @@ router.get("/", async function(req, res, next) {
 
   try {
     const result =  await languageTranslator.translate(translateParams);
-    console.log("RES translation: ", res.result.translations[0].translation);
+    console.log("RES translation: ", result.result.translations[0].translation);
 
     // return res.json(JSON.stringify(res.result.translations[0].translation));
   //  return JSON.stringify(res.result.translations[0].translation);
