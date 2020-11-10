@@ -2,7 +2,7 @@ import React,  {useState} from 'react';
 import './App.css';
 import SpotifyApi from "./SpotifyAPI";
 import IBMWatsonAPI from './IBMWatsonAPI';
-import LyricsApi from "./LyricsAPI";
+import LyricsAPI from "./LyricsAPI";
 import Album from "./Album";
 import Track from "./Track";
 import { useSelector, useDispatch } from "react-redux";
@@ -33,7 +33,7 @@ function Browse() {
 
   const handleTrackClick = async (trackID, artist, track) => {
     // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
-    const trackLyrics = await LyricsApi.getLyrics(artist, track);
+    const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
     const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
     setTranslation(translatedLyrics);
