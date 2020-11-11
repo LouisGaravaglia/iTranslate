@@ -11,8 +11,8 @@ const Search = () => {
   const [translation, setTranslation] = useState("");
   const searchResultsRef = useRef();
   const lyricsTranslationRef = useRef();
-  console.log("SEARCH RESULTS REF: ", searchResultsRef);
-  console.log("LYRICS RESULTS REF: ", lyricsTranslationRef);
+  // console.log("SEARCH RESULTS REF: ", searchResultsRef);
+  // console.log("LYRICS RESULTS REF: ", lyricsTranslationRef);
 
   const handleChange = (e) => {
     setSearchVal(e.target.value);
@@ -21,13 +21,14 @@ const Search = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("handleSubmit: ", searchVal);
-    const resultsArray = await SpotifyAPI.requestSearch(searchVal);
-    console.log("resultArray: ", resultsArray);
-    setSearchResults(resultsArray);
-    setSearchVal("")
-    searchResultsRef.current.scrollIntoView({
-      behavior: "smooth",
-    });
+    const resultsArray = await SpotifyAPI.getSeedData(searchVal);
+    // const resultsArray = await SpotifyAPI.requestSearch(searchVal);
+    // console.log("resultArray: ", resultsArray);
+    // setSearchResults(resultsArray);
+    // setSearchVal("")
+    // searchResultsRef.current.scrollIntoView({
+    //   behavior: "smooth",
+    // });
   }
 
   const getLyrics = async (artist, track) => {
