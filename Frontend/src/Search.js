@@ -40,26 +40,13 @@ const Search = () => {
 
   }
 
-  return (
-    <div className="Search">
-      <div className="Search-Field">
-      <form onSubmit={handleSubmit}>
-      <div className="Search-Input-Container">
-          <input
-            type="text"
-            id="SearchVal"
-            name="searchVal"
-            value={searchVal}
-            onChange={handleChange}
-          />
-          <button type="submit"><i class="fa fa-search icon"></i></button>
-          
-        </div>
-      </form>
-      </div>
-      <div className="Search-Results" ref={searchResultsRef}>
+  const SearchResultsDiv = (
+       <div className="Search-Results" ref={searchResultsRef}>
         {searchResults.map(r => <SearchResult getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
       </div>
+  )
+
+  const LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <div className="Browse-Lyrics-Container">
           <p className="Browse-Lyrics">ORIGINAL LYRICS</p>
@@ -70,6 +57,32 @@ const Search = () => {
           <p className="Browse-Translation">{translation}</p>
         </div>
       </div>
+  )
+
+  return (
+    <div className="Search">
+      <div className="Search-Field">
+        <p></p>
+        <h1>Find your song!</h1>
+        <form onSubmit={handleSubmit}>
+        <div className="Search-Input-Container">
+            <input
+              type="text"
+              id="SearchVal"
+              name="searchVal"
+              value={searchVal}
+              onChange={handleChange}
+            />
+            <button type="submit"><i class="fa fa-search icon"></i></button>
+          </div>
+        </form>
+        <p></p>
+      </div>
+
+      {searchResults[0] ? SearchResultsDiv : ""}
+      {/* {lyrics !== "" ? LyricsTranslationDiv : ""} */}
+      {LyricsTranslationDiv}
+      
     </div>
   );
 };
