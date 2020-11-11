@@ -3,7 +3,22 @@
   padding: 0;
 }
 
+/* //////////////////////////////////////  NAVBAR  ////////////////////////////////////// */
 
+
+.NavBar {
+  background-color: rgb(86, 182, 255);
+  color: white;
+  padding: 20px 0;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  margin: 0 30px;
+  font-weight: 500;
+}
 
 /* //////////////////////////////////////  BROWSE LANDING INDEX  ////////////////////////////////////// */
 

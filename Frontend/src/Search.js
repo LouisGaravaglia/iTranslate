@@ -81,12 +81,13 @@ const Search = () => {
       </div>
 
       <div className="Search-Results" ref={searchResultsRef}>
-        {searchResults[0] ? searchResults.map(r => <SearchResult getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>) : <p>Standing by for your search!</p>}
+        {searchResults[0] ? searchResults.map(r => <SearchResult getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>) : <p>Or select a random song!</p>}
       </div>
 
       {/* {searchResults[0] ? SearchResultsDiv : ""}
       {lyrics !== "" ? LyricsTranslationDiv : ""} */}
       
+      {LyricsTranslationDiv}
       
     </div>
   );
