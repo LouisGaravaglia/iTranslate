@@ -1,4 +1,4 @@
-import React,  {useState} from 'react';
+import React,  {useState, useRef} from 'react';
 import './App.css';
 import SpotifyApi from "./SpotifyAPI";
 import IBMWatsonAPI from './IBMWatsonAPI';
@@ -17,8 +17,22 @@ function Browse() {
   const [selectedArtist, setSelectedArtist] = useState("");
   const artists = useSelector(store => store.artists);
   const dispatch = useDispatch();
+  const albumsRef = useRef();
+  const tracksRef = useRef();
+  const lyricsTranslationRef = useRef();
+  const artistsRef = useRef();
+
+
+  const handleCategoryClick = async () => {
+    artistsRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
 
   const handleArtistClick = async (artistID, artistName) => {
+    albumsRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
     const albums = await SpotifyApi.getAlbums(artistID);
     setAlbums(albums);
     setSelectedArtist(artistName);
@@ -26,12 +40,18 @@ function Browse() {
   }
 
   const handleAlbumClick = async (albumID) => {
+    tracksRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
     const tracks = await SpotifyApi.getTracks(albumID);
     setTracks(tracks);
     console.log("here are the tracks", tracks);
   }
 
   const handleTrackClick = async (trackID, artist, track) => {
+    lyricsTranslationRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
     // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
     const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
@@ -42,20 +62,20 @@ function Browse() {
   return (
     <div className="Browse">
       <div className="Browse-Landing">
-        <h1 className="Browse-Header">Artists</h1>
-        <h1 className="Browse-Header">Genre</h1>
-        <h1 className="Browse-Header">Danceability</h1>
+        <button onClick={handleCategoryClick}>Artists</button>
+        <button onClick={handleCategoryClick}>Genre</button>
+        <button onClick={handleCategoryClick}>Danceability</button>
       </div>
-      <div className="Browse-Artists">
+      <div className="Browse-Artists" ref={artistsRef}>
         {artists.map(artist => <button onClick={() => handleArtistClick(artist.id, artist.name)}>{artist.name}</button>)}
       </div>
-      <div className="Browse-Albums">
+      <div className="Browse-Albums" ref={albumsRef}>
         {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
       </div>
-      <div className="Browse-Tracks">
+      <div className="Browse-Tracks" ref={tracksRef}>
         {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)}
       </div>
-      <div className="Browse-Lyrics-Translation">
+      <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <div className="Browse-Lyrics-Container">
           <p className="Browse-Lyrics">ORIGINAL LYRICS</p>
           <p className="Browse-Lyrics">{lyrics}</p>

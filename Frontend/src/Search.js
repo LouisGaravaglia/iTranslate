@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import SpotifyAPI from "./SpotifyAPI";
 import SearchResult from "./SearchResult";
 import LyricsAPI from "./LyricsAPI";
@@ -9,6 +9,8 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [lyrics, setLyrics] = useState("");
   const [translation, setTranslation] = useState("");
+  const searchResultsRef = useRef();
+  const lyricsTranslationRef = useRef();
 
 
   const handleChange = (e) => {
@@ -22,13 +24,20 @@ const Search = () => {
     console.log("resultArray: ", resultsArray);
     setSearchResults(resultsArray);
     setSearchVal("")
+    searchResultsRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
   }
 
   const getLyrics = async (artist, track) => {
+    lyricsTranslationRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
     const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
     const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
     setTranslation(translatedLyrics);
+
   }
 
   return (
@@ -44,13 +53,14 @@ const Search = () => {
             onChange={handleChange}
           />
           <button type="submit"><i class="fa fa-search icon"></i></button>
+          
         </div>
       </form>
       </div>
-      <div className="Search-Results">
+      <div className="Search-Results" ref={searchResultsRef}>
         {searchResults.map(r => <SearchResult getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
       </div>
-           <div className="Browse-Lyrics-Translation">
+      <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <div className="Browse-Lyrics-Container">
           <p className="Browse-Lyrics">ORIGINAL LYRICS</p>
           <p className="Browse-Lyrics">{lyrics}</p>
