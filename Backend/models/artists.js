@@ -5,6 +5,7 @@ const ExpressError = require("../helpers/ExpressError");
 class Artists {
 
   static async add ( data ) {
+    
     const duplicateCheck = await db.query (
       `SELECT spotify_id FROM artists WHERE spotify_id = $1`, [ data.spotify_id ]
     );
