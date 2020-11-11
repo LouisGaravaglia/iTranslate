@@ -17,7 +17,6 @@
     "required": [
         "spotify_id",
         "name",
-        "release_date",
         "spotify_uri",
         "img_url"
     ],

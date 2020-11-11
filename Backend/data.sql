@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS iTranslateDB;
+DROP DATABASE IF EXISTS itranslatedb;
 
-CREATE DATABASE iTranslateDB;
+CREATE DATABASE itranslatedb;
 
-\c iTranslateDB;
+\c itranslatedb;
 
 DROP TABLE IF EXISTS tracks;
 
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS albums;
 CREATE TABLE albums(
     spotify_id TEXT NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
-    release_date TEXT NOT NULL,
+    release_date TEXT,
     spotify_uri TEXT NOT NULL,
     img_url TEXT NOT NULL
 );

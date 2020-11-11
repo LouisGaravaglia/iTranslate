@@ -22,14 +22,8 @@
     "required": [
         "spotify_id",
         "name",
-        "explicit",
-        "popularity",
         "preview_url",
-        "spotify_uri",
-        "danceablity",
-        "tempo",
-        "valence",
-        "duration"
+        "spotify_uri"
     ],
     "properties": {
         "spotify_id": {
