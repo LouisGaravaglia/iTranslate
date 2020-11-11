@@ -7,11 +7,12 @@ import IBMWatsonAPI from "./IBMWatsonAPI";
 const Search = () => {
   const [searchVal, setSearchVal] = useState("")
   const [searchResults, setSearchResults] = useState([]);
-  const [lyrics, setLyrics] = useState("");
+  const [lyrics, setLyrics] = useState([]);
   const [translation, setTranslation] = useState("");
   const searchResultsRef = useRef();
   const lyricsTranslationRef = useRef();
-
+  console.log("SEARCH RESULTS REF: ", searchResultsRef);
+  console.log("LYRICS RESULTS REF: ", lyricsTranslationRef);
 
   const handleChange = (e) => {
     setSearchVal(e.target.value);
@@ -79,9 +80,13 @@ const Search = () => {
         <p></p>
       </div>
 
-      {searchResults[0] ? SearchResultsDiv : ""}
-      {/* {lyrics !== "" ? LyricsTranslationDiv : ""} */}
-      {LyricsTranslationDiv}
+      <div className="Search-Results" ref={searchResultsRef}>
+        {searchResults[0] ? searchResults.map(r => <SearchResult getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>) : <p>Standing by for your search!</p>}
+      </div>
+
+      {/* {searchResults[0] ? SearchResultsDiv : ""}
+      {lyrics !== "" ? LyricsTranslationDiv : ""} */}
+      
       
     </div>
   );
