@@ -17,6 +17,6 @@
     "ibm-watson": "^5.7.1",
     "jsonschema": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
-    "pg": "^8.4.2"
+    "pg": "^8.5.0"
   }
 }
