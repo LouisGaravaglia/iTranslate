@@ -18,12 +18,25 @@ router.get("/", async function(req, res, next) {
   const lyrics = req.query.lyrics;
   const translateParams = {
   text: lyrics,
-  modelId: 'es-en',
+  target: 'es',
   };
 
   try {
     const response =  await languageTranslator.translate(translateParams);
     return res.json(JSON.stringify({response: response.result.translations[0].translation}));
+  }
+  catch (err) {
+    console.log(err);
+    return next(err);
+  }
+
+});
+
+router.get("/_languages", async function(req, res, next) {
+
+  try {
+        const response =  await languageTranslator.listLanguages();
+        return res.json(JSON.stringify({response}))
   }
   catch (err) {
     console.log(err);

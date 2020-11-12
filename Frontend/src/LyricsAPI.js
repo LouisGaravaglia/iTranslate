@@ -5,6 +5,7 @@ const SEARCH_URL = "https://api.lyrics.ovh/v1"
 class LyricsAPI {
 
     static async getLyrics(artist, track) {
+      console.log("ARTIST, then Track: ", artist, track);
 
       try {
         const res = await axios({
