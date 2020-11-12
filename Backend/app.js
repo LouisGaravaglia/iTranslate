@@ -8,6 +8,7 @@ const artistRoutes = require("./routes/artist");
 const albumRoutes = require("./routes/album");
 const trackRoutes = require("./routes/track");
 
+app.use(express.json());
 app.use(cors({origin: true, credentials: true}));
 app.options('*', cors()) 
 

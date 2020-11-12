@@ -9,8 +9,8 @@ class Tracks {
     const duplicateCheck = await db.query (
       `SELECT spotify_id FROM tracks WHERE spotify_id = $1`, [ data.spotify_id ]
     );
-
-    if ( duplicateCheck[0].rows ) {
+    console.log("DUPLICATE CHECK: ", duplicateCheck);
+    if ( duplicateCheck.rows.length ) {
       throw new ExpressError (
         `There already exists a track with spotify_id '${ data.spotify_id }`,
         400
@@ -22,6 +22,7 @@ class Tracks {
       VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10 ) RETURNING spotify_id`, 
       [ data.spotify_id, data.name, data.explicit, data.popularity, data.preview_url, data.spotify_uri, data.danceablity, data.tempo, data.valence, data.duration ]
     );
+    console.log("HERE IS THE RESULT", result);
 
     return result.rows[0];
 

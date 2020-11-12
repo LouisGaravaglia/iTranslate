@@ -75,7 +75,7 @@ const Search = () => {
   const getLyrics = async (artist, track, index) => {
 
     const base = searchResults[index];
-    const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
+    const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity.toString(), preview_url: base.preview_url  };
     const aData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
     const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
     const [trackData, artistData] = await SpotifyAPI.getSeedData(tData, aData);

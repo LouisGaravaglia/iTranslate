@@ -32,6 +32,8 @@ class ArtistAPI {
     }
 
     static async addTrack(data) {
+      console.log("Trying to change all data values to string: ", data);
+      if ( data.preview_url === null ) data.preview_url = "";
       let res = await this.request("track", data, "post");
       console.log("I'M ADDING TRACK: ", res);
       return res.trackId;

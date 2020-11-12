@@ -165,13 +165,13 @@ static async getSeedData(trackData, artistData) {
       
           // return [artist, album, track, image];
 
-          trackData["danceability"] = songAnalysis.data.danceability;
-          trackData["tempo"] = songAnalysis.data.tempo;
-          trackData["valence"] = songAnalysis.data.valence;
-          trackData["duration"] = songAnalysis.data.duration_ms;
+          trackData["danceability"] = songAnalysis.data.danceability.toString();
+          trackData["tempo"] = songAnalysis.data.tempo.toString();
+          trackData["valence"] = songAnalysis.data.valence.toString();
+          trackData["duration"] = songAnalysis.data.duration_ms.toString();
           artistData["genre"] = artistDetails.data.genres;
           artistData["img_url"] = artistDetails.data.images;
-          artistData["popularity"] = artistDetails.data.popularity;
+          artistData["popularity"] = artistDetails.data.popularity.toString();
           return [trackData, artistData];
     
         

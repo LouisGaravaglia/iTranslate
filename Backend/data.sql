@@ -9,11 +9,11 @@ DROP TABLE IF EXISTS tracks;
 CREATE TABLE tracks(
     spotify_id TEXT NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
-    explicit TEXT,
+    explicit BOOLEAN,
     popularity TEXT,
     preview_url TEXT,
     spotify_uri TEXT NOT NULL,
-    danceablity TEXT,
+    danceability TEXT,
     tempo TEXT,
     valence TEXT,
     duration TEXT 
