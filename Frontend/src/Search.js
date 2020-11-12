@@ -42,9 +42,7 @@ const Search = () => {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {
     function scrollToLanguageSearch() {
-      console.log("TRYING TO CALL scrollToLanguageSearch useEffect.");
       if (selectedTrack) {
-        console.log("Inside conditional in scrollToLanaguageSearch");
         selectLanguageRef.current.scrollIntoView({
           behavior: "smooth",
         });
@@ -64,11 +62,6 @@ const Search = () => {
     }
     scrollToTranslation();
   }, [selectedLanguage]);
-  
-
-  // const handleChange = (e) => {
-  //   setSearchVal(e.target.value);
-  // }
 
   const handleTrackSearchSubmit = async (searchVal) => {
     // e.preventDefault();
@@ -77,13 +70,7 @@ const Search = () => {
     const resultsArray = await SpotifyAPI.requestSearch(searchVal);
     console.log("resultArray: ", resultsArray);
     setSearchResults(resultsArray);
-    // setSearchVal("")
-    // searchResultsRef.current.scrollIntoView({
-    //   behavior: "smooth",
-    // });
   }
-
-
 
   const getLyrics = async (artist, track, index) => {
 
@@ -95,32 +82,23 @@ const Search = () => {
     // const trackId = await ArtistAPI.addTrack(trackData);
     // const artistId = await ArtistAPI.addArtist(artistData);
     // const albumId = await ArtistAPI.addAlbum(albumData);
-    console.log("Changing selectedTrack to: ", track);
+
+    //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
     setSelectedTrack([track, {}]);
     const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
-
-    // selectLanguageRef.current.scrollIntoView({
-    //   behavior: "smooth",
-    // });
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
     //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT LANGUAGE CODE OF THE LANGUAGE USER WANT'S TO USE
     const [ { language } ] = languages.filter( l => l.language_name.toLowerCase() === searchVal.toLowerCase() );
-    console.log("chosenLanguage: ", language);
-    //I'm going to need to send the getTranslation request and now add the chosen Language along with the trackLyrics
     setSelectedLanguage(language);
-    
     const translatedLyrics = await IBMWatsonAPI.getTranslation(lyrics, language);
     console.log("Translated lyrics: ", translatedLyrics);
     setTranslation(translatedLyrics);
-
-    // lyricsTranslationRef.current.scrollIntoView({
-    //   behavior: "smooth",
-    // });
   }
 
+  //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let SearchResultsDiv;
   
   if (searchResults.length) SearchResultsDiv = (
@@ -129,6 +107,7 @@ const Search = () => {
     </div>
   );
 
+  //SELECT LANGUAGE TO TRANSLATE LYRICS TO SEARCH BAR COMPONENT
   let SelectLanguageDiv;
 
   if (selectedTrack.length) SelectLanguageDiv = (
@@ -137,6 +116,7 @@ const Search = () => {
     </div>
   );
 
+  //LYRICS AND TRANSLATION HTML
   let LyricsTranslationDiv;
   
   if (selectedLanguage)  LyricsTranslationDiv = (
