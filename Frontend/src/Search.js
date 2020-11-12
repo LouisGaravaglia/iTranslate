@@ -80,14 +80,7 @@ const Search = () => {
   let SelectLanguageDiv;
 
   if (selectedTrack) SelectLanguageDiv = (
-    <div className="Search-Language" ref={selectLanguageRef}>
-      <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
-        <div class="dropdown-content">
-          {languages.map(l => <a href="#">Link 1</a> )}
-        </div>
-      </div>
-    </div>
+
   );
 
   let LyricsTranslationDiv;

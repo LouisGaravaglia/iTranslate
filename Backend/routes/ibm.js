@@ -14,16 +14,23 @@ const languageTranslator = new LanguageTranslatorV3({
   serviceUrl: IBM_URL,
 });
 
-router.get("/", async function(req, res, next) {
-  const lyrics = req.query.lyrics;
-  const translateParams = {
-  text: lyrics,
-  target: 'es',
-  };
-
+router.get("/:handle", async function(req, res, next) {
   try {
-    const response =  await languageTranslator.translate(translateParams);
-    return res.json(JSON.stringify({response: response.result.translations[0].translation}));
+
+    if (req.params.handle === "translate") {
+      const lyrics = req.query.lyrics;
+      const translateParams = {
+        text: lyrics,
+        target: 'es',
+      };
+
+      const response =  await languageTranslator.translate(translateParams);
+      return res.json(JSON.stringify({response: response.result.translations[0].translation}));
+
+    } else {
+      const response =  await languageTranslator.listLanguages();
+      return res.json(JSON.stringify({response}))
+    }
   }
   catch (err) {
     console.log(err);
@@ -32,17 +39,6 @@ router.get("/", async function(req, res, next) {
 
 });
 
-router.get("/_languages", async function(req, res, next) {
 
-  try {
-        const response =  await languageTranslator.listLanguages();
-        return res.json(JSON.stringify({response}))
-  }
-  catch (err) {
-    console.log(err);
-    return next(err);
-  }
-
-});
 
 module.exports = router;

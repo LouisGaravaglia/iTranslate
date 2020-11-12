@@ -7,7 +7,7 @@ class IBMWatsonAPI {
     try {
       const res = await axios({
           method: "get",
-          url: `http://localhost:3001/translate`,
+          url: `http://localhost:3001/ibm/translate`,
           params: {lyrics},
       });
       const responseObj = JSON.parse(res.data);
@@ -23,11 +23,11 @@ class IBMWatsonAPI {
     try {
       const res = await axios({
           method: "get",
-          url: `http://localhost:3001/translate_languages`
+          url: `http://localhost:3001/ibm/languages`
       });
       const responseObj = JSON.parse(res.data);
       console.log("LANGUAGES: ", responseObj);
-      return responseObj.result.languages;
+      return responseObj.response.result.languages;
 
     } catch(err) {
       console.log("API Error:", err);
