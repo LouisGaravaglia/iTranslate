@@ -42,14 +42,16 @@ const Search = () => {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {
     function scrollToLanguageSearch() {
+      console.log("TRYING TO CALL scrollToLanguageSearch useEffect.");
       if (selectedTrack) {
+        console.log("Inside conditional in scrollToLanaguageSearch");
         selectLanguageRef.current.scrollIntoView({
           behavior: "smooth",
         });
       }
     }
     scrollToLanguageSearch();
-  }, [selectedTrack]);
+  }, [selectedTrack, setSelectedTrack]);
 
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {
@@ -93,6 +95,7 @@ const Search = () => {
     // const trackId = await ArtistAPI.addTrack(trackData);
     // const artistId = await ArtistAPI.addArtist(artistData);
     // const albumId = await ArtistAPI.addAlbum(albumData);
+    console.log("Changing selectedTrack to: ", track);
     setSelectedTrack(track);
     const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
