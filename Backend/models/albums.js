@@ -27,3 +27,5 @@ class Albums {
 
   }
 }
+
+module.exports = Albums;

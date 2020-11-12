@@ -5,7 +5,7 @@ const ExpressError = require("../helpers/ExpressError");
 class Tracks {
 
   static async add ( data ) {
-
+    console.log("INSIDE TRACKS.ADD METHOD", data);
     const duplicateCheck = await db.query (
       `SELECT spotify_id FROM tracks WHERE spotify_id = $1`, [ data.spotify_id ]
     );
@@ -28,3 +28,4 @@ class Tracks {
   }
 }
 
+module.exports = Tracks;

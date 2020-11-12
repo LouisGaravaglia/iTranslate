@@ -74,19 +74,19 @@ const Search = () => {
 
   const getLyrics = async (artist, track, index) => {
 
-    // const base = searchResults[index];
-    // const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
-    // const aData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-    // const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
-    // const [trackData, artistData] = await SpotifyAPI.getSeedData(tData, aData);
-    // const trackId = await ArtistAPI.addTrack(trackData);
-    // const artistId = await ArtistAPI.addArtist(artistData);
-    // const albumId = await ArtistAPI.addAlbum(albumData);
+    const base = searchResults[index];
+    const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
+    const aData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+    const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
+    const [trackData, artistData] = await SpotifyAPI.getSeedData(tData, aData);
+    const trackId = await ArtistAPI.addTrack(trackData);
+    const artistId = await ArtistAPI.addArtist(artistData);
+    const albumId = await ArtistAPI.addAlbum(albumData);
 
     //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
-    setSelectedTrack([track, {}]);
-    const trackLyrics = await LyricsAPI.getLyrics(artist, track);
-    setLyrics(trackLyrics);
+    // setSelectedTrack([track, {}]);
+    // const trackLyrics = await LyricsAPI.getLyrics(artist, track);
+    // setLyrics(trackLyrics);
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {

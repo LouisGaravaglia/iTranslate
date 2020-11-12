@@ -27,3 +27,5 @@ class Artists {
 
   }
 }
+
+module.exports = Artists;
