@@ -1,12 +1,13 @@
 import React, {useState, useRef, useEffect} from 'react';
 import SpotifyAPI from "./SpotifyAPI";
 import SearchResult from "./SearchResult";
+import SearchBar from "./SearchBar";
 import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 import ArtistAPI from './ArtistAPI';
 
 const Search = () => {
-  const [searchVal, setSearchVal] = useState("")
+  // const [searchVal, setSearchVal] = useState("")
   const [searchResults, setSearchResults] = useState([]);
   const [lyrics, setLyrics] = useState("");
   const [translation, setTranslation] = useState("");
@@ -28,12 +29,12 @@ const Search = () => {
     getLanguages();
   }, []);
 
-  const handleChange = (e) => {
-    setSearchVal(e.target.value);
-  }
+  // const handleChange = (e) => {
+  //   setSearchVal(e.target.value);
+  // }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleTrackSearchSubmit = async (searchVal) => {
+    // e.preventDefault();
     const res = await IBMWatsonAPI.getLanguages();
       console.log("my languages!!!: ", res);
       setLanguages(res);
@@ -42,7 +43,7 @@ const Search = () => {
     const resultsArray = await SpotifyAPI.requestSearch(searchVal);
     console.log("resultArray: ", resultsArray);
     setSearchResults(() => resultsArray);
-    setSearchVal("")
+    // setSearchVal("")
     searchResultsRef.current.scrollIntoView({
       behavior: "smooth",
     });
@@ -77,11 +78,11 @@ const Search = () => {
     </div>
   );
 
-  let SelectLanguageDiv;
+  // let SelectLanguageDiv;
 
-  if (selectedTrack) SelectLanguageDiv = (
+  // if (selectedTrack) SelectLanguageDiv = (
 
-  );
+  // );
 
   let LyricsTranslationDiv;
   
@@ -100,7 +101,7 @@ const Search = () => {
 
   return (
     <div className="Search">
-      <div className="Search-Field">
+      {/* <div className="Search-Field">
         <p></p>
         <h1>Find your song!</h1>
         <form onSubmit={handleSubmit}>
@@ -116,7 +117,9 @@ const Search = () => {
           </div>
         </form>
         <p></p>
-      </div>
+      </div> */}
+
+      <SearchBar header="Find your wine!" handleSubmit={handleTrackSearchSubmit}/>
 
    
 
