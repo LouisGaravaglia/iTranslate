@@ -96,7 +96,7 @@ const Search = () => {
     // const artistId = await ArtistAPI.addArtist(artistData);
     // const albumId = await ArtistAPI.addAlbum(albumData);
     console.log("Changing selectedTrack to: ", track);
-    setSelectedTrack(track);
+    setSelectedTrack([track, {}]);
     const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
 
@@ -131,7 +131,7 @@ const Search = () => {
 
   let SelectLanguageDiv;
 
-  if (selectedTrack) SelectLanguageDiv = (
+  if (selectedTrack.length) SelectLanguageDiv = (
     <div ref={selectLanguageRef}>
       <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
     </div>
