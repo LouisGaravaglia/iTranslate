@@ -35,19 +35,18 @@ const Search = () => {
 
   const handleTrackSearchSubmit = async (searchVal) => {
     // e.preventDefault();
-    const res = await IBMWatsonAPI.getLanguages();
-      console.log("my languages!!!: ", res);
-      setLanguages(res);
     console.log("handleSubmit: ", searchVal);
     // const resultsArray = await SpotifyAPI.getSeedData(searchVal);
     const resultsArray = await SpotifyAPI.requestSearch(searchVal);
     console.log("resultArray: ", resultsArray);
-    setSearchResults(() => resultsArray);
+    setSearchResults(resultsArray);
     // setSearchVal("")
     searchResultsRef.current.scrollIntoView({
       behavior: "smooth",
     });
   }
+
+
 
   const getLyrics = async (artist, track, index) => {
 
@@ -62,9 +61,23 @@ const Search = () => {
     setSelectedTrack(track);
     const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
-    const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
-    console.log("LANGUAGES: ", translatedLyrics);
-    setTranslation(translatedLyrics);
+
+    selectLanguageRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
+  const handleLanguageSearchSubmit = async (searchVal) => {
+    const chosenLanguage = languages.filter( l => l.language_name.toLowerCase() === searchVal.toLowerCase() );
+    console.log("MY CHOSEN LANGUAGE", chosenLanguage[0].language);
+
+    //I'm going to need to send the getTranslation request and now add the chosen Language along with the trackLyrics
+
+    
+    // const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
+    // console.log("LANGUAGES: ", translatedLyrics);
+    // setTranslation(translatedLyrics);
+
     lyricsTranslationRef.current.scrollIntoView({
       behavior: "smooth",
     });
@@ -78,11 +91,13 @@ const Search = () => {
     </div>
   );
 
-  // let SelectLanguageDiv;
+  let SelectLanguageDiv;
 
-  // if (selectedTrack) SelectLanguageDiv = (
-
-  // );
+  if (lyrics) SelectLanguageDiv = (
+    <div ref={selectLanguageRef}>
+      <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
+    </div>
+  );
 
   let LyricsTranslationDiv;
   
@@ -124,7 +139,7 @@ const Search = () => {
    
 
       {SearchResultsDiv}
-      {/* {SelectLanguageDiv} */}
+      {SelectLanguageDiv}
       {LyricsTranslationDiv}
    
       
