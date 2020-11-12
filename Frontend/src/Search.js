@@ -17,6 +17,7 @@ const Search = () => {
   const lyricsTranslationRef = useRef();
   const selectLanguageRef = useRef();
 
+  //GET AVAILABLE LANGUAGES TO TRANSLATE LYRICS TO FROM IBM API
   useEffect(() => {
     async function getLanguages() {
       const res = await IBMWatsonAPI.getLanguages();
@@ -25,6 +26,43 @@ const Search = () => {
     }
     getLanguages();
   }, []);
+
+  //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
+  useEffect(() => {
+    function scrollToSearchResults() {
+      if (searchResults.length) {
+        searchResultsRef.current.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    }
+    scrollToSearchResults();
+  }, [searchResults]);
+
+  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  useEffect(() => {
+    function scrollToLanguageSearch() {
+      if (selectedTrack) {
+        selectLanguageRef.current.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    }
+    scrollToLanguageSearch();
+  }, [selectedTrack]);
+
+  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  useEffect(() => {
+    function scrollToTranslation() {
+      if (selectedLanguage) {
+        lyricsTranslationRef.current.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    }
+    scrollToTranslation();
+  }, [selectedLanguage]);
+  
 
   // const handleChange = (e) => {
   //   setSearchVal(e.target.value);
@@ -38,9 +76,9 @@ const Search = () => {
     console.log("resultArray: ", resultsArray);
     setSearchResults(resultsArray);
     // setSearchVal("")
-    searchResultsRef.current.scrollIntoView({
-      behavior: "smooth",
-    });
+    // searchResultsRef.current.scrollIntoView({
+    //   behavior: "smooth",
+    // });
   }
 
 
@@ -59,9 +97,9 @@ const Search = () => {
     const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
 
-    selectLanguageRef.current.scrollIntoView({
-      behavior: "smooth",
-    });
+    // selectLanguageRef.current.scrollIntoView({
+    //   behavior: "smooth",
+    // });
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
@@ -75,9 +113,9 @@ const Search = () => {
     console.log("Translated lyrics: ", translatedLyrics);
     setTranslation(translatedLyrics);
 
-    lyricsTranslationRef.current.scrollIntoView({
-      behavior: "smooth",
-    });
+    // lyricsTranslationRef.current.scrollIntoView({
+    //   behavior: "smooth",
+    // });
   }
 
   let SearchResultsDiv;
@@ -90,7 +128,7 @@ const Search = () => {
 
   let SelectLanguageDiv;
 
-  if (lyrics) SelectLanguageDiv = (
+  if (selectedTrack) SelectLanguageDiv = (
     <div ref={selectLanguageRef}>
       <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
     </div>
