@@ -7,7 +7,6 @@ import IBMWatsonAPI from "./IBMWatsonAPI";
 import ArtistAPI from './ArtistAPI';
 
 const Search = () => {
-  // const [searchVal, setSearchVal] = useState("")
   const [searchResults, setSearchResults] = useState([]);
   const [lyrics, setLyrics] = useState("");
   const [translation, setTranslation] = useState("");
@@ -17,8 +16,6 @@ const Search = () => {
   const searchResultsRef = useRef();
   const lyricsTranslationRef = useRef();
   const selectLanguageRef = useRef();
-  // console.log("SEARCH RESULTS REF: ", searchResultsRef);
-  // console.log("LYRICS RESULTS REF: ", lyricsTranslationRef);
 
   useEffect(() => {
     async function getLanguages() {
@@ -68,15 +65,15 @@ const Search = () => {
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
-    const chosenLanguage = languages.filter( l => l.language_name.toLowerCase() === searchVal.toLowerCase() );
-    console.log("MY CHOSEN LANGUAGE", chosenLanguage[0].language);
-
+    //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT LANGUAGE CODE OF THE LANGUAGE USER WANT'S TO USE
+    const [ { language } ] = languages.filter( l => l.language_name.toLowerCase() === searchVal.toLowerCase() );
+    console.log("chosenLanguage: ", language);
     //I'm going to need to send the getTranslation request and now add the chosen Language along with the trackLyrics
-
+    setSelectedLanguage(language);
     
-    // const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
-    // console.log("LANGUAGES: ", translatedLyrics);
-    // setTranslation(translatedLyrics);
+    const translatedLyrics = await IBMWatsonAPI.getTranslation(lyrics, language);
+    console.log("Translated lyrics: ", translatedLyrics);
+    setTranslation(translatedLyrics);
 
     lyricsTranslationRef.current.scrollIntoView({
       behavior: "smooth",
@@ -116,33 +113,10 @@ const Search = () => {
 
   return (
     <div className="Search">
-      {/* <div className="Search-Field">
-        <p></p>
-        <h1>Find your song!</h1>
-        <form onSubmit={handleSubmit}>
-        <div className="Search-Input-Container">
-            <input
-              type="text"
-              id="SearchVal"
-              name="searchVal"
-              value={searchVal}
-              onChange={handleChange}
-            />
-            <button type="submit"><i class="fa fa-search icon"></i></button>
-          </div>
-        </form>
-        <p></p>
-      </div> */}
-
-      <SearchBar header="Find your wine!" handleSubmit={handleTrackSearchSubmit}/>
-
-   
-
+      <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
       {SearchResultsDiv}
       {SelectLanguageDiv}
       {LyricsTranslationDiv}
-   
-      
     </div>
   );
 

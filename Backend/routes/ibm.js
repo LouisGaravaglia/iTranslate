@@ -19,9 +19,10 @@ router.get("/:handle", async function(req, res, next) {
 
     if (req.params.handle === "translate") {
       const lyrics = req.query.lyrics;
+      const language = req.query.language;
       const translateParams = {
         text: lyrics,
-        target: 'es',
+        target: language,
       };
 
       const response =  await languageTranslator.translate(translateParams);

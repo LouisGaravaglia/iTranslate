@@ -3,12 +3,12 @@ import axios from "axios";
 class IBMWatsonAPI {
 
 
-  static async getTranslation(lyrics) {
+  static async getTranslation(lyrics, language) {
     try {
       const res = await axios({
           method: "get",
           url: `http://localhost:3001/ibm/translate`,
-          params: {lyrics},
+          params: {lyrics, language},
       });
       const responseObj = JSON.parse(res.data);
       console.log("TRANSLATED LYRICS: ", responseObj.response);
