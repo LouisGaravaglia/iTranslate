@@ -3,6 +3,7 @@ import SpotifyAPI from "./SpotifyAPI";
 import SearchResult from "./SearchResult";
 import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
+import ArtistAPI from './ArtistAPI';
 
 const Search = () => {
   const [searchVal, setSearchVal] = useState("")
@@ -21,30 +22,39 @@ const Search = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("handleSubmit: ", searchVal);
-    const resultsArray = await SpotifyAPI.getSeedData(searchVal);
-    // const resultsArray = await SpotifyAPI.requestSearch(searchVal);
-    // console.log("resultArray: ", resultsArray);
-    // setSearchResults(resultsArray);
-    // setSearchVal("")
-    // searchResultsRef.current.scrollIntoView({
-    //   behavior: "smooth",
-    // });
+    // const resultsArray = await SpotifyAPI.getSeedData(searchVal);
+    const resultsArray = await SpotifyAPI.requestSearch(searchVal);
+    console.log("resultArray: ", resultsArray);
+    setSearchResults(resultsArray);
+    setSearchVal("")
+    searchResultsRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
   }
 
-  const getLyrics = async (artist, track) => {
+  const getLyrics = async (artist, track, index) => {
     lyricsTranslationRef.current.scrollIntoView({
       behavior: "smooth",
     });
-    const trackLyrics = await LyricsAPI.getLyrics(artist, track);
-    setLyrics(trackLyrics);
-    const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
-    setTranslation(translatedLyrics);
+    const base = searchResults[index];
+    const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
+    const aData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+    const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
+    const [trackData, artistData] = await SpotifyAPI.getSeedData(tData, aData);
+    const trackId = await ArtistAPI.addTrack(trackData);
+    const artistId = await ArtistAPI.addArtist(artistData);
+    const albumId = await ArtistAPI.addAlbum(albumData);
+
+    // const trackLyrics = await LyricsAPI.getLyrics(artist, track);
+    // setLyrics(trackLyrics);
+    // const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
+    // setTranslation(translatedLyrics);
 
   }
 
   const SearchResultsDiv = (
        <div className="Search-Results" ref={searchResultsRef}>
-        {searchResults.map(r => <SearchResult getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
+        {searchResults.map( ( r, i ) => <SearchResult key={i} index={i} getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
       </div>
   )
 

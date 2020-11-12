@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { validate } = require("jsonschema");
-const { addAlbumSchema } = require("../schemas");
+const addAlbumSchema = require("../schemas/addAlbumSchema.json");
 const Albums = require("../models/albums");
 const ExpressError = require("../helpers/expressError");
 
@@ -20,3 +20,6 @@ router.post( "/", async function( req, res, next ) {
     next( err );
   }
 } );
+
+module.exports = router;
+

@@ -3,10 +3,10 @@ import SpotifyAPI from "./SpotifyAPI";
 import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 
-const SearchResult = ({getLyrics, artist, album, track, trackId, artistId, albumId}) => {
+const SearchResult = ({index, getLyrics, artist, album, track, trackId, artistId, albumId}) => {
 
 const handleClick = () => {
-  getLyrics(artist, track);
+  getLyrics(artist, track, index);
 }
   return (
     // <button onClick={handleClick} className="SearchResult">Artist: {artist} / Album: {album} / Track: {track}</button>

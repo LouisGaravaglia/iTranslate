@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { validate } = require("jsonschema");
-const { addTrackSchema } = require("../schemas");
+const addTrackSchema = require("../schemas/addTrackSchema.json");
 const Tracks = require("../models/tracks.js");
 const ExpressError = require("../helpers/expressError");
 
@@ -21,3 +21,5 @@ router.post( "/", async function( req, rex, next ) {
     return next( err );
   }
 } );
+
+module.exports = router;

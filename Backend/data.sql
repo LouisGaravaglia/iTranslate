@@ -11,7 +11,7 @@ CREATE TABLE tracks(
     name TEXT NOT NULL,
     explicit TEXT,
     popularity TEXT,
-    preview_url TEXT NOT NULL,
+    preview_url TEXT,
     spotify_uri TEXT NOT NULL,
     danceablity TEXT,
     tempo TEXT,
@@ -25,7 +25,9 @@ CREATE TABLE artists(
     spotify_id TEXT NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
     genre TEXT NOT NULL,
-    spotify_uri TEXT NOT NULL
+    spotify_uri TEXT NOT NULL,
+    img_url TEXT,
+    popularity TEXT
 );
 
 DROP TABLE IF EXISTS albums;
