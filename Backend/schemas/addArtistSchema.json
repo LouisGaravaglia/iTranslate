@@ -9,15 +9,9 @@
         {
             "spotify_id": "sssasjaisdofijasod",
             "name": "J Balvin",
-            "genre": [
-                "hi",
-                "by"
-            ],
+            "genre": "rock",
             "spotify_uri": "http://aksjdfaskdjf",
-            "img_url": [
-                "hi",
-                "by"
-            ],
+            "img_url": "http;://wwww.website",
             "popularity": "89"
         }
     ],
@@ -50,15 +44,12 @@
         },
         "genre": {
             "$id": "#/properties/genre",
-            "type": "array",
+            "type": "string",
             "title": "The genre schema",
             "description": "An explanation about the purpose of this instance.",
-            "default": [],
+            "default": "",
             "examples": [
-                [
-                    "hi",
-                    "by"
-                ]
+                "rock, hip hop"
             ],
             "additionalItems": true,
             "items": {
@@ -90,15 +81,12 @@
         },
         "img_url": {
             "$id": "#/properties/img_url",
-            "type": "array",
+            "type": "string",
             "title": "The img_url schema",
             "description": "An explanation about the purpose of this instance.",
-            "default": [],
+            "default": "",
             "examples": [
-                [
-                    "hi",
-                    "by"
-                ]
+                "http://www"
             ],
             "additionalItems": true,
             "items": {

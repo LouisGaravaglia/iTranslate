@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS artists;
 CREATE TABLE artists(
     spotify_id TEXT NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
-    genre TEXT[] NOT NULL,
+    genre TEXT NOT NULL,
     spotify_uri TEXT NOT NULL,
-    img_url TEXT[],
+    img_url TEXT,
     popularity TEXT
 );
 

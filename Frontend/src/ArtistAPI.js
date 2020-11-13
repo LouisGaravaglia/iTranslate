@@ -36,8 +36,9 @@ class ArtistAPI {
       // console.log("Im filtered img data: ", filteredImages);
       // data.img_url = filteredImages;
       const filtered = data.img_url.map(item => item.url);
-      console.log("This is the filtered value: ", filtered);
-      data.img_url = filtered;
+      data.genre = data.genre.join(",");
+      data.img_url = filtered.join(",");
+
       console.log("Artist data: ", data);
       let res = await this.request("artist", data, "post");
       console.log("I'M ADDING ARTIST: ", res);
