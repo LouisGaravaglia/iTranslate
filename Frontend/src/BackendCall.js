@@ -30,8 +30,7 @@ class BackendCall {
       console.log("Track data: ", data);
       if ( data.preview_url === null ) data.preview_url = "";
       let res = await this.request("track", data, "post");
-      console.log("I'M ADDING TRACK: ", res.data.track_id);
-      return res.data.track_id.spotify_id;
+      return res.data.response;
     }
 
 
@@ -41,7 +40,7 @@ class BackendCall {
       data.img_url = filtered.join(",");
       console.log("Artist data: ", data);
       let res = await this.request("artist", data, "post");
-      return res.data.artist_id.spotify_id;
+      return res.data.response;
     }
 
 
@@ -49,7 +48,7 @@ class BackendCall {
       data.img_url = data.img_url.url;
       console.log("ALBUM DATA: ", data);
       let res = await this.request("album", data, "post");
-      return res.data.album_id.spotify_id
+      return res.data.response;
     }
 
     static async addDiscography(data) {

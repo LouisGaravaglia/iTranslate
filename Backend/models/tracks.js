@@ -22,7 +22,7 @@ class Tracks {
     );
     console.log("HERE IS THE RESULT", result);
 
-    return result.rows[0];
+    return result.rows[0].spotify_id;
 
   }
 }

@@ -23,7 +23,7 @@ class Artists {
     console.log("HERE IS THE ARTIST RESULT FROM BACKEND: ", result);
 
 
-    return result.rows[0];
+    return result.rows[0].spotify_id;
 
   }
 }

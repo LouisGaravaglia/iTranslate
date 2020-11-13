@@ -20,7 +20,7 @@ class Albums {
       [ data.spotify_id, data.name, data.release_date, data.spotify_uri, data.img_url ]
     );
 
-    return result.rows[0];
+    return result.rows[0].spotify_id;
 
   }
 }

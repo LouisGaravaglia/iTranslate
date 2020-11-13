@@ -25,9 +25,9 @@ router.post( "/", async function( req, res, next ) {
       throw new ExpressError( validation.errors.map( e => e.stack ), 400 );
     }
 
-    const artist_id = await Artists.add(req.body);
+    const response = await Artists.add(req.body);
     console.log("RETURING FORM THE ARTIST POST ROUTE");
-    return res.status( 201 ).json( { artist_id }  )
+    return res.status( 201 ).json( { response }  )
 
   } catch ( err ) {
     return next( err );

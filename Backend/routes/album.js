@@ -14,9 +14,9 @@ router.post( "/", async function( req, res, next ) {
       throw new ExpressError(validation.errors.map( e => e.stack ), 400 );
     }
 
-    const album_id = await Albums.add( req.body );
+    const response = await Albums.add( req.body );
      console.log("RETURNING FROM THE ALBUM POST ROUTE");
-    return res.status( 201 ).json( { album_id } );
+    return res.status( 201 ).json( { response } );
 
   } catch ( err ) {
     next( err );
