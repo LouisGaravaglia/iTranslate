@@ -11,10 +11,7 @@ class Albums {
     );
 
     if ( duplicateCheck.rows.length ) {
-      throw new ExpressError (
-        `There already exists an album with spotify_id '${ data.spotify_id }`,
-        400
-      );
+      return data.spotify_id;
     };
 
     const result = await db.query (
