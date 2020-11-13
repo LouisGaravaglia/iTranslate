@@ -25,13 +25,17 @@ class BackendCall {
       }
     }
 
-    
 
-    static async addTrackArtistAlbum(trackData, artistData, albumData) {
+        static async addTrack(data) {
+          console.log("Track data: ", data);
+          if ( data.preview_url === null ) data.preview_url = "";
+          let res = await this.request("track", data, "post");
+          console.log("I'M ADDING TRACK: ", res);
+          return res.trackId;
+        }
 
-      try {
 
-        async function addArtist(data) {
+        static async addArtist(data) {
           // const filteredImages = data.img_url.filter(obj => console.log(obj["url"]))
           // console.log("Im filtered img data: ", filteredImages);
           // data.img_url = filteredImages;
@@ -45,15 +49,8 @@ class BackendCall {
           return res.artistId;
         }
 
-        async function addTrack(data) {
-          console.log("Trying to change all data values to string: ", data);
-          if ( data.preview_url === null ) data.preview_url = "";
-          let res = await this.request("track", data, "post");
-          console.log("I'M ADDING TRACK: ", res);
-          return res.trackId;
-        }
 
-        async function addAlbum(data) {
+        static async addAlbum(data) {
           data.img_url = data.img_url.url;
           console.log("ALBUM DATA: ", data);
           let res = await this.request("album", data, "post");
@@ -61,12 +58,22 @@ class BackendCall {
           return res.albumId;
         }
 
-        const trackId = await addTrack(trackData);
-        const artistId = await addArtist(artistData);
-        const albumId = await addAlbum(albumData);
+    
+
+    static async addTrackArtistAlbum(trackData, artistData, albumData) {
+
+      try {
+
+
+
+        const trackId = await this.addTrack(trackData);
+        const artistId = await this.addArtist(artistData);
+        const albumId = await this.addAlbum(albumData);
+        console.log("Sucessfully added all three things.");
+        return [trackId, artistId, albumId];
 
       } catch ( err ) {
-        next ( err );
+        console.log("ERORR!!!!!!!!!!!!!! FROM BackendCall.js", err);
       }
      
 
