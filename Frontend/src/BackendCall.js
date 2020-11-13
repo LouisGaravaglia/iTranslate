@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
-class ArtistAPI {
+class BackendCall {
     static async request(endpoint, paramsOrData = {}, verb = "get") {
       // paramsOrData._token = localStorage.getItem("jobly-token");
   
@@ -27,39 +27,52 @@ class ArtistAPI {
 
     
 
-    static createPostgresArray(data) {
-      
+    static async addTrackArtistAlbum(trackData, artistData, albumData) {
+
+      try {
+
+        async function addArtist(data) {
+          // const filteredImages = data.img_url.filter(obj => console.log(obj["url"]))
+          // console.log("Im filtered img data: ", filteredImages);
+          // data.img_url = filteredImages;
+          const filtered = data.img_url.map(item => item.url);
+          data.genre = data.genre.join(",");
+          data.img_url = filtered.join(",");
+
+          console.log("Artist data: ", data);
+          let res = await this.request("artist", data, "post");
+          console.log("I'M ADDING ARTIST: ", res);
+          return res.artistId;
+        }
+
+        async function addTrack(data) {
+          console.log("Trying to change all data values to string: ", data);
+          if ( data.preview_url === null ) data.preview_url = "";
+          let res = await this.request("track", data, "post");
+          console.log("I'M ADDING TRACK: ", res);
+          return res.trackId;
+        }
+
+        async function addAlbum(data) {
+          data.img_url = data.img_url.url;
+          console.log("ALBUM DATA: ", data);
+          let res = await this.request("album", data, "post");
+          console.log("I'M ADDING ALBUM: ", res);
+          return res.albumId;
+        }
+
+        const trackId = await addTrack(trackData);
+        const artistId = await addArtist(artistData);
+        const albumId = await addAlbum(albumData);
+
+      } catch ( err ) {
+        next ( err );
+      }
+     
+
     }
   
-    static async addArtist(data) {
-      // const filteredImages = data.img_url.filter(obj => console.log(obj["url"]))
-      // console.log("Im filtered img data: ", filteredImages);
-      // data.img_url = filteredImages;
-      const filtered = data.img_url.map(item => item.url);
-      data.genre = data.genre.join(",");
-      data.img_url = filtered.join(",");
-
-      console.log("Artist data: ", data);
-      let res = await this.request("artist", data, "post");
-      console.log("I'M ADDING ARTIST: ", res);
-      return res.artistId;
-    }
-
-    static async addTrack(data) {
-      console.log("Trying to change all data values to string: ", data);
-      if ( data.preview_url === null ) data.preview_url = "";
-      let res = await this.request("track", data, "post");
-      console.log("I'M ADDING TRACK: ", res);
-      return res.trackId;
-    }
-
-    static async addAlbum(data) {
-      data.img_url = data.img_url.url;
-      console.log("ALBUM DATA: ", data);
-      let res = await this.request("album", data, "post");
-      console.log("I'M ADDING ALBUM: ", res);
-      return res.albumId;
-    }
+    
 
     // static async getCompany(handle) {
     //   let res = await this.request(`companies/${handle}`);
@@ -105,4 +118,4 @@ class ArtistAPI {
     
   }
 
-  export default ArtistAPI;
+  export default BackendCall;

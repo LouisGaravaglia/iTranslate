@@ -102,7 +102,7 @@ class SpotifyAPI {
  
 /////////////////////////////////  GET SEED DATA FOR ARTISTS  /////////////////////////////////
 
-static async getSeedData(trackData, artistData) {
+static async getSongArtistAnalysis(trackData, artistData) {
  
       const accessToken = await requestAccessToken();
 

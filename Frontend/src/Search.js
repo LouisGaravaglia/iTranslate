@@ -4,7 +4,7 @@ import SearchResult from "./SearchResult";
 import SearchBar from "./SearchBar";
 import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
-import ArtistAPI from './ArtistAPI';
+import BackendCall from './BackendCall';
 
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -74,19 +74,25 @@ const Search = () => {
 
   const getLyrics = async (artist, track, index) => {
 
+    ////PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
+    // setSelectedTrack([track, {}]);
+    // const trackLyrics = await LyricsAPI.getLyrics(artist, track);
+    ////********* IF THERE ARE NO LYRICS THEN DONT DO ANYTHING BELOW */
+    // setLyrics(trackLyrics);
+
+    //SELECT WHICH TRACK IN THE SEARCH RESULTS WAS CHOSEN BY USER
     const base = searchResults[index];
+    //CREATE OBJECTS FOR TRACK, ARTIST, AND ALBUM DATA
     const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
     const aData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
     const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
-    const [trackData, artistData] = await SpotifyAPI.getSeedData(tData, aData);
-    const trackId = await ArtistAPI.addTrack(trackData);
-    const artistId = await ArtistAPI.addArtist(artistData);
-    const albumId = await ArtistAPI.addAlbum(albumData);
+    //MAKE SECOND CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST DETAILS
+    const [trackData, artistData] = await SpotifyAPI.getSongArtistAnalysis(tData, aData);
+    await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
+    // const artistId = await BackendCall.addArtist(artistData);
+    // const albumId = await BackendCall.addAlbum(albumData);
 
-    //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
-    // setSelectedTrack([track, {}]);
-    // const trackLyrics = await LyricsAPI.getLyrics(artist, track);
-    // setLyrics(trackLyrics);
+
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
