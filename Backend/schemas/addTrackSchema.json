@@ -10,13 +10,13 @@
             "spotify_id": "aa193oijaidjflia",
             "name": "J Balvin",
             "explicit": false,
-            "popularity": "99",
+            "popularity": 99,
             "preview_url": "http:///spotify.com",
             "spotify_uri": "spotify:lkjaslkfjlkajsd",
-            "danceablity": "0.99",
-            "tempo": "1.99",
-            "valence": "0.99",
-            "duration": "1.99"
+            "danceablity": 0.99,
+            "tempo": 177.99,
+            "valence": 0.99,
+            "duration": 19923
         }
     ],
     "required": [
@@ -58,12 +58,12 @@
         },
         "popularity": {
             "$id": "#/properties/popularity",
-            "type": "string",
+            "type": "integer",
             "title": "The popularity schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "99"
+                99
             ]
         },
         "preview_url": {
@@ -88,42 +88,42 @@
         },
         "danceablity": {
             "$id": "#/properties/danceablity",
-            "type": "string",
+            "type": "number",
             "title": "The danceablity schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "0.99"
+                0.99
             ]
         },
         "tempo": {
             "$id": "#/properties/tempo",
-            "type": "string",
+            "type": "number",
             "title": "The tempo schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "1.99"
+                119.877
             ]
         },
         "valence": {
             "$id": "#/properties/valence",
-            "type": "string",
+            "type": "number",
             "title": "The valence schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "0.99"
+                0.99
             ]
         },
         "duration": {
             "$id": "#/properties/duration",
-            "type": "string",
+            "type": "integer",
             "title": "The duration schema",
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "12224"
+                12224
             ]
         }
     },

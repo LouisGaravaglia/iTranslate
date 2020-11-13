@@ -16,6 +16,7 @@ class Tracks {
         400
       );
     };
+      console.log("MY TRACK DATA: ", data);
 
     const result = await db.query (
       `INSERT INTO tracks ( spotify_id, name, explicit, popularity, preview_url, spotify_uri, danceability, tempo, valence, duration )

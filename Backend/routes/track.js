@@ -14,9 +14,7 @@ router.post( "/", async function( req, res, next ) {
     if ( !validation.valid ) {
       throw new ExpressError( validation.errors.map( e => e.stack ), 400 );
     }
-    console.log("REQ.BODY:", req.body);
-    console.log("REQ.PARAMS", req.params);
-    console.log("REQ.QUERY", req.query);
+
 
     const trackId = await Tracks.add( req.body );
      console.log("RETURNING FROM THE TRACK POST ROUTE");

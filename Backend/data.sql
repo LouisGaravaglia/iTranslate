@@ -10,13 +10,13 @@ CREATE TABLE tracks(
     spotify_id TEXT NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
     explicit BOOLEAN,
-    popularity TEXT,
+    popularity INT,
     preview_url TEXT,
     spotify_uri TEXT NOT NULL,
-    danceability TEXT,
-    tempo TEXT,
-    valence TEXT,
-    duration TEXT 
+    danceability FLOAT,
+    tempo FLOAT,
+    valence FLOAT,
+    duration INT 
 );
 
 DROP TABLE IF EXISTS artists;
@@ -27,7 +27,7 @@ CREATE TABLE artists(
     genre TEXT NOT NULL,
     spotify_uri TEXT NOT NULL,
     img_url TEXT,
-    popularity TEXT
+    popularity INT
 );
 
 DROP TABLE IF EXISTS albums;
