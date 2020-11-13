@@ -24,8 +24,21 @@ class ArtistAPI {
         throw Array.isArray(message) ? message : [message];
       }
     }
+
+    
+
+    static createPostgresArray(data) {
+      
+    }
   
     static async addArtist(data) {
+      // const filteredImages = data.img_url.filter(obj => console.log(obj["url"]))
+      // console.log("Im filtered img data: ", filteredImages);
+      // data.img_url = filteredImages;
+      const filtered = data.img_url.map(item => item.url);
+      console.log("This is the filtered value: ", filtered);
+      data.img_url = filtered;
+      console.log("Artist data: ", data);
       let res = await this.request("artist", data, "post");
       console.log("I'M ADDING ARTIST: ", res);
       return res.artistId;
@@ -40,6 +53,8 @@ class ArtistAPI {
     }
 
     static async addAlbum(data) {
+      data.img_url = data.img_url.url;
+      console.log("ALBUM DATA: ", data);
       let res = await this.request("album", data, "post");
       console.log("I'M ADDING ALBUM: ", res);
       return res.albumId;

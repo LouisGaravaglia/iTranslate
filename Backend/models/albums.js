@@ -10,7 +10,7 @@ class Albums {
       `SELECT spotify_id FROM albums WHERE spotify_id = $1`, [ data.spotify_id ]
     );
 
-    if ( duplicateCheck[0].rows ) {
+    if ( duplicateCheck.rows.length ) {
       throw new ExpressError (
         `There already exists an album with spotify_id '${ data.spotify_id }`,
         400

@@ -7,10 +7,18 @@
     "default": {},
     "examples": [
         {
-            "spotify_id": "aa193oijaidjflia",
+            "spotify_id": "sssasjaisdofijasod",
             "name": "J Balvin",
-            "genre": "rock",
-            "spotify_uri": "spotify:lkjaslkfjlkajsd"
+            "genre": [
+                "hi",
+                "by"
+            ],
+            "spotify_uri": "http://aksjdfaskdjf",
+            "img_url": [
+                "hi",
+                "by"
+            ],
+            "popularity": "89"
         }
     ],
     "required": [
@@ -27,7 +35,7 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "aa193oijaidjflia"
+                "sssasjaisdofijasod"
             ]
         },
         "name": {
@@ -42,13 +50,33 @@
         },
         "genre": {
             "$id": "#/properties/genre",
-            "type": "string",
+            "type": "array",
             "title": "The genre schema",
             "description": "An explanation about the purpose of this instance.",
-            "default": "",
+            "default": [],
             "examples": [
-                "rock"
-            ]
+                [
+                    "hi",
+                    "by"
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/genre/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/genre/items/anyOf/0",
+                        "type": "string",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "hi",
+                            "by"
+                        ]
+                    }
+                ]
+            }
         },
         "spotify_uri": {
             "$id": "#/properties/spotify_uri",
@@ -57,7 +85,47 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "spotify:lkjaslkfjlkajsd"
+                "http://aksjdfaskdjf"
+            ]
+        },
+        "img_url": {
+            "$id": "#/properties/img_url",
+            "type": "array",
+            "title": "The img_url schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+                [
+                    "hi",
+                    "by"
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/img_url/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/img_url/items/anyOf/0",
+                        "type": "string",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "hi",
+                            "by"
+                        ]
+                    }
+                ]
+            }
+        },
+        "popularity": {
+            "$id": "#/properties/popularity",
+            "type": "string",
+            "title": "The popularity schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "89"
             ]
         }
     },
