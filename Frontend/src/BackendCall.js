@@ -25,6 +25,7 @@ class BackendCall {
       }
     }
 
+//////////////////////////////////////  SONG DATA METHODS  //////////////////////////////////////
 
     static async addTrack(data) {
       console.log("Track data: ", data);
@@ -65,7 +66,7 @@ class BackendCall {
         const trackId = await this.addTrack(trackData);
 
         if (trackId === "This song already exists in DB") {
-          return "No need to add data"
+          return "No data was added to the DB"
         }
 
         const artistId = await this.addArtist(artistData);
@@ -75,7 +76,7 @@ class BackendCall {
         //DO I NEED TO RETURN ANYTHING FORM ADDISCOGRPAHY?
         this.addDiscography(spotifyIds);
         console.log("Sucessfully added all three things to Disography.");
-        return spotifyIds;
+        return "Added new data to the DB";
 
       } catch ( err ) {
 
@@ -83,6 +84,22 @@ class BackendCall {
 
       }
     }
+
+//////////////////////////////////////  LYRICS METHODS  //////////////////////////////////////
+
+    static async addLyrics(data) {
+      let res = await this.request("lyrics", data, "post");
+      console.log("addLyrics res: ", res);
+      return res.data.response;
+    }
+
+    static async getLyrics(data) {
+      let res = await this.request("lyrics", data);
+      console.log("getLyrics res: ", res);
+      return res.data.response;
+    }
+
+//////////////////////////////////////  TRANSLATION METHODS  //////////////////////////////////////
 
 
   }

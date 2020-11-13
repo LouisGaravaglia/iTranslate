@@ -49,3 +49,20 @@ CREATE TABLE discography (
   artist_id TEXT NOT NULL REFERENCES artists ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS lyrics;
+
+CREATE TABLE lyrics (
+  id SERIAL PRIMARY KEY,
+  track_id TEXT NOT NULL REFERENCES tracks ON DELETE CASCADE,
+  lyrics TEXT NOT NULL
+);
+
+DROP TABLE IF EXISTS translation;
+
+CREATE TABLE translation (
+  id SERIAL PRIMARY KEY,
+  track_id TEXT NOT NULL REFERENCES tracks ON DELETE CASCADE,
+  language TEXT NOT NULL,
+  translation TEXT NOT NULL
+);
+

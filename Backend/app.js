@@ -8,6 +8,8 @@ const artistRoutes = require("./routes/artist");
 const albumRoutes = require("./routes/album");
 const trackRoutes = require("./routes/track");
 const discographyRoutes = require("./routes/discography");
+const lyricsRoutes = require("./routes/lyrics");
+const translationRoutes = require("./routes/translation");
 
 
 app.use(express.json());
@@ -19,6 +21,8 @@ app.use("/track", trackRoutes);
 app.use("/artist", artistRoutes);
 app.use("/album", albumRoutes);
 app.use("/discography", discographyRoutes);
+app.use("/lyrics", lyricsRoutes);
+app.use("/translation", translationRoutes);
 
 
 /** 404 handler */

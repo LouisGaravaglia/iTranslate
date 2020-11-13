@@ -76,9 +76,7 @@ const Search = () => {
 
     ////PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
     // setSelectedTrack([track, {}]);
-    // const trackLyrics = await LyricsAPI.getLyrics(artist, track);
-    ////********* IF THERE ARE NO LYRICS THEN DONT DO ANYTHING BELOW */
-    // setLyrics(trackLyrics);
+
 
     //SELECT WHICH TRACK IN THE SEARCH RESULTS WAS CHOSEN BY USER
     const base = searchResults[index];
@@ -88,11 +86,27 @@ const Search = () => {
     const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
     //MAKE SECOND CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST DETAILS
     const [trackData, artistData] = await SpotifyAPI.getSongArtistAnalysis(tData, aData);
-    await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
+    const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
     // const artistId = await BackendCall.addArtist(artistData);
     // const albumId = await BackendCall.addAlbum(albumData);
+    if (response === "Added new data to the DB") {
+      const trackLyrics = await LyricsAPI.getLyrics(artist, track);
 
+      if (trackLyrics === "") {
+        //DISPLAY FLASH MESSAGE SAYING NO LYRICS AND TO CHOOSE ANOTHER SONG
+        console.log("No lyrics apparently: ", trackLyrics);
+        return;
+      } else {
+        setLyrics(trackLyrics);
+        //NEED TO MAKE THIS FUNCTION AND BACKEND ROUTE/MODEL
+        await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: trackLyrics});
+      }
 
+    } else {
+      //NEED TO MAKE THIS FUNCTION AND BACKEND ROUTE/MODEL
+      const lyrics = BackendCall.getLyrics({track_id: trackData.spotify_id});
+      setLyrics(lyrics);
+    }
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
