@@ -7,6 +7,8 @@ const ibmRoutes = require("./routes/ibm");
 const artistRoutes = require("./routes/artist");
 const albumRoutes = require("./routes/album");
 const trackRoutes = require("./routes/track");
+const discographyRoutes = require("./routes/discography");
+
 
 app.use(express.json());
 app.use(cors({origin: true, credentials: true}));
@@ -16,6 +18,7 @@ app.use("/ibm", ibmRoutes);
 app.use("/track", trackRoutes);
 app.use("/artist", artistRoutes);
 app.use("/album", albumRoutes);
+app.use("/discography", discographyRoutes);
 
 
 /** 404 handler */

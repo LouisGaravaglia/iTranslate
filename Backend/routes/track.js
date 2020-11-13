@@ -16,9 +16,9 @@ router.post( "/", async function( req, res, next ) {
     }
 
 
-    const trackId = await Tracks.add( req.body );
+    const track_id = await Tracks.add( req.body );
      console.log("RETURNING FROM THE TRACK POST ROUTE");
-    return res.status( 201 ).json( { trackId } );
+    return res.status( 201 ).json( { track_id } );
 
   } catch( err ) {
     return next( err );

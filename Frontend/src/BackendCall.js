@@ -30,8 +30,8 @@ class BackendCall {
       console.log("Track data: ", data);
       if ( data.preview_url === null ) data.preview_url = "";
       let res = await this.request("track", data, "post");
-      console.log("I'M ADDING TRACK: ", res);
-      return res.trackId;
+      console.log("I'M ADDING TRACK: ", res.data.track_id);
+      return res.data.track_id.spotify_id;
     }
 
 
@@ -41,7 +41,7 @@ class BackendCall {
       data.img_url = filtered.join(",");
       console.log("Artist data: ", data);
       let res = await this.request("artist", data, "post");
-      return res.artistId;
+      return res.data.artist_id.spotify_id;
     }
 
 
@@ -49,7 +49,13 @@ class BackendCall {
       data.img_url = data.img_url.url;
       console.log("ALBUM DATA: ", data);
       let res = await this.request("album", data, "post");
-      return res.albumId;
+      return res.data.album_id.spotify_id
+    }
+
+    static async addDiscography(data) {
+      console.log("DISCOGRAPHY DATA: ", data);
+      let res = await this.request("discography", data, "post");
+      return res;
     }
 
     // ADDING TRACK ARTIST AND ALBUM DATA TO THE DB
@@ -65,8 +71,12 @@ class BackendCall {
 
         const artistId = await this.addArtist(artistData);
         const albumId = await this.addAlbum(albumData);
-        console.log("Sucessfully added all three things.");
-        return [trackId, artistId, albumId];
+        const spotifyIds = {trackId, artistId, albumId};
+        console.log("Here is the artistId: ", artistId);
+        //DO I NEED TO RETURN ANYTHING FORM ADDISCOGRPAHY?
+        this.addDiscography(spotifyIds);
+        console.log("Sucessfully added all three things to Disography.");
+        return spotifyIds;
 
       } catch ( err ) {
 
