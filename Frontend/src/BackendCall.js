@@ -94,6 +94,7 @@ class BackendCall {
     }
 
     static async getLyrics(data) {
+      console.log("This is data that im sending to getLyrics route: ", data);
       let res = await this.request("lyrics", data);
       console.log("getLyrics res: ", res);
       return res.data.response;

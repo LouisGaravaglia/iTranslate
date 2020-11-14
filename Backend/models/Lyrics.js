@@ -26,16 +26,16 @@ class Lyrics {
 
   }
 
-  static async get(data) {
+  static async get(track_id) {
 
     console.log("ENTERING LYRICS GET ROUTE");
-    console.log("LYRICS get data: ", data);
+    console.log("LYRICS get data: ", track_id);
 
     const result = await db.query (
-      `SELECT lyrics FROM lyrics WHERE track_id = $1`, [data.track_id]
+      `SELECT lyrics FROM lyrics WHERE track_id = $1`, [track_id]
     );
 
-    return result.rows[0];
+    return result.rows[0].lyrics;
 
   }
 

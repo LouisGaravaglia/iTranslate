@@ -104,7 +104,8 @@ const Search = () => {
 
     } else {
       //NEED TO MAKE THIS FUNCTION AND BACKEND ROUTE/MODEL
-      const lyrics = BackendCall.getLyrics({track_id: trackData.spotify_id});
+      const lyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
+      console.log("Setting lyrics to be: ", lyrics);
       setLyrics(lyrics);
     }
   }
