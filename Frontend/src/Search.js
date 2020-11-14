@@ -17,7 +17,6 @@ const Search = () => {
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [translation, setTranslation] = useState("");
-
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
@@ -86,11 +85,10 @@ const Search = () => {
     if (resultsArray === "Not Found") {
       setSearchFlashMessage(true);
       console.log("noting found from Spotify");
-      return;
+    } else {
+      console.log("resultArray: ", resultsArray);
+      setSearchResults(resultsArray);
     }
-
-    console.log("resultArray: ", resultsArray);
-    setSearchResults(resultsArray);
   }
 
   const handleSearchResultsClick = async (artist, track, index) => {
@@ -153,7 +151,6 @@ const Search = () => {
   }
 
   const getTranslation = async () => {
-
     //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
     const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage});
     console.log("databaseTranslation: ", response);
