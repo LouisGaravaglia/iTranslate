@@ -95,11 +95,21 @@ const Search = () => {
     const base = searchResults[index];
     setSelectedTrackId(base.id);
     //CREATE OBJECTS FOR TRACK, ARTIST, AND ALBUM INFO
-    const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
-    const aData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-    const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
+    const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
+    const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+    const completeAlbum = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
     //MAKE SECOND CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY)
-    const [trackData, artistData] = await SpotifyAPI.getSongArtistAnalysis(tData, aData);
+    const [completeTrackData, completeArtistData] = await SpotifyAPI.getSongArtistAnalysis(partialTrackData, partialArtistData);
+
+    if (completeTrackData === "Error getting Track Data") {
+      getLyrics(partialTrackData, partialArtistData, completeAlbum);
+    } else {
+      getLyrics(completeTrackData, completeArtistData, completeAlbum);
+    }
+
+  }
+
+  const getLyrics = async (trackData, artistData, albumData) => {
     const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
 
     if (response === "Added new track to the DB") {

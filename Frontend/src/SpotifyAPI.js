@@ -119,9 +119,6 @@ static async getSongArtistAnalysis(trackData, artistData) {
 
           console.log("Here are album tracks: ", artistDetails);
           console.log("Here is the song anaylsis: ", songAnalysis);
-      
-
-
           trackData["danceability"] = songAnalysis.data.danceability;
           trackData["tempo"] = songAnalysis.data.tempo;
           trackData["valence"] = songAnalysis.data.valence;
@@ -130,12 +127,11 @@ static async getSongArtistAnalysis(trackData, artistData) {
           artistData["img_url"] = artistDetails.data.images;
           artistData["popularity"] = artistDetails.data.popularity;
           return [trackData, artistData];
-    
-        
+
       } catch(err) {
         console.error("API Error:", err.response);
-        let message = err.response.data.message;
-        throw Array.isArray(message) ? message : [message];
+        trackData = "Error getting Track Data"
+        return [trackData, artistData];
       }
     }
 
