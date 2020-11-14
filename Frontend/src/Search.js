@@ -10,18 +10,24 @@ import BackendCall from './BackendCall';
 
 
 const Search = () => {
+  //STATE FOR DATA
+  const [languages, setLanguages] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [lyrics, setLyrics] = useState("");
-  const [translation, setTranslation] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [languages, setLanguages] = useState("");
+  const [translation, setTranslation] = useState("");
+
+  //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
   const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
+  const [translationErrorFlashMessage, setTranslationErrorFlashMessage] = useState(false);
+  //REFS FOR PAGE TRAVERSAL
   const searchResultsRef = useRef();
-  const lyricsTranslationRef = useRef();
   const selectLanguageRef = useRef();
+  const lyricsTranslationRef = useRef();
+
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -155,8 +161,15 @@ const Search = () => {
     if (response === "No Translation in DB") {
       const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], selectedLanguage);
       console.log("Translated lyrics: ", IBMTranslation);
-      setTranslation(IBMTranslation);
-      await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage, translation: IBMTranslation});
+
+      if (IBMTranslation === "Error attempting to read source text") {
+        //**********FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND */
+        setTranslationErrorFlashMessage(true);
+      } else {
+        setTranslation(IBMTranslation);
+        await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage, translation: IBMTranslation});
+      }
+
     } else {
       console.log("got transltion from DB");
       setTranslation(response);
@@ -200,6 +213,7 @@ const Search = () => {
         {searchFlashMessage && (<FlashMessage duration={5000} setState={setSearchFlashMessage} message="Couldn't find any songs with that Artist or Song name."/> )}
         {noLyricsFlashMessage && (<FlashMessage duration={5000} setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
         {languageNotFoundFlashMessage && (<FlashMessage duration={5000} setState={setLanguageNotFoundFlashMessage} message="That Language was not found, try again."/> )}
+        {translationErrorFlashMessage && (<FlashMessage duration={5000} setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
       </div>
       <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
       {SearchResultsDiv}

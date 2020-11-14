@@ -16,6 +16,7 @@ class IBMWatsonAPI {
 
     } catch(err) {
       console.log("API Error:", err);
+      return "Error attempting to read source text"
     }
   }
 
