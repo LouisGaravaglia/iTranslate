@@ -78,6 +78,7 @@ const Search = () => {
       console.log("noting found from Spotify");
       return;
     }
+
     console.log("resultArray: ", resultsArray);
     setSearchResults(resultsArray);
   }
@@ -85,15 +86,11 @@ const Search = () => {
   const handleSearchResultsClick = async (artist, track, index) => {
     const base = searchResults[index];
     setSelectedTrackId(base.id);
-
-
-    //SELECT WHICH TRACK IN THE SEARCH RESULTS WAS CHOSEN BY USER
-    
-    //CREATE OBJECTS FOR TRACK, ARTIST, AND ALBUM DATA
+    //CREATE OBJECTS FOR TRACK, ARTIST, AND ALBUM INFO
     const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
     const aData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
     const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
-    //MAKE SECOND CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST DETAILS
+    //MAKE SECOND CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY)
     const [trackData, artistData] = await SpotifyAPI.getSongArtistAnalysis(tData, aData);
     const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
 
@@ -147,7 +144,7 @@ const Search = () => {
 
   }
 
-////////////////////////////////////////////////////  JSX TO RETURN  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let SearchResultsDiv;
@@ -175,6 +172,8 @@ const Search = () => {
         <DisplayLyrics lyrics={lyrics[0]} translation={translation}/>
       </div>
   );
+
+////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
     <div className="Search">
