@@ -44,7 +44,7 @@ const Search = () => {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {
     function scrollToLanguageSearch() {
-      if (lyrics) {
+      if (lyrics.length) {
         selectLanguageRef.current.scrollIntoView({
           behavior: "smooth",
         });
@@ -56,7 +56,7 @@ const Search = () => {
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {
     function scrollToTranslation() {
-      if (selectedLanguage) {
+      if (selectedLanguage.length) {
         lyricsTranslationRef.current.scrollIntoView({
           behavior: "smooth",
         });
@@ -101,7 +101,7 @@ const Search = () => {
         return;
       } else {
         console.log("SET LYRICS IN FIRST CONDTIONAL");
-        setLyrics(APILyrics);
+        setLyrics([APILyrics, {}]);
         await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: APILyrics});
       }
 
@@ -114,7 +114,7 @@ const Search = () => {
         console.log("THE Lyrics in the db = ", databaseLyrics);
       } else {
         console.log("SET LYRICS IN SECOND CONDTIONAL");
-        setLyrics(databaseLyrics);
+        setLyrics([databaseLyrics, {}]);
       }
     }
   }
@@ -122,13 +122,13 @@ const Search = () => {
   const handleLanguageSearchSubmit = async (searchVal) => {
     //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
     const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
-    setSelectedLanguage(language);
+    setSelectedLanguage([language, {}]);
     //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
     const res = await BackendCall.getTranslation({track_id: selectedTrackId[0], language});
     console.log("databaseTranslation: ", res.translation);
 
     if (res.translation === "No Translation in DB") {
-      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics, language);
+      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], language);
       console.log("Translated lyrics: ", IBMTranslation);
       setTranslation(IBMTranslation);
       await BackendCall.addTranslation({track_id: selectedTrackId[0], language, translation: IBMTranslation});
@@ -162,7 +162,7 @@ const Search = () => {
   //LYRICS AND TRANSLATION HTML
   let LyricsTranslationDiv;
   
-  if (selectedLanguage)  LyricsTranslationDiv = (
+  if (selectedLanguage.length)  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <div className="Browse-Lyrics-Container">
           <p className="Browse-Lyrics">ORIGINAL LYRICS</p>
