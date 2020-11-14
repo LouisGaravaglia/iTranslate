@@ -79,9 +79,8 @@ class BackendCall {
         return "Added new data to the DB";
 
       } catch ( err ) {
-
+        //**********FLASH MESSAGE ASKING TO PICK DIFFERENT SONG */
         console.log("FLASH MESSAGE: PLEASE TRY DIFFERENT SONG.", err);
-
       }
     }
 

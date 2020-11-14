@@ -91,16 +91,14 @@ const Search = () => {
     //MAKE SECOND CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST DETAILS
     const [trackData, artistData] = await SpotifyAPI.getSongArtistAnalysis(tData, aData);
     const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
-    // const artistId = await BackendCall.addArtist(artistData);
-    // const albumId = await BackendCall.addAlbum(albumData);
+
     if (response === "Added new data to the DB") {
       const APILyrics = await LyricsAPI.getLyrics(artist, track);
 
       if (APILyrics === "No Lyrics") {
-        //DISPLAY FLASH MESSAGE SAYING NO LYRICS AND TO CHOOSE ANOTHER SONG
+        //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
         console.log("No lyrics apparently: ", APILyrics);
         await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
-        //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
         return;
       } else {
         console.log("SET LYRICS IN FIRST CONDTIONAL");
@@ -110,14 +108,14 @@ const Search = () => {
 
     } else {
       const databaseLyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
-      console.log("Setting lyrics to be: ", databaseLyrics);
+      console.log("Setting lyrics to be from the DB: ", databaseLyrics);
+
       if (databaseLyrics === "No Lyrics") {
         //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
         console.log("THE Lyrics in the db = ", databaseLyrics);
       } else {
         console.log("SET LYRICS IN SECOND CONDTIONAL");
         setLyrics(databaseLyrics);
-
       }
     }
   }
@@ -127,16 +125,17 @@ const Search = () => {
     const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
     setSelectedLanguage(language);
     //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-    const databaseTranslation = await BackendCall.getTranslation({track_id: selectedTrackId[0], language});
-    console.log("databaseTranslation: ", databaseTranslation);
+    const res = await BackendCall.getTranslation({track_id: selectedTrackId[0], language});
+    console.log("databaseTranslation: ", res.translation);
 
-    if (databaseTranslation === "No Translation in DB") {
+    if (res.translation === "No Translation in DB") {
       const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics, language);
       console.log("Translated lyrics: ", IBMTranslation);
       setTranslation(IBMTranslation);
       await BackendCall.addTranslation({track_id: selectedTrackId[0], language, translation: IBMTranslation});
     } else {
-      setTranslation(databaseTranslation);
+      console.log("got transltion from DB");
+      setTranslation(res.translation);
     }
 
   }
