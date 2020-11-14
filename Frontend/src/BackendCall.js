@@ -76,7 +76,7 @@ class BackendCall {
         //DO I NEED TO RETURN ANYTHING FORM ADDISCOGRPAHY?
         this.addDiscography(spotifyIds);
         console.log("Sucessfully added all three things to Disography.");
-        return "Added new data to the DB";
+        return "Added new track to the DB";
 
       } catch ( err ) {
         //**********FLASH MESSAGE ASKING TO PICK DIFFERENT SONG */

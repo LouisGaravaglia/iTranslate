@@ -2,9 +2,11 @@ import React, {useState, useRef, useEffect} from 'react';
 import SpotifyAPI from "./SpotifyAPI";
 import SearchResult from "./SearchResult";
 import SearchBar from "./SearchBar";
+import DisplayLyrics from "./DisplayLyrics";
 import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 import BackendCall from './BackendCall';
+
 
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -70,14 +72,19 @@ const Search = () => {
   const handleTrackSearchSubmit = async (searchVal) => {
     console.log("handleSubmit: ", searchVal);
     const resultsArray = await SpotifyAPI.requestSearch(searchVal);
+
+    if (resultsArray === "Not Found") {
+      //**********FLASH MESSAGE SAYING NOTHING IS FOUND WITH THAT SONG OR ARTIST NAME */
+      console.log("noting found from Spotify");
+      return;
+    }
     console.log("resultArray: ", resultsArray);
     setSearchResults(resultsArray);
   }
 
   const handleSearchResultsClick = async (artist, track, index) => {
     const base = searchResults[index];
-    //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
-    setSelectedTrackId([base.id, {}]);
+    setSelectedTrackId(base.id);
 
 
     //SELECT WHICH TRACK IN THE SEARCH RESULTS WAS CHOSEN BY USER
@@ -90,7 +97,7 @@ const Search = () => {
     const [trackData, artistData] = await SpotifyAPI.getSongArtistAnalysis(tData, aData);
     const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
 
-    if (response === "Added new data to the DB") {
+    if (response === "Added new track to the DB") {
       const APILyrics = await LyricsAPI.getLyrics(artist, track);
       console.log("APILyrics = ", APILyrics);
 
@@ -101,6 +108,7 @@ const Search = () => {
         return;
       } else {
         console.log("SET LYRICS IN FIRST CONDTIONAL");
+        //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE LYRICS ARE THE SAME
         setLyrics([APILyrics, {}]);
         await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: APILyrics});
       }
@@ -124,14 +132,14 @@ const Search = () => {
     const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
     setSelectedLanguage([language, {}]);
     //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-    const res = await BackendCall.getTranslation({track_id: selectedTrackId[0], language});
+    const res = await BackendCall.getTranslation({track_id: selectedTrackId, language});
     console.log("databaseTranslation: ", res.translation);
 
     if (res.translation === "No Translation in DB") {
       const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], language);
       console.log("Translated lyrics: ", IBMTranslation);
       setTranslation(IBMTranslation);
-      await BackendCall.addTranslation({track_id: selectedTrackId[0], language, translation: IBMTranslation});
+      await BackendCall.addTranslation({track_id: selectedTrackId, language, translation: IBMTranslation});
     } else {
       console.log("got transltion from DB");
       setTranslation(res.translation);
@@ -153,7 +161,7 @@ const Search = () => {
   //SELECT LANGUAGE TO TRANSLATE LYRICS TO SEARCH BAR COMPONENT
   let SelectLanguageDiv;
 
-  if (selectedTrackId.length) SelectLanguageDiv = (
+  if (lyrics.length) SelectLanguageDiv = (
     <div ref={selectLanguageRef}>
       <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
     </div>
@@ -164,14 +172,7 @@ const Search = () => {
   
   if (selectedLanguage.length)  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
-        <div className="Browse-Lyrics-Container">
-          <p className="Browse-Lyrics">ORIGINAL LYRICS</p>
-          <p className="Browse-Lyrics">{lyrics}</p>
-        </div>
-        <div className="Browse-Translation-Container">
-          <p className="Browse-Translation">TRANSLATED LYRICS</p>
-          <p className="Browse-Translation">{translation}</p>
-        </div>
+        <DisplayLyrics lyrics={lyrics[0]} translation={translation}/>
       </div>
   );
 
