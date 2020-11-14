@@ -10,12 +10,14 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [lyrics, setLyrics] = useState("");
   const [translation, setTranslation] = useState("");
-  const [selectedTrack, setSelectedTrack] = useState("");
+  const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [languages, setLanguages] = useState("");
   const searchResultsRef = useRef();
   const lyricsTranslationRef = useRef();
   const selectLanguageRef = useRef();
+
+////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
   //GET AVAILABLE LANGUAGES TO TRANSLATE LYRICS TO FROM IBM API
   useEffect(() => {
@@ -42,14 +44,14 @@ const Search = () => {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {
     function scrollToLanguageSearch() {
-      if (selectedTrack) {
+      if (lyrics) {
         selectLanguageRef.current.scrollIntoView({
           behavior: "smooth",
         });
       }
     }
     scrollToLanguageSearch();
-  }, [selectedTrack, setSelectedTrack]);
+  }, [lyrics, setLyrics]);
 
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {
@@ -63,6 +65,8 @@ const Search = () => {
     scrollToTranslation();
   }, [selectedLanguage]);
 
+////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+
   const handleTrackSearchSubmit = async (searchVal) => {
     // e.preventDefault();
     console.log("handleSubmit: ", searchVal);
@@ -73,13 +77,13 @@ const Search = () => {
   }
 
   const handleSearchResultsClick = async (artist, track, index) => {
-
+    const base = searchResults[index];
     //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
-    setSelectedTrack([track, {}]);
+    setSelectedTrackId([base.id, {}]);
 
 
     //SELECT WHICH TRACK IN THE SEARCH RESULTS WAS CHOSEN BY USER
-    const base = searchResults[index];
+    
     //CREATE OBJECTS FOR TRACK, ARTIST, AND ALBUM DATA
     const tData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
     const aData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
@@ -90,31 +94,51 @@ const Search = () => {
     // const artistId = await BackendCall.addArtist(artistData);
     // const albumId = await BackendCall.addAlbum(albumData);
     if (response === "Added new data to the DB") {
-      const trackLyrics = await LyricsAPI.getLyrics(artist, track);
+      const APILyrics = await LyricsAPI.getLyrics(artist, track);
 
-      if (trackLyrics === "") {
+      if (APILyrics === "No Lyrics") {
         //DISPLAY FLASH MESSAGE SAYING NO LYRICS AND TO CHOOSE ANOTHER SONG
-        console.log("No lyrics apparently: ", trackLyrics);
+        console.log("No lyrics apparently: ", APILyrics);
+        await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
+        //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
         return;
       } else {
-        setLyrics(trackLyrics);
-        await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: trackLyrics});
+        console.log("SET LYRICS IN FIRST CONDTIONAL");
+        setLyrics(APILyrics);
+        await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: APILyrics});
       }
 
     } else {
-      const lyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
-      console.log("Setting lyrics to be: ", lyrics);
-      setLyrics(lyrics);
+      const databaseLyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
+      console.log("Setting lyrics to be: ", databaseLyrics);
+      if (databaseLyrics === "No Lyrics") {
+        //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
+        console.log("THE Lyrics in the db = ", databaseLyrics);
+      } else {
+        console.log("SET LYRICS IN SECOND CONDTIONAL");
+        setLyrics(databaseLyrics);
+
+      }
     }
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
-    //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT LANGUAGE CODE OF THE LANGUAGE USER WANT'S TO USE
-    const [ { language } ] = languages.filter( l => l.language_name.toLowerCase() === searchVal.toLowerCase() );
+    //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
+    const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
     setSelectedLanguage(language);
-    const translatedLyrics = await IBMWatsonAPI.getTranslation(lyrics, language);
-    console.log("Translated lyrics: ", translatedLyrics);
-    setTranslation(translatedLyrics);
+    //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
+    const databaseTranslation = await BackendCall.getTranslation({track_id: selectedTrackId[0], language});
+    console.log("databaseTranslation: ", databaseTranslation);
+
+    if (databaseTranslation === "No Translation in DB") {
+      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics, language);
+      console.log("Translated lyrics: ", IBMTranslation);
+      setTranslation(IBMTranslation);
+      await BackendCall.addTranslation({track_id: selectedTrackId[0], language, translation: IBMTranslation});
+    } else {
+      setTranslation(databaseTranslation);
+    }
+
   }
 
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
@@ -122,14 +146,14 @@ const Search = () => {
   
   if (searchResults.length) SearchResultsDiv = (
     <div className="Search-Results" ref={searchResultsRef}>
-      {searchResults.map( ( r, i ) => <SearchResult key={i} index={i} getLyrics={handleSearchResultsClick} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
+      {searchResults.map((r, i) => <SearchResult key={i} index={i} getLyrics={handleSearchResultsClick} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
     </div>
   );
 
   //SELECT LANGUAGE TO TRANSLATE LYRICS TO SEARCH BAR COMPONENT
   let SelectLanguageDiv;
 
-  if (selectedTrack.length) SelectLanguageDiv = (
+  if (selectedTrackId.length) SelectLanguageDiv = (
     <div ref={selectLanguageRef}>
       <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
     </div>

@@ -6,7 +6,12 @@ const ExpressError = require("../helpers/expressError");
 
 router.get( "/", async function( req, res, next ) {
   try {
+    console.log("MADE IT TO THE TRANSLATION GET ROUTE");
 
+
+    const response = await Translation.get(req.query);
+    console.log("RETURING FORM THE TRANSLATION GET ROUTE", response);
+    return res.status( 201 ).json( { response }  )
   }
 
   catch ( err ) {
@@ -16,15 +21,10 @@ router.get( "/", async function( req, res, next ) {
 
 router.post( "/", async function( req, res, next ) {
   try {
-    console.log("MADE IT TO THE ARTIST POST ROUTE");
-    const validation = validate( req.body, addArtistSchema );
+    console.log("MADE IT TO THE TRANSLATION POST ROUTE");
 
-    if ( !validation.valid ) {
-      throw new ExpressError( validation.errors.map( e => e.stack ), 400 );
-    }
-
-    const response = await Artists.add(req.body);
-    console.log("RETURING FORM THE ARTIST POST ROUTE");
+    const response = await Translation.add(req.body);
+    console.log("RETURING FORM THE TRANSLATION POST ROUTE");
     return res.status( 201 ).json( { response }  )
 
   } catch ( err ) {

@@ -102,6 +102,19 @@ class BackendCall {
 
 //////////////////////////////////////  TRANSLATION METHODS  //////////////////////////////////////
 
+    static async getTranslation(data) {
+      console.log("This is data that im sending to getTranslation route: ", data);
+      let res = await this.request("translation", data);
+      console.log("getTranslation res: ", res);
+      return res.data.response;
+    }
+
+    static async addTranslation(data) {
+      console.log("This is data that im sending to postTranslation route: ", data);
+      let res = await this.request("translation", data, "post");
+      console.log("postTranslation res: ", res);
+      return res.data.response;
+    }
 
   }
 
