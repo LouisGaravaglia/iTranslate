@@ -1,6 +1,6 @@
-import React,  {useState} from 'react';
+import React from 'react';
 import './App.css';
-import SpotifyApi from "./SpotifyAPI";
+
 
 
 function Track({trackName, id, handleTrackClick, artistName}) {

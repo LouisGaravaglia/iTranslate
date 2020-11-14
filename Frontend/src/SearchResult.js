@@ -1,7 +1,4 @@
-import React, {useState} from 'react';
-import SpotifyAPI from "./SpotifyAPI";
-import LyricsAPI from "./LyricsAPI";
-import IBMWatsonAPI from "./IBMWatsonAPI";
+import React from 'react';
 
 const SearchResult = ({index, getLyrics, artist, album, track, trackId, artistId, albumId}) => {
 

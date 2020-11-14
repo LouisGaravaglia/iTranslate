@@ -16,15 +16,16 @@ class LyricsAPI {
 
         if (res.data.lyrics === "") {
           console.log("NO LYRICS");
-          return "No Lyrics"
+          return "No Lyrics from API";
         } else {
           return res.data.lyrics;
         }
 
       } catch(err) {
         console.error("API Error:", err.response);
-        let message = err.response.data.message;
-        throw Array.isArray(message) ? message : [message];
+        return "No Lyrics from API";
+
+     
       }
     }
  

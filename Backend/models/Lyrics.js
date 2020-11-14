@@ -35,7 +35,11 @@ class Lyrics {
       `SELECT lyrics FROM lyrics WHERE track_id = $1`, [track_id]
     );
 
-    return result.rows[0].lyrics;
+    if (result.rows.length) {
+      return result.rows[0].lyrics;
+    } else {
+      return "No Lyrics";
+    }
 
   }
 

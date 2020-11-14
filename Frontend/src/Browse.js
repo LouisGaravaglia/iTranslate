@@ -5,18 +5,17 @@ import IBMWatsonAPI from './IBMWatsonAPI';
 import LyricsAPI from "./LyricsAPI";
 import Album from "./Album";
 import Track from "./Track";
-import { useSelector, useDispatch } from "react-redux";
+
 
 
 
 function Browse() {
   const [albums, setAlbums] = useState([]);
   const [tracks, setTracks] = useState([]);
+  const [artists, setArtists] = useState([]);
   const [lyrics, setLyrics] = useState("");
   const [translation, setTranslation] = useState("");
   const [selectedArtist, setSelectedArtist] = useState("");
-  const artists = useSelector(store => store.artists);
-  const dispatch = useDispatch();
   const albumsRef = useRef();
   const tracksRef = useRef();
   const lyricsTranslationRef = useRef();

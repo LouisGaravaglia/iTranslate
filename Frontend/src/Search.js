@@ -68,9 +68,7 @@ const Search = () => {
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackSearchSubmit = async (searchVal) => {
-    // e.preventDefault();
     console.log("handleSubmit: ", searchVal);
-    // const resultsArray = await SpotifyAPI.getSeedData(searchVal);
     const resultsArray = await SpotifyAPI.requestSearch(searchVal);
     console.log("resultArray: ", resultsArray);
     setSearchResults(resultsArray);
@@ -94,8 +92,9 @@ const Search = () => {
 
     if (response === "Added new data to the DB") {
       const APILyrics = await LyricsAPI.getLyrics(artist, track);
+      console.log("APILyrics = ", APILyrics);
 
-      if (APILyrics === "No Lyrics") {
+      if (APILyrics === "No Lyrics from API") {
         //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
         console.log("No lyrics apparently: ", APILyrics);
         await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
@@ -139,6 +138,8 @@ const Search = () => {
     }
 
   }
+
+////////////////////////////////////////////////////  JSX TO RETURN  ////////////////////////////////////////////////////
 
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let SearchResultsDiv;

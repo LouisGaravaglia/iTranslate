@@ -1,7 +1,6 @@
-import React,  {useState} from 'react';
+import React  from 'react';
 import './App.css';
-import SpotifyApi from "./SpotifyAPI";
-import Track from "./Track";
+
 
 
 function Album({image, name, releaseDate, albumType, id, handleAlbumClick}) {
