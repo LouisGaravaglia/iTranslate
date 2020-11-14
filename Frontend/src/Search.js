@@ -18,6 +18,7 @@ const Search = () => {
   const [languages, setLanguages] = useState("");
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
+  const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
   const searchResultsRef = useRef();
   const lyricsTranslationRef = useRef();
   const selectLanguageRef = useRef();
@@ -130,23 +131,36 @@ const Search = () => {
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
-    //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
-    const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
-    setSelectedLanguage([language, {}]);
-    //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-    const res = await BackendCall.getTranslation({track_id: selectedTrackId, language});
-    console.log("databaseTranslation: ", res.translation);
 
-    if (res.translation === "No Translation in DB") {
-      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], language);
-      console.log("Translated lyrics: ", IBMTranslation);
-      setTranslation(IBMTranslation);
-      await BackendCall.addTranslation({track_id: selectedTrackId, language, translation: IBMTranslation});
-    } else {
-      console.log("got transltion from DB");
-      setTranslation(res.translation);
+    try{
+      //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
+      const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
+      console.log("language is: ", language);
+      setSelectedLanguage([language, {}]);
+      getTranslation();
+    } catch(e) {
+      //**********FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND */
+      setLanguageNotFoundFlashMessage(true);
+      console.log("ERROR CHOOSING LANGUAGE");
     }
 
+  }
+
+  const getTranslation = async () => {
+
+    //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
+    const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage});
+    console.log("databaseTranslation: ", response);
+
+    if (response === "No Translation in DB") {
+      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], selectedLanguage);
+      console.log("Translated lyrics: ", IBMTranslation);
+      setTranslation(IBMTranslation);
+      await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage, translation: IBMTranslation});
+    } else {
+      console.log("got transltion from DB");
+      setTranslation(response);
+    }
   }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
@@ -183,8 +197,9 @@ const Search = () => {
   return (
     <div className="Search">
       <div className="Flash-Messages-Container">
-        {searchFlashMessage && (<FlashMessage duration={5000} setState={setSearchFlashMessage} message="Couldn't find any songs with that Artist or Song name"/> )}
+        {searchFlashMessage && (<FlashMessage duration={5000} setState={setSearchFlashMessage} message="Couldn't find any songs with that Artist or Song name."/> )}
         {noLyricsFlashMessage && (<FlashMessage duration={5000} setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
+        {languageNotFoundFlashMessage && (<FlashMessage duration={5000} setState={setLanguageNotFoundFlashMessage} message="That Language was not found, try again."/> )}
       </div>
       <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
       {SearchResultsDiv}
