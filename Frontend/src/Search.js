@@ -17,6 +17,7 @@ const Search = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [languages, setLanguages] = useState("");
   const [searchError, setSearchError] = useState(false);
+  const [lyricsError, setLyricsError] = useState(false);
   const searchResultsRef = useRef();
   const lyricsTranslationRef = useRef();
   const selectLanguageRef = useRef();
@@ -103,6 +104,7 @@ const Search = () => {
 
       if (APILyrics === "No Lyrics from API") {
         //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
+        setLyricsError(true);
         console.log("No lyrics apparently: ", APILyrics);
         await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
         return;
@@ -119,6 +121,7 @@ const Search = () => {
 
       if (databaseLyrics === "No Lyrics") {
         //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
+        setLyricsError(true);
         console.log("THE Lyrics in the db = ", databaseLyrics);
       } else {
         console.log("SET LYRICS IN SECOND CONDTIONAL");
@@ -180,7 +183,10 @@ const Search = () => {
 
   return (
     <div className="Search">
-      {searchError && (<FlashMessage duration={5000} setState={setSearchError} message="Couldn't find any songs with that Artist or Song name"/> )}
+      <div className="Flash-Messages-Container">
+        {searchError && (<FlashMessage duration={5000} setState={setSearchError} message="Couldn't find any songs with that Artist or Song name"/> )}
+        {lyricsError && (<FlashMessage duration={5000} setState={setLyricsError} message="Unfortunately there are no Lyrics for that song yet."/> )}
+      </div>
       <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
       {SearchResultsDiv}
       {SelectLanguageDiv}

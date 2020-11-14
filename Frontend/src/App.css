@@ -340,6 +340,12 @@ a {
 
 /* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
 
+.Flash-Messages-Container {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
 .FlashMessage {
   display: flex;
   justify-content: space-between;
