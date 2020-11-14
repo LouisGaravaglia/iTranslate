@@ -337,3 +337,31 @@ a {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
+/* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
+
+.FlashMessage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  background-color: rgb(255, 86, 145);
+  height: 10vh;
+  width: 100vw;
+}
+
+.FlashMessage p {
+  color: white;
+  margin: 0 30px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.FlashMessage span {
+  color: white;
+  margin: 0 30px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+}

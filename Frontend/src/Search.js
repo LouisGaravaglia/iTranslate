@@ -3,6 +3,7 @@ import SpotifyAPI from "./SpotifyAPI";
 import SearchResult from "./SearchResult";
 import SearchBar from "./SearchBar";
 import DisplayLyrics from "./DisplayLyrics";
+import FlashMessage from "./FlashMessage";
 import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 import BackendCall from './BackendCall';
@@ -15,6 +16,7 @@ const Search = () => {
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [languages, setLanguages] = useState("");
+  const [searchError, setSearchError] = useState(false);
   const searchResultsRef = useRef();
   const lyricsTranslationRef = useRef();
   const selectLanguageRef = useRef();
@@ -74,6 +76,7 @@ const Search = () => {
     const resultsArray = await SpotifyAPI.requestSearch(searchVal);
 
     if (resultsArray === "Not Found") {
+      setSearchError(true);
       //**********FLASH MESSAGE SAYING NOTHING IS FOUND WITH THAT SONG OR ARTIST NAME */
       console.log("noting found from Spotify");
       return;
@@ -177,6 +180,7 @@ const Search = () => {
 
   return (
     <div className="Search">
+      {searchError && (<FlashMessage duration={5000} setState={setSearchError} message="Couldn't find any songs with that Artist or Song name"/> )}
       <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
       {SearchResultsDiv}
       {SelectLanguageDiv}
