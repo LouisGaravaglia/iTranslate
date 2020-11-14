@@ -72,10 +72,10 @@ const Search = () => {
     setSearchResults(resultsArray);
   }
 
-  const getLyrics = async (artist, track, index) => {
+  const handleSearchResultsClick = async (artist, track, index) => {
 
-    ////PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
-    // setSelectedTrack([track, {}]);
+    //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE TRACK IS SAME
+    setSelectedTrack([track, {}]);
 
 
     //SELECT WHICH TRACK IN THE SEARCH RESULTS WAS CHOSEN BY USER
@@ -98,12 +98,10 @@ const Search = () => {
         return;
       } else {
         setLyrics(trackLyrics);
-        //NEED TO MAKE THIS FUNCTION AND BACKEND ROUTE/MODEL
         await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: trackLyrics});
       }
 
     } else {
-      //NEED TO MAKE THIS FUNCTION AND BACKEND ROUTE/MODEL
       const lyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
       console.log("Setting lyrics to be: ", lyrics);
       setLyrics(lyrics);
@@ -124,7 +122,7 @@ const Search = () => {
   
   if (searchResults.length) SearchResultsDiv = (
     <div className="Search-Results" ref={searchResultsRef}>
-      {searchResults.map( ( r, i ) => <SearchResult key={i} index={i} getLyrics={getLyrics} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
+      {searchResults.map( ( r, i ) => <SearchResult key={i} index={i} getLyrics={handleSearchResultsClick} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
     </div>
   );
 
