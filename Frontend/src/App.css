@@ -3,6 +3,16 @@
   padding: 0;
 }
 
+.container {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    overflow: -moz-scrollbars-none;
+}
+.container::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+
 /* //////////////////////////////////////  NAVBAR  ////////////////////////////////////// */
 
 
@@ -49,6 +59,15 @@ a {
 
 /* //////////////////////////////////////  BROWSE ARTIST SECTION  ////////////////////////////////////// */
 
+.Browse-Artists-Container {
+  width: 100vw;
+  height: 100vh;
+  display: fixed;
+  background-color: green;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
 .Browse-Artists {
   display: flex;
   justify-content: center;
@@ -56,6 +75,7 @@ a {
   flex-wrap: nowrap;
   width: 100vw;
   height: 100vh;
+
 }
 
 .Browse-Artists button{
@@ -77,6 +97,15 @@ a {
   flex: 0 0 15%;
 }
 
+.Browse-Albums-Container {
+  width: 100vw;
+  height: 100vh;
+  display: fixed;
+  background-color: blue;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
 .Browse-Albums {
   display: flex;
   justify-content: flex-start;
@@ -85,10 +114,6 @@ a {
   overflow: auto;
   width: 100vw;
   height: 100vh;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-
-  /* margin: 0 0 0 50px; */
 }
 
 .Album {
@@ -107,6 +132,7 @@ a {
   flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
+
 }
 
 .Browse-Tracks button{
@@ -247,10 +273,9 @@ a {
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  width: 90vw;
-  min-height: 80vh;
-  border: 2px solid  rgb(86, 182, 255);
-  margin: 10vh 5vw;
+  width: 100vw;
+  height: 100vh;
+
 }
 
 .Search-Results p {
@@ -280,6 +305,10 @@ a {
 
 .SearchResult:hover {
   color: rgb(2, 206, 169);
+}
+
+.Search-Slider {
+  margin: 60px 300px 0;
 }
 
 /* //////////////////////////////////////  SEARCH SELECT LANGUAGE  ////////////////////////////////////// */

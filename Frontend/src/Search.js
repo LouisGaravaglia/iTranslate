@@ -8,6 +8,7 @@ import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 import BackendCall from './BackendCall';
 import UserContext from "./UserContext";
+import SearchResultList from "./SearchResultList";
 
 const Search = () => {
   //STATE FOR DATA
@@ -188,7 +189,8 @@ const Search = () => {
   
   if (searchResults.length) SearchResultsDiv = (
     <div className="Search-Results" ref={searchResultsRef}>
-      {searchResults.map((r, i) => <SearchResult key={i} index={i} getLyrics={handleSearchResultsClick} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)}
+      {<SearchResultList resultsArray={searchResults} handleSearch={handleSearchResultsClick}/>}
+      {/* {searchResults.map((r, i) => <SearchResult key={i} index={i} getLyrics={handleSearchResultsClick} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)} */}
     </div>
   );
 

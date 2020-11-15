@@ -198,8 +198,10 @@ function Browse() {
   let ArtistResultsDiv;
   
   if (category === "Artists") ArtistResultsDiv = (
-    <div className="Browse-Artists" ref={artistResultsRef}>
-      {artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)}
+    <div className="Browse-Artists-Container" ref={artistResultsRef}>
+      <div className="Browse-Artists">
+        {artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)}
+      </div>
     </div>
   );
 
@@ -207,8 +209,10 @@ function Browse() {
   let AlbumResultsDiv;
   
   if (albums.length) AlbumResultsDiv = (
-    <div className="Browse-Albums" ref={albumResultsRef}>
-      {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
+    <div className="Browse-Albums-Container" ref={albumResultsRef}>
+      <div className="Browse-Albums">
+        {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
+      </div>  
     </div>
   );
 
