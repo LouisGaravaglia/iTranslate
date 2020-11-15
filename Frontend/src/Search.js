@@ -31,8 +31,6 @@ const Search = () => {
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
-
-
   //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
   useEffect(() => {
     function scrollToSearchResults() {

@@ -51,6 +51,7 @@ function Browse() {
     async function seedArtistsState() {
       const artistsAndIds = await BackendCall.getArtistsAndArtistIds();
       console.log("My artist/id array: ", artistsAndIds);
+      console.log("An artist name: ", artistsAndIds[0].name);
       setArtists(artistsAndIds)
     }
 
@@ -94,7 +95,7 @@ function Browse() {
   useEffect(() => {
     function scrollToTracks() {
       if (tracks.length) {
-        albumResultsRef.current.scrollIntoView({
+        trackResultsRef.current.scrollIntoView({
           behavior: "smooth",
         });
       }
@@ -129,11 +130,12 @@ function Browse() {
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleArtistClick = async (artistID, artistName) => {
-
+    console.log("artistId: ", artistID);
     const albums = await SpotifyApi.getAlbums(artistID);
+    console.log("here are the alubms", albums);    
     setAlbums(albums);
     setSelectedArtist(artistName);
-    console.log("here are the alubms", albums);
+
   }
 
   const handleAlbumClick = async (albumID) => {
@@ -197,7 +199,7 @@ function Browse() {
   
   if (category === "Artists") ArtistResultsDiv = (
     <div className="Browse-Artists" ref={artistResultsRef}>
-      {artists.map(artist => <button onClick={() => handleArtistClick(artist.id, artist.name)}>{artist.name}</button>)}
+      {artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)}
     </div>
   );
 
