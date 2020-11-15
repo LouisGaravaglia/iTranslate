@@ -305,10 +305,11 @@ a {
 
 .SearchResult:hover {
   color: rgb(2, 206, 169);
+    font-size: 1.55rem;
 }
 
 .Search-Slider {
-  margin: 60px 300px 0;
+  margin: 60px 400px 0;
 }
 
 /* //////////////////////////////////////  SEARCH SELECT LANGUAGE  ////////////////////////////////////// */

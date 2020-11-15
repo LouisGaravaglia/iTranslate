@@ -171,7 +171,7 @@ const Search = () => {
   
   if (searchResults.length) SearchResultsDiv = (
     <div className="Search-Results" ref={searchResultsRef}>
-      {<SearchResultList resultsArray={searchResults} handleSearch={handleSearchResultsClick}/>}
+      {<SearchResultList resultsArray={searchResults} handleSearch={handleSearchResultsClick} itemsPerPage={5}/>}
       {/* {searchResults.map((r, i) => <SearchResult key={i} index={i} getLyrics={handleSearchResultsClick} artist={r.artists[0].name} album={r.album.name} track={r.name} trackId={r.id} artistId={r.artists[0].id} albumId={r.album.id}/>)} */}
     </div>
   );
