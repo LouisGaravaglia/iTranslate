@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 
-const SearchResult = ({index, getLyrics, artist, album, track, trackId, artistId, albumId}) => {
-
+const SearchResult = memo(({index, getLyrics, artist, album, track, trackId, artistId, albumId}) => {
+  console.log("SearchResult Re-rendering");
 const handleClick = () => {
   getLyrics(artist, track, index);
 }
@@ -10,7 +10,7 @@ const handleClick = () => {
      <button onClick={handleClick} className="SearchResult">"{track}" by {artist} on {album}</button>
 
   );
-};
+});
 
     // <div className="SearchResult">
     //   <p>Artist: {artist} / Album: {album} / Track: {track}</p>

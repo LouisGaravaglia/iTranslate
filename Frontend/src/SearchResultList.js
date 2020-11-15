@@ -19,7 +19,7 @@ const SearchResultList = ({resultsArray, handleSearch}) => {
     } else if (sliderVal > (pivotVal * 3) && sliderVal <= (pivotVal * 4) && resultsArray.length > 15 ) {
       setPaginateVal(15);
     } 
-    console.log("Slider Value: ", sliderVal);
+    // console.log("Slider Value: ", sliderVal);
   };
 
   // const handleChange = (event, newValue) => {
