@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useContext} from 'react';
+import React, {useState, useRef, useEffect, useContext, useCallback} from 'react';
 import SpotifyAPI from "./SpotifyAPI";
 import SearchResult from "./SearchResult";
 import SearchBar from "./SearchBar";
@@ -32,41 +32,27 @@ const Search = () => {
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
-  //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
-  useEffect(() => {
-    function scrollToSearchResults() {
-      if (searchResults.length) {
-        searchResultsRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
+  //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
+  const scrollToNextDiv = useCallback(async (state, ref) => {
+    if (state.length) {
+      ref.current.scrollIntoView({
+        behavior: "smooth",
+      });
     }
-    scrollToSearchResults();
-  }, [searchResults]);
+  }, []);
+
+  //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
+  useEffect(() => {scrollToNextDiv(searchResults, searchResultsRef);}, [searchResults, searchResultsRef, scrollToNextDiv]);
+
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
-  useEffect(() => {
-    function scrollToLanguageSearch() {
-      if (lyrics.length) {
-        selectLanguageRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
-    }
-    scrollToLanguageSearch();
-  }, [lyrics, setLyrics]);
+  useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
+
 
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {
-    function scrollToTranslation() {
-      if (selectedLanguage.length) {
-        lyricsTranslationRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
-    }
-    scrollToTranslation();
-  }, [selectedLanguage]);
+  useEffect(() => {scrollToNextDiv(selectedLanguage, lyricsTranslationRef);}, [selectedLanguage, lyricsTranslationRef, scrollToNextDiv]);
+
+
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 

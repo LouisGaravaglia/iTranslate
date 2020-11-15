@@ -5,10 +5,7 @@ import SearchResult from "./SearchResult";
 const SearchResultList = ({resultsArray, handleSearch}) => {
   const [sliderVal, setSliderVal] = useState(0);
   const [paginateVal, setPaginateVal] = useState(0);
-
   const resultsInView = resultsArray.slice(paginateVal, paginateVal + 5);
-  console.log("Results in view = ", resultsInView);
-
   const pivotVal = Math.floor((100 / resultsArray.length) * 5);
 
   const handleChange = (event, newValue) => {
