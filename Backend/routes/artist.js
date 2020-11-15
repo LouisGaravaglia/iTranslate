@@ -6,12 +6,24 @@ const addArtistSchema = require('../schemas/addArtistSchema.json');
 const ExpressError = require("../helpers/expressError");
 
 
-router.get( "/", async function( req, res, next ) {
+router.get( "/:handle", async function( req, res, next ) {
   try {
+    console.log("MADE IT TO THE ARTIST GET ROUTE");
 
-  }
+    if (req.params.handle === "ids") {
+      const response = await Artists.getArtistsAndIds();
+      console.log("RETURING FORM THE ARTIST/:IDS GET ROUTE");
+      return res.status( 201 ).json( { response }  )
+    } else {
+      const response = await Artists.getGenres();
+      console.log("RETURING FORM THE ARTIST GET ROUTE");
+      return res.status( 201 ).json( { response }  )
+    }
 
-  catch ( err ) {
+
+
+
+  } catch ( err ) {
     return next( err );
   }
 });

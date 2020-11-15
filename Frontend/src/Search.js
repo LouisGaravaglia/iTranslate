@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import SpotifyAPI from "./SpotifyAPI";
 import SearchResult from "./SearchResult";
 import SearchBar from "./SearchBar";
@@ -7,11 +7,10 @@ import FlashMessage from "./FlashMessage";
 import LyricsAPI from "./LyricsAPI";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 import BackendCall from './BackendCall';
-
+import UserContext from "./UserContext";
 
 const Search = () => {
   //STATE FOR DATA
-  const [languages, setLanguages] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [lyrics, setLyrics] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
@@ -26,19 +25,13 @@ const Search = () => {
   const searchResultsRef = useRef();
   const selectLanguageRef = useRef();
   const lyricsTranslationRef = useRef();
+  //VARIABLES FROM CONTEXT PROVIDER
+  const { languages } = useContext(UserContext);
 
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
-  //GET AVAILABLE LANGUAGES TO TRANSLATE LYRICS TO FROM IBM API
-  useEffect(() => {
-    async function getLanguages() {
-      const res = await IBMWatsonAPI.getLanguages();
-      console.log("my languages!!!: ", res);
-      setLanguages(res);
-    }
-    getLanguages();
-  }, []);
+
 
   //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
   useEffect(() => {
@@ -80,9 +73,17 @@ const Search = () => {
 
   const handleTrackSearchSubmit = async (searchVal) => {
     console.log("handleSubmit: ", searchVal);
+    //TESTING
+    // const newReleases = await SpotifyAPI.getNewAlbums();
+    // const artistsAndIds = await BackendCall.getArtistsAndArtistIds();
+    // console.log("My artist/id array: ", artistsAndIds);
+    // const genres = await BackendCall.getGenres();
+    // console.log("My genre array: ", genres);
+    //TESTING
     const resultsArray = await SpotifyAPI.requestSearch(searchVal);
 
     if (resultsArray === "Not Found") {
+      //FLASH MESSAGE SAYING NO SONGS FOUND WITH THAT SEARCH VALUE
       setSearchFlashMessage(true);
       console.log("noting found from Spotify");
     } else {
@@ -102,14 +103,14 @@ const Search = () => {
     const [completeTrackData, completeArtistData] = await SpotifyAPI.getSongArtistAnalysis(partialTrackData, partialArtistData);
 
     if (completeTrackData === "Error getting Track Data") {
-      getLyrics(partialTrackData, partialArtistData, completeAlbum);
+      getLyrics(partialTrackData, partialArtistData, completeAlbum, artist, track);
     } else {
-      getLyrics(completeTrackData, completeArtistData, completeAlbum);
+      getLyrics(completeTrackData, completeArtistData, completeAlbum, artist, track);
     }
 
   }
 
-  const getLyrics = async (trackData, artistData, albumData) => {
+  const getLyrics = async (trackData, artistData, albumData, artist, track) => {
     const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
 
     if (response === "Added new track to the DB") {
@@ -117,7 +118,7 @@ const Search = () => {
       console.log("APILyrics = ", APILyrics);
 
       if (APILyrics === "No Lyrics from API") {
-        //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
+        //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
         setNoLyricsFlashMessage(true);
         console.log("No lyrics apparently: ", APILyrics);
         await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
@@ -134,7 +135,7 @@ const Search = () => {
       console.log("Setting lyrics to be from the DB: ", databaseLyrics);
 
       if (databaseLyrics === "No Lyrics") {
-        //**********FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG */
+        //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
         setNoLyricsFlashMessage(true);
         console.log("THE Lyrics in the db = ", databaseLyrics);
       } else {
@@ -153,11 +154,10 @@ const Search = () => {
       setSelectedLanguage([language, {}]);
       getTranslation();
     } catch(e) {
-      //**********FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND */
+      //FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND
       setLanguageNotFoundFlashMessage(true);
       console.log("ERROR CHOOSING LANGUAGE");
     }
-
   }
 
   const getTranslation = async () => {
@@ -170,7 +170,7 @@ const Search = () => {
       console.log("Translated lyrics: ", IBMTranslation);
 
       if (IBMTranslation === "Error attempting to read source text") {
-        //**********FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND */
+        //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
         setTranslationErrorFlashMessage(true);
       } else {
         setTranslation(IBMTranslation);
@@ -217,9 +217,9 @@ const Search = () => {
   return (
     <div className="Search">
       <div className="Flash-Messages-Container">
-        {searchFlashMessage && (<FlashMessage duration={5000} setState={setSearchFlashMessage} message="Couldn't find any songs with that Artist or Song name."/> )}
+        {searchFlashMessage && (<FlashMessage duration={5000} setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
         {noLyricsFlashMessage && (<FlashMessage duration={5000} setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
-        {languageNotFoundFlashMessage && (<FlashMessage duration={5000} setState={setLanguageNotFoundFlashMessage} message="That Language was not found, try again."/> )}
+        {languageNotFoundFlashMessage && (<FlashMessage duration={5000} setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
         {translationErrorFlashMessage && (<FlashMessage duration={5000} setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
       </div>
       <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>

@@ -5,135 +5,155 @@ const SEARCH_URL = "https://api.spotify.com/v1/search?q="
 
 class SpotifyAPI {
 
-    static async requestSearch(search) {
-      const minifiedSearchVal = search.replace(" ", "%20");
-      const accessToken = await requestAccessToken();
+  static async requestSearch(search) {
+    const minifiedSearchVal = search.replace(" ", "%20");
+    const accessToken = await requestAccessToken();
 
-      try {
-        const res = await axios({
-          method: "get",
-          url: `${SEARCH_URL}/${minifiedSearchVal}&type=track`,
-          headers: {'Authorization': `Bearer ${accessToken}`}
-        });
+    try {
+      const res = await axios({
+        method: "get",
+        url: `${SEARCH_URL}/${minifiedSearchVal}&type=track`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
 
-        if (res.data.tracks.items[0]) {
-          return res.data.tracks.items;
-        } else {
-          return "Not Found";
-        }
-
-      } catch(err) {
-        console.error("SPOTIFY API Error:", err.response);
+      if (res.data.tracks.items[0]) {
+        return res.data.tracks.items;
+      } else {
         return "Not Found";
       }
+
+    } catch(err) {
+      console.error("SPOTIFY API Error:", err.response);
+      return "Not Found";
     }
+  }
 
 /////////////////////////////////  GET ARTIST ID  /////////////////////////////////
 
-    static async getArtistId(artist) {
-      const noSpacesArtist = artist.replace(" ", "%20");
-      const accessToken = await requestAccessToken();
-      try {
+  static async getArtistId(artist) {
+    const noSpacesArtist = artist.replace(" ", "%20");
+    const accessToken = await requestAccessToken();
+    try {
 
-        const res = await axios({
-          method: "get",
-          url: `${SEARCH_URL}/${noSpacesArtist}&type=artist`,
-          headers: {'Authorization': `Bearer ${accessToken}`}
-        });
+      const res = await axios({
+        method: "get",
+        url: `${SEARCH_URL}/${noSpacesArtist}&type=artist`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
 
-        if (res.data.artists.items[0]) {
-          const artistID = res.data.artists.items[0].id;
-          return artistID;
-        } else {
-          return "Artist ID not found";
-        }
-        
-      } catch(err) {
-        console.error("API Error:", err.response);
-        let message = err.response.data.message;
-        throw Array.isArray(message) ? message : [message];
+      if (res.data.artists.items[0]) {
+        const artistID = res.data.artists.items[0].id;
+        return artistID;
+      } else {
+        return "Artist ID not found";
       }
+      
+    } catch(err) {
+      console.error("API Error:", err.response);
+      let message = err.response.data.message;
+      throw Array.isArray(message) ? message : [message];
     }
+  }
 
 /////////////////////////////////  GET ALBUMS BY ARTIST /////////////////////////////////
 
-    static async getAlbums(ID) {
-      const accessToken = await requestAccessToken();
+  static async getAlbums(ID) {
+    const accessToken = await requestAccessToken();
 
-      try {
+    try {
 
-        const allArtistAlbums = await axios({
-          method: "get",
-          url: `https://api.spotify.com/v1/artists/${ID}/albums?include_groups=album`,
-          headers: {'Authorization': `Bearer ${accessToken}`}
-        });
+      const allArtistAlbums = await axios({
+        method: "get",
+        url: `https://api.spotify.com/v1/artists/${ID}/albums?include_groups=album`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
 
-        return allArtistAlbums.data.items;
+      return allArtistAlbums.data.items;
 
-      } catch(err) {
-        console.error("API Error:", err.response);
-        let message = err.response.data.message;
-        throw Array.isArray(message) ? message : [message];
-      }
+    } catch(err) {
+      console.error("API Error:", err.response);
+      let message = err.response.data.message;
+      throw Array.isArray(message) ? message : [message];
     }
+  }
 
 /////////////////////////////////  GET TRACKS BY ALBUM  /////////////////////////////////
 
-    static async getTracks(albumID) {
-      const accessToken = await requestAccessToken();
+  static async getTracks(albumID) {
+    const accessToken = await requestAccessToken();
 
-      try {
+    try {
 
-        const albumData = await axios({
-          method: "get",
-          url: `https://api.spotify.com/v1/albums/${albumID}/tracks`,
-          headers: {'Authorization': `Bearer ${accessToken}`}
-        });
+      const albumData = await axios({
+        method: "get",
+        url: `https://api.spotify.com/v1/albums/${albumID}/tracks`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
 
-        return albumData.data.items;
+      return albumData.data.items;
 
-      } catch(err) {
-        console.error("API Error:", err.response);
-        let message = err.response.data.message;
-        throw Array.isArray(message) ? message : [message];
-      }
+    } catch(err) {
+      console.error("API Error:", err.response);
+      let message = err.response.data.message;
+      throw Array.isArray(message) ? message : [message];
     }
- 
+  }
+
 /////////////////////////////////  GET SEED DATA FOR ARTISTS  /////////////////////////////////
 
-static async getSongArtistAnalysis(trackData, artistData) {
-      const accessToken = await requestAccessToken();
+  static async getSongArtistAnalysis(trackData, artistData) {
+    const accessToken = await requestAccessToken();
 
-      try {
+    try {
 
-        const artistDetails = await axios({
-          method: "get",
-          url: `https://api.spotify.com/v1/artists/${artistData.spotify_id}`,
-          headers: {'Authorization': `Bearer ${accessToken}`}
-        });
-        const songAnalysis = await axios({
-          method: "get",
-          url: `https://api.spotify.com/v1/audio-features/${trackData.spotify_id}`,
-          headers: {'Authorization': `Bearer ${accessToken}`}
-        });
+      const artistDetails = await axios({
+        method: "get",
+        url: `https://api.spotify.com/v1/artists/${artistData.spotify_id}`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
+      const songAnalysis = await axios({
+        method: "get",
+        url: `https://api.spotify.com/v1/audio-features/${trackData.spotify_id}`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
 
-          console.log("Here are album tracks: ", artistDetails);
-          console.log("Here is the song anaylsis: ", songAnalysis);
-          trackData["danceability"] = songAnalysis.data.danceability;
-          trackData["tempo"] = songAnalysis.data.tempo;
-          trackData["valence"] = songAnalysis.data.valence;
-          trackData["duration"] = songAnalysis.data.duration_ms;
-          artistData["genre"] = artistDetails.data.genres;
-          artistData["img_url"] = artistDetails.data.images;
-          artistData["popularity"] = artistDetails.data.popularity;
-          return [trackData, artistData];
-
-      } catch(err) {
-        console.error("API Error:", err.response);
-        trackData = "Error getting Track Data"
+        console.log("Here are album tracks: ", artistDetails);
+        console.log("Here is the song anaylsis: ", songAnalysis);
+        trackData["danceability"] = songAnalysis.data.danceability;
+        trackData["tempo"] = songAnalysis.data.tempo;
+        trackData["valence"] = songAnalysis.data.valence;
+        trackData["duration"] = songAnalysis.data.duration_ms;
+        artistData["genre"] = artistDetails.data.genres;
+        artistData["img_url"] = artistDetails.data.images;
+        artistData["popularity"] = artistDetails.data.popularity;
         return [trackData, artistData];
-      }
+
+    } catch(err) {
+      console.error("API Error:", err.response);
+      trackData = "Error getting Track Data"
+      return [trackData, artistData];
     }
+  }
+
+  static async getNewAlbums() {
+    const accessToken = await requestAccessToken();
+
+    try {
+
+
+      const newAlbums = await axios({
+        method: "get",
+        url: `https://api.spotify.com/v1/browse/new-releases?limit=50`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
+
+    console.log("newAlbums: ", newAlbums);
+
+    } catch(err) {
+      console.error("API Error:", err.response);
+
+    }
+  }
 
   }
 

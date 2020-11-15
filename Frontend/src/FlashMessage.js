@@ -17,7 +17,6 @@ const FlashMessage = ( { message, duration, setState} ) => {
   return (
     <div onClick={toggleTimer} className="FlashMessage">
       <p>{message}</p>
-      <p><span>x</span></p>
     </div>
   );
 

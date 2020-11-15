@@ -25,7 +25,7 @@ class BackendCall {
       }
     }
 
-//////////////////////////////////////  SONG DATA METHODS  //////////////////////////////////////
+//////////////////////////////////////  ADD SONG DATA METHODS  //////////////////////////////////////
 
     static async addTrack(data) {
       console.log("Track data: ", data);
@@ -33,7 +33,6 @@ class BackendCall {
       let res = await this.request("track", data, "post");
       return res.data.response;
     }
-
 
     static async addArtist(data) {
       const filtered = data.img_url.map(item => item.url);
@@ -43,7 +42,6 @@ class BackendCall {
       let res = await this.request("artist", data, "post");
       return res.data.response;
     }
-
 
     static async addAlbum(data) {
       data.img_url = data.img_url.url;
@@ -58,7 +56,7 @@ class BackendCall {
       return res;
     }
 
-    // ADDING TRACK ARTIST AND ALBUM DATA TO THE DB
+    // CALLS METHODS ABOVE TO ADD TRACK ARTIST AND ALBUM DATA TO THE DB
     static async addTrackArtistAlbum(trackData, artistData, albumData) {
 
       try {
@@ -114,6 +112,28 @@ class BackendCall {
       console.log("postTranslation res: ", res);
       return res.data.response;
     }
+
+//////////////////////////////////////  GET ARTISTS/IDS  //////////////////////////////////////
+
+    static async getArtistsAndArtistIds() {
+      console.log("madking getArtistsandIDS request");
+      let res = await this.request("artist/ids");
+      console.log("getArtistsandIDS res: ", res);
+      return res.data.response;
+    }
+
+//////////////////////////////////////  GET GENRE  //////////////////////////////////////
+
+    static async getGenres() {
+      console.log("making getGenres request");
+      let res = await this.request("artist/genre");
+      console.log("getGenres res: ", res);
+      return res.data.response;
+    }
+
+//////////////////////////////////////  GET DANCEABILITY  //////////////////////////////////////
+
+
 
   }
 
