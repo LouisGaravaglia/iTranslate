@@ -7,18 +7,19 @@ const SearchResultList = ({resultsArray, handleSearch}) => {
   const [paginateVal, setPaginateVal] = useState(0);
 
   const resultsInView = resultsArray.slice(paginateVal, paginateVal + 5);
+  console.log("Results in view = ", resultsInView);
 
-  const pivotVal = (100 / resultsArray.length) * 5;
+  const pivotVal = Math.floor((100 / resultsArray.length) * 5);
 
   const handleChange = (event, newValue) => {
     setSliderVal(newValue);
-    if (sliderVal >= 0 && sliderVal <= 25 && resultsArray.length > 0 ) {
+    if (sliderVal >= 0 && sliderVal <= pivotVal && resultsArray.length > 0 ) {
       setPaginateVal(0);
-    } else if (sliderVal > 25 && sliderVal <= 50 && resultsArray.length > 5) {
+    } else if (sliderVal > pivotVal && sliderVal <= (pivotVal * 2) && resultsArray.length > 5) {
       setPaginateVal(5);
-    } else if (sliderVal > 50 && sliderVal <= 75 && resultsArray.length > 10 ) {
+    } else if (sliderVal > (pivotVal * 2) && sliderVal <= (pivotVal * 3) && resultsArray.length > 10 ) {
       setPaginateVal(10);
-    } else if (sliderVal > 75 && sliderVal <= 100 && resultsArray.length > 15 ) {
+    } else if (sliderVal > (pivotVal * 3) && sliderVal <= (pivotVal * 4) && resultsArray.length > 15 ) {
       setPaginateVal(15);
     } 
     console.log("Slider Value: ", sliderVal);
