@@ -75,7 +75,6 @@ a {
   flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
-
 }
 
 .BrowseArtists {
@@ -85,9 +84,9 @@ a {
   background-color: white;
   border: none;
   color: rgb(86, 182, 255);
-  /* margin: 10px 40px;
-  padding: 6px 12px; */
-  flex: 0 0 25%
+  margin: 10px 10px;
+  /* padding: 6px 12px; */
+  flex: 0 0 10%
 }
 
 .BrowseArtists:hover {
@@ -126,7 +125,7 @@ a {
 
 .Browse-Albums {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   overflow: auto;
@@ -327,7 +326,7 @@ a {
 }
 
 .Search-Slider {
-  margin: 60px 500px 0;
+  margin: 60px 500px 80px;
 }
 
 /* //////////////////////////////////////  SEARCH SELECT LANGUAGE  ////////////////////////////////////// */

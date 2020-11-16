@@ -200,7 +200,7 @@ function Browse() {
   
   if (category === "Artists") ArtistResultsDiv = (
       <div ref={artistResultsRef}>
-        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={8}/>
+        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={16}/>
       </div>
   );
 
@@ -231,8 +231,9 @@ function Browse() {
   let TrackResultsDiv;
   
   if (tracks.length) TrackResultsDiv = (
-    <div className="Browse-Tracks" ref={trackResultsRef}>
-      {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)}
+    <div ref={trackResultsRef}>
+      <SearchResultList key={tracks[0].id} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
+      {/* {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)} */}
     </div>
   );
 
