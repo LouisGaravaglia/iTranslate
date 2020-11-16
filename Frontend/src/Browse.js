@@ -10,6 +10,7 @@ import DisplayLyrics from "./DisplayLyrics";
 import SearchBar from "./SearchBar";
 import FlashMessage from "./FlashMessage";
 import UserContext from "./UserContext";
+import SearchResultList from "./SearchResultList";
 
 function Browse() {
   const [albums, setAlbums] = useState([]);
@@ -36,7 +37,7 @@ function Browse() {
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
   //VARIABLES FROM CONTEXT PROVIDER
-  const { languages  } = useContext(UserContext);
+  const {languages} = useContext(UserContext);
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -198,13 +199,18 @@ function Browse() {
   let ArtistResultsDiv;
   
   if (category === "Artists") ArtistResultsDiv = (
-    <div className="Browse-Artists-Container" ref={artistResultsRef}>
-      <div className="Browse-Artists">
-        {artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)}
-      </div>
+    <div className="Search-Results" ref={artistResultsRef}>
+      <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={5}/>
     </div>
   );
 
+  // if (category === "Artists") ArtistResultsDiv = (
+  //   <div className="Browse-Artists-Container" ref={artistResultsRef}>
+  //     <div className="Browse-Artists">
+  //       {artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)}
+  //     </div>
+  //   </div>
+  // );
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let AlbumResultsDiv;
   
