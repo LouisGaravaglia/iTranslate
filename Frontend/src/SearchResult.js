@@ -22,7 +22,7 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "artists") displayArtists = (
             // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-  <button onClick={handleArtistsClick} className="SearchResult">{props.artist}</button>
+  <button onClick={handleArtistsClick} className="BrowseArtists">{props.artist}</button>
     // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
   );
 

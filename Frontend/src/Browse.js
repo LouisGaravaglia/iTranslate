@@ -199,8 +199,10 @@ function Browse() {
   let ArtistResultsDiv;
   
   if (category === "Artists") ArtistResultsDiv = (
-    <div className="Search-Results" ref={artistResultsRef}>
-      <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={5}/>
+    <div className="Browse-Artists-Containe" ref={artistResultsRef}>
+      <div className="Browse-Artists">
+        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={9}/>
+      </div>
     </div>
   );
 
@@ -215,10 +217,8 @@ function Browse() {
   let AlbumResultsDiv;
   
   if (albums.length) AlbumResultsDiv = (
-    <div className="Browse-Albums-Container" ref={albumResultsRef}>
-      <div className="Browse-Albums">
+    <div className="Browse-Albums" ref={albumResultsRef}>
         {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
-      </div>  
     </div>
   );
 

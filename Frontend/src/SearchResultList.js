@@ -21,14 +21,13 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   let displaySearchResults;
 
   if (typeOfResults === "search-results") displaySearchResults = (
-    resultsInView.map((r, i) => <SearchResult key={i} index={i} handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
+    resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
   );
 
   let displayArtists;
 
   if (typeOfResults === "artists") displayArtists = (
             // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-
     resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.name} spotify_id={r.spotify_id}/>)
   );
 
