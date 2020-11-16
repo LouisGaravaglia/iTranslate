@@ -85,8 +85,8 @@ a {
   background-color: white;
   border: none;
   color: rgb(86, 182, 255);
-  margin: 10px 40px;
-  padding: 6px 12px;
+  /* margin: 10px 40px;
+  padding: 6px 12px; */
   flex: 0 0 25%
 }
 
@@ -128,7 +128,7 @@ a {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   overflow: auto;
   width: 100vw;
   height: 100vh;

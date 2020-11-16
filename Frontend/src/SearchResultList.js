@@ -8,6 +8,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   let maxSliderVal = Math.floor(resultsArray.length / itemsPerPage);
   const resultsInView = resultsArray.slice(sliderVal * itemsPerPage, (sliderVal * itemsPerPage) + itemsPerPage);
   console.log("SearchResultList re-rendering");
+  console.log("resultsArray: ", resultsArray);
   if (!multipleOf) maxSliderVal += 1;
 
   const handleChange = (event, newValue) => {
@@ -21,14 +22,31 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   let displaySearchResults;
 
   if (typeOfResults === "search-results") displaySearchResults = (
-    resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
+    <div>
+      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)}
+      {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
+    </div>
   );
 
   let displayArtists;
 
   if (typeOfResults === "artists") displayArtists = (
             // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-    resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.name} spotify_id={r.spotify_id}/>)
+    <div className="Browse-Artists">
+      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.name} spotify_id={r.spotify_id}/>)}
+      {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
+    </div>
+  );
+
+  let displayAlbums;
+
+  if (typeOfResults === "albums") displayAlbums = (
+  //       {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
+   
+   <div className="Browse-Albums">
+    {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} id={r.id} image={r.images[1].url}/>)}
+    {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
+  </div>
   );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
@@ -37,8 +55,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
     <>
       {displaySearchResults}
       {displayArtists}
-      {/* {resultsInView.map((r, i) => <SearchResult key={i} index={i} handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)} */}
-      {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
+      {displayAlbums}
     </>
   );
 };

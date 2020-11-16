@@ -10,6 +10,10 @@ const SearchResult = memo((props) => {
     props.handleClick(props.spotify_id, props.artist);
   }
 
+  const handleAlbumClick = () => {
+    props.handleClick(props.id);
+  }
+
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   let displaySearchResults;
@@ -26,12 +30,22 @@ const SearchResult = memo((props) => {
     // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
   );
 
+  let displayAlbums;
+
+  if (props.typeOfResults === "albums") displayAlbums = (
+      //       {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
+<div className="Album">
+<img onClick={handleAlbumClick} src={props.image} alt=""/>
+</div>
+  );
+
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
     <>
     {displaySearchResults}
     {displayArtists}
+    {displayAlbums}
     </>
   );
 });
