@@ -24,7 +24,7 @@ const Search = () => {
   const [language, setLanguage] = useState("");
   //REDUX STORE
   const translation = useSelector(store => store.translation);
-  const languageError = useSelector(store => store.errors["languageError"]);
+  const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
   const dispatch = useDispatch();
   //STATE FOR FLASH MESSAGES
@@ -67,8 +67,10 @@ const Search = () => {
           dispatch(resetLanguageError());
           console.log("There is a language error");
         }
-        if (translationError) setTranslationErrorFlashMessage(true);
-        console.log("Here is what language error is: ", languageError);
+        if (translationError) {
+          setTranslationErrorFlashMessage(true);
+          console.log("Here is what language error is: ", languageError);
+        }
 
     }
     displayFlashMessage();
@@ -152,52 +154,9 @@ const Search = () => {
 
   const handleLanguageSearchSubmit = async (searchVal) => {
     dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics[0]));
-    // if (languageError) {
-    //   setLanguageNotFoundFlashMessage(true);
-    //   console.log("There is a language error");
-    // }
-    // if (translationError) setTranslationErrorFlashMessage(true);
-    // console.log("Here is what language error is: ", languageError);
     setMoveToLyricsTranlsation([true]);
   }
 
-  // const handleLanguageSearchSubmit = async (searchVal) => {
-
-  //   try{
-  //     //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
-  //     const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
-  //     console.log("language is: ", language);
-  //     setSelectedLanguage([language, {}]);
-  //     getTranslation();
-  //   } catch(e) {
-  //     //FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND
-  //     setLanguageNotFoundFlashMessage(true);
-  //     console.log("ERROR CHOOSING LANGUAGE");
-  //   }
-  // }
-
-  // const getTranslation = async () => {
-  //   //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-  //   const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage: selectedLanguage[0]});
-  //   console.log("databaseTranslation: ", response);
-
-  //   if (response === "No Translation in DB") {
-  //     const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], selectedLanguage[0]);
-  //     console.log("Translated lyrics: ", IBMTranslation);
-
-  //     if (IBMTranslation === "Error attempting to read source text") {
-  //       //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
-  //       setTranslationErrorFlashMessage(true);
-  //     } else {
-  //       setTranslation(IBMTranslation);
-  //       await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage: selectedLanguage[0], translation: IBMTranslation});
-  //     }
-
-  //   } else {
-  //     console.log("got transltion from DB");
-  //     setTranslation(response);
-  //   }
-  // }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
