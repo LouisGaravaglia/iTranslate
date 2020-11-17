@@ -20,10 +20,10 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
   // const [lyrics, setLyrics] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+  // const [selectedLanguage, setSelectedLanguage] = useState("");
   // const [translation, setTranslation] = useState("");
   const [moveToLyricsTranlsation, setMoveToLyricsTranlsation] = useState([]);
-  const [language, setLanguage] = useState("");
+  // const [language, setLanguage] = useState("");
   //REDUX STORE
   const translation = useSelector(store => store.translation);
   const languageError = useSelector(store => store.errors.languageError);
@@ -67,6 +67,7 @@ const Search = () => {
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
     const displayFlashMessage = () => {
+
         if (lyricsError) {
           setNoLyricsFlashMessage(true);
           dispatch(resetLyricsError());
@@ -132,43 +133,10 @@ const Search = () => {
 
   }
 
-  // const getLyrics = async (trackData, artistData, albumData, artist, track) => {
-  //   const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
 
-  //   if (response === "Added new track to the DB") {
-  //     const APILyrics = await LyricsAPI.getLyrics(artist, track);
-  //     console.log("APILyrics = ", APILyrics);
-
-  //     if (APILyrics === "No Lyrics from API") {
-  //       //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
-  //       setNoLyricsFlashMessage(true);
-  //       console.log("No lyrics apparently: ", APILyrics);
-  //       await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
-  //       return;
-  //     } else {
-  //       console.log("SET LYRICS IN FIRST CONDTIONAL");
-  //       //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE LYRICS ARE THE SAME
-  //       setLyrics([APILyrics, {}]);
-  //       await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: APILyrics});
-  //     }
-
-  //   } else {
-  //     const databaseLyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
-  //     console.log("Setting lyrics to be from the DB: ", databaseLyrics);
-
-  //     if (databaseLyrics === "No Lyrics") {
-  //       //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
-  //       setNoLyricsFlashMessage(true);
-  //       console.log("THE Lyrics in the db = ", databaseLyrics);
-  //     } else {
-  //       console.log("SET LYRICS IN SECOND CONDTIONAL");
-  //       setLyrics([databaseLyrics, {}]);
-  //     }
-  //   }
-  // }
-
+  //GET A HOLD OF LANGUAGE CODE FROM INPUT VALUE, THEN GET TRANSLATION BASED OFF OF THAT
   const handleLanguageSearchSubmit = async (searchVal) => {
-    dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics[0]));
+    dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));
     setMoveToLyricsTranlsation([true]);
   }
 
