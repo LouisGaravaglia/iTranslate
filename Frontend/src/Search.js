@@ -9,9 +9,10 @@ import IBMWatsonAPI from "./IBMWatsonAPI";
 import BackendCall from './BackendCall';
 import UserContext from "./UserContext";
 import SearchResultList from "./SearchResultList";
-import useTranslation from "./hooks/useTranslation";
 import {useDispatch, useSelector} from "react-redux";
-import {getTranslation, resetLanguageError} from "./actionCreators";
+import {getTranslation} from "./actionCreators/getTranslationCreator";
+import {resetLanguageError, resetTranslationError} from "./actionCreators/handleErrorsCreator";
+
 
 const Search = () => {
   //STATE FOR DATA
@@ -69,6 +70,7 @@ const Search = () => {
         }
         if (translationError) {
           setTranslationErrorFlashMessage(true);
+          dispatch(resetTranslationError());
           console.log("Here is what language error is: ", languageError);
         }
 

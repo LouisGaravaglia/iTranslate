@@ -1,6 +1,6 @@
-import { GET_TRANSLATION, UPDATE_ERRORS, RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR } from "./actionTypes";
-import IBMWatsonAPI from "./IBMWatsonAPI";
-import BackendCall from './BackendCall';
+import { GET_TRANSLATION, UPDATE_TRANSLATION_ERRORS } from "../actionTypes";
+import IBMWatsonAPI from "../IBMWatsonAPI";
+import BackendCall from '../BackendCall';
 
 
 ////////////////////////////////// GET ALL POSTS //////////////////////////////////
@@ -53,7 +53,7 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
     console.log("here are my errors: ", errors);
 
     dispatch(retrieveTranslation(translation));
-    dispatch(updateErrors(errors))
+    dispatch(updateGetTranslationErrors(errors))
   };
 }
 
@@ -61,30 +61,8 @@ function retrieveTranslation(translation) {
   return {type:GET_TRANSLATION, translation};
 }
 
-function updateErrors(errors) {
-  return {type: UPDATE_ERRORS, errors}
-}
-
-////////////////////////////////// RESET LANGUAGE ERROR VALUE //////////////////////////////////
-
-export function resetLanguageError() {
-  return async function(dispatch) {
-    dispatch(updateLanguageError());
-  };
-}
-function updateLanguageError() {
-  return {type:RESET_LANGUAGE_ERROR};
-}
-
-////////////////////////////////// RESET TRANSLATION ERROR VALUE //////////////////////////////////
-
-export function resetTranslationError() {
-  return async function(dispatch) {
-    dispatch(updateTranslationError());
-  };
-}
-function updateTranslationError() {
-  return {type:RESET_TRANSLATION_ERROR};
+function updateGetTranslationErrors(errors) {
+  return {type: UPDATE_TRANSLATION_ERRORS, errors}
 }
 
 

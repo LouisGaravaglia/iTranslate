@@ -1,9 +1,9 @@
-import {UPDATE_ERRORS, RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR} from "../actionTypes";
+import {UPDATE_TRANSLATION_ERRORS, RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR} from "../actionTypes";
 const INITIAL_STATE = {searchError: false, languageError: false, translationError: false}
 
 export default function errorsReducer(state=INITIAL_STATE, action) {
   switch(action.type) {
-    case UPDATE_ERRORS:
+    case UPDATE_TRANSLATION_ERRORS:
       return {...state, languageError: action.errors.languageError, translationError: action.errors.translationError}
     case RESET_LANGUAGE_ERROR:
       return {...state, languageError: false};
