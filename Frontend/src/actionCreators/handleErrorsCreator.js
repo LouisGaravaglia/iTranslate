@@ -1,4 +1,15 @@
-import {  RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_LYRICS_ERROR } from "../actionTypes";
+import {  RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_LYRICS_ERROR, RESET_SEARCH_ERROR } from "../actionTypes";
+
+////////////////////////////////// RESET LYRICS ERROR VALUE //////////////////////////////////
+
+export function resetSearchError() {
+  return async function(dispatch) {
+    dispatch(updateSearchError());
+  };
+}
+function updateSearchError() {
+  return {type:RESET_SEARCH_ERROR};
+}
 
 ////////////////////////////////// RESET LYRICS ERROR VALUE //////////////////////////////////
 

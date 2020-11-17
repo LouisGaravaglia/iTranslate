@@ -10,12 +10,13 @@ import SearchResultList from "./SearchResultList";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
-import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
+import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
 import {getLyrics} from "./actionCreators/getLyrics";
+import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 
 const Search = () => {
   //STATE FOR DATA
-  const [searchResults, setSearchResults] = useState([]);
+  // const [searchResults, setSearchResults] = useState([]);
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [moveToLyricsTranlsation, setMoveToLyricsTranlsation] = useState([]);
   //REDUX STORE
@@ -24,6 +25,8 @@ const Search = () => {
   const translationError = useSelector(store => store.errors.translationError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
   const lyrics = useSelector(store => store.lyrics);
+  const searchResults = useSelector(store => store.results);
+  const searchError = useSelector(store => store.errors.searchError);
   const dispatch = useDispatch();
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
@@ -76,6 +79,11 @@ const Search = () => {
           console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
         }
+        if (searchError) {
+          setSearchFlashMessage(true);
+          console.log("Here is what search error is: ", searchError);
+          dispatch(resetSearchError());
+        }
 
     }
     displayFlashMessage();
@@ -84,24 +92,25 @@ const Search = () => {
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackSearchSubmit = async (searchVal) => {
-    console.log("handleSubmit: ", searchVal);
-    //TESTING
-    // const newReleases = await SpotifyAPI.getNewAlbums();
-    // const artistsAndIds = await BackendCall.getArtistsAndArtistIds();
-    // console.log("My artist/id array: ", artistsAndIds);
-    // const genres = await BackendCall.getGenres();
-    // console.log("My genre array: ", genres);
-    //TESTING
-    const resultsArray = await SpotifyAPI.requestSearch(searchVal);
+    dispatch(setResultsArray(searchVal));
+    // console.log("handleSubmit: ", searchVal);
+    // //TESTING
+    // // const newReleases = await SpotifyAPI.getNewAlbums();
+    // // const artistsAndIds = await BackendCall.getArtistsAndArtistIds();
+    // // console.log("My artist/id array: ", artistsAndIds);
+    // // const genres = await BackendCall.getGenres();
+    // // console.log("My genre array: ", genres);
+    // //TESTING
+    // const resultsArray = await SpotifyAPI.requestSearch(searchVal);
 
-    if (resultsArray === "Not Found") {
-      //FLASH MESSAGE SAYING NO SONGS FOUND WITH THAT SEARCH VALUE
-      setSearchFlashMessage(true);
-      console.log("noting found from Spotify");
-    } else {
-      console.log("resultArray: ", resultsArray);
-      setSearchResults(resultsArray);
-    }
+    // if (resultsArray === "Not Found") {
+    //   //FLASH MESSAGE SAYING NO SONGS FOUND WITH THAT SEARCH VALUE
+    //   setSearchFlashMessage(true);
+    //   console.log("noting found from Spotify");
+    // } else {
+    //   console.log("resultArray: ", resultsArray);
+    //   setSearchResults(resultsArray);
+    // }
   }
 
   const handleSearchResultsClick = async (artist, track, index) => {
