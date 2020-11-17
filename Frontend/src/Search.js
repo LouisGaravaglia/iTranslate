@@ -11,7 +11,7 @@ import SearchResultList from "./SearchResultList";
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
-import {getLyrics} from "./actionCreators/getLyrics";
+import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 
 const Search = () => {
@@ -87,30 +87,12 @@ const Search = () => {
 
     }
     displayFlashMessage();
-  }, [languageError, translationError])
+  }, [languageError, translationError, lyricsError, searchError])
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackSearchSubmit = async (searchVal) => {
     dispatch(setResultsArray(searchVal));
-    // console.log("handleSubmit: ", searchVal);
-    // //TESTING
-    // // const newReleases = await SpotifyAPI.getNewAlbums();
-    // // const artistsAndIds = await BackendCall.getArtistsAndArtistIds();
-    // // console.log("My artist/id array: ", artistsAndIds);
-    // // const genres = await BackendCall.getGenres();
-    // // console.log("My genre array: ", genres);
-    // //TESTING
-    // const resultsArray = await SpotifyAPI.requestSearch(searchVal);
-
-    // if (resultsArray === "Not Found") {
-    //   //FLASH MESSAGE SAYING NO SONGS FOUND WITH THAT SEARCH VALUE
-    //   setSearchFlashMessage(true);
-    //   console.log("noting found from Spotify");
-    // } else {
-    //   console.log("resultArray: ", resultsArray);
-    //   setSearchResults(resultsArray);
-    // }
   }
 
   const handleSearchResultsClick = async (artist, track, index) => {

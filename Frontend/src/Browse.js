@@ -11,12 +11,19 @@ import SearchBar from "./SearchBar";
 import FlashMessage from "./FlashMessage";
 import UserContext from "./UserContext";
 import SearchResultList from "./SearchResultList";
+//REDUX IMPORTS
+import {useDispatch, useSelector} from "react-redux";
+import {getTranslation} from "./actionCreators/getTranslationCreator";
+import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
+import {getLyrics} from "./actionCreators/getLyricsCreator";
+import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
+
 
 function Browse() {
   const [albums, setAlbums] = useState([]);
   const [tracks, setTracks] = useState([]);
   const [artists, setArtists] = useState([]);
-  const [lyrics, setLyrics] = useState("");
+  // const [lyrics, setLyrics] = useState("");
   const [translation, setTranslation] = useState("");
   const [selectedArtistId, setSelectedArtistId] = useState("");
   const [genres, setGenres] = useState([]);
@@ -26,6 +33,15 @@ function Browse() {
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState([]);
   const [completeAlbumData, setCompleteAlbumData] = useState({});
+  //REDUX STORE
+  const dispatch = useDispatch();
+  // const translation = useSelector(store => store.translation);
+  const languageError = useSelector(store => store.errors.languageError);
+  const translationError = useSelector(store => store.errors.translationError);
+  const lyricsError = useSelector(store => store.errors.lyricsError);
+  const lyrics = useSelector(store => store.lyrics);
+  const searchResults = useSelector(store => store.results);
+  const searchError = useSelector(store => store.errors.searchError);
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
@@ -83,6 +99,35 @@ function Browse() {
     scrollToCategory();
   }, [category, setCategory]);
 
+  //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
+  useEffect(() => {
+    const displayFlashMessage = () => {
+
+        if (lyricsError) {
+          setNoLyricsFlashMessage(true);
+          console.log("There is a lyrics error");
+          dispatch(resetLyricsError());
+        }
+        if (languageError) {
+          setLanguageNotFoundFlashMessage(true);
+          console.log("There is a language error");
+          dispatch(resetLanguageError());
+        }
+        if (translationError) {
+          setTranslationErrorFlashMessage(true);
+          console.log("Here is what translation error is: ", translationError);
+          dispatch(resetTranslationError());
+        }
+        if (searchError) {
+          setSearchFlashMessage(true);
+          console.log("Here is what search error is: ", searchError);
+          dispatch(resetSearchError());
+        }
+
+    }
+    displayFlashMessage();
+  }, [languageError, translationError, lyricsError, searchError])
+
   //SCROLL DOWN TO ALBUMS WHEN ARTIST HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {
     function scrollToAlbums() {
@@ -110,14 +155,14 @@ function Browse() {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {
     function scrollToLanguageSearch() {
-      if (lyrics.length) {
+      if (lyrics) {
         selectLanguageRef.current.scrollIntoView({
           behavior: "smooth",
         });
       }
     }
     scrollToLanguageSearch();
-  }, [lyrics, setLyrics]);
+  }, [lyrics]);
 
 //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {
@@ -171,47 +216,50 @@ function Browse() {
     if (trackData === "Error getting Track Data") {
       const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
       const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-      getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track);
+      // getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track);
+      dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
+
     } else {
-      getLyrics(trackData, artistData, albumData, artist, track);
+      dispatch(getLyrics(trackData, artistData, albumData, artist, track));
+
     }
 
   }
 
-  const getLyrics = async (trackData, artistData, albumData, artist, track) => {
-    const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
+  // const getLyrics = async (trackData, artistData, albumData, artist, track) => {
+  //   const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
 
-    if (response === "Added new track to the DB") {
-      const APILyrics = await LyricsAPI.getLyrics(artist, track);
-      console.log("APILyrics = ", APILyrics);
+  //   if (response === "Added new track to the DB") {
+  //     const APILyrics = await LyricsAPI.getLyrics(artist, track);
+  //     console.log("APILyrics = ", APILyrics);
 
-      if (APILyrics === "No Lyrics from API") {
-        //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
-        setNoLyricsFlashMessage(true);
-        console.log("No lyrics apparently: ", APILyrics);
-        await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
-        return;
-      } else {
-        console.log("SET LYRICS IN FIRST CONDTIONAL");
-        //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE LYRICS ARE THE SAME
-        setLyrics([APILyrics, {}]);
-        await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: APILyrics});
-      }
+  //     if (APILyrics === "No Lyrics from API") {
+  //       //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
+  //       setNoLyricsFlashMessage(true);
+  //       console.log("No lyrics apparently: ", APILyrics);
+  //       await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
+  //       return;
+  //     } else {
+  //       console.log("SET LYRICS IN FIRST CONDTIONAL");
+  //       //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE LYRICS ARE THE SAME
+  //       setLyrics([APILyrics, {}]);
+  //       await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: APILyrics});
+  //     }
 
-    } else {
-      const databaseLyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
-      console.log("Setting lyrics to be from the DB: ", databaseLyrics);
+  //   } else {
+  //     const databaseLyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
+  //     console.log("Setting lyrics to be from the DB: ", databaseLyrics);
 
-      if (databaseLyrics === "No Lyrics") {
-        //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
-        setNoLyricsFlashMessage(true);
-        console.log("THE Lyrics in the db = ", databaseLyrics);
-      } else {
-        console.log("SET LYRICS IN SECOND CONDTIONAL");
-        setLyrics([databaseLyrics, {}]);
-      }
-    }
-  }
+  //     if (databaseLyrics === "No Lyrics") {
+  //       //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
+  //       setNoLyricsFlashMessage(true);
+  //       console.log("THE Lyrics in the db = ", databaseLyrics);
+  //     } else {
+  //       console.log("SET LYRICS IN SECOND CONDTIONAL");
+  //       setLyrics([databaseLyrics, {}]);
+  //     }
+  //   }
+  // }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
     console.log("HERE IS THE SEARCH VAL IN BROWSE; ", searchVal);
@@ -237,7 +285,7 @@ function Browse() {
 
     if (response === "No Translation in DB") {
       console.log("HERE IS THE FULL LANGUAGE STATE IN BROWSE: ", newLanguage);
-      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], newLanguage);
+      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics, newLanguage);
 
       console.log("Translated lyrics: ", IBMTranslation);
 
@@ -302,7 +350,7 @@ function Browse() {
   //SELECT LANGUAGE TO TRANSLATE LYRICS TO SEARCH BAR COMPONENT
   let SelectLanguageDiv;
 
-  if (lyrics.length) SelectLanguageDiv = (
+  if (lyrics) SelectLanguageDiv = (
     <div ref={selectLanguageRef}>
       <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
     </div>
@@ -313,7 +361,7 @@ function Browse() {
   
   if (selectedLanguage.length)  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
-        <DisplayLyrics lyrics={lyrics[0]} translation={translation}/>
+        <DisplayLyrics lyrics={lyrics} translation={translation}/>
       </div>
   );
 
