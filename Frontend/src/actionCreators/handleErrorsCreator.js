@@ -1,5 +1,15 @@
-import {  RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR } from "../actionTypes";
+import {  RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_LYRICS_ERROR } from "../actionTypes";
 
+////////////////////////////////// RESET LYRICS ERROR VALUE //////////////////////////////////
+
+export function resetLyricsError() {
+  return async function(dispatch) {
+    dispatch(updateLyricsError());
+  };
+}
+function updateLyricsError() {
+  return {type:RESET_LYRICS_ERROR};
+}
 
 ////////////////////////////////// RESET LANGUAGE ERROR VALUE //////////////////////////////////
 
