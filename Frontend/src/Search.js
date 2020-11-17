@@ -45,7 +45,7 @@ const Search = () => {
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
 
-    if (state.length) {
+    if (state) {
       ref.current.scrollIntoView({behavior: "smooth"});
     }
 
@@ -58,7 +58,7 @@ const Search = () => {
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {scrollToNextDiv(moveToLyricsTranlsation, lyricsTranslationRef);}, [moveToLyricsTranlsation, lyricsTranslationRef, scrollToNextDiv]);
+  useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
@@ -120,7 +120,7 @@ const Search = () => {
   //GET A HOLD OF LANGUAGE CODE FROM INPUT VALUE, THEN GET TRANSLATION BASED OFF OF THAT
   const handleLanguageSearchSubmit = async (searchVal) => {
     dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));
-    setMoveToLyricsTranlsation([true]);
+    // setMoveToLyricsTranlsation([true]);
   }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
@@ -128,7 +128,7 @@ const Search = () => {
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let SearchResultsDiv;
   
-  if (searchResults.length) SearchResultsDiv = (
+  if (searchResults) SearchResultsDiv = (
     <div className="Search-Results" ref={searchResultsRef}>
       <SearchResultList key={searchResults[0].id} typeOfResults="search-results" resultsArray={searchResults} handleSearch={handleSearchResultsClick} itemsPerPage={5}/>
     </div>
@@ -146,7 +146,7 @@ const Search = () => {
   //LYRICS AND TRANSLATION HTML
   let LyricsTranslationDiv;
   
-  if (moveToLyricsTranlsation.length)  LyricsTranslationDiv = (
+  if (translation)  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <DisplayLyrics lyrics={lyrics} translation={translation}/>
       </div>

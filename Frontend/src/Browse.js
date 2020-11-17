@@ -226,84 +226,14 @@ function Browse() {
 
   }
 
-  // const getLyrics = async (trackData, artistData, albumData, artist, track) => {
-  //   const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
-
-  //   if (response === "Added new track to the DB") {
-  //     const APILyrics = await LyricsAPI.getLyrics(artist, track);
-  //     console.log("APILyrics = ", APILyrics);
-
-  //     if (APILyrics === "No Lyrics from API") {
-  //       //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
-  //       setNoLyricsFlashMessage(true);
-  //       console.log("No lyrics apparently: ", APILyrics);
-  //       await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
-  //       return;
-  //     } else {
-  //       console.log("SET LYRICS IN FIRST CONDTIONAL");
-  //       //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE LYRICS ARE THE SAME
-  //       setLyrics([APILyrics, {}]);
-  //       await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: APILyrics});
-  //     }
-
-  //   } else {
-  //     const databaseLyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
-  //     console.log("Setting lyrics to be from the DB: ", databaseLyrics);
-
-  //     if (databaseLyrics === "No Lyrics") {
-  //       //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
-  //       setNoLyricsFlashMessage(true);
-  //       console.log("THE Lyrics in the db = ", databaseLyrics);
-  //     } else {
-  //       console.log("SET LYRICS IN SECOND CONDTIONAL");
-  //       setLyrics([databaseLyrics, {}]);
-  //     }
-  //   }
-  // }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
         dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));
     // setMoveToLyricsTranlsation([true]);
-    // console.log("HERE IS THE SEARCH VAL IN BROWSE; ", searchVal);
-    // try{
-    //   //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
-    //   const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
-    //   console.log("language is: ", language);
-    //   // setSelectedLanguage([language, {}]);
-    //   setNewLanguage(language);
-      
-    //   getTranslation();
-    // } catch(e) {
-    //   //FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND
-    //   setLanguageNotFoundFlashMessage(true);
-    //   console.log("ERROR CHOOSING LANGUAGE");
-    // }
+   
   }
 
-  // const getTranslation = async () => {
-  //   //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-  //   const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage: newLanguage});
-  //   console.log("databaseTranslation: ", response);
-
-  //   if (response === "No Translation in DB") {
-  //     console.log("HERE IS THE FULL LANGUAGE STATE IN BROWSE: ", newLanguage);
-  //     const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics, newLanguage);
-
-  //     console.log("Translated lyrics: ", IBMTranslation);
-
-  //     if (IBMTranslation === "Error attempting to read source text") {
-  //       //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
-  //       setTranslationErrorFlashMessage(true);
-  //     } else {
-  //       setTranslation(IBMTranslation);
-  //       await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage: newLanguage, translation: IBMTranslation});
-  //     }
-
-  //   } else {
-  //     console.log("got transltion from DB");
-  //     setTranslation(response);
-  //   }
-  // }
+  
 
   ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
