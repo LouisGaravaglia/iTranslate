@@ -20,10 +20,12 @@ const Search = () => {
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
   // const [translation, setTranslation] = useState("");
-  const [moveToLyricsTranlsation, setMoveToLyricsTranlsation] = useState(false);
+  const [moveToLyricsTranlsation, setMoveToLyricsTranlsation] = useState([]);
   const [language, setLanguage] = useState("");
   //REDUX STORE
   const translation = useSelector(store => store.translation);
+  const languageError = useSelector(store => store.errors["languageError"]);
+  const translationError = useSelector(store => store.errors.translationError);
   const dispatch = useDispatch();
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
@@ -58,6 +60,19 @@ const Search = () => {
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(moveToLyricsTranlsation, lyricsTranslationRef);}, [moveToLyricsTranlsation, lyricsTranslationRef, scrollToNextDiv]);
 
+  useEffect(() => {
+    const displayFlashMessage = () => {
+        if (languageError) {
+          setLanguageNotFoundFlashMessage(true);
+          console.log("There is a language error");
+        }
+        if (translationError) setTranslationErrorFlashMessage(true);
+        console.log("Here is what language error is: ", languageError);
+
+    }
+    displayFlashMessage();
+
+  }, [languageError, translationError])
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackSearchSubmit = async (searchVal) => {
@@ -136,7 +151,13 @@ const Search = () => {
 
   const handleLanguageSearchSubmit = async (searchVal) => {
     dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics[0]));
-    setMoveToLyricsTranlsation(true);
+    // if (languageError) {
+    //   setLanguageNotFoundFlashMessage(true);
+    //   console.log("There is a language error");
+    // }
+    // if (translationError) setTranslationErrorFlashMessage(true);
+    // console.log("Here is what language error is: ", languageError);
+    setMoveToLyricsTranlsation([true]);
   }
 
   // const handleLanguageSearchSubmit = async (searchVal) => {
@@ -200,7 +221,7 @@ const Search = () => {
   //LYRICS AND TRANSLATION HTML
   let LyricsTranslationDiv;
   
-  if (moveToLyricsTranlsation)  LyricsTranslationDiv = (
+  if (moveToLyricsTranlsation.length)  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <DisplayLyrics lyrics={lyrics[0]} translation={translation}/>
       </div>

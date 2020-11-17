@@ -1,6 +1,7 @@
 import { GET_TRANSLATION } from "./actionTypes";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 import BackendCall from './BackendCall';
+// import FlashMessage from "./FlashMessage";
 
 // const POSTS_URL = "http://localhost:5000/api/posts"
 
@@ -20,6 +21,7 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
 
       if (IBMTranslation === "Error attempting to read source text") {
         //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
+        // setTranslationErrorFlashMessage(true);
         errors["translationError"] = true;
         // setErrors(err => ({
         //   ...err,
@@ -47,6 +49,7 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
       return translation;
     } catch(e) {
       errors["languageError"] = true;
+      // setLanguageNotFoundFlashMessage(true);
       // setErrors(err => ({
       //   ...err,
       //   ["languageError"]:true
@@ -64,6 +67,10 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
         dispatch(retrieveTranslation(translation, errors));
     };
 }
+
 function retrieveTranslation(translation, errors) {
     return {type:GET_TRANSLATION, translation, errors};
 }
+
+
+
