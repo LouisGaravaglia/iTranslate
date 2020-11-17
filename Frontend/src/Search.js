@@ -1,29 +1,23 @@
 import React, {useState, useRef, useEffect, useContext, useCallback} from 'react';
+import UserContext from "./UserContext";
+//API IMPORTS
 import SpotifyAPI from "./SpotifyAPI";
-import SearchResult from "./SearchResult";
+//COMPONENT IMPORTS
 import SearchBar from "./SearchBar";
 import DisplayLyrics from "./DisplayLyrics";
 import FlashMessage from "./FlashMessage";
-import LyricsAPI from "./LyricsAPI";
-import IBMWatsonAPI from "./IBMWatsonAPI";
-import BackendCall from './BackendCall';
-import UserContext from "./UserContext";
 import SearchResultList from "./SearchResultList";
+//REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
 import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
 import {getLyrics} from "./actionCreators/getLyrics";
 
-
 const Search = () => {
   //STATE FOR DATA
   const [searchResults, setSearchResults] = useState([]);
-  // const [lyrics, setLyrics] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
-  // const [selectedLanguage, setSelectedLanguage] = useState("");
-  // const [translation, setTranslation] = useState("");
   const [moveToLyricsTranlsation, setMoveToLyricsTranlsation] = useState([]);
-  // const [language, setLanguage] = useState("");
   //REDUX STORE
   const translation = useSelector(store => store.translation);
   const languageError = useSelector(store => store.errors.languageError);
@@ -42,7 +36,6 @@ const Search = () => {
   const lyricsTranslationRef = useRef();
   //VARIABLES FROM CONTEXT PROVIDER
   const { languages } = useContext(UserContext);
-
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -70,22 +63,22 @@ const Search = () => {
 
         if (lyricsError) {
           setNoLyricsFlashMessage(true);
+          console.log("There is a lyrics error");
           dispatch(resetLyricsError());
         }
         if (languageError) {
           setLanguageNotFoundFlashMessage(true);
-          dispatch(resetLanguageError());
           console.log("There is a language error");
+          dispatch(resetLanguageError());
         }
         if (translationError) {
           setTranslationErrorFlashMessage(true);
+          console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
-          console.log("Here is what language error is: ", languageError);
         }
 
     }
     displayFlashMessage();
-
   }, [languageError, translationError])
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
@@ -133,13 +126,11 @@ const Search = () => {
 
   }
 
-
   //GET A HOLD OF LANGUAGE CODE FROM INPUT VALUE, THEN GET TRANSLATION BASED OFF OF THAT
   const handleLanguageSearchSubmit = async (searchVal) => {
     dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));
     setMoveToLyricsTranlsation([true]);
   }
-
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
