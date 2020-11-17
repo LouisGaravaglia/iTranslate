@@ -132,7 +132,7 @@ class SpotifyAPI {
       console.log("Here is the track details: ", trackDetails);
       console.log("Here is the album details: ", albumDetails);
         
-      let trackData = {spotify_id: trackId};
+      const trackData = {spotify_id: trackId};
       const artistData = {spotify_id: artistId};
       const albumData = {spotify_id: albumId};
 
@@ -156,7 +156,7 @@ class SpotifyAPI {
       artistData["genre"] = artistDetails.data.genres.join(",");
       artistData["img_url"] = artistDetails.data.images[1].url;
       artistData["popularity"] = artistDetails.data.popularity;
-      console.log("sucess");
+
       return [trackData, artistData, albumData];
 
     } catch(err) {

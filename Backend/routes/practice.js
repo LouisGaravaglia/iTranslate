@@ -23,6 +23,8 @@
       artistData["img_url"] = artistDetails.data.images[1].url;
       artistData["popularity"] = artistDetails.data.popularity;
 
+      const partialAlbumData = { spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url};
+
  
 
   

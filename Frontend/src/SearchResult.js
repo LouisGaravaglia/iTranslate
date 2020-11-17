@@ -7,11 +7,11 @@ const SearchResult = memo((props) => {
   }
 
   const handleArtistsClick = () => {
-    props.handleClick(props.spotify_id, props.artist);
+    props.handleClick(props.spotify_id);
   }
 
   const handleAlbumClick = () => {
-    props.handleClick(props.id, props.image, props.index);
+    props.handleClick(props.id, props.index);
   }
 
   const handleTrackClick = () => {

@@ -1,6 +1,6 @@
 import React,  {useState, useRef, useEffect, useContext} from 'react';
 import './App.css';
-import SpotifyApi from "./SpotifyAPI";
+import SpotifyAPI from "./SpotifyAPI";
 import IBMWatsonAPI from './IBMWatsonAPI';
 import LyricsAPI from "./LyricsAPI";
 import Album from "./Album";
@@ -18,12 +18,13 @@ function Browse() {
   const [artists, setArtists] = useState([]);
   const [lyrics, setLyrics] = useState("");
   const [translation, setTranslation] = useState("");
-  const [selectedArtist, setSelectedArtist] = useState("");
+  const [selectedArtistId, setSelectedArtistId] = useState("");
   const [genres, setGenres] = useState([]);
   const [category, setCategory] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
-  const [selectedAlbum, setSelectedAlbum] = useState([]);
+  const [selectedAlbumId, setSelectedAlbumId] = useState([]);
+  const [albumData, setAlbumData] = useState({});
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
@@ -131,48 +132,87 @@ function Browse() {
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
-  const handleArtistClick = async (artistID, artistName) => {
-    console.log("artistId: ", artistID);
-    const albums = await SpotifyApi.getAlbums(artistID);
+  const handleArtistClick = async (artistId) => {
+    console.log("artistId: ", artistId);
+    const albums = await SpotifyAPI.getAlbums(artistId);
     console.log("here are the alubms", albums);    
     setAlbums(albums);
-    setSelectedArtist(artistName);
+    setSelectedArtistId(artistId);
 
   }
 
-  const handleAlbumClick = async (albumID, albumImg, albumIdx) => {
-    setSelectedAlbum(albums[albumIdx]);
-    const tracks = await SpotifyApi.getTracks(albumID);
+  const handleAlbumClick = async (albumID, index) => {
+    setSelectedAlbumId(albumID);
+    const base = albums[index];
+    setAlbumData()
+    const tracks = await SpotifyAPI.getTracks(albumID);
     setTracks(tracks);
     console.log("here are the tracks", tracks);
   }
 
-  const handleTrackClick = async (trackID, artist, track) => {
+  //OLD HANDLE TRACK CLICK FUNCTION
+  // const handleTrackClick = async (trackID, artist, track) => {
 
-    // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
-    const trackLyrics = await LyricsAPI.getLyrics(artist, track);
-    setLyrics(trackLyrics);
+  //   // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
+  //   const trackLyrics = await LyricsAPI.getLyrics(artist, track);
+  //   setLyrics(trackLyrics);
+
+  // }
+
+  // //IMPORTED FROM SEARCH, NEED TO TURN INTO HANDLE TRACK CLICK FUNCTION
+  const handleTrackClick = async (artist, track, index) => {
+    const base = tracks[index];
+    //*****do i need this variable/state? in search i use it as a ref, but do i here? */
+    setSelectedTrackId(base.id);
+    //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
+    //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
+    const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
+
+    if (trackData === "Error getting Track Data") {
+      const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
+      const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+      const completeAlbumData = { spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url};
+      getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track);
+    } else {
+      getLyrics(trackData, artistData, albumData, artist, track);
+    }
 
   }
 
-  // //IMPORTED FROM SEARCH, NEED TO TURN INTO HANDLE TRACK CLICK FUNCTION
-  // const handleSearchResultsClick = async (artist, track, index, trackId) => {
-  //   const base = tracks[index];
-  //   setSelectedTrackId(base.id);
-  //   //CREATE OBJECTS FOR TRACK, ARTIST, AND ALBUM INFO
-  //   const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
-  //   const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-  //   const completeAlbum = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri img_url: base};
-  //   //MAKE SECOND CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY)
-  //   const [completeTrackData, completeArtistData] = await SpotifyAPI.getSongArtistAnalysis(partialTrackData, partialArtistData);
+  const getLyrics = async (trackData, artistData, albumData, artist, track) => {
+    const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
 
-  //   if (completeTrackData === "Error getting Track Data") {
-  //     getLyrics(partialTrackData, partialArtistData, completeAlbum, artist, track);
-  //   } else {
-  //     getLyrics(completeTrackData, completeArtistData, completeAlbum, artist, track);
-  //   }
+    if (response === "Added new track to the DB") {
+      const APILyrics = await LyricsAPI.getLyrics(artist, track);
+      console.log("APILyrics = ", APILyrics);
 
-  // }
+      if (APILyrics === "No Lyrics from API") {
+        //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
+        setNoLyricsFlashMessage(true);
+        console.log("No lyrics apparently: ", APILyrics);
+        await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: "No Lyrics"});
+        return;
+      } else {
+        console.log("SET LYRICS IN FIRST CONDTIONAL");
+        //PASSING AN OBJECT TO STATE SO THAT USE-EFFECT IS TRIGGERED BECAUSE STATE IS FORCED TO UPDATE EVEN IF THE LYRICS ARE THE SAME
+        setLyrics([APILyrics, {}]);
+        await BackendCall.addLyrics({track_id: trackData.spotify_id, lyrics: APILyrics});
+      }
+
+    } else {
+      const databaseLyrics = await BackendCall.getLyrics({track_id: trackData.spotify_id});
+      console.log("Setting lyrics to be from the DB: ", databaseLyrics);
+
+      if (databaseLyrics === "No Lyrics") {
+        //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
+        setNoLyricsFlashMessage(true);
+        console.log("THE Lyrics in the db = ", databaseLyrics);
+      } else {
+        console.log("SET LYRICS IN SECOND CONDTIONAL");
+        setLyrics([databaseLyrics, {}]);
+      }
+    }
+  }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
 
