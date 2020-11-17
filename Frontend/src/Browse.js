@@ -23,6 +23,7 @@ function Browse() {
   const [category, setCategory] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
+  const [selectedAlbum, setSelectedAlbum] = useState([]);
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
@@ -139,8 +140,8 @@ function Browse() {
 
   }
 
-  const handleAlbumClick = async (albumID) => {
-
+  const handleAlbumClick = async (albumID, albumImg, albumIdx) => {
+    setSelectedAlbum(albums[albumIdx]);
     const tracks = await SpotifyApi.getTracks(albumID);
     setTracks(tracks);
     console.log("here are the tracks", tracks);
@@ -151,9 +152,27 @@ function Browse() {
     // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
     const trackLyrics = await LyricsAPI.getLyrics(artist, track);
     setLyrics(trackLyrics);
-    const translatedLyrics = await IBMWatsonAPI.getTranslation(trackLyrics);
-    setTranslation(translatedLyrics);
+
   }
+
+  // //IMPORTED FROM SEARCH, NEED TO TURN INTO HANDLE TRACK CLICK FUNCTION
+  // const handleSearchResultsClick = async (artist, track, index, trackId) => {
+  //   const base = tracks[index];
+  //   setSelectedTrackId(base.id);
+  //   //CREATE OBJECTS FOR TRACK, ARTIST, AND ALBUM INFO
+  //   const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
+  //   const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+  //   const completeAlbum = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri img_url: base};
+  //   //MAKE SECOND CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY)
+  //   const [completeTrackData, completeArtistData] = await SpotifyAPI.getSongArtistAnalysis(partialTrackData, partialArtistData);
+
+  //   if (completeTrackData === "Error getting Track Data") {
+  //     getLyrics(partialTrackData, partialArtistData, completeAlbum, artist, track);
+  //   } else {
+  //     getLyrics(completeTrackData, completeArtistData, completeAlbum, artist, track);
+  //   }
+
+  // }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
 

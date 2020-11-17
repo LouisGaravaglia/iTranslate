@@ -101,37 +101,69 @@ class SpotifyAPI {
 
 /////////////////////////////////  GET SEED DATA FOR ARTISTS  /////////////////////////////////
 
-  static async getSongArtistAnalysis(trackData, artistData) {
+  static async getTrackArtistAlbumData(trackId, artistId, albumId) {
     const accessToken = await requestAccessToken();
 
     try {
 
       const artistDetails = await axios({
         method: "get",
-        url: `https://api.spotify.com/v1/artists/${artistData.spotify_id}`,
+        url: `https://api.spotify.com/v1/artists/${artistId}`,
         headers: {'Authorization': `Bearer ${accessToken}`}
       });
       const songAnalysis = await axios({
         method: "get",
-        url: `https://api.spotify.com/v1/audio-features/${trackData.spotify_id}`,
+        url: `https://api.spotify.com/v1/audio-features/${trackId}`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
+      const trackDetails = await axios({
+        method: "get",
+        url: `https://api.spotify.com/v1/tracks/${trackId}`,
+        headers: {'Authorization': `Bearer ${accessToken}`}
+      });
+      const albumDetails = await axios({
+        method: "get",
+        url: `https://api.spotify.com/v1/albums/${albumId}`,
         headers: {'Authorization': `Bearer ${accessToken}`}
       });
 
-        console.log("Here are album tracks: ", artistDetails);
-        console.log("Here is the song anaylsis: ", songAnalysis);
-        trackData["danceability"] = songAnalysis.data.danceability;
-        trackData["tempo"] = songAnalysis.data.tempo;
-        trackData["valence"] = songAnalysis.data.valence;
-        trackData["duration"] = songAnalysis.data.duration_ms;
-        artistData["genre"] = artistDetails.data.genres;
-        artistData["img_url"] = artistDetails.data.images;
-        artistData["popularity"] = artistDetails.data.popularity;
-        return [trackData, artistData];
+      console.log("Here are album tracks: ", artistDetails);
+      console.log("Here is the song anaylsis: ", songAnalysis);
+      console.log("Here is the track details: ", trackDetails);
+      console.log("Here is the album details: ", albumDetails);
+        
+      let trackData = {spotify_id: trackId};
+      const artistData = {spotify_id: artistId};
+      const albumData = {spotify_id: albumId};
+
+      albumData["name"] = albumDetails.data.name;
+      albumData["release_date"] = albumDetails.data.release_date;
+      albumData["spotify_uri"] = albumDetails.data.uri;
+      albumData["img_url"] = albumDetails.data.images[1].url;
+
+      trackData["name"] = trackDetails.data.name;
+      trackData["spotify_uri"] = trackDetails.data.uri;
+      trackData["explicit"] = trackDetails.data.explicit;
+      trackData["popularity"] = trackDetails.data.popularity;
+      trackData["preview_url"] = trackDetails.data.preview_url;
+      trackData["danceability"] = songAnalysis.data.danceability;
+      trackData["tempo"] = songAnalysis.data.tempo;
+      trackData["valence"] = songAnalysis.data.valence;
+      trackData["duration"] = songAnalysis.data.duration_ms;
+
+      artistData["name"] = artistDetails.data.name;
+      artistData["spotify_uri"] = artistDetails.data.uri;
+      artistData["genre"] = artistDetails.data.genres.join(",");
+      artistData["img_url"] = artistDetails.data.images[1].url;
+      artistData["popularity"] = artistDetails.data.popularity;
+      console.log("sucess");
+      return [trackData, artistData, albumData];
 
     } catch(err) {
       console.error("API Error:", err.response);
-      trackData = "Error getting Track Data"
-      return [trackData, artistData];
+      const trackData = "Error getting Track Data"
+      return [trackData];
+      // return [trackData, artistData, albumData];
     }
   }
 

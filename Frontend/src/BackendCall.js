@@ -35,16 +35,16 @@ class BackendCall {
     }
 
     static async addArtist(data) {
-      const filtered = data.img_url.map(item => item.url);
-      data.genre = data.genre.join(",");
-      data.img_url = filtered.join(",");
+      // const filtered = data.img_url.map(item => item.url);
+      // data.genre = data.genre.join(",");
+      // data.img_url = filtered.join(",");
       console.log("Artist data: ", data);
       let res = await this.request("artist", data, "post");
       return res.data.response;
     }
 
     static async addAlbum(data) {
-      data.img_url = data.img_url.url;
+      // data.img_url = data.img_url.url;
       console.log("ALBUM DATA: ", data);
       let res = await this.request("album", data, "post");
       return res.data.response;
