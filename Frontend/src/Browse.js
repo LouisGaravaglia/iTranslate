@@ -24,7 +24,7 @@ function Browse() {
   const [tracks, setTracks] = useState([]);
   const [artists, setArtists] = useState([]);
   // const [lyrics, setLyrics] = useState("");
-  const [translation, setTranslation] = useState("");
+  // const [translation, setTranslation] = useState("");
   const [selectedArtistId, setSelectedArtistId] = useState("");
   const [genres, setGenres] = useState([]);
   const [category, setCategory] = useState("");
@@ -35,7 +35,7 @@ function Browse() {
   const [completeAlbumData, setCompleteAlbumData] = useState({});
   //REDUX STORE
   const dispatch = useDispatch();
-  // const translation = useSelector(store => store.translation);
+  const translation = useSelector(store => store.translation);
   const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
@@ -262,46 +262,48 @@ function Browse() {
   // }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
-    console.log("HERE IS THE SEARCH VAL IN BROWSE; ", searchVal);
-    try{
-      //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
-      const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
-      console.log("language is: ", language);
-      // setSelectedLanguage([language, {}]);
-      setNewLanguage(language);
+        dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));
+    // setMoveToLyricsTranlsation([true]);
+    // console.log("HERE IS THE SEARCH VAL IN BROWSE; ", searchVal);
+    // try{
+    //   //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
+    //   const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
+    //   console.log("language is: ", language);
+    //   // setSelectedLanguage([language, {}]);
+    //   setNewLanguage(language);
       
-      getTranslation();
-    } catch(e) {
-      //FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND
-      setLanguageNotFoundFlashMessage(true);
-      console.log("ERROR CHOOSING LANGUAGE");
-    }
+    //   getTranslation();
+    // } catch(e) {
+    //   //FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND
+    //   setLanguageNotFoundFlashMessage(true);
+    //   console.log("ERROR CHOOSING LANGUAGE");
+    // }
   }
 
-  const getTranslation = async () => {
-    //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-    const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage: newLanguage});
-    console.log("databaseTranslation: ", response);
+  // const getTranslation = async () => {
+  //   //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
+  //   const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage: newLanguage});
+  //   console.log("databaseTranslation: ", response);
 
-    if (response === "No Translation in DB") {
-      console.log("HERE IS THE FULL LANGUAGE STATE IN BROWSE: ", newLanguage);
-      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics, newLanguage);
+  //   if (response === "No Translation in DB") {
+  //     console.log("HERE IS THE FULL LANGUAGE STATE IN BROWSE: ", newLanguage);
+  //     const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics, newLanguage);
 
-      console.log("Translated lyrics: ", IBMTranslation);
+  //     console.log("Translated lyrics: ", IBMTranslation);
 
-      if (IBMTranslation === "Error attempting to read source text") {
-        //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
-        setTranslationErrorFlashMessage(true);
-      } else {
-        setTranslation(IBMTranslation);
-        await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage: newLanguage, translation: IBMTranslation});
-      }
+  //     if (IBMTranslation === "Error attempting to read source text") {
+  //       //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
+  //       setTranslationErrorFlashMessage(true);
+  //     } else {
+  //       setTranslation(IBMTranslation);
+  //       await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage: newLanguage, translation: IBMTranslation});
+  //     }
 
-    } else {
-      console.log("got transltion from DB");
-      setTranslation(response);
-    }
-  }
+  //   } else {
+  //     console.log("got transltion from DB");
+  //     setTranslation(response);
+  //   }
+  // }
 
   ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
@@ -359,7 +361,7 @@ function Browse() {
   //LYRICS AND TRANSLATION HTML
   let LyricsTranslationDiv;
   
-  if (selectedLanguage.length)  LyricsTranslationDiv = (
+  if (lyrics)  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <DisplayLyrics lyrics={lyrics} translation={translation}/>
       </div>
