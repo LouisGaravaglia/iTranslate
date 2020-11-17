@@ -9,6 +9,9 @@ import IBMWatsonAPI from "./IBMWatsonAPI";
 import BackendCall from './BackendCall';
 import UserContext from "./UserContext";
 import SearchResultList from "./SearchResultList";
+import useTranslation from "./hooks/useTranslation";
+import {useDispatch, useSelector} from "react-redux";
+import {getTranslation} from "./actionCreators";
 
 const Search = () => {
   //STATE FOR DATA
@@ -16,7 +19,12 @@ const Search = () => {
   const [lyrics, setLyrics] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [translation, setTranslation] = useState("");
+  // const [translation, setTranslation] = useState("");
+  const [moveToLyricsTranlsation, setMoveToLyricsTranlsation] = useState(false);
+  const [language, setLanguage] = useState("");
+  //REDUX STORE
+  const translation = useSelector(store => store.translation);
+  const dispatch = useDispatch();
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
@@ -48,7 +56,7 @@ const Search = () => {
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {scrollToNextDiv(selectedLanguage, lyricsTranslationRef);}, [selectedLanguage, lyricsTranslationRef, scrollToNextDiv]);
+  useEffect(() => {scrollToNextDiv(moveToLyricsTranlsation, lyricsTranslationRef);}, [moveToLyricsTranlsation, lyricsTranslationRef, scrollToNextDiv]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -127,42 +135,47 @@ const Search = () => {
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
-
-    try{
-      //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
-      const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
-      console.log("language is: ", language);
-      setSelectedLanguage([language, {}]);
-      getTranslation();
-    } catch(e) {
-      //FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND
-      setLanguageNotFoundFlashMessage(true);
-      console.log("ERROR CHOOSING LANGUAGE");
-    }
+    dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics[0]));
+    setMoveToLyricsTranlsation(true);
   }
 
-  const getTranslation = async () => {
-    //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-    const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage: selectedLanguage[0]});
-    console.log("databaseTranslation: ", response);
+  // const handleLanguageSearchSubmit = async (searchVal) => {
 
-    if (response === "No Translation in DB") {
-      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], selectedLanguage[0]);
-      console.log("Translated lyrics: ", IBMTranslation);
+  //   try{
+  //     //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
+  //     const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
+  //     console.log("language is: ", language);
+  //     setSelectedLanguage([language, {}]);
+  //     getTranslation();
+  //   } catch(e) {
+  //     //FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND
+  //     setLanguageNotFoundFlashMessage(true);
+  //     console.log("ERROR CHOOSING LANGUAGE");
+  //   }
+  // }
 
-      if (IBMTranslation === "Error attempting to read source text") {
-        //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
-        setTranslationErrorFlashMessage(true);
-      } else {
-        setTranslation(IBMTranslation);
-        await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage: selectedLanguage[0], translation: IBMTranslation});
-      }
+  // const getTranslation = async () => {
+  //   //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
+  //   const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage: selectedLanguage[0]});
+  //   console.log("databaseTranslation: ", response);
 
-    } else {
-      console.log("got transltion from DB");
-      setTranslation(response);
-    }
-  }
+  //   if (response === "No Translation in DB") {
+  //     const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], selectedLanguage[0]);
+  //     console.log("Translated lyrics: ", IBMTranslation);
+
+  //     if (IBMTranslation === "Error attempting to read source text") {
+  //       //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
+  //       setTranslationErrorFlashMessage(true);
+  //     } else {
+  //       setTranslation(IBMTranslation);
+  //       await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage: selectedLanguage[0], translation: IBMTranslation});
+  //     }
+
+  //   } else {
+  //     console.log("got transltion from DB");
+  //     setTranslation(response);
+  //   }
+  // }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
@@ -187,7 +200,7 @@ const Search = () => {
   //LYRICS AND TRANSLATION HTML
   let LyricsTranslationDiv;
   
-  if (selectedLanguage.length)  LyricsTranslationDiv = (
+  if (moveToLyricsTranlsation)  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <DisplayLyrics lyrics={lyrics[0]} translation={translation}/>
       </div>

@@ -1,2 +1,1 @@
-export const GET_SPOTIFY_DATA = "GET_SPOTIFY_DATA";
-
+export const GET_TRANSLATION = "GET_TRANSLATION";

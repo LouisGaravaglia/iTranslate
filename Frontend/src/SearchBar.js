@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 
+
 const SearchBar = ( { header, handleSubmit} ) => {
   const [searchVal, setSearchVal] = useState("")
+ 
 
   const triggerSubmit = (e) => {
     e.preventDefault();
