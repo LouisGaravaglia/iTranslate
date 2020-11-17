@@ -1,4 +1,4 @@
-import { GET_TRANSLATION } from "./actionTypes";
+import { GET_TRANSLATION, RESET_LANGUAGE_ERROR } from "./actionTypes";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 import BackendCall from './BackendCall';
 // import FlashMessage from "./FlashMessage";
@@ -70,6 +70,16 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
 
 function retrieveTranslation(translation, errors) {
     return {type:GET_TRANSLATION, translation, errors};
+}
+
+////////////////////////////////// RESET LANGUAGE ERROR VALUE //////////////////////////////////
+export function resetLanguageError() {
+    return async function(dispatch) {
+        dispatch(updateLanguageError());
+    };
+}
+function updateLanguageError() {
+    return {type:RESET_LANGUAGE_ERROR};
 }
 
 

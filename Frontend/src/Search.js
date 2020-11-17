@@ -11,7 +11,7 @@ import UserContext from "./UserContext";
 import SearchResultList from "./SearchResultList";
 import useTranslation from "./hooks/useTranslation";
 import {useDispatch, useSelector} from "react-redux";
-import {getTranslation} from "./actionCreators";
+import {getTranslation, resetLanguageError} from "./actionCreators";
 
 const Search = () => {
   //STATE FOR DATA
@@ -64,6 +64,7 @@ const Search = () => {
     const displayFlashMessage = () => {
         if (languageError) {
           setLanguageNotFoundFlashMessage(true);
+          dispatch(resetLanguageError());
           console.log("There is a language error");
         }
         if (translationError) setTranslationErrorFlashMessage(true);
