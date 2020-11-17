@@ -21,10 +21,11 @@ function Browse() {
   const [selectedArtistId, setSelectedArtistId] = useState("");
   const [genres, setGenres] = useState([]);
   const [category, setCategory] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState([]);
+  const [newLanguage, setNewLanguage] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState([]);
-  const [albumData, setAlbumData] = useState({});
+  const [completeAlbumData, setCompleteAlbumData] = useState({});
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
@@ -144,7 +145,7 @@ function Browse() {
   const handleAlbumClick = async (albumID, index) => {
     setSelectedAlbumId(albumID);
     const base = albums[index];
-    setAlbumData()
+    setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
     const tracks = await SpotifyAPI.getTracks(albumID);
     setTracks(tracks);
     console.log("here are the tracks", tracks);
@@ -162,7 +163,6 @@ function Browse() {
   // //IMPORTED FROM SEARCH, NEED TO TURN INTO HANDLE TRACK CLICK FUNCTION
   const handleTrackClick = async (artist, track, index) => {
     const base = tracks[index];
-    //*****do i need this variable/state? in search i use it as a ref, but do i here? */
     setSelectedTrackId(base.id);
     //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
     //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
@@ -171,7 +171,6 @@ function Browse() {
     if (trackData === "Error getting Track Data") {
       const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
       const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-      const completeAlbumData = { spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url};
       getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track);
     } else {
       getLyrics(trackData, artistData, albumData, artist, track);
@@ -215,12 +214,14 @@ function Browse() {
   }
 
   const handleLanguageSearchSubmit = async (searchVal) => {
-
+    console.log("HERE IS THE SEARCH VAL IN BROWSE; ", searchVal);
     try{
       //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
       const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
       console.log("language is: ", language);
-      setSelectedLanguage([language, {}]);
+      // setSelectedLanguage([language, {}]);
+      setNewLanguage(language);
+      
       getTranslation();
     } catch(e) {
       //FLASH MESSAGE SAYING LANGUAGE WAS NOT FOUND
@@ -231,11 +232,13 @@ function Browse() {
 
   const getTranslation = async () => {
     //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-    const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage});
+    const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage: newLanguage});
     console.log("databaseTranslation: ", response);
 
     if (response === "No Translation in DB") {
-      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], selectedLanguage);
+      console.log("HERE IS THE FULL LANGUAGE STATE IN BROWSE: ", newLanguage);
+      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], newLanguage);
+
       console.log("Translated lyrics: ", IBMTranslation);
 
       if (IBMTranslation === "Error attempting to read source text") {
@@ -243,7 +246,7 @@ function Browse() {
         setTranslationErrorFlashMessage(true);
       } else {
         setTranslation(IBMTranslation);
-        await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage, translation: IBMTranslation});
+        await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage: newLanguage, translation: IBMTranslation});
       }
 
     } else {

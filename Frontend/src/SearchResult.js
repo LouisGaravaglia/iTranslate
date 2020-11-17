@@ -15,7 +15,8 @@ const SearchResult = memo((props) => {
   }
 
   const handleTrackClick = () => {
-    props.handleClick(props.id, props.artistName, props.trackName);
+    console.log("Here are the track props: ", props);
+    props.handleClick(props.artistName, props.trackName, props.index);
   }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////

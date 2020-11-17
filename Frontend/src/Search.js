@@ -143,11 +143,11 @@ const Search = () => {
 
   const getTranslation = async () => {
     //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-    const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage});
+    const response = await BackendCall.getTranslation({track_id: selectedTrackId, selectedLanguage: selectedLanguage[0]});
     console.log("databaseTranslation: ", response);
 
     if (response === "No Translation in DB") {
-      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], selectedLanguage);
+      const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics[0], selectedLanguage[0]);
       console.log("Translated lyrics: ", IBMTranslation);
 
       if (IBMTranslation === "Error attempting to read source text") {
@@ -155,7 +155,7 @@ const Search = () => {
         setTranslationErrorFlashMessage(true);
       } else {
         setTranslation(IBMTranslation);
-        await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage, translation: IBMTranslation});
+        await BackendCall.addTranslation({track_id: selectedTrackId, selectedLanguage: selectedLanguage[0], translation: IBMTranslation});
       }
 
     } else {
