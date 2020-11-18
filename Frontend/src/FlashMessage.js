@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const FlashMessage = ( { message, duration, setState} ) => {
+const FlashMessage = ( { message, setState} ) => {
 
   const toggleTimer = () => {
     setState(false);
@@ -9,7 +9,7 @@ const FlashMessage = ( { message, duration, setState} ) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       toggleTimer();
-    }, duration)
+    }, 5000)
 
     return () => clearInterval(intervalId)
   }, [])

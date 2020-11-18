@@ -15,9 +15,7 @@ import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 
 const Search = () => {
   //STATE FOR DATA
-  // const [searchResults, setSearchResults] = useState([]);
   const [selectedTrackId, setSelectedTrackId] = useState([]);
-  const [moveToLyricsTranlsation, setMoveToLyricsTranlsation] = useState([]);
   //REDUX STORE
   const languages = useSelector(store => store.languages);
   const translation = useSelector(store => store.translation);
@@ -154,10 +152,10 @@ const Search = () => {
   return (
     <div className="Search">
       <div className="Flash-Messages-Container">
-        {searchFlashMessage && (<FlashMessage duration={5000} setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
-        {noLyricsFlashMessage && (<FlashMessage duration={5000} setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
-        {languageNotFoundFlashMessage && (<FlashMessage duration={5000} setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
-        {translationErrorFlashMessage && (<FlashMessage duration={5000} setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
+        {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
+        {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
+        {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
+        {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
       </div>
       <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
       {SearchResultsDiv}
