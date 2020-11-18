@@ -7,7 +7,7 @@ import BackendCall from "../../../BackendCall";
 export function getGenres() {
 
   return async function(dispatch) {
-    // const searchError = false;
+    // let searchError = false;
 
 
       const response = await BackendCall.getGenres();

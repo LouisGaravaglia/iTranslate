@@ -7,7 +7,7 @@ import BackendCall from "../../../BackendCall";
 export function getAllArtists() {
 
   return async function(dispatch) {
-    // const albumsError = false;
+    // let albumsError = false;
       const artists = await BackendCall.getArtistsAndArtistIds();
       console.log("My artist/id array: ", artists);
       console.log("An artist name: ", artists[0].name);

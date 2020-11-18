@@ -7,7 +7,7 @@ import SpotifyAPI from "../SpotifyAPI";
 export function setResultsArray(searchVal) {
 
   return async function(dispatch) {
-    const searchError = false;
+    let searchError = false;
 
     const handleTrackSearchSubmit = async (searchVal) => {
       console.log("handleSubmit: ", searchVal);

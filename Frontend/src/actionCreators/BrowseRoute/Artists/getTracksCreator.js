@@ -7,7 +7,7 @@ import SpotifyAPI from "../../../SpotifyAPI";
 export function getTracks(albumID) {
 
   return async function(dispatch) {
-    // const albumsError = false;
+    // let albumsError = false;
     
     const handleAlbumClick = async (albumID) => {
       const response = await SpotifyAPI.getTracks(albumID);

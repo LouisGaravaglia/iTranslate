@@ -8,11 +8,11 @@ const FlashMessage = ( { message, setState} ) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      toggleTimer();
+      setState(false);
     }, 5000)
 
     return () => clearInterval(intervalId)
-  }, [])
+  }, [setState])
 
   return (
     <div onClick={toggleTimer} className="FlashMessage">

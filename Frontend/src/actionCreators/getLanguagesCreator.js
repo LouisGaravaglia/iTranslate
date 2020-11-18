@@ -7,6 +7,7 @@ import IBMWatsonAPI from "../IBMWatsonAPI";
 export function getLanguages() {
 
   return async function(dispatch) {
+    // let languagesError = false;
     const languages = await IBMWatsonAPI.getLanguages();
     console.log("HERE are the languages: ", languages);
     dispatch(addLanguages(languages));

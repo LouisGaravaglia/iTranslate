@@ -7,7 +7,7 @@ import SpotifyAPI from "../../../SpotifyAPI";
 export function getAlbums(artistId) {
 
   return async function(dispatch) {
-    const albumsError = false;
+    // let albumsError = false;
     
     const handleArtistClick = async (artistId) => {
       console.log("artistId: ", artistId);

@@ -83,7 +83,7 @@ const Search = () => {
 
     }
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError, searchError])
+  }, [languageError, translationError, lyricsError, searchError, dispatch])
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 

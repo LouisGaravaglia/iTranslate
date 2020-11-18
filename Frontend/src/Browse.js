@@ -1,4 +1,4 @@
-import React,  {useState, useRef, useEffect, useCallback} from 'react';
+import React,  {useState, useRef, useEffect} from 'react';
 import './App.css';
 //COMPONENT IMPORTS
 import FlashMessage from "./FlashMessage";
@@ -72,9 +72,9 @@ function Browse() {
 
     }
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError])
+  }, [languageError, translationError, lyricsError, dispatch])
 
-  ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
   let BrowseByArtistsDiv;

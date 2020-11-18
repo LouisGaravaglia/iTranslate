@@ -1,5 +1,5 @@
-import { GET_RESULTS, UPDATE_SEARCH_ERROR } from "../actionTypes";
-import SpotifyAPI from "../SpotifyAPI";
+// import { GET_RESULTS, UPDATE_SEARCH_ERROR } from "../actionTypes";
+// import SpotifyAPI from "../SpotifyAPI";
 
 
 
@@ -7,7 +7,7 @@ import SpotifyAPI from "../SpotifyAPI";
 // export function getAllTracks(searchVal) {
 
 //   return async function(dispatch) {
-//     const searchError = false;
+//     let searchError = false;
 
 
 
