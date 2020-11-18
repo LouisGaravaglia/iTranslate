@@ -100,17 +100,16 @@ const Search = () => {
     setSelectedTrackId(base.id);
     //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
     //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
-    const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, base.artists[0].id, base.album.id);
-
-    if (trackData === "Error getting Track Data") {
+    try {
+      const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, base.artists[0].id, base.album.id);
+      dispatch(getLyrics(trackData, artistData, albumData, artist, track));
+      console.log("SEARCH; lyrics are: ");
+      console.log(lyrics);
+    } catch (e) {
       const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
       const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
       const partialAlbumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri};
       dispatch(getLyrics(partialTrackData, partialArtistData, partialAlbumData, artist, track));
-      console.log("SEARCH; lyrics are: ");
-      console.log(lyrics);
-    } else {
-      dispatch(getLyrics(trackData, artistData, albumData, artist, track));
       console.log("SEARCH; lyrics are: ");
       console.log(lyrics);
     }

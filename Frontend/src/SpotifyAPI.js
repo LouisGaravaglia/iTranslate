@@ -161,9 +161,6 @@ class SpotifyAPI {
 
     } catch(err) {
       console.error("API Error:", err.response);
-      const trackData = "Error getting Track Data"
-      return [trackData];
-      // return [trackData, artistData, albumData];
     }
   }
 

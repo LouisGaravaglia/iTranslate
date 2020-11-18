@@ -240,19 +240,15 @@ function Browse() {
     setSelectedTrackId(base.id);
     //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
     //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
-    const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
-
-    if (trackData === "Error getting Track Data") {
+    try {
+      const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
+      dispatch(getLyrics(trackData, artistData, albumData, artist, track));
+    } catch(e) {
       const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
       const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
       // getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track);
       dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
-
-    } else {
-      dispatch(getLyrics(trackData, artistData, albumData, artist, track));
-
     }
-
   }
 
 
