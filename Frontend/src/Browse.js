@@ -3,6 +3,7 @@ import './App.css';
 //COMPONENT IMPORTS
 import FlashMessage from "./FlashMessage";
 import BrowseByArtists from "./BrowseByArtists";
+import BrowseByGenre from "./BrowseByGenre";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
@@ -85,6 +86,15 @@ function Browse() {
       </div>
   );
 
+  //DISPLAY BROWSE BY GENRE COMPONENTS
+  let BrowseByGenreDiv;
+
+  if (category === "Genre") BrowseByGenreDiv = (
+      <div ref={genreResultsRef}>
+        <BrowseByGenre />
+      </div>
+  );
+
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
@@ -101,6 +111,7 @@ function Browse() {
         <button onClick={() => setCategory("Danceability")}>Danceability</button>
       </div>
       {BrowseByArtistsDiv}
+      {BrowseByGenreDiv}
     </div>
   );
 }

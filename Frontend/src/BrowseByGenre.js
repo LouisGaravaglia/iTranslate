@@ -13,7 +13,7 @@ import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 
-function BrowseByArtists() {
+function BrowseByGenre() {
   //REACT STATE
   const [selectedArtistId, setSelectedArtistId] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
@@ -21,6 +21,7 @@ function BrowseByArtists() {
   const [completeAlbumData, setCompleteAlbumData] = useState({});
   //REDUX STORE
   const dispatch = useDispatch();
+  const genres = useSelector(store => store.genres);
   const languages = useSelector(store => store.languages);
   const translation = useSelector(store => store.translation);
   const lyrics = useSelector(store => store.lyrics);
@@ -57,6 +58,10 @@ function BrowseByArtists() {
   useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+
+  const handleGenreClick = async (genre) => {
+
+  }
 
   const handleArtistClick = async (artistId) => {
     dispatch(getAlbums(artistId));
@@ -134,14 +139,14 @@ function BrowseByArtists() {
   return (
     <>
       <div>
-        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={16}/>
+        <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={5}/>
       </div>
-      {AlbumResultsDiv}
+      {/* {AlbumResultsDiv}
       {TrackResultsDiv}
       {SelectLanguageDiv}
-      {LyricsTranslationDiv}
+      {LyricsTranslationDiv} */}
   </>
   );
 }
 
-export default BrowseByArtists;
+export default BrowseByGenre;

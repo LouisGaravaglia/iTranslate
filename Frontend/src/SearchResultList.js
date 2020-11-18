@@ -9,15 +9,15 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   const resultsInView = resultsArray.slice(sliderVal * itemsPerPage, (sliderVal * itemsPerPage) + itemsPerPage);
   console.log("SearchResultList re-rendering");
   console.log("resultsArray: ", resultsArray);
+
   if (!multipleOf) maxSliderVal += 1;
 
   const handleChange = (event, newValue) => {
     setSliderVal(newValue);
-
     console.log("Slider Value: ", sliderVal);
   };
 
-////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  SEARCH ROUTE  ////////////////////////////////////////////////////
 
   let displaySearchResults;
 
@@ -28,10 +28,12 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
     </div>
   );
 
+////////////////////////////////////////////////////  BROWSE BY ARTISTS  ////////////////////////////////////////////////////
+
   let displayArtists;
 
   if (typeOfResults === "artists") displayArtists = (
-            // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
+    // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
     <div className="Browse-Artists">
       {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.name} spotify_id={r.spotify_id}/>)}
       {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
@@ -41,12 +43,11 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   let displayAlbums;
 
   if (typeOfResults === "albums") displayAlbums = (
-  //       {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
-   
-   <div className="Browse-Albums">
-    {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} id={r.id} image={r.images[1].url}/>)}
-    {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
-  </div>
+    //{albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
+    <div className="Browse-Albums">
+      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} id={r.id} image={r.images[1].url}/>)}
+      {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
+    </div>
   );
 
   let displayTracks;
@@ -59,6 +60,18 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
     </div>
   );
 
+////////////////////////////////////////////////////  BROWSE BY GENRE  ////////////////////////////////////////////////////
+
+  let displayGenres;
+
+  if (typeOfResults === "genres") displayGenres = (
+    // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
+    <div className="Browse-Artists">
+      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="genres" handleClick={handleSearch} genre={r}/>)}
+      {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
+    </div>
+  );
+
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
@@ -67,6 +80,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
       {displayArtists}
       {displayAlbums}
       {displayTracks}
+      {displayGenres}
     </>
   );
 };

@@ -19,7 +19,12 @@ const SearchResult = memo((props) => {
     props.handleClick(props.artistName, props.trackName, props.index);
   }
 
-////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
+  const handleGenreClick = () => {
+    console.log("Here are the genre props: ", props);
+    props.handleClick(props.genre);
+  }
+
+////////////////////////////////////////////////////  BROWSE BY ARTISTS  ////////////////////////////////////////////////////
 
   let displaySearchResults;
 
@@ -53,6 +58,16 @@ const SearchResult = memo((props) => {
     // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
   );
 
+////////////////////////////////////////////////////  BROWSE BY GENRE  ////////////////////////////////////////////////////
+
+  let displayGenres;
+
+  if (props.typeOfResults === "genres") displayGenres = (
+            // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
+  <button onClick={handleGenreClick} className="BrowseArtists">{props.genre}</button>
+    // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
+  );
+
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
@@ -61,6 +76,7 @@ const SearchResult = memo((props) => {
     {displayArtists}
     {displayAlbums}
     {displayTracks}
+    {displayGenres}
     </>
   );
 });
