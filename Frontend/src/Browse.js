@@ -22,6 +22,7 @@ function Browse() {
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
   const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
   const [translationErrorFlashMessage, setTranslationErrorFlashMessage] = useState(false);
+  const [noAlbumsFlashMessage, setNoAlbumsFlashMessage] = useState(false);
   //REFS FOR PAGE TRAVERSAL
   const artistResultsRef = useRef();
   const genreResultsRef = useRef();
@@ -83,6 +84,10 @@ const handleCategoryClick = (category) => {
   dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation"));
 }
 
+const handleNoAlbumsError = () => {
+   setNoAlbumsFlashMessage(true);
+}
+
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
@@ -90,7 +95,7 @@ const handleCategoryClick = (category) => {
 
   if (category[0] === "Artists") BrowseByArtistsDiv = (
       <div ref={artistResultsRef}>
-        <BrowseByArtists />
+        <BrowseByArtists handleNoAlbumsError={() => handleNoAlbumsError()} />
       </div>
   );
 
@@ -112,6 +117,7 @@ const handleCategoryClick = (category) => {
         {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
         {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
         {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
+        {noAlbumsFlashMessage && (<FlashMessage setState={setNoAlbumsFlashMessage} message="Sorry, there are no albums for that artist at this time."/> )}
       </div>
       <div className="Browse-Landing">
         <button onClick={() => handleCategoryClick("Artists")}>Artists</button>

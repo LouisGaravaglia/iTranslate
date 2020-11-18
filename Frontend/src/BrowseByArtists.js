@@ -17,7 +17,7 @@ import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 
 
-function BrowseByArtists() {
+function BrowseByArtists({handleNoAlbumsError}) {
   //REACT STATE
   const [selectedArtistId, setSelectedArtistId] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
@@ -63,9 +63,7 @@ function BrowseByArtists() {
 
   useEffect(() => {
     const addFlashMessage = () => {
-      if (albums && !albums[0]) {
-        setNoAlbumsFlashMessage(true);
-      }
+      if (albums && !albums[0]) handleNoAlbumsError();
     }
     addFlashMessage()
   }, [albums, setNoAlbumsFlashMessage]);
@@ -115,7 +113,6 @@ function BrowseByArtists() {
   if (albums) AlbumResultsDiv = (
     <div ref={albumResultsRef}>
         {albums[0] && <SearchResultList key={albums[0].id} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3}/>}
-        {/* {!albums.length && setNoAlbumsFlashMessage(true)} */}
     </div>
   );
 
@@ -151,9 +148,6 @@ function BrowseByArtists() {
 
   return (
     <>
-      <div className="Flash-Messages-Container">
-        {noAlbumsFlashMessage && (<FlashMessage setState={setNoAlbumsFlashMessage} message="Sorry, there are no albums for that artist at this time."/> )}
-      </div>
       <div>
         <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={16}/>
       </div>
