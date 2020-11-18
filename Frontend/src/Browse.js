@@ -1,4 +1,4 @@
-import React,  {useState, useRef, useEffect, useContext} from 'react';
+import React,  {useState, useRef, useEffect, useContext, useCallback} from 'react';
 import './App.css';
 import SpotifyAPI from "./SpotifyAPI";
 import IBMWatsonAPI from './IBMWatsonAPI';
@@ -17,11 +17,13 @@ import {getTranslation} from "./actionCreators/getTranslationCreator";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
 import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
+import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
+import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 
 
 function Browse() {
-  const [albums, setAlbums] = useState([]);
-  const [tracks, setTracks] = useState([]);
+  // const [albums, setAlbums] = useState([]);
+  // const [tracks, setTracks] = useState([]);
   const [artists, setArtists] = useState([]);
   // const [lyrics, setLyrics] = useState("");
   // const [translation, setTranslation] = useState("");
@@ -42,6 +44,8 @@ function Browse() {
   const lyrics = useSelector(store => store.lyrics);
   const searchResults = useSelector(store => store.results);
   const searchError = useSelector(store => store.errors.searchError);
+  const albums = useSelector(store => store.albums);
+  const tracks = useSelector(store => store.tracks);
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
@@ -128,73 +132,98 @@ function Browse() {
     displayFlashMessage();
   }, [languageError, translationError, lyricsError, searchError])
 
-  //SCROLL DOWN TO ALBUMS WHEN ARTIST HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {
-    function scrollToAlbums() {
-      if (albums.length) {
-        albumResultsRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
-    }
-    scrollToAlbums();
-  }, [albums]);
+  //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
+  const scrollToNextDiv = useCallback(async (state, ref) => {
 
-  //SCROLL DOWN TO TRACKS WHEN ALBUM HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {
-    function scrollToTracks() {
-      if (tracks.length) {
-        trackResultsRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
+    if (state) {
+      ref.current.scrollIntoView({behavior: "smooth"});
     }
-    scrollToTracks();
-  }, [tracks]);
+
+  }, []);
+
+  //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
+  useEffect(() => {scrollToNextDiv(albums, albumResultsRef);}, [albums, albumResultsRef, scrollToNextDiv]);
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
-  useEffect(() => {
-    function scrollToLanguageSearch() {
-      if (lyrics) {
-        selectLanguageRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
-    }
-    scrollToLanguageSearch();
-  }, [lyrics]);
+  useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
-//SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {
-    function scrollToTranslation() {
-      if (selectedLanguage.length) {
-        lyricsTranslationRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
-    }
-    scrollToTranslation();
-  }, [selectedLanguage]);
+  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  useEffect(() => {scrollToNextDiv(tracks, trackResultsRef);}, [tracks, trackResultsRef, scrollToNextDiv]);
+
+  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
+
+//   //SCROLL DOWN TO ALBUMS WHEN ARTIST HAS BEEN SELECTED AND SET IN STATE
+//   useEffect(() => {
+//     function scrollToAlbums() {
+//       if (albums.length) {
+//         albumResultsRef.current.scrollIntoView({
+//           behavior: "smooth",
+//         });
+//       }
+//     }
+//     scrollToAlbums();
+//   }, [albums]);
+
+//   //SCROLL DOWN TO TRACKS WHEN ALBUM HAS BEEN SELECTED AND SET IN STATE
+//   useEffect(() => {
+//     function scrollToTracks() {
+//       if (tracks.length) {
+//         trackResultsRef.current.scrollIntoView({
+//           behavior: "smooth",
+//         });
+//       }
+//     }
+//     scrollToTracks();
+//   }, [tracks]);
+
+//   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+//   useEffect(() => {
+//     function scrollToLanguageSearch() {
+//       if (lyrics) {
+//         selectLanguageRef.current.scrollIntoView({
+//           behavior: "smooth",
+//         });
+//       }
+//     }
+//     scrollToLanguageSearch();
+//   }, [lyrics]);
+
+// //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+//   useEffect(() => {
+//     function scrollToTranslation() {
+//       if (selectedLanguage.length) {
+//         lyricsTranslationRef.current.scrollIntoView({
+//           behavior: "smooth",
+//         });
+//       }
+//     }
+//     scrollToTranslation();
+//   }, [selectedLanguage]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleArtistClick = async (artistId) => {
-    console.log("artistId: ", artistId);
-    const albums = await SpotifyAPI.getAlbums(artistId);
-    console.log("here are the alubms", albums);    
-    setAlbums(albums);
+    dispatch(getAlbums(artistId));
     setSelectedArtistId(artistId);
 
   }
 
-  const handleAlbumClick = async (albumID, index) => {
-    setSelectedAlbumId(albumID);
+  const handleAlbumClick = async (albumId, index) => {
+    setSelectedAlbumId(albumId);
     const base = albums[index];
     setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
-    const tracks = await SpotifyAPI.getTracks(albumID);
-    setTracks(tracks);
-    console.log("here are the tracks", tracks);
+    dispatch(getTracks(albumId));
   }
+
+  // const handleAlbumClick = async (albumID, index) => {
+  //   setSelectedAlbumId(albumID);
+  //   const base = albums[index];
+  //   setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
+  //   const tracks = await SpotifyAPI.getTracks(albumID);
+  //   setTracks(tracks);
+  //   console.log("here are the tracks", tracks);
+  // }
 
   //OLD HANDLE TRACK CLICK FUNCTION
   // const handleTrackClick = async (trackID, artist, track) => {
@@ -256,7 +285,7 @@ function Browse() {
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let AlbumResultsDiv;
   
-  if (albums.length) AlbumResultsDiv = (
+  if (albums) AlbumResultsDiv = (
     <div ref={albumResultsRef}>
         <SearchResultList key={albums[0].id} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3}/>
     </div>
@@ -272,7 +301,7 @@ function Browse() {
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let TrackResultsDiv;
   
-  if (tracks.length) TrackResultsDiv = (
+  if (tracks) TrackResultsDiv = (
     <div ref={trackResultsRef}>
       <SearchResultList key={tracks[0].id} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
       {/* {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)} */}
@@ -291,7 +320,7 @@ function Browse() {
   //LYRICS AND TRANSLATION HTML
   let LyricsTranslationDiv;
   
-  if (lyrics)  LyricsTranslationDiv = (
+  if (translation)  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <DisplayLyrics lyrics={lyrics} translation={translation}/>
       </div>
