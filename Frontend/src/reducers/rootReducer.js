@@ -5,6 +5,9 @@ import lyricsReducer from "./lyricsReducer";
 import resultsReducer from "./resultsReducer";
 import albumsReducer from "./BrowseRoute/albumsReducer";
 import tracksReducer from "./BrowseRoute/tracksReducer";
+import languagesReducer from "./languagesReducer";
+import artistsReducer from "./BrowseRoute/artistsReducer";
+import genresReducer from "./BrowseRoute/genresReducer";
 
 const rootReducer = combineReducers({
   results: resultsReducer, 
@@ -12,7 +15,10 @@ const rootReducer = combineReducers({
   lyrics: lyricsReducer, 
   errors: errorsReducer,
   albums: albumsReducer,
-  tracks: tracksReducer
+  tracks: tracksReducer,
+  languages: languagesReducer,
+  artists: artistsReducer,
+  genres: genresReducer
 });
 
 export default rootReducer;

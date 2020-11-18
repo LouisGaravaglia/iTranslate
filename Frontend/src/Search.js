@@ -1,5 +1,4 @@
-import React, {useState, useRef, useEffect, useContext, useCallback} from 'react';
-import UserContext from "./UserContext";
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 //API IMPORTS
 import SpotifyAPI from "./SpotifyAPI";
 //COMPONENT IMPORTS
@@ -20,6 +19,7 @@ const Search = () => {
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [moveToLyricsTranlsation, setMoveToLyricsTranlsation] = useState([]);
   //REDUX STORE
+  const languages = useSelector(store => store.languages);
   const translation = useSelector(store => store.translation);
   const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
@@ -37,8 +37,6 @@ const Search = () => {
   const searchResultsRef = useRef();
   const selectLanguageRef = useRef();
   const lyricsTranslationRef = useRef();
-  //VARIABLES FROM CONTEXT PROVIDER
-  const { languages } = useContext(UserContext);
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 

@@ -1,15 +1,16 @@
-import React,  {useState, useRef, useEffect, useContext, useCallback} from 'react';
+import React,  {useState, useRef, useEffect, useCallback} from 'react';
 import './App.css';
+//API IMPORTS
+import BackendCall from './BackendCall';
 import SpotifyAPI from "./SpotifyAPI";
 import IBMWatsonAPI from './IBMWatsonAPI';
 import LyricsAPI from "./LyricsAPI";
+//COMPONENT IMPORTS
 import Album from "./Album";
 import Track from "./Track";
-import BackendCall from './BackendCall';
 import DisplayLyrics from "./DisplayLyrics";
 import SearchBar from "./SearchBar";
 import FlashMessage from "./FlashMessage";
-import UserContext from "./UserContext";
 import SearchResultList from "./SearchResultList";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
@@ -24,7 +25,7 @@ import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 function Browse() {
   // const [albums, setAlbums] = useState([]);
   // const [tracks, setTracks] = useState([]);
-  const [artists, setArtists] = useState([]);
+  // const [artists, setArtists] = useState([]);
   // const [lyrics, setLyrics] = useState("");
   // const [translation, setTranslation] = useState("");
   const [selectedArtistId, setSelectedArtistId] = useState("");
@@ -37,6 +38,7 @@ function Browse() {
   const [completeAlbumData, setCompleteAlbumData] = useState({});
   //REDUX STORE
   const dispatch = useDispatch();
+  const languages = useSelector(store => store.languages);
   const translation = useSelector(store => store.translation);
   const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
@@ -44,6 +46,7 @@ function Browse() {
   const lyrics = useSelector(store => store.lyrics);
   const searchResults = useSelector(store => store.results);
   const searchError = useSelector(store => store.errors.searchError);
+  const artists = useSelector(store => store.artists);
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
   //STATE FOR FLASH MESSAGES
@@ -59,33 +62,14 @@ function Browse() {
   const albumResultsRef = useRef();
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
-  //VARIABLES FROM CONTEXT PROVIDER
-  const {languages} = useContext(UserContext);
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
-  useEffect(() => {
-
-    async function seedGenreState() {
-      const response = await BackendCall.getGenres();
-      console.log("My genre array: ", response[0].genres);
-      setGenres(response[0].genres)
-    }
-
-    async function seedArtistsState() {
-      const artistsAndIds = await BackendCall.getArtistsAndArtistIds();
-      console.log("My artist/id array: ", artistsAndIds);
-      console.log("An artist name: ", artistsAndIds[0].name);
-      setArtists(artistsAndIds)
-    }
-
-    seedGenreState();
-    seedArtistsState()
-  }, [])
-
   //SCROLL DOWN TO CATEGORY DIV WHEN USER SELECTS A CATEGORY
   useEffect(() => {
+
     function scrollToCategory() {
+
       if (category === "Artists") {
         artistResultsRef.current.scrollIntoView({
           behavior: "smooth",
@@ -99,6 +83,7 @@ function Browse() {
           behavior: "smooth",
         });
       }
+
     }
     scrollToCategory();
   }, [category, setCategory]);
@@ -153,60 +138,11 @@ function Browse() {
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
-//   //SCROLL DOWN TO ALBUMS WHEN ARTIST HAS BEEN SELECTED AND SET IN STATE
-//   useEffect(() => {
-//     function scrollToAlbums() {
-//       if (albums.length) {
-//         albumResultsRef.current.scrollIntoView({
-//           behavior: "smooth",
-//         });
-//       }
-//     }
-//     scrollToAlbums();
-//   }, [albums]);
-
-//   //SCROLL DOWN TO TRACKS WHEN ALBUM HAS BEEN SELECTED AND SET IN STATE
-//   useEffect(() => {
-//     function scrollToTracks() {
-//       if (tracks.length) {
-//         trackResultsRef.current.scrollIntoView({
-//           behavior: "smooth",
-//         });
-//       }
-//     }
-//     scrollToTracks();
-//   }, [tracks]);
-
-//   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
-//   useEffect(() => {
-//     function scrollToLanguageSearch() {
-//       if (lyrics) {
-//         selectLanguageRef.current.scrollIntoView({
-//           behavior: "smooth",
-//         });
-//       }
-//     }
-//     scrollToLanguageSearch();
-//   }, [lyrics]);
-
-// //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-//   useEffect(() => {
-//     function scrollToTranslation() {
-//       if (selectedLanguage.length) {
-//         lyricsTranslationRef.current.scrollIntoView({
-//           behavior: "smooth",
-//         });
-//       }
-//     }
-//     scrollToTranslation();
-//   }, [selectedLanguage]);
-
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleArtistClick = async (artistId) => {
     dispatch(getAlbums(artistId));
     setSelectedArtistId(artistId);
-
   }
 
   const handleAlbumClick = async (albumId, index) => {
@@ -216,25 +152,7 @@ function Browse() {
     dispatch(getTracks(albumId));
   }
 
-  // const handleAlbumClick = async (albumID, index) => {
-  //   setSelectedAlbumId(albumID);
-  //   const base = albums[index];
-  //   setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
-  //   const tracks = await SpotifyAPI.getTracks(albumID);
-  //   setTracks(tracks);
-  //   console.log("here are the tracks", tracks);
-  // }
-
-  //OLD HANDLE TRACK CLICK FUNCTION
-  // const handleTrackClick = async (trackID, artist, track) => {
-
-  //   // const trackAnalysis = await SpotifyApi.getTrackAnalysis(trackID);
-  //   const trackLyrics = await LyricsAPI.getLyrics(artist, track);
-  //   setLyrics(trackLyrics);
-
-  // }
-
-  // //IMPORTED FROM SEARCH, NEED TO TURN INTO HANDLE TRACK CLICK FUNCTION
+  //IMPORTED FROM SEARCH, NEED TO TURN INTO HANDLE TRACK CLICK FUNCTION
   const handleTrackClick = async (artist, track, index) => {
     const base = tracks[index];
     setSelectedTrackId(base.id);
@@ -246,19 +164,13 @@ function Browse() {
     } catch(e) {
       const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
       const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-      // getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track);
       dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
     }
   }
 
-
   const handleLanguageSearchSubmit = async (searchVal) => {
-        dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));
-    // setMoveToLyricsTranlsation([true]);
-   
+    dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));   
   }
-
-  
 
   ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
@@ -271,13 +183,6 @@ function Browse() {
       </div>
   );
 
-  // if (category === "Artists") ArtistResultsDiv = (
-  //   <div className="Browse-Artists-Container" ref={artistResultsRef}>
-  //     <div className="Browse-Artists">
-  //       {artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)}
-  //     </div>
-  //   </div>
-  // );
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let AlbumResultsDiv;
   
@@ -287,13 +192,6 @@ function Browse() {
     </div>
   );
 
-  // let AlbumResultsDiv;
-  
-  // if (albums.length) AlbumResultsDiv = (
-  //   <div className="Browse-Albums" ref={albumResultsRef}>
-  //       {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
-  //   </div>
-  // );
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let TrackResultsDiv;
   
