@@ -135,7 +135,7 @@ function Browse() {
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
 
-    if (state) {
+    if (state && state !== "Could not read language value") {
       ref.current.scrollIntoView({behavior: "smooth"});
     }
 
@@ -316,7 +316,7 @@ function Browse() {
   //LYRICS AND TRANSLATION HTML
   let LyricsTranslationDiv;
   
-  if (translation)  LyricsTranslationDiv = (
+  if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
       <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
         <DisplayLyrics lyrics={lyrics} translation={translation}/>
       </div>

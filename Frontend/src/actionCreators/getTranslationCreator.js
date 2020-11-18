@@ -44,7 +44,7 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
         return translation;
       } catch(e) {
         errors["languageError"] = true;
-        return "No Translation Available";
+        return "Could not read language value";
       }
     }
 
