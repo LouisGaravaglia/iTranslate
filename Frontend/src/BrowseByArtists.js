@@ -16,7 +16,7 @@ import {resetStore} from "./actionCreators/resetStoreCreator";
 function BrowseByArtists({handleNoAlbumsError}) {
   //REACT STATE
   const [selectedArtistId, setSelectedArtistId] = useState("");
-  const [selectedTrackId, setSelectedTrackId] = useState([]);
+  const [selectedTrackId, setSelectedTrackId] = useState("");
   const [selectedAlbumId, setSelectedAlbumId] = useState([]);
   const [completeAlbumData, setCompleteAlbumData] = useState({});
   //REDUX STORE
@@ -63,6 +63,7 @@ function BrowseByArtists({handleNoAlbumsError}) {
     dispatch(getAlbums(artistId));
     setSelectedArtistId(artistId);
     dispatch(resetStore("tracks", "lyrics", "translation"));
+    setSelectedTrackId("");
   }
 
   const handleAlbumClick = async (albumId, index) => {
@@ -71,6 +72,7 @@ function BrowseByArtists({handleNoAlbumsError}) {
     setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
     dispatch(getTracks(albumId));
     dispatch(resetStore("lyrics", "translation"));
+    setSelectedTrackId("");
   }
 
   const handleTrackClick = async (artist, track, index) => {
