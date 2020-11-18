@@ -14,4 +14,8 @@ export const GET_LANGUAGES = "GET_LANGUAGES";
 export const GET_ARTISTS = "GET_ARTISTS";
 export const GET_ALL_ARTISTS = "GET_ALL_ARTISTS";
 export const GET_GENRES = "GET_GENRES";
+export const RESET_TRANSLATION = "RESET_TRANSLATION";
+export const RESET_LYRICS = "RESET_LYRICS";
+export const RESET_TRACKS = "RESET_TRACKS";
+export const RESET_ALBUMS = "RESET_ALBUMS";
 

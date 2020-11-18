@@ -12,7 +12,8 @@ import {getTranslation} from "./actionCreators/getTranslationCreator";
 import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
-import {getArtists} from "./actionCreators/BrowseRoute/Genre/getArtistsCreator"
+import {getArtists} from "./actionCreators/BrowseRoute/Genre/getArtistsCreator";
+import {resetStore} from "./actionCreators/resetStoreCreator";
 
 function BrowseByGenre() {
   //REACT STATE
@@ -48,6 +49,9 @@ function BrowseByGenre() {
 
   }, []);
 
+  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  useEffect(() => {scrollToNextDiv(artists, aritstResultsRef);}, [artists, aritstResultsRef, scrollToNextDiv]);
+
   //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
   useEffect(() => {scrollToNextDiv(albums, albumResultsRef);}, [albums, albumResultsRef, scrollToNextDiv]);
 
@@ -60,17 +64,17 @@ function BrowseByGenre() {
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {scrollToNextDiv(artists, aritstResultsRef);}, [artists, aritstResultsRef, scrollToNextDiv]);
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleGenreClick = async (genre) => {
     dispatch(getArtists({genre}));
+    dispatch(resetStore("albums", "tracks", "lyrics", "translation"));
   }
 
   const handleArtistClick = async (artistId) => {
     dispatch(getAlbums(artistId));
     setSelectedArtistId(artistId);
+    dispatch(resetStore("tracks", "lyrics", "translation"));
   }
 
   const handleAlbumClick = async (albumId, index) => {
@@ -78,11 +82,13 @@ function BrowseByGenre() {
     const base = albums[index];
     setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
     dispatch(getTracks(albumId));
+    dispatch(resetStore("lyrics", "translation"));
   }
 
   const handleTrackClick = async (artist, track, index) => {
     const base = tracks[index];
     setSelectedTrackId(base.id);
+    dispatch(resetStore("translation"));
 
     try {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
@@ -110,6 +116,7 @@ function BrowseByGenre() {
         <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={3}/>
     </div>
   );
+
   //DISPLAY ALBUMS FROM SELECTED ARTIST
   let AlbumResultsDiv;
   
@@ -125,7 +132,6 @@ function BrowseByGenre() {
   if (tracks) TrackResultsDiv = (
     <div ref={trackResultsRef}>
       <SearchResultList key={tracks[0].id} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
-      {/* {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)} */}
     </div>
   );
 
@@ -155,11 +161,11 @@ function BrowseByGenre() {
         <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={5}/>
       </div>
       {ArtistResultsDiv}
-      {/* {AlbumResultsDiv}
+      {AlbumResultsDiv}
       {TrackResultsDiv}
       {SelectLanguageDiv}
-      {LyricsTranslationDiv} */}
-  </>
+      {LyricsTranslationDiv}
+    </>
   );
 }
 
