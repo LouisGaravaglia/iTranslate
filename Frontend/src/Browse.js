@@ -33,15 +33,15 @@ function Browse() {
 
     function scrollToCategory() {
 
-      if (category === "Artists") {
+      if (category[0] === "Artists") {
         artistResultsRef.current.scrollIntoView({
           behavior: "smooth",
         });
-      } else if (category === "Genre") {
+      } else if (category[0] === "Genre") {
         genreResultsRef.current.scrollIntoView({
           behavior: "smooth",
         });
-      } else if (category === "Danceability") {
+      } else if (category[0] === "Danceability") {
          danceabilityDivRef.current.scrollIntoView({
           behavior: "smooth",
         });
@@ -80,7 +80,7 @@ function Browse() {
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
   let BrowseByArtistsDiv;
 
-  if (category === "Artists") BrowseByArtistsDiv = (
+  if (category[0] === "Artists") BrowseByArtistsDiv = (
       <div ref={artistResultsRef}>
         <BrowseByArtists />
       </div>
@@ -89,7 +89,7 @@ function Browse() {
   //DISPLAY BROWSE BY GENRE COMPONENTS
   let BrowseByGenreDiv;
 
-  if (category === "Genre") BrowseByGenreDiv = (
+  if (category[0] === "Genre") BrowseByGenreDiv = (
       <div ref={genreResultsRef}>
         <BrowseByGenre />
       </div>
@@ -106,9 +106,9 @@ function Browse() {
         {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
       </div>
       <div className="Browse-Landing">
-        <button onClick={() => setCategory("Artists")}>Artists</button>
-        <button onClick={() => setCategory("Genre")}>Genre</button>
-        <button onClick={() => setCategory("Danceability")}>Danceability</button>
+        <button onClick={() => setCategory(["Artists", {}])}>Artists</button>
+        <button onClick={() => setCategory(["Genre", {}])}>Genre</button>
+        <button onClick={() => setCategory(["Danceability", {}])}>Danceability</button>
       </div>
       {BrowseByArtistsDiv}
       {BrowseByGenreDiv}
