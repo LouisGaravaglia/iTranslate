@@ -22,6 +22,7 @@ function BrowseByGenre() {
   //REDUX STORE
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
+
   const languages = useSelector(store => store.languages);
   const translation = useSelector(store => store.translation);
   const lyrics = useSelector(store => store.lyrics);
@@ -60,7 +61,7 @@ function BrowseByGenre() {
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleGenreClick = async (genre) => {
-
+    dispatch(getArtists());
   }
 
   const handleArtistClick = async (artistId) => {
