@@ -5,19 +5,16 @@ import SpotifyAPI from "./SpotifyAPI";
 //COMPONENT IMPORTS
 import DisplayLyrics from "./DisplayLyrics";
 import SearchBar from "./SearchBar";
-import FlashMessage from "./FlashMessage";
 import SearchResultList from "./SearchResultList";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
-import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
 import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 
 function BrowseByArtists() {
   const [selectedArtistId, setSelectedArtistId] = useState("");
-  const [category, setCategory] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState([]);
   const [completeAlbumData, setCompleteAlbumData] = useState({});
@@ -25,23 +22,12 @@ function BrowseByArtists() {
   const dispatch = useDispatch();
   const languages = useSelector(store => store.languages);
   const translation = useSelector(store => store.translation);
-  const languageError = useSelector(store => store.errors.languageError);
-  const translationError = useSelector(store => store.errors.translationError);
-  const lyricsError = useSelector(store => store.errors.lyricsError);
   const lyrics = useSelector(store => store.lyrics);
   const artists = useSelector(store => store.artists);
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
-  //STATE FOR FLASH MESSAGES
-  const [searchFlashMessage, setSearchFlashMessage] = useState(false);
-  const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
-  const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
-  const [translationErrorFlashMessage, setTranslationErrorFlashMessage] = useState(false);
   //REFS FOR PAGE TRAVERSAL
   const lyricsTranslationRef = useRef();
-  const artistResultsRef = useRef();
-  const genreResultsRef = useRef();
-  const danceabilityDivRef = useRef();
   const albumResultsRef = useRef();
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
@@ -104,15 +90,6 @@ function BrowseByArtists() {
   }
 
   ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
-
-  //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
-  // let ArtistResultsDiv;
-  
-  // if (artists) ArtistResultsDiv = (
-  //     <div ref={artistResultsRef}>
-  //       <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={16}/>
-  //     </div>
-  // );
 
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let AlbumResultsDiv;
