@@ -3,14 +3,10 @@ import './App.css';
 //API IMPORTS
 import SpotifyAPI from "./SpotifyAPI";
 //COMPONENT IMPORTS
-import DisplayLyrics from "./DisplayLyrics";
-import SearchBar from "./SearchBar";
 import SearchResultList from "./SearchResultList";
-import FlashMessage from "./FlashMessage";
 import LyricsTranslation from "./LyricsTranslation";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {getTranslation} from "./actionCreators/getTranslationCreator";
 import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
@@ -23,17 +19,13 @@ function BrowseByArtists({handleNoAlbumsError}) {
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState([]);
   const [completeAlbumData, setCompleteAlbumData] = useState({});
-  const [noAlbumsFlashMessage, setNoAlbumsFlashMessage] = useState(false);
   //REDUX STORE
   const dispatch = useDispatch();
-  const languages = useSelector(store => store.languages);
-  const translation = useSelector(store => store.translation);
   const lyrics = useSelector(store => store.lyrics);
   const artists = useSelector(store => store.allArtists);
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
   //REFS FOR PAGE TRAVERSAL
-  const lyricsTranslationRef = useRef();
   const albumResultsRef = useRef();
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
@@ -58,15 +50,12 @@ function BrowseByArtists({handleNoAlbumsError}) {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
-  // //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  // useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
-
   useEffect(() => {
     const addFlashMessage = () => {
       if (albums && !albums[0]) handleNoAlbumsError();
     }
     addFlashMessage()
-  }, [albums, setNoAlbumsFlashMessage]);
+  }, [albums]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -101,10 +90,6 @@ function BrowseByArtists({handleNoAlbumsError}) {
     }
   }
 
-  // const handleLanguageSearchSubmit = async (searchVal) => {
-  //   dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));   
-  // }
-
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   //DISPLAY ALBUMS FROM SELECTED ARTIST
@@ -134,24 +119,6 @@ function BrowseByArtists({handleNoAlbumsError}) {
     </div>
   );
 
-  // //SELECT LANGUAGE TO TRANSLATE LYRICS TO
-  // let SelectLanguageDiv;
-
-  // if (lyrics) SelectLanguageDiv = (
-  //   <div ref={selectLanguageRef}>
-  //     <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
-  //   </div>
-  // );
-
-  // //DISPLAY LYRICS AND TRANSLATION
-  // let LyricsTranslationDiv;
-  
-  // if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
-  //     <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
-  //       <DisplayLyrics lyrics={lyrics} translation={translation}/>
-  //     </div>
-  // );
-
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
@@ -162,8 +129,6 @@ function BrowseByArtists({handleNoAlbumsError}) {
       {AlbumResultsDiv}
       {TrackResultsDiv}
       {LyricsAndTranslationDivs}
-      {/* {SelectLanguageDiv}
-      {LyricsTranslationDiv} */}
   </>
   );
 }

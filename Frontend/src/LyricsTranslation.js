@@ -1,18 +1,11 @@
-import React,  {useState, useRef, useEffect, useCallback} from 'react';
+import React,  {useRef, useEffect, useCallback} from 'react';
 import './App.css';
-//API IMPORTS
-import SpotifyAPI from "./SpotifyAPI";
 //COMPONENT IMPORTS
 import DisplayLyrics from "./DisplayLyrics";
 import SearchBar from "./SearchBar";
-import SearchResultList from "./SearchResultList";
-
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
-import {getLyrics} from "./actionCreators/getLyricsCreator";
-import {resetStore} from "./actionCreators/resetStoreCreator";
-
 
 function LyricsTranslation({selectedTrackId}) {
   //REDUX STORE
@@ -41,29 +34,13 @@ function LyricsTranslation({selectedTrackId}) {
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
-  // useEffect(() => {
-  //   const addFlashMessage = () => {
-  //     if (albums && !albums[0]) handleNoAlbumsError();
-  //   }
-  //   addFlashMessage()
-  // }, [albums, setNoAlbumsFlashMessage]);
-
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleLanguageSearchSubmit = async (searchVal) => {
     dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));   
   }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
-
-  // //SELECT LANGUAGE TO TRANSLATE LYRICS TO
-  // let SelectLanguageDiv;
-
-  // if (lyrics) SelectLanguageDiv = (
-  //   <div ref={selectLanguageRef}>
-  //     <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
-  //   </div>
-  // );
 
   //DISPLAY LYRICS AND TRANSLATION
   let LyricsTranslationDiv;

@@ -6,6 +6,7 @@ import SpotifyAPI from "./SpotifyAPI";
 import DisplayLyrics from "./DisplayLyrics";
 import SearchBar from "./SearchBar";
 import SearchResultList from "./SearchResultList";
+import LyricsTranslation from "./LyricsTranslation";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
@@ -55,14 +56,14 @@ function BrowseByGenre() {
   //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
   useEffect(() => {scrollToNextDiv(albums, albumResultsRef);}, [albums, albumResultsRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
-  useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
-
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(tracks, trackResultsRef);}, [tracks, trackResultsRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
+  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
+
+  // //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  // useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -102,9 +103,9 @@ function BrowseByGenre() {
     }
   }
 
-  const handleLanguageSearchSubmit = async (searchVal) => {
-    dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));   
-  }
+  // const handleLanguageSearchSubmit = async (searchVal) => {
+  //   dispatch(getTranslation(searchVal, languages, selectedTrackId, lyrics));   
+  // }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
@@ -135,23 +136,31 @@ function BrowseByGenre() {
     </div>
   );
 
-  //SELECT LANGUAGE TO TRANSLATE LYRICS TO
-  let SelectLanguageDiv;
+  let LyricsAndTranslationDivs;
 
-  if (lyrics) SelectLanguageDiv = (
+  if (selectedTrackId) LyricsAndTranslationDivs = (
     <div ref={selectLanguageRef}>
-      <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
+      <LyricsTranslation selectedTrackId={selectedTrackId} />
     </div>
   );
 
-  //DISPLAY LYRICS AND TRANSLATION
-  let LyricsTranslationDiv;
+  // //SELECT LANGUAGE TO TRANSLATE LYRICS TO
+  // let SelectLanguageDiv;
+
+  // if (lyrics) SelectLanguageDiv = (
+  //   <div ref={selectLanguageRef}>
+  //     <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
+  //   </div>
+  // );
+
+  // //DISPLAY LYRICS AND TRANSLATION
+  // let LyricsTranslationDiv;
   
-  if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
-      <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
-        <DisplayLyrics lyrics={lyrics} translation={translation}/>
-      </div>
-  );
+  // if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
+  //     <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
+  //       <DisplayLyrics lyrics={lyrics} translation={translation}/>
+  //     </div>
+  // );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
@@ -163,8 +172,7 @@ function BrowseByGenre() {
       {ArtistResultsDiv}
       {AlbumResultsDiv}
       {TrackResultsDiv}
-      {SelectLanguageDiv}
-      {LyricsTranslationDiv}
+      {LyricsAndTranslationDivs}
     </>
   );
 }
