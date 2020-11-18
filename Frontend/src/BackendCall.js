@@ -82,7 +82,7 @@ class BackendCall {
       }
     }
 
-//////////////////////////////////////  LYRICS METHODS  //////////////////////////////////////
+//////////////////////////////////////  GET/ADD LYRICS  //////////////////////////////////////
 
     static async addLyrics(data) {
       let res = await this.request("lyrics", data, "post");
@@ -97,7 +97,7 @@ class BackendCall {
       return res.data.response;
     }
 
-//////////////////////////////////////  TRANSLATION METHODS  //////////////////////////////////////
+//////////////////////////////////////  GET/ADD TRANSLATION  //////////////////////////////////////
 
     static async getTranslation(data) {
       console.log("This is data that im sending to getTranslation route: ", data);
@@ -122,12 +122,19 @@ class BackendCall {
       return res.data.response;
     }
 
-//////////////////////////////////////  GET GENRE  //////////////////////////////////////
+//////////////////////////////////////  GET GENRES / GET ARTISTS FROM SPECIFIC GENRE  //////////////////////////////////////
 
     static async getGenres() {
       console.log("making getGenres request");
-      let res = await this.request("artist/genre");
+      let res = await this.request("artist/allGenres");
       console.log("getGenres res: ", res);
+      return res.data.response;
+    }
+
+    static async getArtistByGenre(data) {
+      console.log("making getArtistByGenre request");
+      let res = await this.request("artist/byGenre", data);
+      console.log("getArtistByGenre res: ", res);
       return res.data.response;
     }
 

@@ -24,7 +24,7 @@ function BrowseByArtists() {
   const languages = useSelector(store => store.languages);
   const translation = useSelector(store => store.translation);
   const lyrics = useSelector(store => store.lyrics);
-  const artists = useSelector(store => store.artists);
+  const artists = useSelector(store => store.allArtists);
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
   //REFS FOR PAGE TRAVERSAL

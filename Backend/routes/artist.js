@@ -14,8 +14,13 @@ router.get( "/:handle", async function( req, res, next ) {
       const response = await Artists.getArtistsAndIds();
       console.log("RETURING FORM THE ARTIST/:IDS GET ROUTE");
       return res.status( 201 ).json( { response }  )
-    } else {
+    } else if (req.params.handle === "allGenres"){
       const response = await Artists.getGenres();
+      console.log("RETURING FORM THE ARTIST GET ROUTE");
+      return res.status( 201 ).json( { response }  )
+    } else if (req.params.handle === "byGenre") {
+      console.log("getArtistByGenre req.query: ", req.query.genre);
+      const response = await Artists.getArtistByGenre(req.query.genre);
       console.log("RETURING FORM THE ARTIST GET ROUTE");
       return res.status( 201 ).json( { response }  )
     }

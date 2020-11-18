@@ -12,6 +12,7 @@ import {getTranslation} from "./actionCreators/getTranslationCreator";
 import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
+import {getArtists} from "./actionCreators/BrowseRoute/Genre/getArtistsCreator"
 
 function BrowseByGenre() {
   //REACT STATE
@@ -34,6 +35,7 @@ function BrowseByGenre() {
   const albumResultsRef = useRef();
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
+  const aritstResultsRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -58,10 +60,12 @@ function BrowseByGenre() {
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
+  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  useEffect(() => {scrollToNextDiv(artists, aritstResultsRef);}, [artists, aritstResultsRef, scrollToNextDiv]);
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleGenreClick = async (genre) => {
-    dispatch(getArtists());
+    dispatch(getArtists({genre}));
   }
 
   const handleArtistClick = async (artistId) => {
@@ -98,6 +102,14 @@ function BrowseByGenre() {
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
+  //DISPLAY ARTISTS FROM SELECTED GENRE
+  let ArtistResultsDiv;
+  
+  if (artists) ArtistResultsDiv = (
+    <div ref={aritstResultsRef}>
+        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={3}/>
+    </div>
+  );
   //DISPLAY ALBUMS FROM SELECTED ARTIST
   let AlbumResultsDiv;
   
@@ -142,6 +154,7 @@ function BrowseByGenre() {
       <div>
         <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={5}/>
       </div>
+      {ArtistResultsDiv}
       {/* {AlbumResultsDiv}
       {TrackResultsDiv}
       {SelectLanguageDiv}

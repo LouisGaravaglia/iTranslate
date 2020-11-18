@@ -30,13 +30,15 @@ class Artists {
   }
 
   static async getGenres() {
-        // const result = await db.query (`SELECT array_agg(genre) FROM artists GROUP BY genre ORDER BY genre DESC`);
-    // const result = await db.query (`SELECT ARRAY(SELECT genre FROM artists ORDER BY genre)`);
-    // const result = await db.query (`SELECT array_to_string(ARRAY(SELECT genre FROM artists ORDER BY genre DESC), ', ') AS genres`);
-    // const result = await db.query (`SELECT array_to_string(array_agg(genre ORDER BY genre), ', ') FROM artists`);
-
     const result = await db.query (`SELECT array_to_string(ARRAY(SELECT genre FROM artists ORDER BY genre), ', ') AS genres`);
     console.log("HERE IS THE getGenres RESULT FROM BACKEND: ", result);
+    return result.rows;
+  }
+
+    static async getArtistByGenre(genre) {
+      console.log("tHIs is the val of genre i'm passing: ", genre);
+    const result = await db.query (`SELECT name, spotify_id FROM artists WHERE genre ILIKE '%'||$1||'%'`, [genre]);
+    console.log("HERE IS THE getArtistByGenre RESULT FROM BACKEND: ", result);
     return result.rows;
   }
 }

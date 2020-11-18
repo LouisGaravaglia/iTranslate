@@ -7,6 +7,7 @@ import albumsReducer from "./BrowseRoute/albumsReducer";
 import tracksReducer from "./BrowseRoute/tracksReducer";
 import languagesReducer from "./languagesReducer";
 import artistsReducer from "./BrowseRoute/artistsReducer";
+import allArtistsReducer from "./BrowseRoute/allArtistsReducer";
 import genresReducer from "./BrowseRoute/genresReducer";
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   tracks: tracksReducer,
   languages: languagesReducer,
   artists: artistsReducer,
+  allArtists: allArtistsReducer,
   genres: genresReducer
 });
 

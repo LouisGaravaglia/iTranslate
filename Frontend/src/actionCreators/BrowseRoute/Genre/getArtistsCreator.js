@@ -1,16 +1,16 @@
-import { GET_ALL_ARTISTS } from "../../../actionTypes";
+import { GET_ARTISTS } from "../../../actionTypes";
 import BackendCall from "../../../BackendCall";
 
 
 
 ////////////////////////////////// GET ALL POSTS //////////////////////////////////
-export function getAllArtists() {
+export function getArtists(genre) {
 
   return async function(dispatch) {
     // let albumsError = false;
-      const artists = await BackendCall.getArtistsAndArtistIds();
-      console.log("My artist/id array: ", artists);
-      console.log("An artist name: ", artists[0].name);
+      const artists = await BackendCall.getArtistByGenre(genre);
+      console.log("Here are the artists from getArtistByGenre: ", artists);
+
 
     dispatch(addArtists(artists));
     // dispatch(updateArtistErrors(tracksError))
@@ -18,7 +18,7 @@ export function getAllArtists() {
 }
 
 function addArtists(artists) {
-  return {type:GET_ALL_ARTISTS, artists};
+  return {type:GET_ARTISTS, artists};
 }
 
 // function updateArtistErrors(albumsError) {
