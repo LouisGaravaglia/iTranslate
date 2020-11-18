@@ -1,13 +1,8 @@
 import React,  {useState, useRef, useEffect, useCallback} from 'react';
 import './App.css';
 //API IMPORTS
-import BackendCall from './BackendCall';
 import SpotifyAPI from "./SpotifyAPI";
-import IBMWatsonAPI from './IBMWatsonAPI';
-import LyricsAPI from "./LyricsAPI";
 //COMPONENT IMPORTS
-import Album from "./Album";
-import Track from "./Track";
 import DisplayLyrics from "./DisplayLyrics";
 import SearchBar from "./SearchBar";
 import FlashMessage from "./FlashMessage";
@@ -15,24 +10,15 @@ import SearchResultList from "./SearchResultList";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
-import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
+import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
 import {getLyrics} from "./actionCreators/getLyricsCreator";
-import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 
 
 function Browse() {
-  // const [albums, setAlbums] = useState([]);
-  // const [tracks, setTracks] = useState([]);
-  // const [artists, setArtists] = useState([]);
-  // const [lyrics, setLyrics] = useState("");
-  // const [translation, setTranslation] = useState("");
   const [selectedArtistId, setSelectedArtistId] = useState("");
-  const [genres, setGenres] = useState([]);
   const [category, setCategory] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState([]);
-  const [newLanguage, setNewLanguage] = useState("");
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState([]);
   const [completeAlbumData, setCompleteAlbumData] = useState({});
@@ -44,8 +30,6 @@ function Browse() {
   const translationError = useSelector(store => store.errors.translationError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
   const lyrics = useSelector(store => store.lyrics);
-  const searchResults = useSelector(store => store.results);
-  const searchError = useSelector(store => store.errors.searchError);
   const artists = useSelector(store => store.artists);
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
@@ -107,15 +91,10 @@ function Browse() {
           console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
         }
-        if (searchError) {
-          setSearchFlashMessage(true);
-          console.log("Here is what search error is: ", searchError);
-          dispatch(resetSearchError());
-        }
 
     }
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError, searchError])
+  }, [languageError, translationError, lyricsError])
 
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
