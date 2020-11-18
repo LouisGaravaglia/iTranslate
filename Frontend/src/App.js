@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 // import UserContext from "./UserContext";
 import IBMWatsonAPI from "./IBMWatsonAPI";
 import {getLanguages} from "./actionCreators/getLanguagesCreator";
-import {getArtists} from "./actionCreators/BrowseRoute/Artists/getArtistsCreator";
+import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
 
 
@@ -20,7 +20,7 @@ function App() {
 
     async function getSeedData() {
       dispatch(getLanguages());
-      dispatch(getArtists());
+      dispatch(getAllArtists());
       dispatch(getGenres());
     }
 

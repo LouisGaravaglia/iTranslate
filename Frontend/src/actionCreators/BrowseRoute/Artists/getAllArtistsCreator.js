@@ -4,7 +4,7 @@ import BackendCall from "../../../BackendCall";
 
 
 ////////////////////////////////// GET ALL POSTS //////////////////////////////////
-export function getArtists() {
+export function getAllArtists() {
 
   return async function(dispatch) {
     // const albumsError = false;
