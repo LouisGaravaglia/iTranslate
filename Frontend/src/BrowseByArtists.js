@@ -6,12 +6,16 @@ import SpotifyAPI from "./SpotifyAPI";
 import DisplayLyrics from "./DisplayLyrics";
 import SearchBar from "./SearchBar";
 import SearchResultList from "./SearchResultList";
+import FlashMessage from "./FlashMessage";
+
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
 import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
+import {resetStore} from "./actionCreators/resetStoreCreator";
+
 
 function BrowseByArtists() {
   //REACT STATE
@@ -19,6 +23,7 @@ function BrowseByArtists() {
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   const [selectedAlbumId, setSelectedAlbumId] = useState([]);
   const [completeAlbumData, setCompleteAlbumData] = useState({});
+  const [noAlbumsFlashMessage, setNoAlbumsFlashMessage] = useState(false);
   //REDUX STORE
   const dispatch = useDispatch();
   const languages = useSelector(store => store.languages);
@@ -56,11 +61,21 @@ function BrowseByArtists() {
   //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
+  useEffect(() => {
+    const addFlashMessage = () => {
+      if (albums && !albums[0]) {
+        setNoAlbumsFlashMessage(true);
+      }
+    }
+    addFlashMessage()
+  }, [albums, setNoAlbumsFlashMessage]);
+
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleArtistClick = async (artistId) => {
     dispatch(getAlbums(artistId));
     setSelectedArtistId(artistId);
+    dispatch(resetStore("tracks", "lyrics", "translation"));
   }
 
   const handleAlbumClick = async (albumId, index) => {
@@ -68,11 +83,13 @@ function BrowseByArtists() {
     const base = albums[index];
     setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
     dispatch(getTracks(albumId));
+    dispatch(resetStore("lyrics", "translation"));
   }
 
   const handleTrackClick = async (artist, track, index) => {
     const base = tracks[index];
     setSelectedTrackId(base.id);
+    dispatch(resetStore("translation"));
 
     try {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
@@ -97,7 +114,8 @@ function BrowseByArtists() {
   
   if (albums) AlbumResultsDiv = (
     <div ref={albumResultsRef}>
-        <SearchResultList key={albums[0].id} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3}/>
+        {albums[0] && <SearchResultList key={albums[0].id} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3}/>}
+        {/* {!albums.length && setNoAlbumsFlashMessage(true)} */}
     </div>
   );
 
@@ -133,6 +151,9 @@ function BrowseByArtists() {
 
   return (
     <>
+      <div className="Flash-Messages-Container">
+        {noAlbumsFlashMessage && (<FlashMessage setState={setNoAlbumsFlashMessage} message="Sorry, there are no albums for that artist at this time."/> )}
+      </div>
       <div>
         <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={16}/>
       </div>

@@ -18,4 +18,5 @@ export const RESET_TRANSLATION = "RESET_TRANSLATION";
 export const RESET_LYRICS = "RESET_LYRICS";
 export const RESET_TRACKS = "RESET_TRACKS";
 export const RESET_ALBUMS = "RESET_ALBUMS";
+export const RESET_ARTISTS = "RESET_ARTISTS";
 

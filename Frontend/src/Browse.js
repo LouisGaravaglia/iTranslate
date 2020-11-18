@@ -7,6 +7,7 @@ import BrowseByGenre from "./BrowseByGenre";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
+import {resetStore} from "./actionCreators/resetStoreCreator";
 
 function Browse() {
   //REACT STATE
@@ -75,6 +76,13 @@ function Browse() {
     displayFlashMessage();
   }, [languageError, translationError, lyricsError, dispatch])
 
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
+
+const handleCategoryClick = (category) => {
+  setCategory([category, {}]);
+  dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation"));
+}
+
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
@@ -106,9 +114,9 @@ function Browse() {
         {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
       </div>
       <div className="Browse-Landing">
-        <button onClick={() => setCategory(["Artists", {}])}>Artists</button>
-        <button onClick={() => setCategory(["Genre", {}])}>Genre</button>
-        <button onClick={() => setCategory(["Danceability", {}])}>Danceability</button>
+        <button onClick={() => handleCategoryClick("Artists")}>Artists</button>
+        <button onClick={() => handleCategoryClick("Genre")}>Genre</button>
+        <button onClick={() => handleCategoryClick("Danceability")}>Danceability</button>
       </div>
       {BrowseByArtistsDiv}
       {BrowseByGenreDiv}
