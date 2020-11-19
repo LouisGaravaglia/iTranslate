@@ -3,22 +3,23 @@ import React, {useState, useRef, useEffect, useCallback} from 'react';
 import SpotifyAPI from "./SpotifyAPI";
 //COMPONENT IMPORTS
 import SearchBar from "./SearchBar";
-import DisplayLyrics from "./DisplayLyrics";
 import FlashMessage from "./FlashMessage";
 import SearchResultList from "./SearchResultList";
+import LyricsTranslation from "./LyricsTranslation";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
 import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
+import {resetStore} from "./actionCreators/resetStoreCreator";
+
 
 const Search = () => {
   //STATE FOR DATA
   const [selectedTrackId, setSelectedTrackId] = useState([]);
   //REDUX STORE
   const languages = useSelector(store => store.languages);
-  const translation = useSelector(store => store.translation);
   const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
@@ -34,7 +35,6 @@ const Search = () => {
   //REFS FOR PAGE TRAVERSAL
   const searchResultsRef = useRef();
   const selectLanguageRef = useRef();
-  const lyricsTranslationRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -52,9 +52,6 @@ const Search = () => {
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
-
-  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {scrollToNextDiv(translation, lyricsTranslationRef);}, [translation, lyricsTranslationRef, scrollToNextDiv]);
 
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
@@ -89,6 +86,8 @@ const Search = () => {
 
   const handleTrackSearchSubmit = async (searchVal) => {
     dispatch(setResultsArray(searchVal));
+    dispatch(resetStore("lyrics", "translation"));
+
   }
 
   const handleSearchResultsClick = async (artist, track, index) => {
@@ -130,22 +129,12 @@ const Search = () => {
     </div>
   );
 
-  //SELECT LANGUAGE TO TRANSLATE LYRICS TO SEARCH BAR COMPONENT
-  let SelectLanguageDiv;
+  let LyricsAndTranslationDivs;
 
-  if (lyrics) SelectLanguageDiv = (
+  if (lyrics) LyricsAndTranslationDivs = (
     <div ref={selectLanguageRef}>
-      <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
+      <LyricsTranslation selectedTrackId={selectedTrackId} />
     </div>
-  );
-
-  //LYRICS AND TRANSLATION HTML
-  let LyricsTranslationDiv;
-  
-  if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
-      <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
-        <DisplayLyrics lyrics={lyrics} translation={translation}/>
-      </div>
   );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
@@ -160,8 +149,7 @@ const Search = () => {
       </div>
       <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
       {SearchResultsDiv}
-      {SelectLanguageDiv}
-      {LyricsTranslationDiv}
+      {LyricsAndTranslationDivs}
     </div>
   );
 
