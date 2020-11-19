@@ -19,21 +19,20 @@ class Tracks {
 // `SELECT t.name, t.spotify_id, a.name, d.name FROM tracks t JOIN artists a ON t.artist_id = a.spotify_id JOIN albums d ON t.album_id = d.spotify_id WHERE t.danceability >= $1 AND t.danceability <= $2`
   }
 
-  static async getCheckmarkValue(trackId) {
-    console.log("INSIDE TRACKS.getCheckmarkValue METHOD", trackId);
+  static async checkIfTrackHasLyrics(trackId) {
+    console.log("INSIDE TRACKS.checkIfTrackHasLyrics METHOD", trackId);
 
     const result = await db.query (
       `SELECT lyrics FROM tracks WHERE spotify_id = $1`, [trackId]);
-    console.log("HERE IS THE RESULT", result);
     console.log("Here is the result of rows[0]", result.rows[0]);
 
     if (result.rows[0] === "No Lyrics") {
-      return "red";
+      return false;
+    } else if (result.rows[0] === undefined){
+      return false;
     } else {
-      return "green";
+      return true
     }
-
-    return result.rows;
 
   }
 

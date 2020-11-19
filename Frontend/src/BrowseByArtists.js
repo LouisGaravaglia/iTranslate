@@ -111,7 +111,7 @@ function BrowseByArtists({handleNoAlbumsError}) {
   
   if (tracks) TrackResultsDiv = (
     <div ref={trackResultsRef}>
-      <SearchResultList key={tracks[0].id} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
+      <SearchResultList key={tracks[0].trackId} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
       {/* {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)} */}
     </div>
   );

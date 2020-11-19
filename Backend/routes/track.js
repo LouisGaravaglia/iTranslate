@@ -15,9 +15,9 @@ router.get( "/:handle", async function(req, res, next) {
       console.log("RETURING FORM THE TRACKS GET ROUTE", response);
       return res.status( 201 ).json( { response }  )
 
-    } else if (req.params.handle === "checkmark") {
-      const response = await Tracks.getCheckmarkValue(req.query.trackId);
-      console.log("RETURING FORM THE TRACKS getCheckmarkValue ROUTE", response);
+    } else if (req.params.handle === "hasLyrics") {
+      const response = await Tracks.checkIfTrackHasLyrics(req.query.trackId);
+      console.log("RETURING FORM THE TRACKS checkIfTrackHasLyrics ROUTE", response);
       return res.status( 201 ).json( { response }  )
 
     } else if (req.params.handle === "getLyrics") {

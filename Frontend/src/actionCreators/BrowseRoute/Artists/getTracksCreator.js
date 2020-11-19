@@ -17,19 +17,19 @@ export function getTracks(albumID) {
       //Loop over tracks array and make new array with consolidated objects
       for (let track of tracks) {
 
-        let checkmarkVal = await BackendCall.getCheckmarkValue({trackId: track.id});
-
+        let hasLyrics = await BackendCall.checkIfTrackHasLyrics({trackId: track.id});
+        console.log("Boolean value if track has lyrics: ", hasLyrics);
         newTracksArray.push({
           trackId: track.id, 
           trackName: track.name, 
           artistId: track.artists[0].id,
           artistName: track.artists[0].name,
           albumId,
-          checkmarkVal
+          hasLyrics
           })
       }
 
-
+      console.log("Here is what the newTracksArray is: ", newTracksArray);
       return newTracksArray;
     }
     

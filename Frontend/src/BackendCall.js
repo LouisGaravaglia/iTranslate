@@ -74,9 +74,9 @@ class BackendCall {
 
 //////////////////////////////////////  GET CHECKMARK VALUE //////////////////////////////////////
 
-    static async getCheckmarkValue(data) {
-      let res = await this.request("track/checkmark", data);
-      console.log("getCheckmarkValue res: ", res);
+    static async checkIfTrackHasLyrics(data) {
+      let res = await this.request("track/hasLyrics", data);
+      console.log("checkIfTrackHasLyrics res: ", res);
       return res.data.response;
     }
 
