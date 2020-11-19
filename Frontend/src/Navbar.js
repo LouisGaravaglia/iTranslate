@@ -1,8 +1,10 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-
+import {resetStore} from "./actionCreators/resetStoreCreator";
+import {useDispatch} from "react-redux";
 
 const NavBar = () => {
+    const dispatch = useDispatch();
 
 
     // const loggedInNav = () => {
@@ -27,7 +29,7 @@ const NavBar = () => {
     
     return (
         <div className="NavBar">
-            <NavLink exact to="/">Search</NavLink>
+            <NavLink exact to="/" onClick={() => dispatch(resetStore("searchResults")) }>Search</NavLink>
             <NavLink exact to="/browse">Browse</NavLink>
             {/* {publicNav() } */}
         </div>

@@ -1,4 +1,4 @@
-import { RESET_TRANSLATION, RESET_LYRICS, RESET_TRACKS, RESET_ALBUMS, RESET_ARTISTS } from "../actionTypes";
+import { RESET_TRANSLATION, RESET_LYRICS, RESET_TRACKS, RESET_ALBUMS, RESET_ARTISTS, RESET_SEARCH_RESULTS } from "../actionTypes";
 
 ////////////////////////////////// RESET PIECES OF STATE IN STORE BACK TO INTIAL VALUE //////////////////////////////////
 export function resetStore(...specificState) {
@@ -11,6 +11,7 @@ export function resetStore(...specificState) {
       if (specificState[i] === "tracks") dispatch(resetTracks());
       if (specificState[i] === "lyrics") dispatch(resetLyrics());
       if (specificState[i] === "translation") dispatch(resetTranslation());
+      if (specificState[i] === "searchResults") dispatch(resetSearchResults());
     }
 
     console.log("Finished reseting store in resetStoreCreator:");
@@ -37,3 +38,6 @@ function resetTranslation() {
   return {type:RESET_TRANSLATION};
 }
 
+function resetSearchResults() {
+  return {type:RESET_SEARCH_RESULTS};
+}

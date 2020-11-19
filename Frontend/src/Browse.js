@@ -9,6 +9,9 @@ import BrowseByDanceability from "./BrowseByDanceability";
 import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
+import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
+import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
+
 
 function Browse() {
   //REACT STATE
@@ -30,6 +33,18 @@ function Browse() {
   const danceabilityResultsRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
+
+  useEffect(() => {
+
+    async function getSeedData() {
+      //GET ALL ARTISTS IN DB AND STORE THEM FOR THE BROWSE BY ARTISTS COMPONENT
+      dispatch(getAllArtists());
+      //GET ALL GENRES IN DB AND STORE THEM FOR THE BROWSE BY GENRE COMPONENT
+      dispatch(getGenres());
+    }
+
+    getSeedData();
+  }, [dispatch]);
 
   //SCROLL DOWN TO CATEGORY DIV WHEN USER SELECTS A CATEGORY
   useEffect(() => {

@@ -22,7 +22,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   let displaySearchResults;
 
   if (typeOfResults === "search-results") displaySearchResults = (
-    <div>
+    <div className="Browse-Artists">
       {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)}
       {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
     </div>

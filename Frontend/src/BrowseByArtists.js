@@ -11,6 +11,7 @@ import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
+import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
 
 
 function BrowseByArtists({handleNoAlbumsError}) {
@@ -31,6 +32,8 @@ function BrowseByArtists({handleNoAlbumsError}) {
   const trackResultsRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
+
+
 
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
@@ -126,7 +129,7 @@ function BrowseByArtists({handleNoAlbumsError}) {
   return (
     <>
       <div>
-        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={16}/>
+        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={4}/>
       </div>
       {AlbumResultsDiv}
       {TrackResultsDiv}

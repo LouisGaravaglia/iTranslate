@@ -124,7 +124,7 @@ const Search = () => {
   let SearchResultsDiv;
   
   if (searchResults) SearchResultsDiv = (
-    <div className="Search-Results" ref={searchResultsRef}>
+    <div ref={searchResultsRef}>
       <SearchResultList key={searchResults[0].id} typeOfResults="search-results" resultsArray={searchResults} handleSearch={handleSearchResultsClick} itemsPerPage={5}/>
     </div>
   );
