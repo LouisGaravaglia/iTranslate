@@ -80,18 +80,20 @@ function BrowseByArtists({handleNoAlbumsError}) {
 
   const handleTrackClick = async (artist, track, index) => {
     const base = tracks[index];
-    setSelectedTrackId(base.id);
+    setSelectedTrackId(base.trackId);
     dispatch(resetStore("translation"));
 
     try {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
       //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
-      const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
+      const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.trackId, base.artistId, base.albumId);
       dispatch(getLyrics(trackData, artistData, albumData, artist, track));
-    } catch(e) {
-      const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
-      const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-      dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
+    } catch(e) {  
+      //*** NEED TO ADD A FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
+
+      // const partialTrackData = { spotify_id: base.trackId, name: base.trackName, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
+      // const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+      // dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
     }
   }
 
