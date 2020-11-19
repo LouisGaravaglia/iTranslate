@@ -25,7 +25,7 @@ CREATE TABLE albums(
     release_date TEXT,
     spotify_uri TEXT,
     img_url TEXT NOT NULL,
-    artist_id INT NOT NULL REFERENCES artists ON DELETE CASCADE
+    artist_id TEXT NOT NULL REFERENCES artists(spotify_id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS tracks;
@@ -44,7 +44,7 @@ CREATE TABLE tracks(
     duration INT,
     lyrics TEXT,
     album_id TEXT NOT NULL REFERENCES albums(spotify_id) ON DELETE CASCADE,
-    artist_id TEXT NOT NULL REFERENCES artists(spotify_id )ON DELETE CASCADE
+    artist_id TEXT NOT NULL REFERENCES artists(spotify_id)ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS translation;

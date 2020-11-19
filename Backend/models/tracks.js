@@ -64,8 +64,7 @@ class Tracks {
     console.log("LYRICS add data: ", data);
 
     const result = await db.query (
-      `INSERT INTO tracks (lyrics)
-      VALUES ($1) WHERE spotify_id = $2 RETURNING spotify_id`, 
+      `UPDATE tracks SET lyrics = $1 WHERE spotify_id = $2`, 
       [data.lyrics, data.track_id]
     );
 

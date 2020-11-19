@@ -18,9 +18,9 @@ function App() {
       //GET AVAILABLE LANGUAGES TO TRANSLATE LYRICS TO FROM IBM API
       dispatch(getLanguages());
       //GET ALL ARTISTS IN DB AND STORE THEM FOR THE BROWSE BY ARTISTS COMPONENT
-      dispatch(getAllArtists());
+      // dispatch(getAllArtists());
       //GET ALL GENRES IN DB AND STORE THEM FOR THE BROWSE BY GENRE COMPONENT
-      dispatch(getGenres());
+      // dispatch(getGenres());
     }
 
     getSeedData();

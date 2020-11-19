@@ -15,9 +15,9 @@ class Albums {
     };
 
     const result = await db.query (
-      `INSERT INTO albums ( spotify_id, name, release_date, spotify_uri, img_url)
-      VALUES ( $1, $2, $3, $4, $5) RETURNING spotify_id`, 
-      [ data.spotify_id, data.name, data.release_date, data.spotify_uri, data.img_url ]
+      `INSERT INTO albums ( spotify_id, name, release_date, spotify_uri, img_url, artist_id)
+      VALUES ( $1, $2, $3, $4, $5, $6) RETURNING spotify_id`, 
+      [ data.spotify_id, data.name, data.release_date, data.spotify_uri, data.img_url, data.artist_id ]
     );
 
     return result.rows[0].spotify_id;

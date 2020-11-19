@@ -51,18 +51,19 @@ class BackendCall {
     static async addTrackArtistAlbum(trackData, artistData, albumData) {
 
       try {
-
+        const artistId = await this.addArtist(artistData);
+        const albumId = await this.addAlbum(albumData);
         const trackId = await this.addTrack(trackData);
+              // const spotifyIds = {trackId, artistId, albumId};
+        console.log("Here is the artistId: ", artistId);
+        console.log("Sucessfully added all three things to Database");
 
         if (trackId === "This song already exists in DB") {
           return "No data was added to the DB"
         }
 
-        const artistId = await this.addArtist(artistData);
-        const albumId = await this.addAlbum(albumData);
-        // const spotifyIds = {trackId, artistId, albumId};
-        console.log("Here is the artistId: ", artistId);
-        console.log("Sucessfully added all three things to Database");
+ 
+
         return "Added new track to the DB";
 
       } catch ( err ) {
