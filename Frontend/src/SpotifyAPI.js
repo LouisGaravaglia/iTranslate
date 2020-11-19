@@ -79,18 +79,20 @@ class SpotifyAPI {
 
 /////////////////////////////////  GET TRACKS BY ALBUM  /////////////////////////////////
 
-  static async getTracks(albumID) {
+  static async getTracks(albumId) {
     const accessToken = await requestAccessToken();
 
     try {
 
       const albumData = await axios({
         method: "get",
-        url: `https://api.spotify.com/v1/albums/${albumID}/tracks`,
+        url: `https://api.spotify.com/v1/albums/${albumId}/tracks`,
         headers: {'Authorization': `Bearer ${accessToken}`}
       });
 
-      return albumData.data.items;
+      const tracks = albumData.data.items;
+
+      return [tracks, albumId];
 
     } catch(err) {
       console.error("API Error:", err.response);

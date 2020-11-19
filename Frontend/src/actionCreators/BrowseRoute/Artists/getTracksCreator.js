@@ -1,6 +1,6 @@
 import { GET_TRACKS } from "../../../actionTypes";
 import SpotifyAPI from "../../../SpotifyAPI";
-
+import BackendCall from "../../../BackendCall";
 
 
 ////////////////////////////////// GET ALL POSTS //////////////////////////////////
@@ -10,9 +10,27 @@ export function getTracks(albumID) {
     // let albumsError = false;
     
     const handleAlbumClick = async (albumID) => {
-      const response = await SpotifyAPI.getTracks(albumID);
-      console.log("here are the tracks", response);
-      return response;
+      const [tracks, albumId] = await SpotifyAPI.getTracks(albumID);
+      const newTracksArray = [];
+      console.log("here are the tracks", tracks);
+
+      //Loop over tracks array and make new array with consolidated objects
+      for (let track of tracks) {
+
+        let checkmarkVal = await BackendCall.getCheckmarkValue({trackId: track.id});
+
+        newTracksArray.push({
+          trackId: track.id, 
+          trackName: track.name, 
+          artistId: track.artists[0].id,
+          artistName: track.artists[0].name,
+          albumId,
+          checkmarkVal
+          })
+      }
+
+
+      return newTracksArray;
     }
     
     const tracks = await handleAlbumClick(albumID);

@@ -4,6 +4,35 @@ const ExpressError = require("../helpers/ExpressError");
 
 class Tracks {
 
+  static async getDanceabilityTracks(data) {
+    console.log("INSIDE TRACKS.getDanceablityTracks METHOD", data);
+
+    const result = await db.query (
+      `SELECT name, spotify_id FROM tracks WHERE danceability >= $1 AND danceability <= $2`, [data.lowerLimit, data.upperLimit]);
+    console.log("HERE IS THE RESULT", result);
+
+    return result.rows;
+
+  }
+
+  static async getCheckmarkValue(trackId) {
+    console.log("INSIDE TRACKS.getCheckmarkValue METHOD", trackId);
+
+    const result = await db.query (
+      `SELECT lyrics FROM tracks WHERE spotify_id = $1`, [trackId]);
+    console.log("HERE IS THE RESULT", result);
+    console.log("Here is the result of rows[0]", result.rows[0]);
+
+    if (result.rows[0] === "No Lyrics") {
+      return "red";
+    } else {
+      return "green";
+    }
+
+    return result.rows;
+
+  }
+
   static async add ( data ) {
     console.log("INSIDE TRACKS.ADD METHOD", data);
     const duplicateCheck = await db.query (

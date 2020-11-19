@@ -82,6 +82,14 @@ class BackendCall {
       }
     }
 
+//////////////////////////////////////  GET CHECKMARK VALUE //////////////////////////////////////
+
+    static async getCheckmarkValue(data) {
+      let res = await this.request("track/checkmark", data);
+      console.log("getCheckmarkValue res: ", res);
+      return res.data.response;
+    }
+
 //////////////////////////////////////  GET/ADD LYRICS  //////////////////////////////////////
 
     static async addLyrics(data) {
@@ -140,6 +148,12 @@ class BackendCall {
 
 //////////////////////////////////////  GET DANCEABILITY  //////////////////////////////////////
 
+    static async getDanceabilityTracks(data) {
+      console.log("making getDanceabilityTracks request");
+      let res = await this.request("track/danceability", data);
+      console.log("getDanceabilityTracks res: ", res);
+      return res.data.response;
+    }
 
 
   }

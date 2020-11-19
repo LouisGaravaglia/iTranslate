@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS tracks;
 
 CREATE TABLE tracks(
     id SERIAL PRIMARY KEY,
-    spotify_id TEXT NOT NULL,
+    spotify_id TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL,
     explicit BOOLEAN,
     popularity INT,
@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS artists;
 
 CREATE TABLE artists(
     id SERIAL PRIMARY KEY,
-    spotify_id TEXT NOT NULL,
+    spotify_id TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL,
     genre TEXT,
     spotify_uri TEXT,
@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS albums;
 
 CREATE TABLE albums(
     id SERIAL PRIMARY KEY,
-    spotify_id TEXT NOT NULL,
+    spotify_id TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL,
     release_date TEXT,
     spotify_uri TEXT,

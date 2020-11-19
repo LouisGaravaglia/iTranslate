@@ -4,6 +4,7 @@ import './App.css';
 import FlashMessage from "./FlashMessage";
 import BrowseByArtists from "./BrowseByArtists";
 import BrowseByGenre from "./BrowseByGenre";
+import BrowseByDanceability from "./BrowseByDanceability";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
@@ -26,7 +27,7 @@ function Browse() {
   //REFS FOR PAGE TRAVERSAL
   const artistResultsRef = useRef();
   const genreResultsRef = useRef();
-  const danceabilityDivRef = useRef();
+  const danceabilityResultsRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -44,7 +45,7 @@ function Browse() {
           behavior: "smooth",
         });
       } else if (category[0] === "Danceability") {
-         danceabilityDivRef.current.scrollIntoView({
+         danceabilityResultsRef.current.scrollIntoView({
           behavior: "smooth",
         });
       }
@@ -108,6 +109,15 @@ const handleNoAlbumsError = () => {
       </div>
   );
 
+  //DISPLAY BROWSE BY DANCEABILITY COMPONENTS
+  let BrowseByDanceabilityDiv;
+
+  if (category[0] === "Danceability") BrowseByDanceabilityDiv = (
+      <div ref={danceabilityResultsRef}>
+        <BrowseByDanceability />
+      </div>
+  );
+
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
@@ -126,6 +136,7 @@ const handleNoAlbumsError = () => {
       </div>
       {BrowseByArtistsDiv}
       {BrowseByGenreDiv}
+      {BrowseByDanceabilityDiv}
     </div>
   );
 }
