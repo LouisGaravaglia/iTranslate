@@ -2,16 +2,19 @@ import React,  {useState, useRef, useEffect, useCallback} from 'react';
 import './App.css';
 //API IMPORTS
 import SpotifyAPI from "./SpotifyAPI";
+import BackendCall from "./BackendCall";
 //COMPONENT IMPORTS
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {getLyrics} from "./actionCreators/getLyricsCreator";
+// import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {getArtists} from "./actionCreators/BrowseRoute/Genre/getArtistsCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
+import {findLyricsFromAPI} from "./actionCreators/findLyricsFromAPICreator";
+import {getLyricsFromDB} from "./actionCreators/getLyricsFromDBCreator";
 
 function BrowseByGenre() {
   //REACT STATE
@@ -79,22 +82,40 @@ function BrowseByGenre() {
     setSelectedTrackId("");
   }
 
-  const handleTrackClick = async (artist, track, index) => {
-    const base = tracks[index];
-    setSelectedTrackId(base.id);
+  const handleTrackClick = async (artistName, trackName, index) => {
+    const track = tracks[index];
+    setSelectedTrackId(track.id);
     dispatch(resetStore("translation"));
 
     try {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
       //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
-      const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
-      dispatch(getLyrics(trackData, artistData, albumData, artist, track));
-    } catch(e) {
-      const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
-      const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-      dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
+      if (track.hasLyrics) {
+        dispatch(getLyricsFromDB(track.trackId));
+      } else {
+        if (track.inDatabase) {
+          dispatch(findLyricsFromAPI(track.trackId, artistName, trackName));
+        } else {
+          const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(track.trackId, track.artistId, track.albumId);
+          const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
+          dispatch(findLyricsFromAPI(track.trackId, artistName, trackName));
+        }
+      }
+    } catch(e) {  
+      //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
     }
   }
+
+      // try {
+    //   //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
+    //   //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
+    //   const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
+    //   dispatch(getLyrics(trackData, artistData, albumData, artist, track));
+    // } catch(e) {
+    //   const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
+    //   const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+    //   dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
+    // }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
@@ -121,7 +142,7 @@ function BrowseByGenre() {
   
   if (tracks) TrackResultsDiv = (
     <div ref={trackResultsRef}>
-      <SearchResultList key={tracks[0].id} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
+      <SearchResultList key={tracks[0].trackId} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
     </div>
   );
 

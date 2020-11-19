@@ -24,6 +24,11 @@ router.get( "/:handle", async function(req, res, next) {
       const response = await Tracks.getLyrics(req.query.trackId);
       console.log("RETURING FORM THE TRACKS getLyrics ROUTE", response);
       return res.status( 201 ).json( { response }  )
+
+    } else if (req.params.handle === "inDatabase") {
+      const response = await Tracks.checkIfTrackIsInDB(req.query.trackId);
+      console.log("RETURING FORM THE TRACKS checkIfTrackIsInDB ROUTE", response);
+      return res.status( 201 ).json( { response }  )
     }
   } catch ( err ) {
     return next( err );

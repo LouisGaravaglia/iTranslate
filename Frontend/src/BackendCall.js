@@ -72,11 +72,17 @@ class BackendCall {
       }
     }
 
-//////////////////////////////////////  GET CHECKMARK VALUE //////////////////////////////////////
+//////////////////////////////////////  GET hasLyrics AND checkIfTrackIsInDB VALUE //////////////////////////////////////
 
     static async checkIfTrackHasLyrics(data) {
       let res = await this.request("track/hasLyrics", data);
       console.log("checkIfTrackHasLyrics res: ", res);
+      return res.data.response;
+    }
+
+    static async checkIfTrackIsInDB(data) {
+      let res = await this.request("track/inDatabase", data);
+      console.log("checkIfTrackIsInDB res: ", res);
       return res.data.response;
     }
 

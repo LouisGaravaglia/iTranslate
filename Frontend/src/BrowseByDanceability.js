@@ -8,7 +8,7 @@ import LyricsTranslation from "./LyricsTranslation";
 import SliderDanceability from "./SliderDanceability";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {getLyrics} from "./actionCreators/getLyricsCreator";
+// import {getLyrics} from "./actionCreators/getLyricsCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
@@ -76,11 +76,11 @@ function BrowseByDanceability({handleNoAlbumsError}) {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
       //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
       const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
-      dispatch(getLyrics(trackData, artistData, albumData, artist, track));
+      // dispatch(getLyrics(trackData, artistData, albumData, artist, track));
     } catch(e) {
-      const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
-      const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-      dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
+      // const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
+      // const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+      // dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
     }
   }
 

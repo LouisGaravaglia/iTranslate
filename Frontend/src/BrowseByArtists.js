@@ -2,16 +2,18 @@ import React,  {useState, useRef, useEffect, useCallback} from 'react';
 import './App.css';
 //API IMPORTS
 import SpotifyAPI from "./SpotifyAPI";
+import BackendCall from "./BackendCall";
 //COMPONENT IMPORTS
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {getLyrics} from "./actionCreators/getLyricsCreator";
+import {getLyricsFromDB} from "./actionCreators/getLyricsFromDBCreator";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
+import {findLyricsFromAPI} from './actionCreators/findLyricsFromAPICreator';
 
 
 function BrowseByArtists({handleNoAlbumsError}) {
@@ -78,24 +80,34 @@ function BrowseByArtists({handleNoAlbumsError}) {
     setSelectedTrackId("");
   }
 
-  const handleTrackClick = async (artist, track, index) => {
-    const base = tracks[index];
-    setSelectedTrackId(base.trackId);
+  const handleTrackClick = async (artistName, trackName, index) => {
+    const track = tracks[index];
+    setSelectedTrackId(track.trackId);
     dispatch(resetStore("translation"));
 
     try {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
       //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
-      const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.trackId, base.artistId, base.albumId);
-      dispatch(getLyrics(trackData, artistData, albumData, artist, track));
+      if (track.hasLyrics) {
+        dispatch(getLyricsFromDB(track.trackId));
+      } else {
+        if (track.inDatabase) {
+          dispatch(findLyricsFromAPI(track.trackId, artistName, trackName));
+        } else {
+          const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(track.trackId, track.artistId, track.albumId);
+          const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
+          dispatch(findLyricsFromAPI(track.trackId, artistName, trackName));
+        }
+      }
     } catch(e) {  
-      //*** NEED TO ADD A FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
-
-      // const partialTrackData = { spotify_id: base.trackId, name: base.trackName, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
-      // const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-      // dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
+      //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
     }
   }
+      // dispatch(getLyrics(trackData, artistData, albumData, artist, track));
+
+        // const partialTrackData = { spotify_id: base.trackId, name: base.trackName, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
+      // const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+      // dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 

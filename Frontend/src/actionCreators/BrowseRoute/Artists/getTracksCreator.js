@@ -18,14 +18,16 @@ export function getTracks(albumID) {
       for (let track of tracks) {
 
         let hasLyrics = await BackendCall.checkIfTrackHasLyrics({trackId: track.id});
-        console.log("Boolean value if track has lyrics: ", hasLyrics);
+        let inDatabase = await BackendCall.checkIfTrackIsInDB({trackId: track.id});
+
         newTracksArray.push({
           trackId: track.id, 
           trackName: track.name, 
           artistId: track.artists[0].id,
           artistName: track.artists[0].name,
           albumId,
-          hasLyrics
+          hasLyrics,
+          inDatabase
           })
       }
 
