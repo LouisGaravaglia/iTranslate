@@ -30,14 +30,11 @@ class BackendCall {
     static async addTrack(data) {
       console.log("Track data: ", data);
       if ( data.preview_url === null ) data.preview_url = "";
-      let res = await this.request("track", data, "post");
+      let res = await this.request("track/addTrackData", data, "post");
       return res.data.response;
     }
 
     static async addArtist(data) {
-      // const filtered = data.img_url.map(item => item.url);
-      // data.genre = data.genre.join(",");
-      // data.img_url = filtered.join(",");
       console.log("Artist data: ", data);
       let res = await this.request("artist", data, "post");
       return res.data.response;
@@ -48,12 +45,6 @@ class BackendCall {
       console.log("ALBUM DATA: ", data);
       let res = await this.request("album", data, "post");
       return res.data.response;
-    }
-
-    static async addDiscography(data) {
-      console.log("DISCOGRAPHY DATA: ", data);
-      let res = await this.request("discography", data, "post");
-      return res;
     }
 
     // CALLS METHODS ABOVE TO ADD TRACK ARTIST AND ALBUM DATA TO THE DB
@@ -69,11 +60,9 @@ class BackendCall {
 
         const artistId = await this.addArtist(artistData);
         const albumId = await this.addAlbum(albumData);
-        const spotifyIds = {trackId, artistId, albumId};
+        // const spotifyIds = {trackId, artistId, albumId};
         console.log("Here is the artistId: ", artistId);
-        //DO I NEED TO RETURN ANYTHING FORM ADDISCOGRPAHY?
-        this.addDiscography(spotifyIds);
-        console.log("Sucessfully added all three things to Disography.");
+        console.log("Sucessfully added all three things to Database");
         return "Added new track to the DB";
 
       } catch ( err ) {
@@ -93,14 +82,14 @@ class BackendCall {
 //////////////////////////////////////  GET/ADD LYRICS  //////////////////////////////////////
 
     static async addLyrics(data) {
-      let res = await this.request("lyrics", data, "post");
+      let res = await this.request("track/addLyrics", data, "post");
       console.log("addLyrics res: ", res);
       return res.data.response;
     }
 
     static async getLyrics(data) {
-      console.log("This is data that im sending to getLyrics route: ", data);
-      let res = await this.request("lyrics", data);
+      console.log("This is data that im sending to track/getLyrics route: ", data);
+      let res = await this.request("track/getLyrics", data);
       console.log("getLyrics res: ", res);
       return res.data.response;
     }

@@ -14,33 +14,44 @@ router.get( "/:handle", async function(req, res, next) {
       const response = await Tracks.getDanceabilityTracks(req.query);
       console.log("RETURING FORM THE TRACKS GET ROUTE", response);
       return res.status( 201 ).json( { response }  )
-    }else if (req.params.handle === "checkmark") {
+
+    } else if (req.params.handle === "checkmark") {
       const response = await Tracks.getCheckmarkValue(req.query.trackId);
       console.log("RETURING FORM THE TRACKS getCheckmarkValue ROUTE", response);
       return res.status( 201 ).json( { response }  )
+
+    } else if (req.params.handle === "getLyrics") {
+      const response = await Tracks.getLyrics(req.query.trackId);
+      console.log("RETURING FORM THE TRACKS getLyrics ROUTE", response);
+      return res.status( 201 ).json( { response }  )
     }
-
-
-  }
-
-  catch ( err ) {
+  } catch ( err ) {
     return next( err );
   }
 });
 
-router.post( "/", async function( req, res, next ) {
+router.post( "/:handle", async function( req, res, next ) {
+  
   try {
-    const validation = validate( req.body, addTrackSchema );
-     console.log("MADE IT TO THE TRACK POST ROUTE");
-      debugger;
-    if ( !validation.valid ) {
-      throw new ExpressError( validation.errors.map( e => e.stack ), 400 );
+
+    if (req.params.handle === "addTrackData") {
+      const validation = validate( req.body, addTrackSchema );
+      console.log("MADE IT TO THE TRACK POST ROUTE");
+
+      if ( !validation.valid ) {
+        throw new ExpressError( validation.errors.map( e => e.stack ), 400 );
+      }
+
+      const response = await Tracks.addTrackData( req.body );
+      console.log("RETURNING FROM THE TRACK addTrackData POST ROUTE");
+      return res.status( 201 ).json( { response } );
+
+    } else if (req.params.handle === "addLyrics") {
+      console.log("MADE IT TO THE tracks addLyrics POST ROUTE");
+      const response = await Tracks.addLyrics(req.body);
+      console.log("RETURING FORM THE TRACKS addlyrics POST ROUTE", response);
+      return res.status( 201 ).json( { response }  )
     }
-
-
-    const response = await Tracks.add( req.body );
-     console.log("RETURNING FROM THE TRACK POST ROUTE");
-    return res.status( 201 ).json( { response } );
 
   } catch( err ) {
     return next( err );

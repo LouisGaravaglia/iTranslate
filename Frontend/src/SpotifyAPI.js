@@ -142,6 +142,7 @@ class SpotifyAPI {
       albumData["release_date"] = albumDetails.data.release_date;
       albumData["spotify_uri"] = albumDetails.data.uri;
       albumData["img_url"] = albumDetails.data.images[1].url;
+      albumData["artist_id"] = artistId;
 
       trackData["name"] = trackDetails.data.name;
       trackData["spotify_uri"] = trackDetails.data.uri;
@@ -152,6 +153,8 @@ class SpotifyAPI {
       trackData["tempo"] = songAnalysis.data.tempo;
       trackData["valence"] = songAnalysis.data.valence;
       trackData["duration"] = songAnalysis.data.duration_ms;
+      trackData["artist_id"] = artistId;
+      trackData["album_id"] = albumId;
 
       artistData["name"] = artistDetails.data.name;
       artistData["spotify_uri"] = artistDetails.data.uri;
