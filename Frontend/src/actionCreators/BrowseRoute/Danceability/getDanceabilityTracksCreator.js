@@ -12,7 +12,10 @@ export function getDanceabilityTracks(lowerLimit, upperLimit) {
       const tracks = await BackendCall.getDanceabilityTracks({lowerLimit, upperLimit});
             console.log("All danceability tracks: ", tracks);
 
-      if (!tracks.length) return;
+      if (!tracks.length) {
+        dispatch(addTracks(""));
+        return;
+      }
 
       for (let track of tracks) {
         track["hasLyrics"] = true;

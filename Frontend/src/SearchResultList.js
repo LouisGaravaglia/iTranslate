@@ -77,8 +77,12 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "danceability-tracks") displayDanceabilityTracks = (
     <>
       {/* <SliderDanceability handleSliderMouseUp={handleSliderMouseUp} /> */}
+      <div className="Danceability-Tracks">
       {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r}/>)}
+      </div>
+      <div className="Danceability-Slider-Container">
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} />}
+   </div>
     </>
   );
 
