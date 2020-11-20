@@ -1,7 +1,45 @@
 import React, {useState} from 'react';
-import { withStyles, createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from "@material-ui/styles";
+import {withStyles} from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
+
+const MyDanceabilitySlider = withStyles({
+         root: {
+          color: "#777777",
+          height: 8
+        },
+        thumb: {
+          height: 24,
+          width: 24,
+          backgroundColor: "#fff",
+          border: "2px solid currentColor",
+          marginTop: -10,
+          marginLeft: -12,
+          "&:focus,&:hover,&$active": {
+            boxShadow: "inherit"
+          }
+        },
+        active: {},
+        valueLabel: {
+          left: "calc(-50% + 14px)",
+          top: -22,
+          "& *": {
+            backgroundColor: "transparent",
+            color: "#885511"
+          }
+        },
+        track: {
+          color: "#777777",
+          height: 8,
+          borderRadius: 4
+        },
+        rail: {
+          height: 4,
+          borderRadius: 4,
+          opacity: 0.5,
+          backgroundColor: "#bfbfbf"
+
+        }
+})(Slider);
 
 const DanceabilitySlider = ({handleSliderMouseMove}) => {
   const [sliderVal, setSliderVal] = useState(0);
@@ -13,50 +51,12 @@ const DanceabilitySlider = ({handleSliderMouseMove}) => {
   };
 
 
-// const Danceability = createMuiTheme({
-//     overrides: {
-//       MuiSlider: {
-//         root: {
-//           color: "#52af77",
-//           height: 8
-//         },
-//         thumb: {
-//           height: 10,
-//           width: 48,
-//           backgroundColor: "#fff",
-//           border: "2px solid currentColor",
-//           marginTop: -8,
-//           marginLeft: -12,
-//           "&:focus,&:hover,&$active": {
-//             boxShadow: "inherit"
-//           }
-//         },
-//         active: {},
-//         valueLabel: {
-//           left: "calc(-50% + 14px)",
-//           top: -22,
-//           "& *": {
-//             background: "transparent",
-//             color: "#000"
-//           }
-//         },
-//         track: {
-//           height: 8,
-//           borderRadius: 4
-//         },
-//         rail: {
-//           height: 8,
-//           borderRadius: 4
-//         }
-//       }
-//     }
-//   });
 
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-   <Slider className="Danceability-Slider" color="" value={sliderVal} max={1} min={0} step={0.01} onChange={handleChange} aria-labelledby="continuous-slider" valueLabelDisplay="auto" scale={(x) => x * 100}/>
+   <MyDanceabilitySlider className="Danceability-Slider" color="" value={sliderVal} max={1} min={0} step={0.01} onChange={handleChange} aria-labelledby="continuous-slider" valueLabelDisplay="off" scale={(x) => x * 100}/>
   );
 };
 
