@@ -2,7 +2,7 @@ import React,  {useState, useRef, useEffect, useCallback} from 'react';
 import './App.css';
 //COMPONENT IMPORTS
 import LyricsTranslation from "./LyricsTranslation";
-import SliderDanceability from "./SliderDanceability";
+import DanceabilitySlider from "./DanceabilitySlider";
 import Tracks from "./Tracks";
 
 //REDUX IMPORTS
@@ -38,7 +38,7 @@ function BrowseByDanceability() {
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
-  const handleSliderMouseUp = async (val) => {
+  const handleSliderMouseMove = async (val) => {
     console.log("Here is the val: ", val);
     let lowerLimit = (val - 0.10).toFixed(2);
     let upperLimit = (val + 0.10).toFixed(2);
@@ -71,7 +71,7 @@ function BrowseByDanceability() {
     <>
     <div className="Browse-Artists" ref={trackResultsRef}>
 
-      <SliderDanceability handleSliderMouseUp={handleSliderMouseUp} />
+      <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
 {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={6} />}
            </div>
       {/* {TrackResultsDiv} */}

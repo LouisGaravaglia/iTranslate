@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Slider from '@material-ui/core/Slider';
 
-const SearchResultList = ({handleSliderMouseUp}) => {
+const DanceabilitySlider = ({handleSliderMouseMove}) => {
   const [sliderVal, setSliderVal] = useState(0);
   // const multipleOf = resultsArray.length % itemsPerPage === 0;
   // let maxSliderVal = Math.floor(resultsArray.length / itemsPerPage);
@@ -12,11 +12,13 @@ const SearchResultList = ({handleSliderMouseUp}) => {
   // if (!multipleOf) maxSliderVal += 1;
 
   const handleChange = (event, newValue) => {
-    const newSliderVal = newValue;
-    newSliderVal.toFixed(2);
+    // const newSliderVal = newValue;
+    
+    // newSliderVal.toFixed(2);
+    // // if (new7, 14, 28, 29, 55, 56, 57, 58)
     setSliderVal(newValue);
-    console.log("Slider Value: ", sliderVal);
-    handleSliderMouseUp(sliderVal);
+    console.log("Slider Value: ", newValue);
+    handleSliderMouseMove(newValue);
   };
 
   // const handleMouseUp = () => {
@@ -28,10 +30,8 @@ const SearchResultList = ({handleSliderMouseUp}) => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    // <div className="Browse-Artists">
-      <Slider className="Search-Slider" color="" value={sliderVal} max={1} min={0} step={0.01} onChange={handleChange} aria-labelledby="continuous-slider" valueLabelDisplay="on" scale={(x) => x * 100}/>
-    // </div>
+    <Slider className="Danceability-Slider" color="" value={sliderVal} max={1} min={0} step={0.01} onChange={handleChange} aria-labelledby="continuous-slider" valueLabelDisplay="on" scale={(x) => x * 100}/>
   );
 };
 
-export default SearchResultList;
+export default DanceabilitySlider;

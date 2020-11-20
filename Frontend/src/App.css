@@ -326,10 +326,6 @@ a {
     font-size: 1.55rem;
 }
 
-.Search-Slider {
-  margin: 60px 500px 80px;
-}
-
 /* //////////////////////////////////////  SEARCH SELECT LANGUAGE  ////////////////////////////////////// */
 
 .Search-Language {
@@ -384,6 +380,17 @@ a {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
+}
+
+/* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
+
+.Pagination-Slider {
+ margin: 60px 500px 80px;
+
+}
+
+.Danceability-Slider {
+  margin: 60px 500px 80px;
 }
 
 /* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
