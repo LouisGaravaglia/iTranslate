@@ -385,6 +385,10 @@ a {
 /* //////////////////////////////////////  PAGINATION SLIDER  ////////////////////////////////////// */
 
 .Pagination-Slider {
+  width: 100vw;
+  height: 30vh;
+  max-height: 30vh;
+  min-height: 30vh;
   margin: 60px 500px 80px;
 }
 
@@ -394,9 +398,9 @@ a {
 /* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
 
 .Flash-Messages-Container {
-    position: sticky;
-    top: 0;
-    z-index: 3;
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 
 .FlashMessage {
@@ -443,7 +447,7 @@ a {
   min-height: 30vh;
 }
 
-.Browse-Danceability-extended {
+.Browse-Danceability-Placeholder {
   width: 100vw;
   height: 70vh;
   max-height: 70vh;
@@ -462,6 +466,14 @@ a {
 }
 
 .Danceability-Slider-Container {
+   width: 100vw;
+   height: 30vh;
+   max-height: 30vh;
+   min-height: 30vh;
+   flex: 0 1 100%;
+}
+
+.Pagination-Slider-Placeholder {
    width: 100vw;
    height: 30vh;
    max-height: 30vh;

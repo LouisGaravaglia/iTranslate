@@ -71,18 +71,17 @@ function BrowseByDanceability() {
 
   return (
     <>
-    <div ref={trackResultsRef}>
-    <div className="Browse-Danceability">
-    <h1>{(sliderVal * 100).toFixed(0)}</h1>
-      <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
+      <div ref={trackResultsRef}>
+        <div className="Browse-Danceability">
+          <h1>{(sliderVal * 100).toFixed(0)}</h1>
+          <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
+          {!tracks && <div className="Browse-Danceability-Placeholder" > </div>}
+          {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={3} />}
+        </div>
       </div>
-      {!tracks && <div className="Browse-Danceability-extended" > </div>}
-{tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={3} />}
-           </div>
       {/* {TrackResultsDiv} */}
       {LyricsAndTranslationDivs}
-
-  </>
+    </>
   );
 }
 
