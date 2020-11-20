@@ -1,22 +1,22 @@
 const db = require("../db");
 const ExpressError = require("../helpers/ExpressError");
-// const sqlForPartialUpdate = require("../helpers/partialUpdate");
 
 class Tracks {
 
   static async getDanceabilityTracks(data) {
     console.log("INSIDE TRACKS.getDanceablityTracks METHOD", data);
-// `SELECT name, spotify_id, artist_id, album_id FROM tracks WHERE danceability >= $1 AND danceability <= $2`
     const result = await db.query (
-      `SELECT t.name, t.spotify_id, a.name, d.name FROM tracks t 
+      `SELECT t.name AS "trackName", t.spotify_id AS "trackId",
+       a.name AS "artistName", a.spotify_id AS "artistId",
+      d.name AS "albumName", d.spotify_id AS "albumId"
+      FROM tracks t 
       JOIN artists a ON t.artist_id = a.spotify_id 
       JOIN albums d ON t.album_id = d.spotify_id
-      WHERE t.danceability >= $1 AND t.danceability <= $2`, [data.lowerLimit, data.upperLimit]);
+      WHERE t.danceability >= $1 AND t.danceability <= $2 AND t.lyrics != 'No Lyrics'`, [data.lowerLimit, data.upperLimit]);
     console.log("HERE IS THE RESULT", result);
 
     return result.rows;
-// SELECT g.player,t.id,m.stadium, m.mdate FROM game m JOIN goal g ON m.id = g.matchid JOIN eteam t ON g.teamid = t.id WHERE t.id IN ('GER')
-// `SELECT t.name, t.spotify_id, a.name, d.name FROM tracks t JOIN artists a ON t.artist_id = a.spotify_id JOIN albums d ON t.album_id = d.spotify_id WHERE t.danceability >= $1 AND t.danceability <= $2`
+
   }
 
   static async checkIfTrackHasLyrics(trackId) {

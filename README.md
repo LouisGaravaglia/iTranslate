@@ -73,4 +73,4 @@ I don’t know if this site will really be a true CRUD application. If I am able
 
 **What are your stretch goals?**
 
-I have a couple stretch goals. One that i’m hopeful to implement is having user profiles where a user can update a translation to be more accurate. And I may need to assign certain users, obviously probably myself to start out with, be admins to approve any changes made so that they aren't malicious translations. Another, would be to imbed music videos of the songs using YouTube’s API. Also, incorporating a healthy sorting ability between genres, artists, and potentially tempo and valence using Spotify’s API.
+I have a couple stretch goals. One is having user profiles where a user can update a translation to be more accurate. And I may need to assign certain users, obviously probably myself to start out with, be admins to approve any changes made so that they are valid translations. Another, would be to imbed music videos of the songs using YouTube’s API. Implementing a typeahead searchbar would be great as well.

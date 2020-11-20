@@ -6,6 +6,8 @@ import SpotifyAPI from "./SpotifyAPI";
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
 import SliderDanceability from "./SliderDanceability";
+import Tracks from "./Tracks";
+
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 // import {getLyrics} from "./actionCreators/getLyricsCreator";
@@ -16,16 +18,17 @@ import {getDanceabilityTracks} from "./actionCreators/BrowseRoute/Danceability/g
 
 function BrowseByDanceability({handleNoAlbumsError}) {
   //REACT STATE
-  const [selectedArtistId, setSelectedArtistId] = useState("");
-  const [selectedTrackId, setSelectedTrackId] = useState("");
-  const [selectedAlbumId, setSelectedAlbumId] = useState([]);
-  const [completeAlbumData, setCompleteAlbumData] = useState({});
+  // const [selectedArtistId, setSelectedArtistId] = useState("");
+  // const [selectedTrackId, setSelectedTrackId] = useState("");
+  // const [selectedAlbumId, setSelectedAlbumId] = useState([]);
+  // const [completeAlbumData, setCompleteAlbumData] = useState({});
   //REDUX STORE
   const dispatch = useDispatch();
   const lyrics = useSelector(store => store.lyrics);
   const artists = useSelector(store => store.allArtists);
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
+  const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   //REFS FOR PAGE TRAVERSAL
   const albumResultsRef = useRef();
   const selectLanguageRef = useRef();
@@ -67,22 +70,22 @@ function BrowseByDanceability({handleNoAlbumsError}) {
     dispatch(getDanceabilityTracks(lowerLimit, upperLimit));
   }
 
-  const handleTrackClick = async (artist, track, index) => {
-    const base = tracks[index];
-    setSelectedTrackId(base.id);
-    dispatch(resetStore("translation"));
+  // const handleTrackClick = async (artist, track, index) => {
+  //   const base = tracks[index];
+  //   setSelectedTrackId(base.id);
+  //   dispatch(resetStore("translation"));
 
-    try {
-      //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
-      //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
-      const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
-      // dispatch(getLyrics(trackData, artistData, albumData, artist, track));
-    } catch(e) {
-      // const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
-      // const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-      // dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
-    }
-  }
+  //   try {
+  //     //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
+  //     //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
+  //     const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(base.id, selectedArtistId, selectedAlbumId);
+  //     // dispatch(getLyrics(trackData, artistData, albumData, artist, track));
+  //   } catch(e) {
+  //     // const partialTrackData = { spotify_id: base.id, name: base.name, spotify_uri: base.uri, explicit: base.explicit, preview_url: base.preview_url  };
+  //     // const partialArtistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
+  //     // dispatch(getLyrics(partialTrackData, partialArtistData, completeAlbumData, artist, track));
+  //   }
+  // }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
@@ -92,7 +95,9 @@ function BrowseByDanceability({handleNoAlbumsError}) {
   
   if (tracks) TrackResultsDiv = (
     <div ref={trackResultsRef}>
-      <SearchResultList key={tracks[0].spotify_id} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
+      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={6} />
+
+      {/* <SearchResultList key={tracks[0].spotify_id} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/> */}
       {/* {tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)} */}
     </div>
   );

@@ -25,7 +25,9 @@ const SearchResultList = ({handleSliderMouseUp}) => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <Slider className="Search-Slider" color="" value={sliderVal} max={1} min={0} step={0.01} onChange={handleChange} onMouseUp={handleMouseUp}aria-labelledby="continuous-slider" />
+    <div className="Browse-Artists">
+      <Slider className="Search-Slider" color="" value={sliderVal} max={1} min={0} step={0.01} onChange={handleChange} onMouseUp={handleMouseUp}aria-labelledby="continuous-slider" />
+    </div>
   );
 };
 

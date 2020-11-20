@@ -38,7 +38,7 @@ class Translation {
     console.log("GET TRANSLATION result: ", result);
 
     if (result.rows.length) {
-      return result.rows[0];
+      return result.rows[0].translation;
     } else {
       return "No Translation in DB";
     }

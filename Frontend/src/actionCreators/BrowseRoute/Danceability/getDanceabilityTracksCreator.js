@@ -9,7 +9,7 @@ export function getDanceabilityTracks(lowerLimit, upperLimit) {
   return async function(dispatch) {
     // let albumsError = false;
       const tracks = await BackendCall.getDanceabilityTracks({lowerLimit, upperLimit});
-      console.log("All tracks: ", tracks);
+      console.log("All danceability tracks: ", tracks);
 
     dispatch(addTracks(tracks));
     // dispatch(updateArtistErrors(tracksError))

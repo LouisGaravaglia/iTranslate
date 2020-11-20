@@ -22,7 +22,10 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />
+    <div>
+      <h1>{sliderVal}</h1>
+      <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />
+    </div>
   );
 };
 
