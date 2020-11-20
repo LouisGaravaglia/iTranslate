@@ -7,12 +7,21 @@ import BackendCall from "../../../BackendCall";
 export function getDanceabilityTracks(lowerLimit, upperLimit) {
 
   return async function(dispatch) {
+    console.log("fetching danceability: ", lowerLimit, upperLimit);
     // let albumsError = false;
       const tracks = await BackendCall.getDanceabilityTracks({lowerLimit, upperLimit});
-      console.log("All danceability tracks: ", tracks);
+            console.log("All danceability tracks: ", tracks);
+
+      if (!tracks.length) return;
+
+      for (let track of tracks) {
+        track["hasLyrics"] = true;
+        track["inDatabase"] = true;
+      }
+
 
     dispatch(addTracks(tracks));
-    // dispatch(updateArtistErrors(tracksError))
+
   };
 }
 

@@ -78,10 +78,11 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   let displayDanceabilityTracks;
 
   if (typeOfResults === "danceability-tracks") displayDanceabilityTracks = (
-    <div>
-      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} id={r.spotify_id} artist={r.artistName} album={r.albumName} track={r.trackName}/>)}
+    <>
+      {/* <SliderDanceability handleSliderMouseUp={handleSliderMouseUp} /> */}
+      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r}/>)}
       {resultsArray.length > itemsPerPage && <Slider className="Search-Slider" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" />}
-    </div>
+    </>
   );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
@@ -93,6 +94,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
       {displayAlbums}
       {displayTracks}
       {displayGenres}
+      {displayDanceabilityTracks}
     </>
   );
 };
