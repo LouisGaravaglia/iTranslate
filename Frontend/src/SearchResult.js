@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 const SearchResult = memo((props) => {
 
   const handleSearchClick = () => {
-    props.handleClick(props.artist, props.track, props.index);
+    props.handleClick(props.musicObject);
   }
 
   const handleArtistsClick = () => {
@@ -16,7 +16,7 @@ const SearchResult = memo((props) => {
 
   const handleTrackClick = () => {
     console.log("Here are the track props: ", props);
-    props.handleClick(props.artistName, props.trackName, props.index);
+    props.handleClick(props.musicObject);
   }
 
   const handleGenreClick = () => {

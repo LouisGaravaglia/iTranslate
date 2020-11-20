@@ -80,8 +80,7 @@ function BrowseByArtists({handleNoAlbumsError}) {
     setSelectedTrackId("");
   }
 
-  const handleTrackClick = async (artistName, trackName, index) => {
-    const track = tracks[index];
+  const handleTrackClick = async (track) => {
     setSelectedTrackId(track.trackId);
     dispatch(resetStore("translation"));
 
@@ -92,11 +91,11 @@ function BrowseByArtists({handleNoAlbumsError}) {
         dispatch(getLyricsFromDB(track.trackId));
       } else {
         if (track.inDatabase) {
-          dispatch(findLyricsFromAPI(track.trackId, artistName, trackName));
+          dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
         } else {
           const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(track.trackId, track.artistId, track.albumId);
           const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
-          dispatch(findLyricsFromAPI(track.trackId, artistName, trackName));
+          dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
         }
       }
     } catch(e) {  

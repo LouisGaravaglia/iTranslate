@@ -29,7 +29,7 @@ const NavBar = () => {
     
     return (
         <div className="NavBar">
-            <NavLink exact to="/" onClick={() => dispatch(resetStore("searchResults")) }>Search</NavLink>
+            <NavLink exact to="/" onClick={() => dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack")) }>Search</NavLink>
             <NavLink exact to="/browse">Browse</NavLink>
             {/* {publicNav() } */}
         </div>

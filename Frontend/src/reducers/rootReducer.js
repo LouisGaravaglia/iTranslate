@@ -9,6 +9,7 @@ import languagesReducer from "./languagesReducer";
 import artistsReducer from "./BrowseRoute/artistsReducer";
 import allArtistsReducer from "./BrowseRoute/allArtistsReducer";
 import genresReducer from "./BrowseRoute/genresReducer";
+import selectedTrackReducer from "./selectedTrackReducer";
 
 const rootReducer = combineReducers({
   results: resultsReducer, 
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   languages: languagesReducer,
   artists: artistsReducer,
   allArtists: allArtistsReducer,
-  genres: genresReducer
+  genres: genresReducer,
+  selectedTrack: selectedTrackReducer
 });
 
 export default rootReducer;
