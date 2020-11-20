@@ -11,7 +11,7 @@ const SearchResult = memo((props) => {
   }
 
   const handleAlbumClick = () => {
-    props.handleClick(props.id, props.index);
+    props.handleClick(props.id);
   }
 
   const handleTrackClick = () => {

@@ -6,6 +6,7 @@ import BackendCall from "./BackendCall";
 //COMPONENT IMPORTS
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
+import Tracks from "./Tracks";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 // import {getLyrics} from "./actionCreators/getLyricsCreator";
@@ -17,11 +18,11 @@ import {findLyricsFromAPI} from "./actionCreators/findLyricsFromAPICreator";
 import {getLyricsFromDB} from "./actionCreators/getLyricsFromDBCreator";
 
 function BrowseByGenre() {
-  //REACT STATE
-  const [selectedArtistId, setSelectedArtistId] = useState("");
-  const [selectedTrackId, setSelectedTrackId] = useState("");
-  const [selectedAlbumId, setSelectedAlbumId] = useState([]);
-  const [completeAlbumData, setCompleteAlbumData] = useState({});
+  // //REACT STATE
+  // const [selectedArtistId, setSelectedArtistId] = useState("");
+  // const [selectedTrackId, setSelectedTrackId] = useState("");
+  // const [selectedAlbumId, setSelectedAlbumId] = useState([]);
+  // const [completeAlbumData, setCompleteAlbumData] = useState({});
   //REDUX STORE
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
@@ -29,6 +30,7 @@ function BrowseByGenre() {
   const artists = useSelector(store => store.artists);
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
+  const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   //REFS FOR PAGE TRAVERSAL
   const albumResultsRef = useRef();
   const selectLanguageRef = useRef();
@@ -63,47 +65,47 @@ function BrowseByGenre() {
   const handleGenreClick = async (genre) => {
     dispatch(getArtists({genre}));
     dispatch(resetStore("albums", "tracks", "lyrics", "translation"));
-    setSelectedTrackId("");
+    // setSelectedTrackId("");
   }
 
   const handleArtistClick = async (artistId) => {
     dispatch(getAlbums(artistId));
-    setSelectedArtistId(artistId);
+    // setSelectedArtistId(artistId);
     dispatch(resetStore("tracks", "lyrics", "translation"));
-    setSelectedTrackId("");
+    // setSelectedTrackId("");
   }
 
   const handleAlbumClick = async (albumId, index) => {
-    setSelectedAlbumId(albumId);
-    const base = albums[index];
-    setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
+    // setSelectedAlbumId(albumId);
+    // const base = albums[index];
+    // setCompleteAlbumData({ spotify_id: base.id, name: base.name, release_date: base.release_date, spotify_uri: base.uri, img_url: base.images[1].url})
     dispatch(getTracks(albumId));
     dispatch(resetStore("lyrics", "translation"));
-    setSelectedTrackId("");
+    // setSelectedTrackId("");
   }
 
-  const handleTrackClick = async (track) => {
-    setSelectedTrackId(track.trackId);
-    dispatch(resetStore("translation"));
+  // const handleTrackClick = async (track) => {
+  //   setSelectedTrackId(track.trackId);
+  //   dispatch(resetStore("translation"));
 
-    try {
-      //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
-      //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
-      if (track.hasLyrics) {
-        dispatch(getLyricsFromDB(track.trackId));
-      } else {
-        if (track.inDatabase) {
-          dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
-        } else {
-          const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(track.trackId, track.artistId, track.albumId);
-          const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
-          dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
-        }
-      }
-    } catch(e) {  
-      //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
-    }
-  }
+  //   try {
+  //     //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
+  //     //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
+  //     if (track.hasLyrics) {
+  //       dispatch(getLyricsFromDB(track.trackId));
+  //     } else {
+  //       if (track.inDatabase) {
+  //         dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
+  //       } else {
+  //         const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(track.trackId, track.artistId, track.albumId);
+  //         const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
+  //         dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
+  //       }
+  //     }
+  //   } catch(e) {  
+  //     //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
+  //   }
+  // }
 
       // try {
     //   //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
@@ -141,7 +143,8 @@ function BrowseByGenre() {
   
   if (tracks) TrackResultsDiv = (
     <div ref={trackResultsRef}>
-      <SearchResultList key={tracks[0].trackId} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/>
+      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={6} />
+      {/* <SearchResultList key={tracks[0].trackId} typeOfResults="tracks" resultsArray={tracks} handleSearch={handleTrackClick} itemsPerPage={16}/> */}
     </div>
   );
 
