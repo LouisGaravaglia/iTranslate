@@ -389,9 +389,7 @@ a {
 }
 
 
-.Danceability-Slider {
-  margin: 60px 300px 80px;
-}
+
 
 /* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
 
@@ -430,6 +428,28 @@ a {
 
 /* //////////////////////////////////////  DANCEABILITY ROUTE ////////////////////////////////////// */
 
+.Danceability-Slider {
+  margin: 60px 300px 80px;
+}
+
+.Browse-Danceability {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 30vh;
+  max-height: 30vh;
+  min-height: 30vh;
+}
+
+.Browse-Danceability-extended {
+  width: 100vw;
+  height: 70vh;
+  max-height: 70vh;
+  min-height: 70vh;
+}
+
 .Danceability-Tracks {
   display: flex;
   justify-content: center;
@@ -444,5 +464,6 @@ a {
 .Danceability-Slider-Container {
    width: 100vw;
    height: 30vh;
+   max-height: 30vh;
    min-height: 30vh;
 }

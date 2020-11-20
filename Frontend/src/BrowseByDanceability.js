@@ -71,9 +71,12 @@ function BrowseByDanceability() {
 
   return (
     <>
-    <div className="Browse-Artists" ref={trackResultsRef}>
+    <div ref={trackResultsRef}>
+    <div className="Browse-Danceability">
     <h1>{(sliderVal * 100).toFixed(0)}</h1>
       <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
+      </div>
+      {!tracks && <div className="Browse-Danceability-extended" > </div>}
 {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={3} />}
            </div>
       {/* {TrackResultsDiv} */}
