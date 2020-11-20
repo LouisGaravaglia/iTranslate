@@ -4,7 +4,7 @@ import BackendCall from '../BackendCall';
 
 
 ////////////////////////////////// GET ALL POSTS //////////////////////////////////
-export function getLyricsFromDB(track_id) {
+export function getLyricsFromDB(trackId) {
 
   return async function(dispatch) {
     //VARIBLE THAT KEEPS TRACK OF ANY ERROR REQUESTING LYRICS
@@ -12,7 +12,7 @@ export function getLyricsFromDB(track_id) {
 
      try {
         //GET THE LYRICS THAT ARE DEFINITELY STORED IN DATABASE
-        const lyrics = await BackendCall.getLyrics({track_id});
+        const lyrics = await BackendCall.getLyrics({trackId});
         console.log("Setting lyrics to be from the DB: ", lyrics);
         dispatch(addLyrics(lyrics));
      } catch(e) {

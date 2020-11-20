@@ -97,7 +97,7 @@ function Browse() {
 
 const handleCategoryClick = (category) => {
   setCategory([category, {}]);
-  dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation"));
+  dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "selectedTrack"));
 }
 
 const handleNoAlbumsError = () => {
