@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getDanceabilityTracks} from "./actionCreators/BrowseRoute/Danceability/getDanceabilityTracksCreator";
 
 function BrowseByDanceability() {
+  const [sliderVal, setSliderVal] = useState(0);
   //REDUX STORE
   const dispatch = useDispatch();
   const lyrics = useSelector(store => store.lyrics);
@@ -40,6 +41,7 @@ function BrowseByDanceability() {
 
   const handleSliderMouseMove = async (val) => {
     console.log("Here is the val: ", val);
+    setSliderVal(val);
     let lowerLimit = (val - 0.10).toFixed(2);
     let upperLimit = (val + 0.10).toFixed(2);
     dispatch(getDanceabilityTracks(lowerLimit, upperLimit));
@@ -70,9 +72,9 @@ function BrowseByDanceability() {
   return (
     <>
     <div className="Browse-Artists" ref={trackResultsRef}>
-
+    <h1>{(sliderVal * 100).toFixed(0)}</h1>
       <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
-{tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={6} />}
+{tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={3} />}
            </div>
       {/* {TrackResultsDiv} */}
       {LyricsAndTranslationDivs}

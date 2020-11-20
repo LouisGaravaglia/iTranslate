@@ -50,6 +50,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
 
   if (typeOfResults === "tracks") displayTracks = (
      //{tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)}
+    
     <div className="Browse-Artists">
       {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="tracks" handleClick={handleSearch} artistName={r.artistName} trackName={r.trackName} musicObject={r}/>)}
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} />}
