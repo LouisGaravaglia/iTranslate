@@ -60,11 +60,11 @@ function BrowseByDanceability() {
   return (
     <>
       <div ref={trackResultsRef}>
-        <div className="Browse-Danceability">
+        <div className="Browse-Danceability-v2">
           <h1>{(sliderVal * 100).toFixed(0)}</h1>
-          <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
-          {!tracks && <><div className="Danceability-Tracks"> <button className="Browse-Result">KEEP SLIDING!</button></div> <div className="Pagination-Slider-Placeholder"></div></>}
-          {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={3} />}
+          <DanceabilitySlider classname="Danceability-Slider-v2" handleSliderMouseMove={handleSliderMouseMove} />
+          {!tracks && <><div className="Danceability-Tracks-v2"> <button className="Browse-Result">KEEP SLIDING!</button></div> <div className="Pagination-Slider-Placeholder-v2"><p>Placeholder</p></div></>}
+          {tracks && <Tracks className="Danceability-Tracks-v2" results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={1} />}
         </div>
       </div>
       {LyricsAndTranslationDivs}
@@ -73,3 +73,18 @@ function BrowseByDanceability() {
 }
 
 export default BrowseByDanceability;
+
+
+  // return (
+  //   <>
+  //     <div ref={trackResultsRef}>
+  //       <div className="Browse-Danceability">
+  //         <h1>{(sliderVal * 100).toFixed(0)}</h1>
+  //         <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
+  //         {!tracks && <><div className="Danceability-Tracks"> <button className="Browse-Result">KEEP SLIDING!</button></div> <div className="Pagination-Slider-Placeholder"></div></>}
+  //         {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={1} />}
+  //       </div>
+  //     </div>
+  //     {LyricsAndTranslationDivs}
+  //   </>
+  // );

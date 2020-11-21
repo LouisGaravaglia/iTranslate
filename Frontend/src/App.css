@@ -578,3 +578,86 @@ a {
   color: rgb(86, 182, 255);
   flex: 0 0 100%
 }
+
+/* //////////////////////////////////////  v2 ////////////////////////////////////// */
+
+.Browse-Danceability-v2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100vw;
+  height: 94vh;
+  border: 2px solid turquoise;
+}
+
+.Browse-Danceability-v2 h1{
+      border: 2px solid blue;
+  text-align: center;
+    flex: 1 0 5vh;
+
+}
+
+.Danceability-Slider-v2 {
+  
+      border: 2px solid yellow;
+  text-align: center;
+    flex: 1 0 5vh;
+
+}
+
+.Danceability-Tracks-v2 {
+    border: 2px solid red;
+  text-align: center;
+    flex: 8 0 30vh;
+
+}
+
+.Pagination-Slider-Placeholder-v2 {
+  border: 4px solid #3e8e41;
+    text-align: center;
+
+    flex: 1 0 20vh;
+
+}
+
+
+
+.Pagination-Slider-Container-v2 {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 4px solid #3e8e41;
+    /* text-align: center; */
+  width: 100vw;
+    flex: 1 0 20vh;
+
+
+}
+
+.Pagination-Slider-v2 {
+    /* text-align: center; */
+    flex: 0 0 30vw;
+
+
+
+}
+
+.Danceability-Slider-Container-v2 {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 4px solid #3e8e41;
+    /* text-align: center; */
+  width: 100vw;
+    flex: 1 0 20vh;
+
+
+}
+
+.Danceability-Slider-Item-v2 {
+  flex: 0 0 60vw;
+}

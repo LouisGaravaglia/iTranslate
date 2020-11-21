@@ -56,7 +56,9 @@ const DanceabilitySlider = ({handleSliderMouseMove}) => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-   <MyDanceabilitySlider className="Danceability-Slider" color="" value={sliderVal} max={1} min={0} step={0.01} onChange={handleChange} aria-labelledby="continuous-slider" valueLabelDisplay="off" scale={(x) => x * 100}/>
+    <div className="Danceability-Slider-Container-v2">
+   <MyDanceabilitySlider className="Danceability-Slider-Item-v2" color="" value={sliderVal} max={1} min={0} step={0.01} onChange={handleChange} aria-labelledby="continuous-slider" valueLabelDisplay="off" scale={(x) => x * 100}/>
+  </div>
   );
 };
 

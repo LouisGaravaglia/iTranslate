@@ -82,12 +82,12 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
 
   if (typeOfResults === "danceability-tracks") displayDanceabilityTracks = (
     <>
-      <div className="Danceability-Tracks">
+      <div className="Danceability-Tracks-v2">
         {resultsArray.length && resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r}/>)}
         {/* {!resultsArray.length && <button className="BrowseArtists">NO TRACKS AVAILABLE WITH THAT DANCEABILITY SCORE</button>} */}
       </div>
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} />}
-      {resultsArray.length <= itemsPerPage && <div className="Pagination-Slider-Placeholder"></div>}
+      {resultsArray.length <= itemsPerPage && <div className="Pagination-Slider-Placeholder-v2"></div>}
     </>
   );
 
