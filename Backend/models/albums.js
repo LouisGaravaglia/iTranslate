@@ -23,6 +23,20 @@ class Albums {
     return result.rows[0].spotify_id;
 
   }
+
+  static async checkIfAlbumIsInDB(albumId) {
+    console.log("INSIDE ALBUMS.checkIfAlbumIsInDB METHOD", albumId);
+
+    const result = await db.query (
+      `SELECT name FROM albums WHERE spotify_id = $1`, [albumId]);
+    console.log("Here is the result of rows[0]", result.rows[0]);
+
+    if (result.rows.length ) {
+      return true;
+    } else {
+      return false;
+    } 
+  }
 }
 
 module.exports = Albums;

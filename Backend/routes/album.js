@@ -5,9 +5,20 @@ const addAlbumSchema = require("../schemas/addAlbumSchema.json");
 const Albums = require("../models/Albums");
 const ExpressError = require("../helpers/expressError");
 
+router.get( "/", async function( req, res, next ) {
+  try {
+    console.log("MADE IT TO THE ALBUM GET ROUTE");
+    const response = await Albums.checkIfAlbumIsInDB( req.query.albumId );
+    console.log("RETURNING FROM THE ALBUM GET ROUTE");
+    return res.status( 201 ).json( { response } );
+  } catch ( err ) {
+    next( err );
+  }
+});
+
 router.post( "/", async function( req, res, next ) {
   try {
-     console.log("MADE IT TO THE ALBUM POST ROUTE");
+    console.log("MADE IT TO THE ALBUM POST ROUTE");
     const validation = validate( req.body, addAlbumSchema );
 
     if ( !validation.valid ) {
@@ -15,13 +26,13 @@ router.post( "/", async function( req, res, next ) {
     }
 
     const response = await Albums.add( req.body );
-     console.log("RETURNING FROM THE ALBUM POST ROUTE");
+    console.log("RETURNING FROM THE ALBUM POST ROUTE");
     return res.status( 201 ).json( { response } );
 
   } catch ( err ) {
     next( err );
   }
-} );
+});
 
 module.exports = router;
 

@@ -154,11 +154,20 @@ a {
   width: 100vw;
   height: 100vh;
 }
-
+/******   I NEED THIS***/
 .Album {
   flex: 1 0 21%;
   margin: 40px;
   flex: 0 0 auto; 
+  
+}
+
+/******   I NEED THIS***/
+.Album-No-Database {
+  flex: 1 0 21%;
+  margin: 40px;
+  flex: 0 0 auto; 
+  opacity: 0.2;
   
 }
 
@@ -356,13 +365,27 @@ a {
   color: rgb(2, 206, 169);
 }
 
+.Browse-Result-No-Lyrics {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
+  font-size: 5rem;
+  background-color: white;
+  border: none;
+  color: rgb(86, 182, 255);
+  margin: 15vh 0 0;
+  opacity: 0.2;
+}
+
+.Browse-Result-No-Lyrics:hover {
+  color: rgb(2, 206, 169);
+}
 .Result {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 600;
+  font-weight: 200;
   font-size: 2rem;
   background-color: white;
   border: none;
-  color: rgb(38, 155, 245);
+  color: rgb(86, 182, 255);
   margin: 5vh 0 0;
   /* margin: 10px 40px;
   padding: 6px 12px; */

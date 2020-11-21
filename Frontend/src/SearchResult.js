@@ -35,27 +35,33 @@ const SearchResult = memo((props) => {
   let displayArtists;
 
   if (props.typeOfResults === "artists") displayArtists = (
-            // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-  <button onClick={handleArtistsClick} className="Browse-Result">{props.artist}</button>
-    // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
+    <button onClick={handleArtistsClick} className="Browse-Result">{props.artist}</button>
   );
 
   let displayAlbums;
 
-  if (props.typeOfResults === "albums") displayAlbums = (
-      //       {albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
+  if (props.typeOfResults === "albums" && props.inDatabase) displayAlbums = (
     <div className="Album">
+      <img onClick={handleAlbumClick} src={props.image} alt=""/>
+    </div>
+  );
+
+  if (props.typeOfResults === "albums" && !props.inDatabase) displayAlbums = (
+    <div className="Album-No-Database">
       <img onClick={handleAlbumClick} src={props.image} alt=""/>
     </div>
   );
 
 
   let displayTracks;
+  //DISPLAYS TRACKS THAT ARE 100% OPACITY SINCE WE HAVE LYRICS
+  if (props.typeOfResults === "tracks" && props.hasLyrics) displayTracks = (
+    <button onClick={handleTrackClick} className="Browse-Result">{props.trackName}</button>
+  );
 
-  if (props.typeOfResults === "tracks") displayTracks = (
-            // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-  <button onClick={handleTrackClick} className="Browse-Result">{props.trackName}</button>
-    // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
+  //DISPLAYS TRACKS THAT ARE 20% OPACITY SINCE THERE ARE NO LYRICS IN THE DATABSE
+  if (props.typeOfResults === "tracks" && !props.hasLyrics) displayTracks = (
+    <button onClick={handleTrackClick} className="Browse-Result-No-Lyrics">{props.trackName}</button>
   );
 
 ////////////////////////////////////////////////////  BROWSE BY GENRE  ////////////////////////////////////////////////////
@@ -63,9 +69,7 @@ const SearchResult = memo((props) => {
   let displayGenres;
 
   if (props.typeOfResults === "genres") displayGenres = (
-            // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-  <button onClick={handleGenreClick} className="Browse-Result">{props.genre}</button>
-    // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
+    <button onClick={handleGenreClick} className="Browse-Result">{props.genre}</button>
   );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
