@@ -29,7 +29,9 @@ const SearchResult = memo((props) => {
   let displaySearchResults;
 
   if (props.typeOfResults === "search-results") displaySearchResults = (
+    <div className="Result-Container">
     <button onClick={handleSearchClick} className="Result">{<span className="Browse-Result">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</button>
+  </div>
   );
 
   let displayArtists;

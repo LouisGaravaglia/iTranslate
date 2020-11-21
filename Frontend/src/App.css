@@ -346,51 +346,9 @@ a {
   border: none;
   color: rgb(28, 141, 227);
   margin: 5vh 0 0;
-  /* margin: 10px 40px;
-  padding: 6px 12px; */
-  /* flex: 0 1 100%; */
+
 }
 
-.Browse-Result {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 100;
-  font-size: 5rem;
-  background-color: white;
-  border: none;
-  color: rgb(86, 182, 255);
-  margin: 15vh 0 0;
-}
-
-.Browse-Result:hover {
-  color: rgb(2, 206, 169);
-}
-
-.Browse-Result-No-Lyrics {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 100;
-  font-size: 5rem;
-  background-color: white;
-  border: none;
-  color: rgb(86, 182, 255);
-  margin: 15vh 0 0;
-  opacity: 0.2;
-}
-
-.Browse-Result-No-Lyrics:hover {
-  color: rgb(2, 206, 169);
-}
-.Result {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 200;
-  font-size: 2rem;
-  background-color: white;
-  border: none;
-  color: rgb(86, 182, 255);
-  margin: 5vh 0 0;
-  /* margin: 10px 40px;
-  padding: 6px 12px; */
-  /* flex: 0 1 100%; */
-}
 
 /* .Result-Lightweight {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -581,6 +539,7 @@ a {
 
 /* //////////////////////////////////////  v2 ////////////////////////////////////// */
 
+/* I need this! */
 .Browse-Danceability-v2 {
   display: flex;
   flex-direction: column;
@@ -589,75 +548,140 @@ a {
   flex-wrap: nowrap;
   width: 100vw;
   height: 94vh;
-  border: 2px solid turquoise;
+  /* border: 2px solid turquoise; */
 }
 
+/* I need this! */
 .Browse-Danceability-v2 h1{
-      border: 2px solid blue;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  color: rgb(130, 201, 255);
+  opacity: 0.5;
+  /* border: 2px solid blue; */
   text-align: center;
-    flex: 1 0 5vh;
-
+  flex: 2 0 3vh;
 }
 
-.Danceability-Slider-v2 {
-  
-      border: 2px solid yellow;
-  text-align: center;
-    flex: 1 0 5vh;
-
-}
-
+/* I need this! */
 .Danceability-Tracks-v2 {
-    border: 2px solid red;
+  /* border: 2px solid red; */
   text-align: center;
-    flex: 8 0 30vh;
-
+  width: 100vw;
+  flex: 8 0 30vh;
 }
 
+/* I need this! */
 .Pagination-Slider-Placeholder-v2 {
-  border: 4px solid #3e8e41;
-    text-align: center;
-
-    flex: 1 0 20vh;
-
+  /* border: 4px solid #3e8e41; */
+  text-align: center;
+  flex: 1 0 20vh;
 }
 
-
-
+/* I need this! */
 .Pagination-Slider-Container-v2 {
-    display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  border: 4px solid #3e8e41;
-    /* text-align: center; */
+  /* border: 4px solid #3e8e41; */
   width: 100vw;
-    flex: 1 0 20vh;
-
-
+  flex: 1 0 20vh;
 }
 
+/* I need this! */
 .Pagination-Slider-v2 {
-    /* text-align: center; */
-    flex: 0 0 30vw;
-
-
-
+  flex: 0 0 30vw;
 }
 
+/* I need this! */
 .Danceability-Slider-Container-v2 {
-    display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  border: 4px solid #3e8e41;
-    /* text-align: center; */
+  /* border: 2px solid yellow; */
   width: 100vw;
-    flex: 1 0 20vh;
-
-
+  flex: 1 0 3vh;
 }
 
+/* I need this! */
 .Danceability-Slider-Item-v2 {
-  flex: 0 0 60vw;
+  flex: 0 0 80vw;
+}
+
+/* I need this! */
+.Danceability-No-Results-Container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100%;
+  flex: 8 0 30vh;
+}
+
+/* I need this! */
+.Danceability-No-Results {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
+  font-size: 5rem;
+  background-color: white;
+  border: none;
+  color: rgb(86, 182, 255);
+}
+
+
+/* I need this! */
+.Browse-Result {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
+  font-size: 5rem;
+  background-color: white;
+  border: none;
+  color: rgb(86, 182, 255);
+  margin: 15vh 0 0;
+}
+
+/* I need this! */
+.Browse-Result:hover {
+  color: rgb(2, 206, 169);
+}
+
+
+.Browse-Result-No-Lyrics {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
+  font-size: 5rem;
+  background-color: white;
+  border: none;
+  color: rgb(86, 182, 255);
+  margin: 15vh 0 0;
+  opacity: 0.2;
+}
+
+
+.Browse-Result-No-Lyrics:hover {
+  color: rgb(2, 206, 169);
+}
+/* I need this! */
+.Result {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 200;
+  font-size: 2rem;
+  background-color: white;
+  border: none;
+  color: rgb(86, 182, 255);
+}
+
+/* I need this! */
+.Result-Container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100%;
 }

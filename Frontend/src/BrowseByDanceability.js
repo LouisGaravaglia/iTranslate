@@ -63,7 +63,7 @@ function BrowseByDanceability() {
         <div className="Browse-Danceability-v2">
           <h1>{(sliderVal * 100).toFixed(0)}</h1>
           <DanceabilitySlider classname="Danceability-Slider-v2" handleSliderMouseMove={handleSliderMouseMove} />
-          {!tracks && <><div className="Danceability-Tracks-v2"> <button className="Browse-Result">KEEP SLIDING!</button></div> <div className="Pagination-Slider-Placeholder-v2"><p>Placeholder</p></div></>}
+          {!tracks && <><div className="Danceability-No-Results-Container"> <button className="Danceability-No-Results">KEEP SLIDING!</button></div> <div className="Pagination-Slider-Placeholder-v2"></div></>}
           {tracks && <Tracks className="Danceability-Tracks-v2" results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={1} />}
         </div>
       </div>
