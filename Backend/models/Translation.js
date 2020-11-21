@@ -33,7 +33,7 @@ class Translation {
     console.log("TRANSLATION get data: ", data);
 
     const result = await db.query (
-      `SELECT translation FROM translation WHERE track_id = $1`, [data.track_id]
+      `SELECT translation FROM translation WHERE track_id = $1 AND language = $2`, [data.track_id, data.selectedLanguage]
     );
     console.log("GET TRANSLATION result: ", result);
 
