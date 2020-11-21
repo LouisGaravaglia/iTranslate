@@ -5,10 +5,21 @@ const addAlbumSchema = require("../schemas/addAlbumSchema.json");
 const Albums = require("../models/Albums");
 const ExpressError = require("../helpers/expressError");
 
+// router.get( "/", async function( req, res, next ) {
+//   try {
+//     console.log("MADE IT TO THE ALBUM GET ROUTE");
+//     const response = await Albums.checkIfAlbumIsInDB( req.query.albumId );
+//     console.log("RETURNING FROM THE ALBUM GET ROUTE");
+//     return res.status( 201 ).json( { response } );
+//   } catch ( err ) {
+//     next( err );
+//   }
+// });
+
 router.get( "/", async function( req, res, next ) {
   try {
     console.log("MADE IT TO THE ALBUM GET ROUTE");
-    const response = await Albums.checkIfAlbumIsInDB( req.query.albumId );
+    const response = await Albums.getAlbums( req.query.artistId );
     console.log("RETURNING FROM THE ALBUM GET ROUTE");
     return res.status( 201 ).json( { response } );
   } catch ( err ) {

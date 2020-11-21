@@ -44,7 +44,8 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "albums") displayAlbums = (
     //{albums.map(a => <Album className="Album" key={a.id} id={a.id} handleAlbumClick={handleAlbumClick} releaseDate={a.release_date} albumType={a.album_type} name={a.name} image={a.images[1].url}/>)}
     <div className="Browse-Albums">
-      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} inDatabase={r.inDatabase} name={r.name} id={r.spotify_id} image={r.img}/>)}
+      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} name={r.name} id={r.spotify_id} image={r.img_url}/>)}
+      {/* {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} inDatabase={r.inDatabase} name={r.name} id={r.spotify_id} image={r.img}/>)} */}
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} />}
     </div>
   );

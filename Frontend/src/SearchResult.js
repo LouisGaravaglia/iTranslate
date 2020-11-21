@@ -40,17 +40,25 @@ const SearchResult = memo((props) => {
 
   let displayAlbums;
 
-  if (props.typeOfResults === "albums" && props.inDatabase) displayAlbums = (
+  if (props.typeOfResults === "albums") displayAlbums = (
     <div className="Album">
       <img onClick={handleAlbumClick} src={props.image} alt=""/>
     </div>
   );
 
-  if (props.typeOfResults === "albums" && !props.inDatabase) displayAlbums = (
-    <div className="Album-No-Database">
-      <img onClick={handleAlbumClick} src={props.image} alt=""/>
-    </div>
-  );
+  // let displayAlbums;
+
+  // if (props.typeOfResults === "albums" && props.inDatabase) displayAlbums = (
+  //   <div className="Album">
+  //     <img onClick={handleAlbumClick} src={props.image} alt=""/>
+  //   </div>
+  // );
+
+  // if (props.typeOfResults === "albums" && !props.inDatabase) displayAlbums = (
+  //   <div className="Album-No-Database">
+  //     <img onClick={handleAlbumClick} src={props.image} alt=""/>
+  //   </div>
+  // );
 
 
   let displayTracks;
