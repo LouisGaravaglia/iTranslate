@@ -30,7 +30,7 @@ class BackendCall {
     static async addTrack(data) {
       console.log("Track data: ", data);
       if ( data.preview_url === null ) data.preview_url = "";
-      let res = await this.request("track/addTrackData", data, "post");
+      let res = await this.request("track", data, "post");
       return res.data.response;
     }
 
@@ -41,7 +41,6 @@ class BackendCall {
     }
 
     static async addAlbum(data) {
-      // data.img_url = data.img_url.url;
       console.log("ALBUM DATA: ", data);
       let res = await this.request("album", data, "post");
       return res.data.response;
@@ -54,7 +53,6 @@ class BackendCall {
         const artistId = await this.addArtist(artistData);
         const albumId = await this.addAlbum(albumData);
         const trackId = await this.addTrack(trackData);
-              // const spotifyIds = {trackId, artistId, albumId};
         console.log("Here is the artistId: ", artistId);
         console.log("Sucessfully added all three things to Database");
 
@@ -89,7 +87,7 @@ class BackendCall {
 //////////////////////////////////////  GET/ADD LYRICS  //////////////////////////////////////
 
     static async addLyrics(data) {
-      let res = await this.request("track/addLyrics", data, "post");
+      let res = await this.request("track", data, "patch");
       console.log("addLyrics res: ", res);
       return res.data.response;
     }
