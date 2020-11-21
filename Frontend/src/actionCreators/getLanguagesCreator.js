@@ -8,9 +8,15 @@ export function getLanguages() {
 
   return async function(dispatch) {
     // let languagesError = false;
-    const languages = await IBMWatsonAPI.getLanguages();
-    console.log("HERE are the languages: ", languages);
-    dispatch(addLanguages(languages));
+
+    try {
+      const languages = await IBMWatsonAPI.getLanguages();
+      console.log("HERE are the languages: ", languages);
+      dispatch(addLanguages(languages));
+    } catch(e) {
+      dispatch(addLanguages([{language:""}]));
+    }
+
     // dispatch(updateGetTranslationErrors(searchError))
   };
 }

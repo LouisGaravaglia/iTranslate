@@ -22,6 +22,14 @@ function BrowseByDanceability() {
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
+  // useEffect(() => {
+  //   const placeholderText = () => {
+  //     if (tracks === "") {
+
+  //     }
+  //   }
+  //   placeholderText();
+  // })
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
 
@@ -75,7 +83,7 @@ function BrowseByDanceability() {
         <div className="Browse-Danceability">
           <h1>{(sliderVal * 100).toFixed(0)}</h1>
           <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
-          {!tracks && <div className="Browse-Danceability-Placeholder" > </div>}
+          {!tracks && <><div className="Danceability-Tracks"> <button className="Danceability-Text-Placeholder">NO TRACKS AVAILABLE WITH THAT DANCEABILITY SCORE</button> </div> <div className="Pagination-Slider-Placeholder"></div></>}
           {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={3} />}
         </div>
       </div>
