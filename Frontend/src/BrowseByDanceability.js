@@ -4,7 +4,6 @@ import './App.css';
 import LyricsTranslation from "./LyricsTranslation";
 import DanceabilitySlider from "./DanceabilitySlider";
 import Tracks from "./Tracks";
-
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getDanceabilityTracks} from "./actionCreators/BrowseRoute/Danceability/getDanceabilityTracksCreator";
@@ -22,14 +21,6 @@ function BrowseByDanceability() {
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
-  // useEffect(() => {
-  //   const placeholderText = () => {
-  //     if (tracks === "") {
-
-  //     }
-  //   }
-  //   placeholderText();
-  // })
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
 
@@ -50,22 +41,11 @@ function BrowseByDanceability() {
   const handleSliderMouseMove = async (val) => {
     console.log("Here is the val: ", val);
     setSliderVal(val);
-    let lowerLimit = (val - 0.10).toFixed(2);
-    let upperLimit = (val + 0.10).toFixed(2);
-    dispatch(getDanceabilityTracks(lowerLimit, upperLimit));
+    let upperLimit = (val + 0.01).toFixed(2);
+    dispatch(getDanceabilityTracks(val, upperLimit));
   };
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
-
-
-  //DISPLAY TRACKS FROM SELECTED ALBUM
-  // let TrackResultsDiv;
-  
-  // if (tracks) TrackResultsDiv = (
-  //   <div ref={trackResultsRef}>
-  //     <Tracks results={tracks} typeOfResults={"search-results"} itemsPerPage={6} />
-  //   </div>
-  // );
 
   let LyricsAndTranslationDivs;
 
@@ -83,7 +63,7 @@ function BrowseByDanceability() {
         <div className="Browse-Danceability">
           <h1>{(sliderVal * 100).toFixed(0)}</h1>
           <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
-          {!tracks && <><div className="Danceability-Tracks"> <button className="Danceability-Text-Placeholder">NO TRACKS AVAILABLE WITH THAT DANCEABILITY SCORE</button> </div> <div className="Pagination-Slider-Placeholder"></div></>}
+          {!tracks && <><div className="Danceability-Tracks"> <button className="Browse-Result">KEEP SLIDING!</button></div> <div className="Pagination-Slider-Placeholder"></div></>}
           {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={3} />}
         </div>
       </div>

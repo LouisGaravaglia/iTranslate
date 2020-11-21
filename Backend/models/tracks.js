@@ -12,7 +12,7 @@ class Tracks {
       FROM tracks t 
       JOIN artists a ON t.artist_id = a.spotify_id 
       JOIN albums d ON t.album_id = d.spotify_id
-      WHERE t.danceability >= $1 AND t.danceability <= $2 AND t.lyrics != 'No Lyrics'`, [data.lowerLimit, data.upperLimit]);
+      WHERE t.danceability >= $1 AND t.danceability < $2 AND t.lyrics != 'No Lyrics'`, [data.lowerLimit, data.upperLimit]);
     console.log("HERE IS THE RESULT", result);
 
     return result.rows;

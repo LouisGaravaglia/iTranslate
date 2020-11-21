@@ -19,8 +19,9 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
     <>
     <div className="Browse-Artists">
       {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r}/>)}
+     </div> 
       {resultsArray.length > itemsPerPage && <PaginationSlider resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} />}
-     </div>
+     
     </>
   );
 
@@ -30,10 +31,12 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
 
   if (typeOfResults === "artists") displayArtists = (
     // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
+   <>
     <div className="Browse-Artists">
       {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.name} spotify_id={r.spotify_id}/>)}
+        </div>
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} />}
-    </div>
+ </>
   );
 
   let displayAlbums;
@@ -50,11 +53,12 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
 
   if (typeOfResults === "tracks") displayTracks = (
      //{tracks.map(t => <Track key={t.id} id={t.id} handleTrackClick={handleTrackClick} trackName={t.name} artistName={selectedArtist}/>)}
-    
+    <>
     <div className="Browse-Artists">
       {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="tracks" handleClick={handleSearch} artistName={r.artistName} trackName={r.trackName} musicObject={r}/>)}
+       </div>
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} />}
-    </div>
+   </>
   );
 
 
@@ -63,11 +67,12 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   let displayGenres;
 
   if (typeOfResults === "genres") displayGenres = (
-    // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
+<>
     <div className="Browse-Artists">
       {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="genres" handleClick={handleSearch} genre={r}/>)}
+     </div> 
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} />}
-    </div>
+    </>
   );
 
 ////////////////////////////////////////////////////  BROWSE BY DANCEABILITY  ////////////////////////////////////////////////////

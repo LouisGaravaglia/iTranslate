@@ -80,8 +80,10 @@ function BrowseByArtists({handleNoAlbumsError}) {
   let TrackResultsDiv;
   
   if (tracks) TrackResultsDiv = (
-    <div ref={trackResultsRef}>
-      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={6} />
+    <div className="Browse-Danceability" ref={trackResultsRef}>
+
+      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} />
+     
     </div>
   );
 
@@ -97,8 +99,8 @@ function BrowseByArtists({handleNoAlbumsError}) {
 
   return (
     <>
-      <div>
-        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={4}/>
+      <div className="Browse-Danceability">
+        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
       </div>
       {AlbumResultsDiv}
       {TrackResultsDiv}

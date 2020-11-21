@@ -72,8 +72,8 @@ function BrowseByGenre() {
   let ArtistResultsDiv;
   
   if (artists) ArtistResultsDiv = (
-    <div ref={aritstResultsRef}>
-        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={3}/>
+    <div className="Browse-Danceability" ref={aritstResultsRef}>
+        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
     </div>
   );
 
@@ -90,8 +90,8 @@ function BrowseByGenre() {
   let TrackResultsDiv;
   
   if (tracks) TrackResultsDiv = (
-    <div ref={trackResultsRef}>
-      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={6} />
+    <div className="Browse-Danceability" ref={trackResultsRef}>
+      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} />
     </div>
   );
 
@@ -107,8 +107,8 @@ function BrowseByGenre() {
 
   return (
     <>
-      <div>
-        <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={5}/>
+      <div className="Browse-Danceability">
+        <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={1}/>
       </div>
       {ArtistResultsDiv}
       {AlbumResultsDiv}

@@ -29,14 +29,14 @@ const SearchResult = memo((props) => {
   let displaySearchResults;
 
   if (props.typeOfResults === "search-results") displaySearchResults = (
-    <button onClick={handleSearchClick} className="SearchResult">"{props.track}" by {props.artist} on {props.album}</button>
+    <button onClick={handleSearchClick} className="Result">{<span className="Browse-Result">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</button>
   );
 
   let displayArtists;
 
   if (props.typeOfResults === "artists") displayArtists = (
             // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-  <button onClick={handleArtistsClick} className="BrowseArtists">{props.artist}</button>
+  <button onClick={handleArtistsClick} className="Browse-Result">{props.artist}</button>
     // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
   );
 
@@ -54,7 +54,7 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "tracks") displayTracks = (
             // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-  <button onClick={handleTrackClick} className="BrowseArtists">{props.trackName}</button>
+  <button onClick={handleTrackClick} className="Browse-Result">{props.trackName}</button>
     // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
   );
 
@@ -64,7 +64,7 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "genres") displayGenres = (
             // artists.map(artist => <button onClick={() => handleArtistClick(artist.spotify_id, artist.name)}>{artist.name}</button>)
-  <button onClick={handleGenreClick} className="BrowseArtists">{props.genre}</button>
+  <button onClick={handleGenreClick} className="Browse-Result">{props.genre}</button>
     // resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name}/>)
   );
 

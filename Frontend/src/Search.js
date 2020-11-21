@@ -90,7 +90,9 @@ const Search = () => {
   
   if (searchResults) SearchResultsDiv = (
     <div ref={searchResultsRef}>
-      <Tracks results={searchResults} typeOfResults={"search-results"} itemsPerPage={6} />
+    <div className="Browse-Danceability">
+      <Tracks results={searchResults} typeOfResults={"search-results"} itemsPerPage={1} />
+    </div>
     </div>
   );
 
