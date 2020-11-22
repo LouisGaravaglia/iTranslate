@@ -33,10 +33,10 @@ class Albums {
     console.log("INSIDE ALBUMS.getAlbums METHOD", artistId);
 
     const result = await db.query (
-      `SELECT d.spotify_id AS "albumId", d.img_url AS "albumImg", d.name AS "albumName"
+      `SELECT d.spotify_id AS "albumId", d.img_url AS "albumImg", d.name AS "albumName", d.release_date
        FROM albums d 
        JOIN tracks t ON d.spotify_id = t.album_id 
-       WHERE d.artist_id = $1 AND t.lyrics != 'No Lyrics'`, [artistId]);
+       WHERE d.artist_id = $1 AND t.lyrics != 'No Lyrics' ORDER BY d.release_date DESC`, [artistId]);
     console.log("Here is the result of rows from getAlbums", result.rows);
 
     return result.rows;

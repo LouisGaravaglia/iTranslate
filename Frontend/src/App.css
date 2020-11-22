@@ -677,3 +677,10 @@ a {
 .Main-Pagination-Slider {
   flex: 0 0 30vw;
 }
+
+/* I need this! */
+.Main-Pagination-Slider-Placeholder {
+  /* border: 4px solid #3e8e41; */
+  text-align: center;
+  flex: 3 0 20vh;
+}

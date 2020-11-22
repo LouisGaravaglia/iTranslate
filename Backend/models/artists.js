@@ -27,7 +27,7 @@ class Artists {
     const result = await db.query (`SELECT a.name AS "artistName", a.spotify_id AS "artistId"
       FROM artists a 
       JOIN tracks t ON a.spotify_id = t.artist_id
-      WHERE t.lyrics != 'No Lyrics' GROUP BY a.spotify_id, a.name`);
+      WHERE t.lyrics != 'No Lyrics' GROUP BY a.spotify_id, a.name ORDER BY a.name`);
     console.log("HERE IS THE getArtistsAndIds RESULT FROM BACKEND: ", result);
     return result.rows;
   }

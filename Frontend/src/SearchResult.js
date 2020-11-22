@@ -28,7 +28,15 @@ const SearchResult = memo((props) => {
 
   let displaySearchResults;
 
-  if (props.typeOfResults === "danceability-results") displaySearchResults = (
+  if (props.typeOfResults === "search-results") displaySearchResults = (
+    <div className="Danceability-Result-Container">
+    <button onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</button>
+  </div>
+  );
+
+  let displayDanceabilityResults;
+
+  if (props.typeOfResults === "danceability-results") displayDanceabilityResults = (
     <div className="Danceability-Result-Container">
     <button onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</button>
   </div>
@@ -96,6 +104,7 @@ const SearchResult = memo((props) => {
   return (
     <>
     {displaySearchResults}
+    {displayDanceabilityResults}
     {displayArtists}
     {displayAlbums}
     {displayTracks}

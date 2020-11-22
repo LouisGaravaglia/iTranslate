@@ -45,13 +45,14 @@ function BrowseByArtists({handleNoAlbumsError}) {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
-  //HANDLE ERROR MESSAGE IN CASE AN ARTIST IS LISTED THAT DOESN'T HAVE AN ALBUM ON SPOTIFY
-  useEffect(() => {
-    const addFlashMessage = () => {
-      if (albums && !albums[0]) handleNoAlbumsError();
-    }
-    addFlashMessage()
-  }, [albums]);
+  // ***IF I DELETE THIS, REMOVE THE PROP BEING PASSED DOWN ABOVE****
+  // //HANDLE ERROR MESSAGE IN CASE AN ARTIST IS LISTED THAT DOESN'T HAVE AN ALBUM ON SPOTIFY
+  // useEffect(() => {
+  //   const addFlashMessage = () => {
+  //     if (albums && !albums[0]) handleNoAlbumsError();
+  //   }
+  //   addFlashMessage()
+  // }, [albums]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
