@@ -4,6 +4,7 @@ import './App.css';
 import LyricsTranslation from "./LyricsTranslation";
 import DanceabilitySlider from "./DanceabilitySlider";
 import Tracks from "./Tracks";
+import LanguageSelect from "./LanguageSelect";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getDanceabilityTracks} from "./actionCreators/BrowseRoute/Danceability/getDanceabilityTracksCreator";
@@ -15,9 +16,11 @@ function BrowseByDanceability() {
   const lyrics = useSelector(store => store.lyrics);
   const tracks = useSelector(store => store.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
+  const translation = useSelector(store => store.translation);
   //REFS FOR PAGE TRAVERSAL
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
+  const showLyricsTranslationRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -36,6 +39,9 @@ function BrowseByDanceability() {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
+  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  useEffect(() => {scrollToNextDiv(translation, showLyricsTranslationRef);}, [translation, showLyricsTranslationRef, scrollToNextDiv]);
+
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleSliderMouseMove = async (val) => {
@@ -47,11 +53,21 @@ function BrowseByDanceability() {
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
-  let LyricsAndTranslationDivs;
+  //DISPLAY LANGUAGE SELECTION SEARCH BAR
+  let LanguageSelectDiv;
 
-  if (selectedTrackId) LyricsAndTranslationDivs = (
+  if (lyrics) LanguageSelectDiv = (
     <div ref={selectLanguageRef}>
-      <LyricsTranslation selectedTrackId={selectedTrackId} />
+      <LanguageSelect selectedTrackId={selectedTrackId}/>
+    </div>
+  );
+
+  //DISPLAY LYRICS AND TRANSLATION
+  let LyricsTranslationDiv;
+  
+  if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
+    <div ref={showLyricsTranslationRef}>
+      <LyricsTranslation  />
     </div>
   );
 
@@ -67,7 +83,8 @@ function BrowseByDanceability() {
           {tracks && <Tracks className="Result-Box" results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={1} />}
         </div>
       </div>
-      {LyricsAndTranslationDivs}
+      {LanguageSelectDiv}
+      {LyricsTranslationDiv}
     </>
   );
 }

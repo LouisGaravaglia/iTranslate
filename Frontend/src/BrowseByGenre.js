@@ -4,6 +4,7 @@ import './App.css';
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
 import Tracks from "./Tracks";
+import LanguageSelect from "./LanguageSelect";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
@@ -20,11 +21,13 @@ function BrowseByGenre() {
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
+  const translation = useSelector(store => store.translation);
   //REFS FOR PAGE TRAVERSAL
   const albumResultsRef = useRef();
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
   const aritstResultsRef = useRef();
+  const showLyricsTranslationRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -48,6 +51,9 @@ function BrowseByGenre() {
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
+
+  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  useEffect(() => {scrollToNextDiv(translation, showLyricsTranslationRef);}, [translation, showLyricsTranslationRef, scrollToNextDiv]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -95,11 +101,21 @@ function BrowseByGenre() {
     </div>
   );
 
-  let LyricsAndTranslationDivs;
+  //DISPLAY LANGUAGE SELECTION SEARCH BAR
+  let LanguageSelectDiv;
 
-  if (selectedTrackId) LyricsAndTranslationDivs = (
+  if (lyrics) LanguageSelectDiv = (
     <div ref={selectLanguageRef}>
-      <LyricsTranslation selectedTrackId={selectedTrackId} />
+      <LanguageSelect selectedTrackId={selectedTrackId}/>
+    </div>
+  );
+
+  //DISPLAY LYRICS AND TRANSLATION
+  let LyricsTranslationDiv;
+  
+  if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
+    <div ref={showLyricsTranslationRef}>
+      <LyricsTranslation  />
     </div>
   );
 
@@ -113,7 +129,8 @@ function BrowseByGenre() {
       {ArtistResultsDiv}
       {AlbumResultsDiv}
       {TrackResultsDiv}
-      {LyricsAndTranslationDivs}
+      {LanguageSelectDiv}
+      {LyricsTranslationDiv}
     </>
   );
 }

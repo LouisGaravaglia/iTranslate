@@ -19,7 +19,7 @@ const Search = () => {
   const lyrics = useSelector(store => store.lyrics);
   const searchResults = useSelector(store => store.results);
   const searchError = useSelector(store => store.errors.searchError);
-  const selectedTrack = useSelector(store => store.selectedTrack);
+  const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const translation = useSelector(store => store.translation);
   const dispatch = useDispatch();
   //STATE FOR FLASH MESSAGES
@@ -105,7 +105,7 @@ const Search = () => {
 
   if (lyrics) LanguageSelectDiv = (
     <div ref={selectLanguageRef}>
-      <LanguageSelect selectedTrackId={selectedTrack.trackId}/>
+      <LanguageSelect selectedTrackId={selectedTrackId}/>
     </div>
   );
 
@@ -117,7 +117,6 @@ const Search = () => {
       <LyricsTranslation  />
     </div>
   );
-
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 

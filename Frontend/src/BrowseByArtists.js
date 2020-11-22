@@ -4,6 +4,7 @@ import './App.css';
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
 import Tracks from "./Tracks";
+import LanguageSelect from "./LanguageSelect";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
@@ -18,10 +19,12 @@ function BrowseByArtists({handleNoAlbumsError}) {
   const albums = useSelector(store => store.albums);
   const tracks = useSelector(store => store.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
+  const translation = useSelector(store => store.translation);
   //REFS FOR PAGE TRAVERSAL
   const albumResultsRef = useRef();
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
+  const showLyricsTranslationRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -44,6 +47,9 @@ function BrowseByArtists({handleNoAlbumsError}) {
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
+
+  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  useEffect(() => {scrollToNextDiv(translation, showLyricsTranslationRef);}, [translation, showLyricsTranslationRef, scrollToNextDiv]);
 
   // ***IF I DELETE THIS, REMOVE THE PROP BEING PASSED DOWN ABOVE****
   // //HANDLE ERROR MESSAGE IN CASE AN ARTIST IS LISTED THAT DOESN'T HAVE AN ALBUM ON SPOTIFY
@@ -82,17 +88,25 @@ function BrowseByArtists({handleNoAlbumsError}) {
   
   if (tracks) TrackResultsDiv = (
     <div className="Main-Container" ref={trackResultsRef}>
-
       <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} />
-     
     </div>
   );
 
-  let LyricsAndTranslationDivs;
+  //DISPLAY LANGUAGE SELECTION SEARCH BAR
+  let LanguageSelectDiv;
 
-  if (selectedTrackId) LyricsAndTranslationDivs = (
+  if (lyrics) LanguageSelectDiv = (
     <div ref={selectLanguageRef}>
-      <LyricsTranslation selectedTrackId={selectedTrackId} />
+      <LanguageSelect selectedTrackId={selectedTrackId}/>
+    </div>
+  );
+
+  //DISPLAY LYRICS AND TRANSLATION
+  let LyricsTranslationDiv;
+  
+  if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
+    <div ref={showLyricsTranslationRef}>
+      <LyricsTranslation  />
     </div>
   );
 
@@ -105,7 +119,8 @@ function BrowseByArtists({handleNoAlbumsError}) {
       </div>
       {AlbumResultsDiv}
       {TrackResultsDiv}
-      {LyricsAndTranslationDivs}
+      {LanguageSelectDiv}
+      {LyricsTranslationDiv}
   </>
   );
 }
