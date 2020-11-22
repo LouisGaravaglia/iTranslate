@@ -21,6 +21,7 @@ function LyricsTranslation() {
 
       {props => (
         <div style={props}>
+
           <div className="Lyrics-Translation">
             <div className="Lyrics-Container">
               <p className="Lyrics">ORIGINAL LYRICS</p>
@@ -31,6 +32,7 @@ function LyricsTranslation() {
               <p className="Translation">{translation}</p>
             </div>
           </div>
+
         </div>
       )}
 

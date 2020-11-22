@@ -5,6 +5,7 @@ import LyricsTranslation from "./LyricsTranslation";
 import DanceabilitySlider from "./DanceabilitySlider";
 import Tracks from "./Tracks";
 import LanguageSelect from "./LanguageSelect";
+import DanceabilitySearch from "./DanceabilitySearch";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getDanceabilityTracks} from "./actionCreators/BrowseRoute/Danceability/getDanceabilityTracksCreator";
@@ -33,8 +34,8 @@ function BrowseByDanceability() {
 
   }, []);
 
-  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  useEffect(() => {scrollToNextDiv(tracks, trackResultsRef);}, [tracks, trackResultsRef, scrollToNextDiv]);
+  // //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  // useEffect(() => {scrollToNextDiv(tracks, trackResultsRef);}, [tracks, trackResultsRef, scrollToNextDiv]);
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
@@ -44,14 +45,23 @@ function BrowseByDanceability() {
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
-  const handleSliderMouseMove = async (val) => {
-    console.log("Here is the val: ", val);
-    setSliderVal(val);
-    let upperLimit = (val + 0.01).toFixed(2);
-    dispatch(getDanceabilityTracks(val, upperLimit));
-  };
+  // const handleSliderMouseMove = async (val) => {
+  //   console.log("Here is the val: ", val);
+  //   setSliderVal(val);
+  //   let upperLimit = (val + 0.01).toFixed(2);
+  //   dispatch(getDanceabilityTracks(val, upperLimit));
+  // };
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
+
+  // //DISPLAY DANCEABILITY SEARCH SLIDER
+  // let DanceabilitySearchDiv;
+  
+  // if (translation && translation !== "Could not read language value")  DanceabilitySearchDiv = (
+  //   <div ref={showLyricsTranslationRef}>
+  //     <DanceabilitySearch  />
+  //   </div>
+  // );
 
   //DISPLAY LANGUAGE SELECTION SEARCH BAR
   let LanguageSelectDiv;
@@ -71,18 +81,13 @@ function BrowseByDanceability() {
     </div>
   );
 
+
+
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
     <>
-      <div ref={trackResultsRef}>
-        <div className="Browse-Danceability-v2">
-          <h1>{(sliderVal * 100).toFixed(0)}</h1>
-          <DanceabilitySlider classname="Danceability-Slider-v2" handleSliderMouseMove={handleSliderMouseMove} />
-          {!tracks && <><div className="Danceability-No-Results-Container"> <button className="Danceability-No-Results">KEEP SLIDING!</button></div> <div className="Pagination-Slider-Placeholder-v2"></div></>}
-          {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={1} />}
-        </div>
-      </div>
+      <DanceabilitySearch />
       {LanguageSelectDiv}
       {LyricsTranslationDiv}
     </>
