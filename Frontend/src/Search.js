@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
+import {Spring} from 'react-spring/renderprops';
 //COMPONENT IMPORTS
 import SearchBar from "./SearchBar";
 import FlashMessage from "./FlashMessage";
@@ -121,20 +122,31 @@ const Search = () => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <div className="Search">
-      <div className="Flash-Messages-Container">
-        {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
-        {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
-        {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
-        {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
-      </div>
-      <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
-      {SearchResultsDiv}
-      {LanguageSelectDiv}
-      {LyricsTranslationDiv}
-    </div>
-  );
+    <Spring
+      from={{opacity: 0}}
+      to={{opacity: 1}}
+      config={{delay: 300, duration: 300}}
+    >
+      {props => (
+        <div style={props}>
 
+          <div className="Search">
+            <div className="Flash-Messages-Container">
+              {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
+              {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
+              {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
+              {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
+            </div>
+            <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
+            {SearchResultsDiv}
+            {LanguageSelectDiv}
+            {LyricsTranslationDiv}
+          </div>
+
+        </div>
+      )}
+    </Spring>
+  );
 };
 
 export default Search;

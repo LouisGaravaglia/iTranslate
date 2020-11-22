@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
+import {Spring} from 'react-spring/renderprops';
 import './App.css';
 //COMPONENT IMPORTS
 import FlashMessage from "./FlashMessage";
@@ -142,24 +143,36 @@ const handleNoAlbumsError = () => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <div className="Browse">
-      <div className="Flash-Messages-Container">
-        {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
-        {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
-        {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
-        {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
-        {generalErrorFlashMessage && (<FlashMessage setState={setGeneralErrorFlashMessage} message="Uh oh, something went wrong. Please try again."/> )}
-        {/* {noAlbumsFlashMessage && (<FlashMessage setState={setNoAlbumsFlashMessage} message="Sorry, there are no albums for that artist at this time."/> )} */}
+    <Spring
+      from={{opacity: 0}}
+      to={{opacity: 1}}
+      config={{delay: 300, duration: 300}}
+    >
+    {props => (
+      <div style={props}>
+
+        <div className="Browse">
+          <div className="Flash-Messages-Container">
+            {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
+            {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
+            {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
+            {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
+            {generalErrorFlashMessage && (<FlashMessage setState={setGeneralErrorFlashMessage} message="Uh oh, something went wrong. Please try again."/> )}
+            {/* {noAlbumsFlashMessage && (<FlashMessage setState={setNoAlbumsFlashMessage} message="Sorry, there are no albums for that artist at this time."/> )} */}
+          </div>
+          <div className="Browse-Landing">
+            <button onClick={() => handleCategoryClick("Artists")}>Artists</button>
+            <button onClick={() => handleCategoryClick("Genre")}>Genre</button>
+            <button onClick={() => handleCategoryClick("Danceability")}>Danceability</button>
+          </div>
+          {BrowseByArtistsDiv}
+          {BrowseByGenreDiv}
+          {BrowseByDanceabilityDiv}
+        </div>
+
       </div>
-      <div className="Browse-Landing">
-        <button onClick={() => handleCategoryClick("Artists")}>Artists</button>
-        <button onClick={() => handleCategoryClick("Genre")}>Genre</button>
-        <button onClick={() => handleCategoryClick("Danceability")}>Danceability</button>
-      </div>
-      {BrowseByArtistsDiv}
-      {BrowseByGenreDiv}
-      {BrowseByDanceabilityDiv}
-    </div>
+    )}
+    </Spring>
   );
 }
 

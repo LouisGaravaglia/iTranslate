@@ -1,14 +1,15 @@
 import React,  {useRef, useEffect, useCallback} from 'react';
+import {Spring} from 'react-spring/renderprops';
 import './App.css';
 //COMPONENT IMPORTS
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
 import Tracks from "./Tracks";
 import LanguageSelect from "./LanguageSelect";
+import Artists from "./Artists";
+import Albums from "./Albums";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
-import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {getArtists} from "./actionCreators/BrowseRoute/Genre/getArtistsCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 
@@ -62,24 +63,14 @@ function BrowseByGenre() {
     dispatch(resetStore("albums", "tracks", "lyrics", "translation"));
   }
 
-  const handleArtistClick = async (artistId) => {
-    dispatch(getAlbums(artistId));
-    dispatch(resetStore("tracks", "lyrics", "translation"));
-  }
-
-  const handleAlbumClick = async (albumId) => {
-    dispatch(getTracks(albumId));
-    dispatch(resetStore("lyrics", "translation"));
-  }
-
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   //DISPLAY ARTISTS FROM SELECTED GENRE
   let ArtistResultsDiv;
   
   if (artists) ArtistResultsDiv = (
-    <div className="Main-Container" ref={aritstResultsRef}>
-        <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
+    <div ref={aritstResultsRef}>
+      <Artists />
     </div>
   );
 
@@ -87,8 +78,8 @@ function BrowseByGenre() {
   let AlbumResultsDiv;
   
   if (albums) AlbumResultsDiv = (
-    <div className="Main-Container" ref={albumResultsRef}>
-        <SearchResultList key={albums[0].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3}/>
+    <div  ref={albumResultsRef}>
+      <Albums />
     </div>
   );
 
@@ -122,17 +113,28 @@ function BrowseByGenre() {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <>
-      <div className="Main-Container">
-        <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={1}/>
-      </div>
-      {ArtistResultsDiv}
-      {AlbumResultsDiv}
-      {TrackResultsDiv}
-      {LanguageSelectDiv}
-      {LyricsTranslationDiv}
-    </>
+    <Spring
+      from={{opacity: 0}}
+      to={{opacity: 1}}
+      config={{delay: 300, duration: 300}}
+    >
+      {props => (
+        <div style={props}>
+
+          <div className="Main-Container">
+            <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={1}/>
+          </div>
+          {ArtistResultsDiv}
+          {AlbumResultsDiv}
+          {TrackResultsDiv}
+          {LanguageSelectDiv}
+          {LyricsTranslationDiv}
+
+        </div>
+      )}
+    </Spring>
   );
-}
+};
+
 
 export default BrowseByGenre;

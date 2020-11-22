@@ -1,10 +1,12 @@
 import React, {useRef, useEffect, useCallback} from 'react';
+import {Spring} from 'react-spring/renderprops';
 import './App.css';
 //COMPONENT IMPORTS
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
 import Tracks from "./Tracks";
 import LanguageSelect from "./LanguageSelect";
+import Albums from "./Albums";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
@@ -67,19 +69,14 @@ function BrowseByArtists({handleNoAlbumsError}) {
     dispatch(resetStore("tracks", "lyrics", "translation"));
   }
 
-  const handleAlbumClick = async (albumId) => {
-    dispatch(getTracks(albumId));
-    dispatch(resetStore("lyrics", "translation", "selectedTrack"));
-  }
-
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   //DISPLAY ALBUMS FROM SELECTED ARTIST
   let AlbumResultsDiv;
   
   if (albums) AlbumResultsDiv = (
-    <div className="Main-Container" ref={albumResultsRef}>
-      {albums[0] && <SearchResultList key={albums[0].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3}/>}
+    <div ref={albumResultsRef}>
+      <Albums />
     </div>
   );
 
@@ -113,16 +110,27 @@ function BrowseByArtists({handleNoAlbumsError}) {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <>
-      <div className="Main-Container">
-        <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
-      </div>
-      {AlbumResultsDiv}
-      {TrackResultsDiv}
-      {LanguageSelectDiv}
-      {LyricsTranslationDiv}
-  </>
+    <Spring
+      from={{opacity: 0}}
+      to={{opacity: 1}}
+      config={{delay: 300, duration: 300}}
+    >
+      {props => (
+        <div style={props}>
+
+          <div className="Main-Container">
+            <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
+          </div>
+          {AlbumResultsDiv}
+          {TrackResultsDiv}
+          {LanguageSelectDiv}
+          {LyricsTranslationDiv}
+
+        </div>
+      )}
+    </Spring>
   );
-}
+};
+
 
 export default BrowseByArtists;

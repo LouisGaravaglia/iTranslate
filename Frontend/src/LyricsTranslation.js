@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spring } from 'react-spring/renderprops';
+import {Spring} from 'react-spring/renderprops';
 import './App.css';
 //REDUX IMPORTS
 import {useSelector} from "react-redux";
@@ -12,13 +12,11 @@ function LyricsTranslation() {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <>
-      <Spring
-        from={{opacity: 0}}
-        to={{opacity: 1}}
-        config={{delay: 300, duration: 300}}
-      >
-
+    <Spring
+      from={{opacity: 0}}
+      to={{opacity: 1}}
+      config={{delay: 300, duration: 300}}
+    >
       {props => (
         <div style={props}>
 
@@ -35,9 +33,7 @@ function LyricsTranslation() {
 
         </div>
       )}
-
     </Spring>
-  </>
   );
 };
 
