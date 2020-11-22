@@ -46,7 +46,7 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "artists") displayArtists = (
     <div className="Main-Result-Container">
-    <button onClick={handleArtistsClick} className="Result-Main">{props.artist}</button>
+    <p onClick={handleArtistsClick} className="Result-Main">{props.artist}</p>
   </div>
   );
 
@@ -76,7 +76,7 @@ const SearchResult = memo((props) => {
   
   if (props.typeOfResults === "tracks") displayTracks = (
     <div className="Main-Result-Container">
-      <button onClick={handleTrackClick} className="Result-Main">{props.trackName}</button>
+      <p onClick={handleTrackClick} className="Result-Main">{props.trackName}</p>
     </div>
   );
 
@@ -96,7 +96,9 @@ const SearchResult = memo((props) => {
   let displayGenres;
 
   if (props.typeOfResults === "genres") displayGenres = (
-    <button onClick={handleGenreClick} className="Browse-Result">{props.genre}</button>
+    <div className="Main-Result-Container">
+    <p onClick={handleGenreClick} className="Result-Main">{props.genre}</p>
+  </div>
   );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////

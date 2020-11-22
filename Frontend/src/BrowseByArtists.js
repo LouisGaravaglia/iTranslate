@@ -73,7 +73,7 @@ function BrowseByArtists({handleNoAlbumsError}) {
   
   if (albums) AlbumResultsDiv = (
     <div className="Main-Container" ref={albumResultsRef}>
-      {albums[0] && <SearchResultList key={albums[0].id} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3}/>}
+      {albums[0] && <SearchResultList key={albums[0].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3}/>}
     </div>
   );
 

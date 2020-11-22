@@ -38,15 +38,59 @@ class Artists {
   //   return result.rows;
   // }
 
-  static async getGenres() {
-    const result = await db.query (`SELECT array_to_string(ARRAY(SELECT genre FROM artists ORDER BY genre), ', ') AS genres`);
-    console.log("HERE IS THE getGenres RESULT FROM BACKEND: ", result);
+  // static async getGenres() {
+  //   const result = await db.query (`
+  //     SELECT a.genre 
+  //     FROM artists a
+  //     JOIN tracks t
+  //     ON a.spotify_id = t.artist_id
+  //     WHERE t.lyrics != 'No Lyrics'
+  //     ORDER BY genre`);
+  //   console.log("HERE IS THE new getGenres RESULT FROM BACKEND: ", result);
+  //   return result.rows;
+  // }
+
+  // SELECT a.genre, a.name 
+  //     FROM artists a
+  //     JOIN tracks t
+  //     ON a.spotify_id = t.artist_id
+  //     WHERE t.lyrics != 'No Lyrics'
+  //     ORDER BY genre GROP BY a.name
+
+  // SELECT a.genre, a.name 
+  //     FROM artists a
+  //     JOIN tracks t
+  //     ON a.spotify_id = t.artist_id
+  //     WHERE t.lyrics != 'No Lyrics'
+  //     ORDER BY genre GROP BY a.name
+
+    static async getGenres() {
+    const result = await db.query (`SELECT array_to_string(ARRAY(
+      SELECT a.genre 
+      FROM artists a
+      JOIN tracks t
+      ON a.spotify_id = t.artist_id
+      WHERE t.lyrics != 'No Lyrics'
+      GROUP BY a.genre, a.name
+      ), ', ') AS genres`);
+    console.log("HERE IS THE new getGenres RESULT FROM BACKEND: ", result);
     return result.rows;
   }
 
+  //   static async getGenres() {
+  //   const result = await db.query (`SELECT array_to_string(ARRAY(SELECT genre FROM artists ORDER BY genre), ', ') AS genres`);
+  //   console.log("HERE IS THE getGenres RESULT FROM BACKEND: ", result);
+  //   return result.rows;
+  // }
+
     static async getArtistByGenre(genre) {
       console.log("tHIs is the val of genre i'm passing: ", genre);
-    const result = await db.query (`SELECT name, spotify_id FROM artists WHERE genre ILIKE '%'||$1||'%'`, [genre]);
+    const result = await db.query (`SELECT a.name AS "artistName", a.spotify_id AS "artistId"
+    FROM artists a
+    JOIN tracks t
+    ON a.spotify_id = t.artist_id
+    WHERE a.genre ILIKE '%'||$1||'%' AND t.lyrics != 'No Lyrics'
+    GROUP BY a.name, a.spotify_id`, [genre]);
     console.log("HERE IS THE getArtistByGenre RESULT FROM BACKEND: ", result);
     return result.rows;
   }
