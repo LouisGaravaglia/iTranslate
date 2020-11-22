@@ -230,7 +230,7 @@ a {
   opacity: 0.5;
   /* border: 2px solid blue; */
   text-align: center;
-  flex: 2 0 3vh;
+  flex: 1 0 3vh;
 }
 
 .Pagination-Slider-Placeholder-v2 {
@@ -349,7 +349,7 @@ a {
 }
 
 .Result-Main:hover {
-color: rgb(2, 206, 169);
+  color: rgb(2, 206, 169);
 }
 
 .Browse-Albums {
