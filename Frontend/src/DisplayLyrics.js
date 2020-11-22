@@ -4,13 +4,13 @@ const DisplayLyrics = ( { lyrics, translation} ) => {
 
   return (
     <>
-      <div className="Browse-Lyrics-Container">
-        <p className="Browse-Lyrics">ORIGINAL LYRICS</p>
-        <p className="Browse-Lyrics">{lyrics}</p>
+      <div className="Lyrics-Container">
+        <p className="Lyrics">ORIGINAL LYRICS</p>
+        <p className="Lyrics">{lyrics}</p>
       </div>
-      <div className="Browse-Translation-Container">
-        <p className="Browse-Translation">TRANSLATED LYRICS</p>
-        <p className="Browse-Translation">{translation}</p>
+      <div className="Translation-Container">
+        <p className="Translation">TRANSLATED LYRICS</p>
+        <p className="Translation">{translation}</p>
       </div>
   </>
   );

@@ -4,51 +4,59 @@ const SearchResult = memo((props) => {
 
   const handleSearchClick = () => {
     props.handleClick(props.musicObject);
-  }
+  };
 
   const handleArtistsClick = () => {
     props.handleClick(props.spotify_id);
-  }
+  };
 
   const handleAlbumClick = () => {
     props.handleClick(props.id);
-  }
+  };
 
   const handleTrackClick = () => {
     console.log("Here are the track props: ", props);
     props.handleClick(props.musicObject);
-  }
+  };
 
   const handleGenreClick = () => {
     console.log("Here are the genre props: ", props);
     props.handleClick(props.genre);
-  }
+  };
 
-////////////////////////////////////////////////////  BROWSE BY ARTISTS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  SEARCH RESULTS  ////////////////////////////////////////////////////
 
   let displaySearchResults;
 
   if (props.typeOfResults === "search-results") displaySearchResults = (
     <div className="Danceability-Result-Container">
-    <button onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</button>
-  </div>
+      <p onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
+    </div>
   );
+
+////////////////////////////////////////////////////  DANCEABILITY RESULTS  ////////////////////////////////////////////////////
+
 
   let displayDanceabilityResults;
 
   if (props.typeOfResults === "danceability-results") displayDanceabilityResults = (
     <div className="Danceability-Result-Container">
-    <button onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</button>
-  </div>
+      <p onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
+    </div>
   );
+
+////////////////////////////////////////////////////  ARTISTS  ////////////////////////////////////////////////////
+
 
   let displayArtists;
 
   if (props.typeOfResults === "artists") displayArtists = (
     <div className="Main-Result-Container">
-    <p onClick={handleArtistsClick} className="Result-Main">{props.artist}</p>
-  </div>
+      <p onClick={handleArtistsClick} className="Result-Main">{props.artist}</p>
+    </div>
   );
+
+////////////////////////////////////////////////////  ALBUMS  ////////////////////////////////////////////////////
 
   let displayAlbums;
 
@@ -72,6 +80,8 @@ const SearchResult = memo((props) => {
   //   </div>
   // );
 
+////////////////////////////////////////////////////  TRACKS  ////////////////////////////////////////////////////
+
   let displayTracks;
   
   if (props.typeOfResults === "tracks") displayTracks = (
@@ -91,26 +101,26 @@ const SearchResult = memo((props) => {
   //   <button onClick={handleTrackClick} className="Browse-Result-No-Lyrics">{props.trackName}</button>
   // );
 
-////////////////////////////////////////////////////  BROWSE BY GENRE  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  GENRES  ////////////////////////////////////////////////////
 
   let displayGenres;
 
   if (props.typeOfResults === "genres") displayGenres = (
     <div className="Main-Result-Container">
-    <p onClick={handleGenreClick} className="Result-Main">{props.genre}</p>
-  </div>
+      <p onClick={handleGenreClick} className="Result-Main">{props.genre}</p>
+    </div>
   );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
     <>
-    {displaySearchResults}
-    {displayDanceabilityResults}
-    {displayArtists}
-    {displayAlbums}
-    {displayTracks}
-    {displayGenres}
+      {displaySearchResults}
+      {displayDanceabilityResults}
+      {displayArtists}
+      {displayAlbums}
+      {displayTracks}
+      {displayGenres}
     </>
   );
 });

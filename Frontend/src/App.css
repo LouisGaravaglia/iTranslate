@@ -3,18 +3,7 @@
   padding: 0;
 }
 
-.container {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-    overflow: -moz-scrollbars-none;
-}
-.container::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-}
-
-
 /* //////////////////////////////////////  NAVBAR  ////////////////////////////////////// */
-
 
 .NavBar {
   background-color: rgb(86, 182, 255);
@@ -57,133 +46,16 @@ a {
   color: rgb(2, 206, 169);
 }
 
-/* //////////////////////////////////////  BROWSE ARTIST SECTION  ////////////////////////////////////// */
-
-/* .Browse-Artists-Container {
-  width: 100vw;
-  height: 100vh;
-  display: fixed;
-  background-color: green;
-  overflow-y: hidden;
-  overflow-x: hidden;
-} */
-
-/* .Danceability-Tracks {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100vw;
-  height: 40vh;
-  max-height: 40vh;
-  min-height: 40vh;
-} */
-
-.Browse-Artists {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100vw;
-  height: 40vh;
-  max-height: 40vh;
-  min-height: 40vh;
-}
-
-/* .Browse-Artists {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
-} */
-
-.BrowseArtists {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 400;
-  font-size: 1.5rem;
-  background-color: white;
-  border: none;
-  color: rgb(86, 182, 255);
-  margin: 10px 10px;
-  /* padding: 6px 12px; */
-  flex: 0 0 10%
-}
-
-.BrowseArtists:hover {
-  color: rgb(2, 206, 169);
-  font-size: 1.55rem;
-}
-
-/* .Browse-Artists button{
-  background-color: rgb(86, 182, 255);
-  border: none;
-  font-size: 1rem;
-  color: white;
-  margin: 0 40px;
-  padding: 6px 12px;
-  flex: 0 0 33.333333%
-} */
-
-/* .Browse-Artists button:hover{
-  background-color: rgb(41, 162, 255);
-} */
-
-/* //////////////////////////////////////  BROWSE ALBUM SECTION  ////////////////////////////////////// */
+/* //////////////////////////////////////  BROWSE SECTION  ////////////////////////////////////// */
 
 .Browse {
-  flex: 0 0 15%;
-}
-
-.Browse-Albums-Container {
-  width: 100vw;
   height: 100vh;
-  display: fixed;
-  background-color: blue;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
-
-
-/******   I NEED THIS***/
-.Album-No-Database {
-  flex: 1 0 21%;
-  margin: 40px;
-  flex: 0 0 auto; 
-  opacity: 0.2;
-  
-}
-
-/* //////////////////////////////////////  BROWSE TRACK SECTION  ////////////////////////////////////// */
-
-.Browse-Tracks {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
   width: 100vw;
-  height: 100vh;
-
 }
 
-.Browse-Tracks button{
-  background-color: rgb(86, 182, 255);
-  border: none;
-  font-size: 1rem;
-  color: white;
-  margin: 0 40px;
-  padding: 6px 12px;
-}
+/* //////////////////////////////////////  LYRICS  ////////////////////////////////////// */
 
-.Browse-Tracks button:hover{
-  background-color: rgb(41, 162, 255);
-}
-
-/* //////////////////////////////////////  BROWSE/SEARCH LYRICS  ////////////////////////////////////// */
-
-.Browse-Lyrics-Translation {
+.Lyrics-Translation {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
@@ -191,7 +63,7 @@ a {
   min-height: 100vh;
 }
 
-.Browse-Lyrics-Container {
+.Lyrics-Container {
   background-color: rgb(2, 152, 206);
   margin: 20px 20px 20px 50px;
   flex-basis: 0;
@@ -199,7 +71,7 @@ a {
 
 }
 
-.Browse-Lyrics {
+.Lyrics {
   white-space: pre-line;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
@@ -208,16 +80,16 @@ a {
   margin: 40px 40px;
 }
 
-/* //////////////////////////////////////  BROWSE/SEARCH TRANSLATION  ////////////////////////////////////// */
+/* //////////////////////////////////////  TRANSLATION  ////////////////////////////////////// */
 
-.Browse-Translation-Container {
+.Translation-Container {
   background-color: rgb(2, 206, 169);
   margin: 20px;
   flex-basis: 0;
   flex: 1 1 0px
 }
 
-.Browse-Translation {
+.Translation {
   white-space: pre-line;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
@@ -299,125 +171,6 @@ a {
 
 }
 
-/* //////////////////////////////////////  SEARCH RESULTS  ////////////////////////////////////// */
-
-/* .Search-Results {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  flex-wrap: wrap;
-  width: 100vw;
-  height: 100vh;
-} */
-
-/* .Search-Results p {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 800;
-  font-size: 3rem;
-  background-color: white;
-  border: none;
-  color: rgb(86, 182, 255);
-  margin: 10px 40px;
-  padding: 6px 12px;
-
-
-} */
-
-.SearchResult {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 600;
-  font-size: 2rem;
-  background-color: white;
-  border: none;
-  color: rgb(28, 141, 227);
-  margin: 5vh 0 0;
-
-}
-
-
-/* .Result-Lightweight {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 100;
-  font-size: 5rem;
-  color: rgb(0, 145, 255);
-} */
-/* 
-.Result-Lightweight:hover {
-    color: rgb(2, 206, 169);
-
-} */
-
-
-
-/* //////////////////////////////////////  SEARCH SELECT LANGUAGE  ////////////////////////////////////// */
-
-.Search-Language {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100vw;
-  height: 100vh;
-}
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
-/* //////////////////////////////////////  PAGINATION SLIDER  ////////////////////////////////////// */
-
-.Pagination-Slider {
-  width: 100vw;
-  height: 10vh;
-  max-height: 10vh;
-  min-height: 10vh;
-  margin: 60px 500px 80px;
-}
-
-
-
-
 /* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
 
 .Flash-Messages-Container {
@@ -456,7 +209,7 @@ a {
 /* //////////////////////////////////////  DANCEABILITY ROUTE ////////////////////////////////////// */
 
 
-/* I need this! */
+
 .Browse-Danceability-v2 {
   display: flex;
   flex-direction: column;
@@ -468,7 +221,7 @@ a {
   /* border: 2px solid turquoise; */
 }
 
-/* I need this! */
+
 .Browse-Danceability-v2 h1{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 900;
@@ -480,58 +233,39 @@ a {
   flex: 2 0 3vh;
 }
 
-/* I need this! */
-.Danceability-Tracks-v2 {
-  border: 2px solid blue;
-  text-align: center;
-  width: 100vw;
-  flex: 8 0 30vh;
-}
-
-
-/* I need this! */
 .Pagination-Slider-Placeholder-v2 {
   /* border: 4px solid #3e8e41; */
   text-align: center;
   flex: 1 0 20vh;
 }
 
-
-
-
-
 .Danceability-Pagination-Slider-Container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
   width: 100vw;
   flex: 1 0 20vh;
 }
-
 
 .Danceability-Pagination-Slider {
   flex: 0 0 30vw;
 }
 
-/* I need this! */
 .Danceability-Slider-Container-v2 {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  border: 2px solid yellow;
+  /* border: 2px solid yellow; */
   width: 100vw;
   flex: 1 0 3vh;
 }
 
-/* I need this! */
 .Danceability-Slider-Item-v2 {
   flex: 0 0 80vw;
 }
 
-/* I need this! */
 .Danceability-No-Results-Container {
   text-align: center;
   display: flex;
@@ -541,10 +275,9 @@ a {
   width: 100vw;
   height: 100%;
   flex: 8 0 30vh;
-  border: 2px solid magenta;
+  /* border: 2px solid magenta; */
 }
 
-/* I need this! */
 .Danceability-No-Results {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 100;
@@ -554,27 +287,8 @@ a {
   color: rgb(86, 182, 255);
 }
 
-/* .Browse-Result-No-Lyrics {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 100;
-  font-size: 5rem;
-  background-color: white;
-  border: none;
-  color: rgb(86, 182, 255);
-  margin: 15vh 0 0;
-  opacity: 0.2;
-}
-
-
-.Browse-Result-No-Lyrics:hover {
-  color: rgb(2, 206, 169);
-} */
-
-
 /* //////////////////////////////////////  RESULT (HEADER & SUBHEADER) ////////////////////////////////////// */
 
-
-/* I need this! */
 .Danceability-Result-Container {
   text-align: center;
   display: flex;
@@ -583,32 +297,32 @@ a {
   flex-wrap: wrap;
   width: 100vw;
   height: 100%;
-  border: 2px solid brown;
+  /* border: 2px solid brown; */
 }
 
-/* I need this! */
+.Result-Box {
+  /* border: 2px solid blue; */
+  text-align: center;
+  width: 100vw;
+  flex: 8 0 30vh;
+}
+
 .Result-Header {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 100;
   font-size: 5rem;
-  background-color: white;
-  border: none;
   color: rgb(86, 182, 255);
   margin: 15vh 0 0;
 }
 
-/* I need this! */
 .Result-Header:hover {
   color: rgb(2, 206, 169);
 }
 
-/* I need this! */
 .Result-Subheader {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 200;
   font-size: 2rem;
-  background-color: white;
-  border: none;
   color: rgb(86, 182, 255);
 }
 
@@ -623,7 +337,7 @@ a {
   flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
-  border: 4px solid red;
+  /* border: 4px solid red; */
 }
 
 .Result-Main {
@@ -638,26 +352,15 @@ a {
 color: rgb(2, 206, 169);
 }
 
-/* .Result-Main {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 100;
-  font-size: 5rem;
-  background-color: white;
-  border: none;
-  color: rgb(86, 182, 255);
-  margin-bottom: 80px;
-} */
-
 .Browse-Albums {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   flex: 1 0 60vh;
-  border: 4px solid yellow;
+  /* border: 4px solid yellow; */
 }
 
-/******   I NEED THIS***/
 .Album {
   flex: 1 0 21%;
   margin: 40px;
@@ -680,17 +383,15 @@ color: rgb(2, 206, 169);
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  border: 4px solid #3e8e41;
+  /* border: 4px solid #3e8e41; */
   width: 100vw;
   flex: 3 0 20vh;
 }
-
 
 .Main-Pagination-Slider {
   flex: 0 0 30vw;
 }
 
-/* I need this! */
 .Main-Pagination-Slider-Placeholder {
   /* border: 4px solid #3e8e41; */
   text-align: center;

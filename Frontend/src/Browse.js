@@ -1,4 +1,4 @@
-import React,  {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import './App.css';
 //COMPONENT IMPORTS
 import FlashMessage from "./FlashMessage";
@@ -11,7 +11,6 @@ import {resetLanguageError, resetTranslationError, resetLyricsError} from "./act
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
-
 
 function Browse() {
   //REACT STATE

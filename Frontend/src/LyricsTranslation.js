@@ -46,7 +46,7 @@ function LyricsTranslation({selectedTrackId}) {
   let LyricsTranslationDiv;
   
   if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
-      <div className="Browse-Lyrics-Translation" ref={lyricsTranslationRef}>
+      <div className="Lyrics-Translation" ref={lyricsTranslationRef}>
         <DisplayLyrics lyrics={lyrics} translation={translation}/>
       </div>
   );
