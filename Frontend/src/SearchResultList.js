@@ -45,7 +45,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "albums") displayAlbums = (
  <>
     <div className="Browse-Albums">
-      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} name={r.name} id={r.spotify_id} image={r.img_url}/>)}
+      {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} name={r.albumName} id={r.albumId} image={r.albumImg}/>)}
     </div>
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
  </>

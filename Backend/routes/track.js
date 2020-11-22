@@ -15,9 +15,9 @@ router.get( "/:handle", async function(req, res, next) {
       console.log("RETURING FORM THE TRACKS GET ROUTE", response);
       return res.status( 201 ).json( { response }  )
 
-    } else if (req.params.handle === "hasLyrics") {
-      const response = await Tracks.checkIfTrackHasLyrics(req.query.trackId);
-      console.log("RETURING FORM THE TRACKS checkIfTrackHasLyrics ROUTE", response);
+    } else if (req.params.handle === "getTracks") {
+      const response = await Tracks.getTracks(req.query.albumId);
+      console.log("RETURING FORM THE TRACKS getTracks ROUTE", response);
       return res.status( 201 ).json( { response }  )
 
     } else if (req.params.handle === "getLyrics") {
@@ -25,15 +25,24 @@ router.get( "/:handle", async function(req, res, next) {
       console.log("RETURING FORM THE TRACKS getLyrics ROUTE", response);
       return res.status( 201 ).json( { response }  )
 
-    } else if (req.params.handle === "inDatabase") {
-      const response = await Tracks.checkIfTrackIsInDB(req.query.trackId);
-      console.log("RETURING FORM THE TRACKS checkIfTrackIsInDB ROUTE", response);
-      return res.status( 201 ).json( { response }  )
-    }
+    } 
+
   } catch ( err ) {
     return next( err );
   }
 });
+
+
+  //  } else if (req.params.handle === "hasLyrics") {
+  //     const response = await Tracks.checkIfTrackHasLyrics(req.query.trackId);
+  //     console.log("RETURING FORM THE TRACKS checkIfTrackHasLyrics ROUTE", response);
+  //     return res.status( 201 ).json( { response }  )
+
+  //   } else if (req.params.handle === "inDatabase") {
+  //     const response = await Tracks.checkIfTrackIsInDB(req.query.trackId);
+  //     console.log("RETURING FORM THE TRACKS checkIfTrackIsInDB ROUTE", response);
+  //     return res.status( 201 ).json( { response }  )
+  //   }
 
 router.post( "/", async function( req, res, next ) {
   

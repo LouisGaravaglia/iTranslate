@@ -24,15 +24,33 @@ class Albums {
 
   }
 
+  // `SELECT d.spotify_id AS "albumId", d.img_url AS "albumImg", d.name AS "albumName"
+  //     FROM albums d 
+  //     JOIN tracks t ON d.album_id = t.album_id 
+  //     WHERE d.artist_id = $1 AND t.lyrics != 'No Lyrics'`
+
   static async getAlbums(artistId) {
     console.log("INSIDE ALBUMS.getAlbums METHOD", artistId);
 
     const result = await db.query (
-      `SELECT spotify_id, img_url, name FROM albums WHERE artist_id = $1`, [artistId]);
-    console.log("Here is the result of rows[0]", result.rows[0]);
+      `SELECT d.spotify_id AS "albumId", d.img_url AS "albumImg", d.name AS "albumName"
+       FROM albums d 
+       JOIN tracks t ON d.spotify_id = t.album_id 
+       WHERE d.artist_id = $1 AND t.lyrics != 'No Lyrics'`, [artistId]);
+    console.log("Here is the result of rows from getAlbums", result.rows);
 
     return result.rows;
   }
+
+  //   static async getAlbums(artistId) {
+  //   console.log("INSIDE ALBUMS.getAlbums METHOD", artistId);
+
+  //   const result = await db.query (
+  //     `SELECT spotify_id, img_url, name FROM albums WHERE artist_id = $1`, [artistId]);
+  //   console.log("Here is the result of rows[0]", result.rows[0]);
+
+  //   return result.rows;
+  // }
 
   //   static async checkIfAlbumIsInDB(albumId) {
   //   console.log("INSIDE ALBUMS.checkIfAlbumIsInDB METHOD", albumId);

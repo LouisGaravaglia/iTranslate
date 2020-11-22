@@ -155,7 +155,7 @@ class BackendCall {
       return res.data.response;
     }
 
-//////////////////////////////////////  GET DANCEABILITY  //////////////////////////////////////
+//////////////////////////////////////  GET ALBUMS  //////////////////////////////////////
 
     static async getAlbums(data) {
       console.log("making getAlbums request");
@@ -163,6 +163,16 @@ class BackendCall {
       console.log("getAlbums res: ", res);
       return res.data.response;
     }
+
+//////////////////////////////////////  GET ALBUMS  //////////////////////////////////////
+
+    static async getTracks(data) {
+      console.log("making getTracks request");
+      let res = await this.request("track/getTracks", data);
+      console.log("getTracks res: ", res);
+      return res.data.response;
+    }
+
   }
 
   export default BackendCall;

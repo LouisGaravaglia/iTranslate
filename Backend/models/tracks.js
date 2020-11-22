@@ -19,35 +19,57 @@ class Tracks {
 
   }
 
-  static async checkIfTrackHasLyrics(trackId) {
-    console.log("INSIDE TRACKS.checkIfTrackHasLyrics METHOD", trackId);
+//           trackId: track.id, 
+//           trackName: track.name, 
+//           artistId: track.artists[0].id,
+//           artistName: track.artists[0].name,
+//           albumId,
+//           hasLyrics,
+//           inDatabase
 
+  static async getTracks(albumId) {
+    console.log("INSIDE TRACKS.getTracks METHOD", albumId);
     const result = await db.query (
-      `SELECT lyrics FROM tracks WHERE spotify_id = $1`, [trackId]);
-    console.log("Here is the result of rows[0]", result.rows[0]);
+      `SELECT t.name AS "trackName", t.spotify_id AS "trackId",
+      t.artist_id AS "artistId", a.name AS "artistName", t.album_id AS "albumId"
+      FROM tracks t
+      JOIN artists a ON t.artist_id = a.spotify_id 
+      WHERE t.album_id = $1 AND lyrics != 'No Lyrics'`, [albumId]);
+    console.log("HERE IS THE RESULT FROM getTracks: ", result);
 
-    if (result.rows[0] === "No Lyrics") {
-      return false;
-    } else if (result.rows[0] === undefined){
-      return false;
-    } else {
-      return true
-    }
+    return result.rows;
+
   }
 
-  static async checkIfTrackIsInDB(trackId) {
-    console.log("INSIDE TRACKS.checkIfTrackIsInDB METHOD", trackId);
+  // static async checkIfTrackHasLyrics(trackId) {
+  //   console.log("INSIDE TRACKS.checkIfTrackHasLyrics METHOD", trackId);
 
-    const result = await db.query (
-      `SELECT name FROM tracks WHERE spotify_id = $1`, [trackId]);
-    console.log("Here is the result of rows[0]", result.rows[0]);
+  //   const result = await db.query (
+  //     `SELECT lyrics FROM tracks WHERE spotify_id = $1`, [trackId]);
+  //   console.log("Here is the result of rows[0]", result.rows[0]);
 
-    if (result.rows.length ) {
-      return true;
-    } else {
-      return false;
-    } 
-  }
+  //   if (result.rows[0] === "No Lyrics") {
+  //     return false;
+  //   } else if (result.rows[0] === undefined){
+  //     return false;
+  //   } else {
+  //     return true
+  //   }
+  // }
+
+  // static async checkIfTrackIsInDB(trackId) {
+  //   console.log("INSIDE TRACKS.checkIfTrackIsInDB METHOD", trackId);
+
+  //   const result = await db.query (
+  //     `SELECT name FROM tracks WHERE spotify_id = $1`, [trackId]);
+  //   console.log("Here is the result of rows[0]", result.rows[0]);
+
+  //   if (result.rows.length ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   } 
+  // }
 
   static async addTrackData ( data ) {
     console.log("INSIDE TRACKS.ADD METHOD", data);
