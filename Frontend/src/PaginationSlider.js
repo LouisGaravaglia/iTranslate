@@ -42,7 +42,7 @@ const MyPaginationSlider = withStyles({
         }
 })(Slider);
 
-const PaginationSlider = memo(({resultsArray, itemsPerPage, handleSliderChange}) => {
+const PaginationSlider = memo(({resultsArray, itemsPerPage, handleSliderChange, containerClass, sliderClass}) => {
   const [sliderVal, setSliderVal] = useState(0);
   const multipleOf = resultsArray.length % itemsPerPage === 0;
   let maxSliderVal = Math.floor(resultsArray.length / itemsPerPage);
@@ -61,8 +61,8 @@ const PaginationSlider = memo(({resultsArray, itemsPerPage, handleSliderChange})
 
   return (
 
-<div className="Pagination-Slider-Container-v2">
-  <MyPaginationSlider className="Pagination-Slider-v2" color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" track={false}/>
+<div className={containerClass}>
+  <MyPaginationSlider className={sliderClass} color="" value={sliderVal} max={maxSliderVal - 1} min={0} step={1} onChange={handleChange} aria-labelledby="continuous-slider" track={false}/>
 </div>
   );
 });

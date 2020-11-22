@@ -28,16 +28,18 @@ const SearchResult = memo((props) => {
 
   let displaySearchResults;
 
-  if (props.typeOfResults === "search-results") displaySearchResults = (
-    <div className="Result-Container">
-    <button onClick={handleSearchClick} className="Result">{<span className="Browse-Result">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</button>
+  if (props.typeOfResults === "danceability-results") displaySearchResults = (
+    <div className="Danceability-Result-Container">
+    <button onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</button>
   </div>
   );
 
   let displayArtists;
 
   if (props.typeOfResults === "artists") displayArtists = (
-    <button onClick={handleArtistsClick} className="Browse-Result">{props.artist}</button>
+    <div className="Main-Result-Container">
+    <button onClick={handleArtistsClick} className="Result-Main">{props.artist}</button>
+  </div>
   );
 
   let displayAlbums;
@@ -62,17 +64,24 @@ const SearchResult = memo((props) => {
   //   </div>
   // );
 
-
   let displayTracks;
-  //DISPLAYS TRACKS THAT ARE 100% OPACITY SINCE WE HAVE LYRICS
-  if (props.typeOfResults === "tracks" && props.hasLyrics) displayTracks = (
-    <button onClick={handleTrackClick} className="Browse-Result">{props.trackName}</button>
+  
+  if (props.typeOfResults === "tracks") displayTracks = (
+    <div className="Main-Result-Container">
+      <button onClick={handleTrackClick} className="Result-Main">{props.trackName}</button>
+    </div>
   );
 
-  //DISPLAYS TRACKS THAT ARE 20% OPACITY SINCE THERE ARE NO LYRICS IN THE DATABSE
-  if (props.typeOfResults === "tracks" && !props.hasLyrics) displayTracks = (
-    <button onClick={handleTrackClick} className="Browse-Result-No-Lyrics">{props.trackName}</button>
-  );
+  // let displayTracks;
+  // //DISPLAYS TRACKS THAT ARE 100% OPACITY SINCE WE HAVE LYRICS
+  // if (props.typeOfResults === "tracks" && props.hasLyrics) displayTracks = (
+  //   <button onClick={handleTrackClick} className="Browse-Result">{props.trackName}</button>
+  // );
+
+  // //DISPLAYS TRACKS THAT ARE 20% OPACITY SINCE THERE ARE NO LYRICS IN THE DATABSE
+  // if (props.typeOfResults === "tracks" && !props.hasLyrics) displayTracks = (
+  //   <button onClick={handleTrackClick} className="Browse-Result-No-Lyrics">{props.trackName}</button>
+  // );
 
 ////////////////////////////////////////////////////  BROWSE BY GENRE  ////////////////////////////////////////////////////
 
