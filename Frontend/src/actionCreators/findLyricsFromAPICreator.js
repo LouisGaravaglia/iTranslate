@@ -22,7 +22,7 @@ export function findLyricsFromAPI(track_id, artist, track) {
         await BackendCall.addLyrics({track_id, lyrics: "No Lyrics"});
         //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
         lyricsError = true;
-        dispatch(updateLyricsError(lyricsError))
+        dispatch(updateLyricsError(lyricsError));
       } else {
         console.log("SET LYRICS IN FIRST CONDTIONAL");
         //ADD LYRICS TO THAT TRACK IN THE DATABASE
@@ -33,7 +33,7 @@ export function findLyricsFromAPI(track_id, artist, track) {
     } catch(e) {
       //FLASH MESSAGE SAYING NO LYRICS EXIST FOR THAT SONG
       lyricsError = true;
-      dispatch(updateLyricsError(lyricsError))
+      dispatch(updateLyricsError(lyricsError));
     };
   };
 };
@@ -43,5 +43,5 @@ function addLyrics(lyrics) {
 };
 
 function updateLyricsError(lyricsError) {
-  return {type: UPDATE_LYRICS_ERROR, lyricsError}
+  return {type: UPDATE_LYRICS_ERROR, lyricsError};
 };

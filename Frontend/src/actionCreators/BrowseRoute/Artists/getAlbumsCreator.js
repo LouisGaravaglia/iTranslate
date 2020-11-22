@@ -1,34 +1,28 @@
-import { GET_ALBUMS } from "../../../actionTypes";
-import SpotifyAPI from "../../../SpotifyAPI";
+import { GET_ALBUMS, UPDATE_GENERAL_ERROR } from "../../../actionTypes";
 import BackendCall from "../../../BackendCall";
-
 
 ////////////////////////////////// GET ALL POSTS //////////////////////////////////
 export function getAlbums(artistId) {
 
   return async function(dispatch) {
-    // let albumsError = false;
-    
+
     try { 
       let albums = await BackendCall.getAlbums({artistId});
       console.log("here are the alubms", albums); 
       dispatch(addAlbums(albums));
     } catch(e) {
-      dispatch(addAlbums(""));
-    }
-
-
-    // dispatch(updateArtistErrors(albumsError))
+      dispatch(updateGeneralError(true));
+    };
   };
-}
+};
 
 function addAlbums(albums) {
   return {type:GET_ALBUMS, albums};
-}
+};
 
-// function updateArtistErrors(albumsError) {
-//   return {type: UPDATE_SEARCH_ERROR, albumsError}
-// }
+function updateGeneralError(generalError) {
+  return {type: UPDATE_GENERAL_ERROR, generalError};
+};
 
 
 

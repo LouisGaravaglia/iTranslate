@@ -1,13 +1,10 @@
-import {GET_LANGUAGES} from "../actionTypes";
+import {GET_LANGUAGES, UPDATE_GENERAL_ERROR} from "../actionTypes";
 import IBMWatsonAPI from "../IBMWatsonAPI";
-
-
 
 ////////////////////////////////// GET ALL POSTS //////////////////////////////////
 export function getLanguages() {
 
   return async function(dispatch) {
-    // let languagesError = false;
 
     try {
       const languages = await IBMWatsonAPI.getLanguages();
@@ -15,16 +12,15 @@ export function getLanguages() {
       dispatch(addLanguages(languages));
     } catch(e) {
       dispatch(addLanguages([{language:""}]));
-    }
-
-    // dispatch(updateGetTranslationErrors(searchError))
+      dispatch(updateGeneralError(true));
+    };
   };
-}
+};
 
 function addLanguages(languages) {
   return {type:GET_LANGUAGES, languages};
-}
+};
 
-// function updateGetTranslationErrors(searchError) {
-//   return {type: UPDATE_SEARCH_ERROR, searchError}
-// }
+function updateGeneralError(generalError) {
+  return {type: UPDATE_GENERAL_ERROR, generalError};
+};

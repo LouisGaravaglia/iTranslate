@@ -1,4 +1,4 @@
-import { GET_TRACKS } from "../../../actionTypes";
+import { GET_TRACKS, UPDATE_GENERAL_ERROR } from "../../../actionTypes";
 import BackendCall from "../../../BackendCall";
 
 
@@ -8,9 +8,10 @@ export function getDanceabilityTracks(lowerLimit, upperLimit) {
 
   return async function(dispatch) {
     console.log("fetching danceability: ", lowerLimit, upperLimit);
-    // let albumsError = false;
+    
+    try {
       const tracks = await BackendCall.getDanceabilityTracks({lowerLimit, upperLimit});
-            console.log("All danceability tracks: ", tracks);
+      console.log("All danceability tracks: ", tracks);
 
       if (!tracks.length) {
         dispatch(addTracks(""));
@@ -22,16 +23,18 @@ export function getDanceabilityTracks(lowerLimit, upperLimit) {
         track["inDatabase"] = true;
       }
 
+      dispatch(addTracks(tracks));
 
-    dispatch(addTracks(tracks));
-
+    } catch(e) {
+      dispatch(updateGeneralError(true));
+    };
   };
-}
+};
 
 function addTracks(tracks) {
   return {type:GET_TRACKS, tracks};
-}
+};
 
-// function updateArtistErrors(albumsError) {
-//   return {type: UPDATE_SEARCH_ERROR, albumsError}
-// }
+function updateGeneralError(generalError) {
+  return {type: UPDATE_GENERAL_ERROR, generalError};
+};

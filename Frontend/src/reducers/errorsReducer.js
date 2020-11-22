@@ -1,5 +1,5 @@
-import {UPDATE_TRANSLATION_ERRORS, UPDATE_LYRICS_ERROR, UPDATE_SEARCH_ERROR, RESET_LYRICS_ERROR, RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_SEARCH_ERROR} from "../actionTypes";
-const INITIAL_STATE = {searchError: false, lyricsError: false, languageError: false, translationError: false}
+import {UPDATE_TRANSLATION_ERRORS, UPDATE_LYRICS_ERROR, UPDATE_SEARCH_ERROR, RESET_LYRICS_ERROR, RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_SEARCH_ERROR, UPDATE_GENERAL_ERROR, RESET_GENERAL_ERROR} from "../actionTypes";
+const INITIAL_STATE = {generalError: false, searchError: false, lyricsError: false, languageError: false, translationError: false}
 
 export default function errorsReducer(state=INITIAL_STATE, action) {
   switch(action.type) {
@@ -10,6 +10,8 @@ export default function errorsReducer(state=INITIAL_STATE, action) {
       return {...state, lyricsError: action.lyricsError};
     case UPDATE_SEARCH_ERROR:
       return {...state, searchError: action.searchError};
+    case UPDATE_GENERAL_ERROR:
+      return {...state, generalError: action.generalError};
     //RESET ERROR VALUES BACK TO FALSE AFTER TRIGGERING A FLASH MESSAGE
     case RESET_LANGUAGE_ERROR:
       return {...state, languageError: false};
@@ -19,6 +21,8 @@ export default function errorsReducer(state=INITIAL_STATE, action) {
       return {...state, lyricsError: false};
     case RESET_SEARCH_ERROR:
       return {...state, searchError: false};
+    case RESET_GENERAL_ERROR:
+      return {...state, generalError: false};
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import {  RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_LYRICS_ERROR, RESET_SEARCH_ERROR } from "../actionTypes";
+import {  RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_LYRICS_ERROR, RESET_SEARCH_ERROR, GENERAL_ERROR, RESET_GENERAL_ERROR } from "../actionTypes";
 
 ////////////////////////////////// RESET LYRICS ERROR VALUE //////////////////////////////////
 
@@ -44,6 +44,16 @@ function updateTranslationError() {
   return {type:RESET_TRANSLATION_ERROR};
 }
 
+////////////////////////////////// RESET GENERAL ERROR VALUE //////////////////////////////////
+
+export function resetGeneralError() {
+  return async function(dispatch) {
+    dispatch(updateGeneralError());
+  };
+}
+function updateGeneralError() {
+  return {type:RESET_GENERAL_ERROR};
+}
 
 
 

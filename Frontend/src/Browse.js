@@ -7,7 +7,7 @@ import BrowseByGenre from "./BrowseByGenre";
 import BrowseByDanceability from "./BrowseByDanceability";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {resetLanguageError, resetTranslationError, resetLyricsError} from "./actionCreators/handleErrorsCreator";
+import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
@@ -20,12 +20,14 @@ function Browse() {
   const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
+  const generalError = useSelector(store => store.errors.generalError);
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
   const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
   const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
   const [translationErrorFlashMessage, setTranslationErrorFlashMessage] = useState(false);
   const [noAlbumsFlashMessage, setNoAlbumsFlashMessage] = useState(false);
+  const [generalErrorFlashMessage, setGeneralErrorFlashMessage] = useState(false);
   //REFS FOR PAGE TRAVERSAL
   const artistResultsRef = useRef();
   const genreResultsRef = useRef();
@@ -87,10 +89,15 @@ function Browse() {
           console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
         }
+        if (generalError) {
+          setGeneralErrorFlashMessage(true);
+          console.log("Here is what general error is: ", generalError);
+          dispatch(resetGeneralError());
+        }
 
     }
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError, dispatch])
+  }, [languageError, translationError, lyricsError, generalError, dispatch])
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -141,7 +148,8 @@ const handleNoAlbumsError = () => {
         {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
         {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
         {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
-        {noAlbumsFlashMessage && (<FlashMessage setState={setNoAlbumsFlashMessage} message="Sorry, there are no albums for that artist at this time."/> )}
+        {generalErrorFlashMessage && (<FlashMessage setState={setGeneralErrorFlashMessage} message="Uh oh, something went wrong. Please try again."/> )}
+        {/* {noAlbumsFlashMessage && (<FlashMessage setState={setNoAlbumsFlashMessage} message="Sorry, there are no albums for that artist at this time."/> )} */}
       </div>
       <div className="Browse-Landing">
         <button onClick={() => handleCategoryClick("Artists")}>Artists</button>
