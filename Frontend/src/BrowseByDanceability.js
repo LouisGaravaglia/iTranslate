@@ -1,26 +1,19 @@
-import React,  {useState, useRef, useEffect, useCallback} from 'react';
+import React,  {useRef, useEffect, useCallback} from 'react';
 import './App.css';
 //COMPONENT IMPORTS
 import LyricsTranslation from "./LyricsTranslation";
-import DanceabilitySlider from "./DanceabilitySlider";
-import Tracks from "./Tracks";
 import LanguageSelect from "./LanguageSelect";
 import DanceabilitySearch from "./DanceabilitySearch";
 //REDUX IMPORTS
-import {useDispatch, useSelector} from "react-redux";
-import {getDanceabilityTracks} from "./actionCreators/BrowseRoute/Danceability/getDanceabilityTracksCreator";
+import {useSelector} from "react-redux";
 
 function BrowseByDanceability() {
-  const [sliderVal, setSliderVal] = useState(0);
   //REDUX STORE
-  const dispatch = useDispatch();
   const lyrics = useSelector(store => store.lyrics);
-  const tracks = useSelector(store => store.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const translation = useSelector(store => store.translation);
   //REFS FOR PAGE TRAVERSAL
   const selectLanguageRef = useRef();
-  const trackResultsRef = useRef();
   const showLyricsTranslationRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
@@ -34,34 +27,13 @@ function BrowseByDanceability() {
 
   }, []);
 
-  // //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
-  // useEffect(() => {scrollToNextDiv(tracks, trackResultsRef);}, [tracks, trackResultsRef, scrollToNextDiv]);
-
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, showLyricsTranslationRef);}, [translation, showLyricsTranslationRef, scrollToNextDiv]);
 
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
-
-  // const handleSliderMouseMove = async (val) => {
-  //   console.log("Here is the val: ", val);
-  //   setSliderVal(val);
-  //   let upperLimit = (val + 0.01).toFixed(2);
-  //   dispatch(getDanceabilityTracks(val, upperLimit));
-  // };
-
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
-
-  // //DISPLAY DANCEABILITY SEARCH SLIDER
-  // let DanceabilitySearchDiv;
-  
-  // if (translation && translation !== "Could not read language value")  DanceabilitySearchDiv = (
-  //   <div ref={showLyricsTranslationRef}>
-  //     <DanceabilitySearch  />
-  //   </div>
-  // );
 
   //DISPLAY LANGUAGE SELECTION SEARCH BAR
   let LanguageSelectDiv;
@@ -81,8 +53,6 @@ function BrowseByDanceability() {
     </div>
   );
 
-
-
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
@@ -95,18 +65,3 @@ function BrowseByDanceability() {
 }
 
 export default BrowseByDanceability;
-
-
-  // return (
-  //   <>
-  //     <div ref={trackResultsRef}>
-  //       <div className="Browse-Danceability">
-  //         <h1>{(sliderVal * 100).toFixed(0)}</h1>
-  //         <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
-  //         {!tracks && <><div className="Danceability-Tracks"> <button className="Browse-Result">KEEP SLIDING!</button></div> <div className="Pagination-Slider-Placeholder"></div></>}
-  //         {tracks && <Tracks results={tracks} typeOfResults={"danceability-tracks"} itemsPerPage={1} />}
-  //       </div>
-  //     </div>
-  //     {LyricsAndTranslationDivs}
-  //   </>
-  // );
