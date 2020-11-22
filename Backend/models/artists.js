@@ -1,6 +1,5 @@
 const db = require("../db");
 const ExpressError = require("../helpers/ExpressError");
-// const sqlForPartialUpdate = require("../helpers/partialUpdate");
 
 class Artists {
 
