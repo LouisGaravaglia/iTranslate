@@ -1,4 +1,5 @@
 import React from 'react';
+import { Spring } from 'react-spring/renderprops';
 //API IMPORTS
 import SpotifyAPI from "./SpotifyAPI";
 import BackendCall from "./BackendCall";
@@ -44,7 +45,19 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
+    <Spring
+    from={{opacity: 0}}
+    to={{opacity: 1}}
+    config={{delay: 300, duration: 300}}
+    >
+      {props => (
+        <div style={props}>
+
     <SearchResultList key={results[0].trackId} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage}/>
+
+        </div>
+      )}
+    </Spring>
   );
 
 };

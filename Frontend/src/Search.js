@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect, useCallback} from 'react';
 //COMPONENT IMPORTS
 import SearchBar from "./SearchBar";
 import FlashMessage from "./FlashMessage";
+import LanguageSelect from "./LanguageSelect";
 import LyricsTranslation from "./LyricsTranslation";
 import Tracks from "./Tracks";
 //REDUX IMPORTS
@@ -19,6 +20,7 @@ const Search = () => {
   const searchResults = useSelector(store => store.results);
   const searchError = useSelector(store => store.errors.searchError);
   const selectedTrack = useSelector(store => store.selectedTrack);
+  const translation = useSelector(store => store.translation);
   const dispatch = useDispatch();
   //STATE FOR FLASH MESSAGES
   const [searchFlashMessage, setSearchFlashMessage] = useState(false);
@@ -28,6 +30,7 @@ const Search = () => {
   //REFS FOR PAGE TRAVERSAL
   const searchResultsRef = useRef();
   const selectLanguageRef = useRef();
+  const showLyricsTranslationRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -45,6 +48,9 @@ const Search = () => {
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
+
+  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  useEffect(() => {scrollToNextDiv(translation, showLyricsTranslationRef);}, [translation, showLyricsTranslationRef, scrollToNextDiv]);
 
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
@@ -94,13 +100,24 @@ const Search = () => {
     </div>
   );
 
-  let LyricsAndTranslationDivs;
+  //DISPLAY LANGUAGE SELECTION SEARCH BAR
+  let LanguageSelectDiv;
 
-  if (lyrics) LyricsAndTranslationDivs = (
+  if (lyrics) LanguageSelectDiv = (
     <div ref={selectLanguageRef}>
-      <LyricsTranslation selectedTrackId={selectedTrack.trackId} />
+      <LanguageSelect selectedTrackId={selectedTrack.trackId}/>
     </div>
   );
+
+  //DISPLAY LYRICS AND TRANSLATION
+  let LyricsTranslationDiv;
+  
+  if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
+    <div ref={showLyricsTranslationRef}>
+      <LyricsTranslation  />
+    </div>
+  );
+
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
@@ -114,7 +131,8 @@ const Search = () => {
       </div>
       <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
       {SearchResultsDiv}
-      {LyricsAndTranslationDivs}
+      {LanguageSelectDiv}
+      {LyricsTranslationDiv}
     </div>
   );
 
