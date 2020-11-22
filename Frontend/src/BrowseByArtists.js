@@ -100,7 +100,7 @@ function BrowseByArtists({handleNoAlbumsError}) {
   return (
     <>
       <div className="Main-Container">
-        <SearchResultList key={artists[0].spotify_id} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
+        <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
       </div>
       {AlbumResultsDiv}
       {TrackResultsDiv}

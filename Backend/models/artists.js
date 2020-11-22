@@ -24,10 +24,19 @@ class Artists {
   }
 
   static async getArtistsAndIds() {
-    const result = await db.query (`SELECT name, spotify_id FROM artists`);
+    const result = await db.query (`SELECT a.name AS "artistName", a.spotify_id AS "artistId"
+      FROM artists a 
+      JOIN tracks t ON a.spotify_id = t.artist_id
+      WHERE t.lyrics != 'No Lyrics' GROUP BY a.spotify_id, a.name`);
     console.log("HERE IS THE getArtistsAndIds RESULT FROM BACKEND: ", result);
     return result.rows;
   }
+
+  //   static async getArtistsAndIds() {
+  //   const result = await db.query (`SELECT name, spotify_id FROM artists`);
+  //   console.log("HERE IS THE getArtistsAndIds RESULT FROM BACKEND: ", result);
+  //   return result.rows;
+  // }
 
   static async getGenres() {
     const result = await db.query (`SELECT array_to_string(ARRAY(SELECT genre FROM artists ORDER BY genre), ', ') AS genres`);
