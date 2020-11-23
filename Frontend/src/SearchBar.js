@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-
+import {Spring} from 'react-spring/renderprops';
 
 const SearchBar = ( { header, handleSubmit} ) => {
   const [searchVal, setSearchVal] = useState("")
- 
 
   const triggerSubmit = (e) => {
     e.preventDefault();
@@ -16,11 +15,19 @@ const SearchBar = ( { header, handleSubmit} ) => {
 
   return (
 
+        <Spring
+      from={{opacity: 0}}
+      to={{opacity: 1}}
+      config={{delay: 300, duration: 300}}
+    >
+      {props => (
+        <div style={props}>
+
       <div className="Search-Field">
-        <p></p>
+        <div className="Search-Field-Content">
         <h1>{header}</h1>
-        <form>
-        <div className="Search-Input-Container">
+        <form className="Search-Input-Container">
+        <div >
           <input
             type="text"
             id="SearchVal"
@@ -31,8 +38,13 @@ const SearchBar = ( { header, handleSubmit} ) => {
           <button onClick={triggerSubmit} type="submit"><i class="fa fa-search icon"></i></button>
         </div>
         </form>
-        <p></p>
+        </div>
+        <div className="Search-Field-Filler"></div>
       </div>
+
+        </div>
+      )}
+    </Spring>
 
   );
 

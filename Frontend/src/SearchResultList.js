@@ -18,7 +18,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "search-results") displaySearchResults = (
     <>
       <div className="Result-Box">
-        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r}/>)}
+        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name} musicObject={r}/>)}
       </div> 
       {resultsArray.length > itemsPerPage && <PaginationSlider resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
       {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>}

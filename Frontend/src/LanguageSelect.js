@@ -22,7 +22,7 @@ function LanguageSelect({selectedTrackId}) {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <>
+    <div>
       <Spring
         from={{opacity: 0}}
         to={{opacity: 1}}
@@ -31,14 +31,14 @@ function LanguageSelect({selectedTrackId}) {
 
       {props => (
         <div style={props}>
-          <div>
+          
             <SearchBar header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
-          </div>
+         
         </div>
       )}
 
     </Spring>
-  </>
+  </div>
   );
 };
 

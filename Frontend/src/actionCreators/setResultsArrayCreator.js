@@ -9,7 +9,7 @@ export function setResultsArray(searchVal) {
   return async function(dispatch) {
     let searchError = false;
     const results = await SpotifyAPI.requestSearch(searchVal);
-
+  console.log("Searchr results = ", results);
     try {
 
       if (results === "Not Found") {
@@ -18,28 +18,28 @@ export function setResultsArray(searchVal) {
         console.log("noting found from Spotify");
         dispatch(updateSearchErrors(searchError))
       } else {
-        const newSearchResults = [];
-        console.log("here are the results: ", results);
+        // const newSearchResults = [];
+        // console.log("here are the results: ", results);
 
-        //Loop over results array and make new array with consolidated objects
-        for (let track of results) {
-          let hasLyrics = await BackendCall.checkIfTrackHasLyrics({trackId: track.id});
-          let inDatabase = await BackendCall.checkIfTrackIsInDB({trackId: track.id});
+        // //Loop over results array and make new array with consolidated objects
+        // for (let track of results) {
+        //   let hasLyrics = await BackendCall.checkIfTrackHasLyrics({trackId: track.id});
+        //   let inDatabase = await BackendCall.checkIfTrackIsInDB({trackId: track.id});
 
-          newSearchResults.push({
-            trackId: track.id, 
-            trackName: track.name, 
-            artistId: track.artists[0].id,
-            artistName: track.artists[0].name,
-            albumId: track.album.id,
-            albumName: track.album.name,
-            hasLyrics,
-            inDatabase
-          });
+        //   newSearchResults.push({
+        //     trackId: track.id, 
+        //     trackName: track.name, 
+        //     artistId: track.artists[0].id,
+        //     artistName: track.artists[0].name,
+        //     albumId: track.album.id,
+        //     albumName: track.album.name,
+        //     hasLyrics,
+        //     inDatabase
+        //   });
           
-        };
-        console.log("Here is what the newSearchResults is: ", newSearchResults);
-        dispatch(pushResultsArray(newSearchResults));
+        // };
+        // console.log("Here is what the newSearchResults is: ", newSearchResults);
+        dispatch(pushResultsArray(results));
       };
     } catch(e) {
       searchError = true;

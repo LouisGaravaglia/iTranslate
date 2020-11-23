@@ -10,6 +10,7 @@ import artistsReducer from "./BrowseRoute/artistsReducer";
 import allArtistsReducer from "./BrowseRoute/allArtistsReducer";
 import genresReducer from "./BrowseRoute/genresReducer";
 import selectedTrackReducer from "./selectedTrackReducer";
+import setInViewReducer from "./setInViewReducer";
 
 const rootReducer = combineReducers({
   results: resultsReducer, 
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   artists: artistsReducer,
   allArtists: allArtistsReducer,
   genres: genresReducer,
-  selectedTrack: selectedTrackReducer
+  selectedTrack: selectedTrackReducer,
+  inView: setInViewReducer
 });
 
 export default rootReducer;

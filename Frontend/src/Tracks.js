@@ -12,7 +12,6 @@ import {getLyricsFromDB} from "./actionCreators/getLyricsFromDBCreator";
 import {findLyricsFromAPI} from "./actionCreators/findLyricsFromAPICreator";
 import {addSelectedTrack} from "./actionCreators/addSelectedTrackCreator";
 
-
 const Tracks = ({typeOfResults, results, itemsPerPage}) => {
   const dispatch = useDispatch();
 
@@ -53,7 +52,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
       {props => (
         <div style={props}>
 
-          <SearchResultList key={results[0].trackId} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage}/>
+          <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage}/>
 
         </div>
       )}

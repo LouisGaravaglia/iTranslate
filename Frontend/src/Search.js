@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
-import {Spring} from 'react-spring/renderprops';
+import {useSpring, animated} from 'react-spring';
 //COMPONENT IMPORTS
 import SearchBar from "./SearchBar";
 import FlashMessage from "./FlashMessage";
@@ -11,8 +11,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
 import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
+import useOnScreen from "./useOnScreen";
 
 const Search = () => {
+  //STATE FOR ANIMATIONS
+  const [bgColor, setBgColor] = useState("#ABA800");
   //REDUX STORE
   const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
@@ -32,11 +35,39 @@ const Search = () => {
   const searchResultsRef = useRef();
   const selectLanguageRef = useRef();
   const showLyricsTranslationRef = useRef();
+  const searchRef = useRef();
+
+////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
+
+  const searchBarInView = useOnScreen(searchRef, {threshold: 0.7});
+  const searchResultsInView = useOnScreen(searchResultsRef, {threshold: 0.7});
+  const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
+  const LyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
+
+  useEffect(() => {
+    const changeInView = (searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView) => {
+      if (searchBarInView) {
+        setBgColor("#ABA800");
+      } else if (searchResultsInView) {
+        setBgColor("#8019FF");
+      } else if (selectLanguageInView) {
+        setBgColor("#AB5D00");
+      } else if (LyricsTranslationInView) {
+        setBgColor("#008FD1");
+      }
+    };
+  changeInView(searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView);
+  }, [searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView]);
+
+  const springProps = useSpring({
+    backgroundColor: bgColor,
+    config: {duration: 300}
+  });
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
-  const scrollToNextDiv = useCallback(async (state, ref) => {
+  const scrollToNextDiv = useCallback(async (state, ref, divId) => {
 
     if (state && state !== "Could not read language value") {
       ref.current.scrollIntoView({behavior: "smooth"});
@@ -90,62 +121,83 @@ const Search = () => {
 
   }
 
+  // const handleBgColorChange = (divId) => {
+  //   setBgColor(colorOptions[divId]);
+  // }
+
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
+
+  //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
+  let SearchBarDiv;
+  
+  SearchBarDiv = (
+    <animated.div style={springProps} ref={searchRef}>
+      <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
+    </animated.div>
+  );
 
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   let SearchResultsDiv;
   
   if (searchResults) SearchResultsDiv = (
-    <div className="Main-Container" ref={searchResultsRef}>
+        <animated.div style={springProps}  className="Main-Container" ref={searchResultsRef}>
       <Tracks results={searchResults} typeOfResults={"search-results"} itemsPerPage={1} />
-    </div>
+    </animated.div>
+  
   );
 
   //DISPLAY LANGUAGE SELECTION SEARCH BAR
   let LanguageSelectDiv;
 
   if (lyrics) LanguageSelectDiv = (
-    <div ref={selectLanguageRef}>
+
+    <animated.div style={springProps}  ref={selectLanguageRef}>
       <LanguageSelect selectedTrackId={selectedTrackId}/>
-    </div>
+    </animated.div>
+
   );
 
   //DISPLAY LYRICS AND TRANSLATION
   let LyricsTranslationDiv;
   
   if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
-    <div ref={showLyricsTranslationRef}>
+    <animated.div style={springProps}  ref={showLyricsTranslationRef}>
       <LyricsTranslation  />
-    </div>
+    </animated.div>
   );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <Spring
-      from={{opacity: 0}}
-      to={{opacity: 1}}
-      config={{delay: 300, duration: 300}}
-    >
-      {props => (
-        <div style={props}>
 
-          <div className="Search">
+
+
+   <>
+
             <div className="Flash-Messages-Container">
               {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
               {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
               {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
               {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
             </div>
-            <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
+
+            {SearchBarDiv}
+           
+              
+              
+
+ 
             {SearchResultsDiv}
+
+
             {LanguageSelectDiv}
             {LyricsTranslationDiv}
-          </div>
+         
 
-        </div>
-      )}
-    </Spring>
+ </>
+       
+
+
   );
 };
 

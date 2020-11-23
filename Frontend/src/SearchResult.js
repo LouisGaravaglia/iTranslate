@@ -1,9 +1,11 @@
 import React, {memo} from 'react';
+import BackendCall from "./BackendCall";
 
 const SearchResult = memo((props) => {
 
-  const handleSearchClick = () => {
-    props.handleClick(props.musicObject);
+  const handleSearchClick = async () => {
+    const updatedTrack = await BackendCall.consolidateSelectedSearchResultInfo(props.musicObject)
+    props.handleClick(updatedTrack);
   };
 
   const handleArtistsClick = () => {
@@ -29,7 +31,7 @@ const SearchResult = memo((props) => {
   let displaySearchResults;
 
   if (props.typeOfResults === "search-results") displaySearchResults = (
-    <div className="Danceability-Result-Container">
+    <div className="Main-Result-Container">
       <p onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
     </div>
   );

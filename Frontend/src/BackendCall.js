@@ -51,7 +51,7 @@ class BackendCall {
 
       try {
         const artistId = await this.addArtist(artistData);
-        const albumId = await this.addAlbum(albumData);
+        // const albumId = await this.addAlbum(albumData);
         const trackId = await this.addTrack(trackData);
         console.log("Here is the artistId: ", artistId);
         console.log("Sucessfully added all three things to Database");
@@ -173,6 +173,26 @@ class BackendCall {
       return res.data.response;
     }
 
-  }
+//////////////////////////////////////  GET SELECTED SEARCH RESULT DB INFO  //////////////////////////////////////
+
+    static async consolidateSelectedSearchResultInfo(track) {
+      const selectedTrack = {};
+      let hasLyrics = await BackendCall.checkIfTrackHasLyrics({trackId: track.id});
+      let inDatabase = await BackendCall.checkIfTrackIsInDB({trackId: track.id});
+
+      selectedTrack["trackId"] = track.id;
+      selectedTrack["trackName"] = track.name;
+      selectedTrack["artistId"] = track.artists[0].id;
+      selectedTrack["artistName"] = track.artists[0].name;
+      selectedTrack["albumId"] = track.album.id;
+      selectedTrack["albumName"] = track.album.name;
+      selectedTrack["hasLyrics"] = hasLyrics;
+      selectedTrack["inDatabase"] = inDatabase;
+
+      console.log("consolidateSelectedSearchResultInfo = ", selectedTrack);
+      return selectedTrack;
+    };
+
+  };
 
   export default BackendCall;

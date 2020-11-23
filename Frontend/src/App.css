@@ -1,6 +1,10 @@
-* {
-  margin: 0;
-  padding: 0;
+html, body {
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px !important;
+  overflow-x: hidden; 
 }
 
 /* //////////////////////////////////////  NAVBAR  ////////////////////////////////////// */
@@ -104,33 +108,45 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
 }
 
-.Search-Field h1 {
+.Search-Field-Content h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 800;
   font-size: 5rem;
   color: rgb(86, 182, 255);
   display: block;
-  flex: 1 0 100%;
   text-align: center;
-
+  /* margin: 0 80px; */
 }
+
+.Search-Field-Content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 80px;
+}
+
 
 /* STYLING FOR EMPTY P ELEMENT TO CENTER THE SEARCH BAR AND SEARCH H1 FLEX ITEMS */
-.Search-Field p {
+/* .Search-Field p {
   flex: 1 0 100%;
   height: 20vh;
-}
+} */
 
 .Search-Field input {
   width: 40vw;
   height: 50px;
   border: 2px solid  rgb(86, 182, 255);
   border-radius: 4px;
+
 }
 
 .Search-Field button{
@@ -153,6 +169,10 @@ a {
   background-color: rgb(41, 162, 255);
 }
 
+.Search-Field-Filler {
+flex: 0.1 0 1vh;
+}
+
 #SearchVal {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
@@ -168,7 +188,6 @@ a {
 
 .Search-Input-Container {
   position: relative;
-
 }
 
 /* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
