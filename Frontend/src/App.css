@@ -8,12 +8,21 @@ html, body {
 }
 
 /* //////////////////////////////////////  NAVBAR  ////////////////////////////////////// */
-
-.NavBar {
-  background-color: rgb(86, 182, 255);
-  color: white;
-  padding: 20px 0;
+.Navbar-Container {
+  position: absolute;
+  height: 50px;
+}
+.Navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 4;
   text-decoration: none;
+  width: 100vw;
+  height: 100px;
 }
 
 a {
@@ -22,6 +31,31 @@ a {
   margin: 0 30px;
   font-weight: 500;
 }
+
+.Navbar-Search-Box {
+  width: 50vw;
+}
+
+.Navbar-Search {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-left: 50px;
+}
+
+.Navbar-Browse-Box {
+  width: 50vw;
+  float: right;
+}
+
+.Navbar-Browse {
+  float: right;
+}
+
+/* .Navbar-Browse-Arrow:hover {
+  padding-left: 20px;
+} */
 
 /* //////////////////////////////////////  BROWSE LANDING INDEX  ////////////////////////////////////// */
 
@@ -32,6 +66,7 @@ a {
   flex-wrap: nowrap;
   width: 100vw;
   height: 100vh;
+
 }
 
 .Browse-Landing button {
@@ -55,6 +90,7 @@ a {
 .Browse {
   height: 100vh;
   width: 100vw;
+    background-color: red;
 }
 
 /* //////////////////////////////////////  LYRICS  ////////////////////////////////////// */
@@ -103,6 +139,12 @@ a {
 }
 
 /* //////////////////////////////////////  SEARCH BAR  ////////////////////////////////////// */
+
+/* .Search-Home-Container {
+    height: 100vh;
+  width: 100vw;
+background-color: rgb(2, 206, 169);
+} */
 
 .Search-Field {
   display: flex;

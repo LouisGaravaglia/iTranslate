@@ -6,6 +6,7 @@ import FlashMessage from "./FlashMessage";
 import LanguageSelect from "./LanguageSelect";
 import LyricsTranslation from "./LyricsTranslation";
 import Tracks from "./Tracks";
+import SearchLanding from "./SearchLanding";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
@@ -61,7 +62,7 @@ const Search = () => {
 
   const springProps = useSpring({
     backgroundColor: bgColor,
-    config: {duration: 300}
+    config: {duration: 900}
   });
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
@@ -131,8 +132,10 @@ const Search = () => {
   let SearchBarDiv;
   
   SearchBarDiv = (
+    
     <animated.div style={springProps} ref={searchRef}>
-      <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
+
+            <SearchLanding handleTrackSearchSubmit={handleTrackSearchSubmit}/>
     </animated.div>
   );
 
@@ -170,9 +173,9 @@ const Search = () => {
 
   return (
 
+<>
 
-
-   <>
+  {/* <div className="Search-Home-Container"> */}
 
             <div className="Flash-Messages-Container">
               {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
@@ -181,9 +184,8 @@ const Search = () => {
               {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
             </div>
 
-            {SearchBarDiv}
            
-              
+              {SearchBarDiv}
               
 
  
@@ -194,8 +196,8 @@ const Search = () => {
             {LyricsTranslationDiv}
          
 
- </>
-       
+ {/* </div> */}
+   </>    
 
 
   );

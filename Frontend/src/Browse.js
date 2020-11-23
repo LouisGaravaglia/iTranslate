@@ -1,11 +1,14 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {Spring} from 'react-spring/renderprops';
+import {useSpring, animated} from 'react-spring';
+
 import './App.css';
 //COMPONENT IMPORTS
 import FlashMessage from "./FlashMessage";
 import BrowseByArtists from "./BrowseByArtists";
 import BrowseByGenre from "./BrowseByGenre";
 import BrowseByDanceability from "./BrowseByDanceability";
+import Categories from "./BrowseCategories";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
@@ -16,6 +19,7 @@ import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
 function Browse() {
   //REACT STATE
   const [category, setCategory] = useState("");
+  const [bgColor, setBgColor] = useState("#22A833");
   //REDUX STORE
   const dispatch = useDispatch();
   const languageError = useSelector(store => store.errors.languageError);
@@ -33,6 +37,7 @@ function Browse() {
   const artistResultsRef = useRef();
   const genreResultsRef = useRef();
   const danceabilityResultsRef = useRef();
+  const categoryRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -100,6 +105,14 @@ function Browse() {
     displayFlashMessage();
   }, [languageError, translationError, lyricsError, generalError, dispatch])
 
+////////////////////////////////////////////////////  ANIMATION HOOKS  ////////////////////////////////////////////////////
+
+  const springProps = useSpring({
+    backgroundColor: bgColor,
+    config: {duration: 900}
+  });
+
+
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
 const handleCategoryClick = (category) => {
@@ -112,6 +125,14 @@ const handleNoAlbumsError = () => {
 }
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
+
+
+  //DISPLAY BROWSE BY ARTISTS COMPONENTS
+  let ChooseCategoryDiv = (
+      <animated.div style={springProps} ref={categoryRef}>
+               <Categories handleCategoryClick={handleCategoryClick}/>
+      </animated.div>
+  );
 
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
   let BrowseByArtistsDiv;
@@ -143,14 +164,15 @@ const handleNoAlbumsError = () => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <Spring
-      from={{opacity: 0}}
-      to={{opacity: 1}}
-      config={{delay: 300, duration: 300}}
-    >
-    {props => (
-      <div style={props}>
+    // <Spring
+    //   from={{opacity: 0, marginLeft: 2500}}
+    //   to={{opacity: 1, marginLeft: 0}}
+    //   config={{delay: 300, duration: 300}}
+    // >
+    // {props => (
+    //   <div style={props}>
 
+  
         <div className="Browse">
           <div className="Flash-Messages-Container">
             {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
@@ -160,20 +182,17 @@ const handleNoAlbumsError = () => {
             {generalErrorFlashMessage && (<FlashMessage setState={setGeneralErrorFlashMessage} message="Uh oh, something went wrong. Please try again."/> )}
             {/* {noAlbumsFlashMessage && (<FlashMessage setState={setNoAlbumsFlashMessage} message="Sorry, there are no albums for that artist at this time."/> )} */}
           </div>
-          <div className="Browse-Landing">
-            <button onClick={() => handleCategoryClick("Artists")}>Artists</button>
-            <button onClick={() => handleCategoryClick("Genre")}>Genre</button>
-            <button onClick={() => handleCategoryClick("Danceability")}>Danceability</button>
-          </div>
+          {ChooseCategoryDiv}
+  
           {BrowseByArtistsDiv}
           {BrowseByGenreDiv}
           {BrowseByDanceabilityDiv}
         </div>
 
-      </div>
-    )}
-    </Spring>
+    //   </div>
+    // )}
+    // </Spring>
   );
-}
+};
 
 export default Browse;

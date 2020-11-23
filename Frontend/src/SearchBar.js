@@ -15,13 +15,13 @@ const SearchBar = ( { header, handleSubmit} ) => {
 
   return (
 
-        <Spring
-      from={{opacity: 0}}
-      to={{opacity: 1}}
-      config={{delay: 300, duration: 300}}
-    >
-      {props => (
-        <div style={props}>
+    //     <Spring
+    //   from={{opacity: 0}}
+    //   to={{opacity: 1}}
+    //   config={{delay: 300, duration: 300}}
+    // >
+    //   {props => (
+    //     <div style={props}>
 
       <div className="Search-Field">
         <div className="Search-Field-Content">
@@ -42,9 +42,9 @@ const SearchBar = ( { header, handleSubmit} ) => {
         <div className="Search-Field-Filler"></div>
       </div>
 
-        </div>
-      )}
-    </Spring>
+    //     </div>
+    //   )}
+    // </Spring>
 
   );
 
