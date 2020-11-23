@@ -24,10 +24,10 @@ const SearchLanding = ({handleTrackSearchSubmit}) => {
 
   return (
     <Spring
-      from={{opacity: 0, marginLeft: -2500}}
+      from={{opacity: 1, marginLeft: -2500}}
       to={{opacity: 1, marginLeft: 0}}
       reverse={false}
-      config={{delay: 100, duration: 100}}
+      config={{delay: 0, duration: 200}}
     >
     {props => (
       <div style={props}>

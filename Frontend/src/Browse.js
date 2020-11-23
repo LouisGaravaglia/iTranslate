@@ -109,7 +109,7 @@ function Browse() {
 
   const springProps = useSpring({
     backgroundColor: bgColor,
-    config: {duration: 900}
+    config: {duration: 800}
   });
 
 
