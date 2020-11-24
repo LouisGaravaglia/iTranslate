@@ -87,7 +87,7 @@ function BrowseByDanceability() {
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  //SCROLL DOWN TO SHOW LYRICS AND TRANSLATION WHEN TRANSLATION HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, showLyricsTranslationRef);}, [translation, showLyricsTranslationRef, scrollToNextDiv]);
 
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
@@ -175,6 +175,6 @@ function BrowseByDanceability() {
       {LyricsTranslationDiv}
     </>
   );
-}
+};
 
 export default BrowseByDanceability;

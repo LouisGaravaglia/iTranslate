@@ -1,9 +1,7 @@
 import React,  {useState, useRef, useEffect, useCallback} from 'react';
-import {Spring} from 'react-spring/renderprops';
 import {useSpring, animated} from 'react-spring';
 import './App.css';
 //COMPONENT IMPORTS
-import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
 import Tracks from "./Tracks";
 import LanguageSelect from "./LanguageSelect";
@@ -18,9 +16,11 @@ import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
 //CUSTOM HOOK IMPORTS
 import useOnScreen from "./useOnScreen";
+//IONICONS IMPORTS
+import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
-function BrowseByGenre({handleCategoryClick}) {
-    //STATE FOR ANIMATIONS
+function BrowseByGenre() {
+  //STATE FOR ANIMATIONS
   const [bgColor, setBgColor] = useState("#8700B0");
   //REDUX STORE
   const dispatch = useDispatch();
@@ -74,11 +74,11 @@ function BrowseByGenre({handleCategoryClick}) {
           setGeneralErrorFlashMessage(true);
           console.log("Here is what general error is: ", generalError);
           dispatch(resetGeneralError());
-        }
+        };
 
-    }
+    };
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError, generalError, dispatch])
+  }, [languageError, translationError, lyricsError, generalError, dispatch]);
 
   //GET ALL GENRES IN DB AND STORE THEM FOR THE BROWSE BY GENRE COMPONENT
   useEffect(() => {
@@ -106,19 +106,19 @@ function BrowseByGenre({handleCategoryClick}) {
 
   }, []);
 
-  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  //SCROLL DOWN TO SHOW ARTISTS WHEN GENRE HAS BEEN SELECTED AND CORRESPONDING ARTISTS SET IN STATE
   useEffect(() => {scrollToNextDiv(artists, artistsResultsRef);}, [artists, artistsResultsRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
+  //SCROLL DOWN TO ALBUMS RESULTS DIV WHEN ALBUMS ARE SET IN STATE
   useEffect(() => {scrollToNextDiv(albums, albumResultsRef);}, [albums, albumResultsRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  //SCROLL DOWN TO TRACKS DIV WHEN TRACKS HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(tracks, trackResultsRef);}, [tracks, trackResultsRef, scrollToNextDiv]);
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  //SCROLL DOWN TO SHOW LYRICS AND TRANSLATION WHEN TRANSLATION HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, showLyricsTranslationRef);}, [translation, showLyricsTranslationRef, scrollToNextDiv]);
 
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
@@ -176,10 +176,23 @@ function BrowseByGenre({handleCategoryClick}) {
   );
 
   //DISPLAY GENRES
-  const selectGenresDiv = (
-      <animated.div style={springProps} ref={selectGenresRef}>
-        <Genres />
-      </animated.div>
+  let selectGenresDiv;
+  
+   if (genres) selectGenresDiv = (
+     <animated.div style={springProps} ref={selectGenresRef}>
+       <Genres />
+     </animated.div>
+  );
+
+  //DISPLAY MUSIC ICON IF THERE IS AN ERROR LOADING GENRES
+  if (!genres) selectGenresDiv = (
+    <animated.div style={springProps}  ref={selectGenresRef}>
+      <div className="Main-Container">
+        <div className="Loading-Box">
+          <IosMusicalNotes fontSize="300px" color="orange" />
+        </div>
+      </div>
+    </animated.div>
   );
 
   //DISPLAY ARTISTS FROM SELECTED GENRE

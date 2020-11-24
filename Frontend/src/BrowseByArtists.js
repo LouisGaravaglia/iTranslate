@@ -1,5 +1,4 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
-import {Spring} from 'react-spring/renderprops';
 import {useSpring, animated} from 'react-spring';
 import './App.css';
 //COMPONENT IMPORTS
@@ -13,7 +12,6 @@ import FlashMessage from "./FlashMessage";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
-import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
@@ -22,7 +20,7 @@ import useOnScreen from "./useOnScreen";
 //IONICONS IMPORTS
 import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
-function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
+function BrowseByArtists() {
   //STATE FOR ANIMATIONS
   const [bgColor, setBgColor] = useState("#8700B0");
   //REDUX STORE
@@ -89,7 +87,6 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
     getSeedData();
   }, [dispatch]);
 
-
   //SKIP OVER THE CATEGORIES SINCE THE USER NEEDED TO SEE THAT IN ORDER TO GET TO THIS COMPONENT
   useEffect(() => {
     const scrollPastCategories = () => {
@@ -109,29 +106,17 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
 
   }, []);
 
-  //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
-  // useEffect(() => {scrollToNextDiv(artists, artistsResultsRef);}, [artists, artistsResultsRef, scrollToNextDiv]);
-
-  //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
+  //SCROLL DOWN TO ALBUMS DIV WHEN ALBUMS ARE SET IN STATE
   useEffect(() => {scrollToNextDiv(albums, albumResultsRef);}, [albums, albumResultsRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO LYRICS/TRANSLATION WHEN LANGUAGE HAS BEEN SELECTED AND SET IN STATE
+  //SCROLL DOWN TO TRACKS DIV WHEN TRACKS HAS BEEN SELECTED AND SET IN STATE
   useEffect(() => {scrollToNextDiv(tracks, trackResultsRef);}, [tracks, trackResultsRef, scrollToNextDiv]);
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(lyrics, selectLanguageRef);}, [lyrics, selectLanguageRef, scrollToNextDiv]);
 
-  //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
+  //SCROLL DOWN TO SHOW LYRICS AND TRANSLATION WHEN TRANSLATION HAS BE SET IN STATE
   useEffect(() => {scrollToNextDiv(translation, showLyricsTranslationRef);}, [translation, showLyricsTranslationRef, scrollToNextDiv]);
-
-  // ***IF I DELETE THIS, REMOVE THE PROP BEING PASSED DOWN ABOVE****
-  // //HANDLE ERROR MESSAGE IN CASE AN ARTIST IS LISTED THAT DOESN'T HAVE AN ALBUM ON SPOTIFY
-  // useEffect(() => {
-  //   const addFlashMessage = () => {
-  //     if (albums && !albums[0]) handleNoAlbumsError();
-  //   }
-  //   addFlashMessage()
-  // }, [albums]);
 
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
 
@@ -141,7 +126,6 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
   const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
   const trackResultsInView = useOnScreen(trackResultsRef, {threshold: 0.7});
   const LyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.1});
-
 
   useEffect(() => {
     const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView) => {
@@ -266,6 +250,5 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
     </>
   );
 };
-
 
 export default BrowseByArtists;
