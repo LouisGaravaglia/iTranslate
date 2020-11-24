@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 import {useDispatch, useSelector} from "react-redux";
 import {getTranslation} from "./actionCreators/getTranslationCreator";
 //IONICONS IMPORTS
-import MdPizza from 'react-ionicons/lib/MdPizza';
+import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
 function LanguageSelect({selectedTrackId}) {
   //REACT STATE
@@ -47,7 +47,7 @@ function LanguageSelect({selectedTrackId}) {
   
   if (isLoading) LoadingIconDiv = (
     <div className="Loading-Box">
-      <MdPizza rotate={true} fontSize="300px" color="orange" />
+      <IosMusicalNotes rotate={true} fontSize="300px" color="orange" />
     </div>
   );
 

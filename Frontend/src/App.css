@@ -8,6 +8,7 @@ html, body {
 }
 
 /* //////////////////////////////////////  NAVBAR  ////////////////////////////////////// */
+
 .Navbar-Container {
   position: absolute;
   height: 50px;
@@ -82,14 +83,6 @@ a {
 .Browse-Landing p:hover {
   color: rgb(2, 206, 169);
 }
-
-/* //////////////////////////////////////  BROWSE SECTION  ////////////////////////////////////// */
-
-/* .Browse {
-  height: 100vh;
-  width: 100vw;
-    background-color: red;
-} */
 
 /* //////////////////////////////////////  LYRICS  ////////////////////////////////////// */
 
@@ -175,19 +168,11 @@ background-color: rgb(2, 206, 169);
   margin: 0 80px;
 }
 
-
-/* STYLING FOR EMPTY P ELEMENT TO CENTER THE SEARCH BAR AND SEARCH H1 FLEX ITEMS */
-/* .Search-Field p {
-  flex: 1 0 100%;
-  height: 20vh;
-} */
-
 .Search-Field input {
   width: 40vw;
   height: 50px;
   border: 2px solid  rgb(86, 182, 255);
   border-radius: 4px;
-
 }
 
 .Search-Field button{
@@ -473,12 +458,6 @@ flex: 0.1 0 1vh;
 }
 
 /* //////////////////////////////////////  LOADING ICON  ////////////////////////////////////// */
-
-/* .Loading-Container {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-} */
 
 .Loading-Box {
   position: absolute;

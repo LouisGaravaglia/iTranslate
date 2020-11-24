@@ -9,14 +9,18 @@ import Tracks from "./Tracks";
 import LanguageSelect from "./LanguageSelect";
 import Albums from "./Albums";
 import Categories from "./BrowseCategories";
+import FlashMessage from "./FlashMessage";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
+import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
 //CUSTOM HOOK IMPORTS
 import useOnScreen from "./useOnScreen";
+//IONICONS IMPORTS
+import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
 function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
   //STATE FOR ANIMATIONS
@@ -29,6 +33,10 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
   const tracks = useSelector(store => store.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const translation = useSelector(store => store.translation);
+    const translationError = useSelector(store => store.errors.translationError);
+  const languageError = useSelector(store => store.errors.languageError);
+  const lyricsError = useSelector(store => store.errors.lyricsError);
+  const generalError = useSelector(store => store.errors.generalError);
   //REFS FOR PAGE TRAVERSAL
   const categoryRef = useRef();
   const albumResultsRef = useRef();
@@ -36,8 +44,42 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
   const trackResultsRef = useRef();
   const showLyricsTranslationRef = useRef();
   const artistsResultsRef = useRef();
+  //STATE FOR FLASH MESSAGES
+  const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
+  const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
+  const [translationErrorFlashMessage, setTranslationErrorFlashMessage] = useState(false);
+  const [generalErrorFlashMessage, setGeneralErrorFlashMessage] = useState(false);
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
+
+  //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
+  useEffect(() => {
+    const displayFlashMessage = () => {
+
+        if (lyricsError) {
+          setNoLyricsFlashMessage(true);
+          console.log("There is a lyrics error");
+          dispatch(resetLyricsError());
+        }
+        if (languageError) {
+          setLanguageNotFoundFlashMessage(true);
+          console.log("Here is what language error is: ", languageError);
+          dispatch(resetLanguageError());
+        }
+        if (languageError) {
+          setTranslationErrorFlashMessage(true);
+          console.log("Here is what translation error is: ", translationError);
+          dispatch(resetTranslationError());
+        }
+        if (generalError) {
+          setGeneralErrorFlashMessage(true);
+          console.log("Here is what general error is: ", generalError);
+          dispatch(resetGeneralError());
+        }
+
+    }
+    displayFlashMessage();
+  }, [languageError, translationError, lyricsError, generalError, dispatch])
 
   //GET ALL ARTISTS IN DB AND STORE THEM FOR THE BROWSE BY ARTISTS COMPONENT
   useEffect(() => {
@@ -159,9 +201,12 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
     </animated.div>
   );
 
-     if (!artists) ArtistsResultsDiv = (
+  if (!artists) ArtistsResultsDiv = (
     <animated.div style={springProps}  ref={artistsResultsRef}>
       <div className="Main-Container">
+        <div className="Loading-Box">
+          <IosMusicalNotes fontSize="300px" color="orange" />
+        </div>
       </div>
     </animated.div>
   );
@@ -213,6 +258,12 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
     //   {props => (
     //     <div style={props}>
 <>
+      <div className="Flash-Messages-Container">
+        {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
+        {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
+        {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
+        {generalErrorFlashMessage && (<FlashMessage setState={setGeneralErrorFlashMessage} message="Uh oh, something went wrong. Please try again."/> )}
+      </div>
           {ChooseCategoryDiv}
           {ArtistsResultsDiv}
           {AlbumResultsDiv}

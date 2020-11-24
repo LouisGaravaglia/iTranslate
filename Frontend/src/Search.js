@@ -9,7 +9,7 @@ import Tracks from "./Tracks";
 import SearchLanding from "./SearchLanding";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
+import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
 import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 //CUSTOM HOOK IMPORTS
@@ -20,6 +20,7 @@ const Search = () => {
   const [bgColor, setBgColor] = useState("#1D4DBE");
   //REDUX STORE
   const translationError = useSelector(store => store.errors.translationError);
+  const languageError = useSelector(store => store.errors.languageError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
   const lyrics = useSelector(store => store.lyrics);
   const searchResults = useSelector(store => store.results);
@@ -94,6 +95,11 @@ const Search = () => {
           setNoLyricsFlashMessage(true);
           console.log("There is a lyrics error");
           dispatch(resetLyricsError());
+        }
+        if (languageError) {
+          setLanguageNotFoundFlashMessage(true);
+          console.log("Here is what language error is: ", languageError);
+          dispatch(resetLanguageError());
         }
         if (translationError) {
           setTranslationErrorFlashMessage(true);

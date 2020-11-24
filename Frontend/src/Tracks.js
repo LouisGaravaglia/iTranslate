@@ -12,7 +12,7 @@ import {getLyricsFromDB} from "./actionCreators/getLyricsFromDBCreator";
 import {findLyricsFromAPI} from "./actionCreators/findLyricsFromAPICreator";
 import {addSelectedTrack} from "./actionCreators/addSelectedTrackCreator";
 //IONICONS IMPORTS
-import MdPizza from 'react-ionicons/lib/MdPizza';
+import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
 const Tracks = ({typeOfResults, results, itemsPerPage}) => {
   //REACT STATE
@@ -69,7 +69,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
   
   if (isLoading) LoadingIconDiv = (
     <div className="Loading-Box">
-      <MdPizza rotate={true} fontSize="300px" color="orange" />
+      <IosMusicalNotes rotate={true} fontSize="300px" color="orange" />
     </div>
   );
 

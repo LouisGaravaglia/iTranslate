@@ -1,4 +1,4 @@
-import {RESET_TRANSLATION_ERROR, RESET_LYRICS_ERROR, RESET_SEARCH_ERROR, RESET_GENERAL_ERROR} from "../actionTypes";
+import {  RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_LYRICS_ERROR, RESET_SEARCH_ERROR, RESET_GENERAL_ERROR } from "../actionTypes";
 
 ////////////////////////////////// RESET LYRICS ERROR VALUE //////////////////////////////////
 
@@ -20,6 +20,17 @@ export function resetLyricsError() {
 }
 function updateLyricsError() {
   return {type:RESET_LYRICS_ERROR};
+}
+
+////////////////////////////////// RESET LANGUAGE ERROR VALUE //////////////////////////////////
+
+export function resetLanguageError() {
+  return async function(dispatch) {
+    dispatch(updateLanguageError());
+  };
+}
+function updateLanguageError() {
+  return {type:RESET_LANGUAGE_ERROR};
 }
 
 ////////////////////////////////// RESET TRANSLATION ERROR VALUE //////////////////////////////////

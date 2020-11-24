@@ -9,7 +9,7 @@ const FlashMessage = ( { message, setState} ) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setState(false);
-    }, 3000)
+    }, 4000)
 
     return () => clearInterval(intervalId)
   }, [setState])
