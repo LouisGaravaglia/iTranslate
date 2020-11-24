@@ -20,7 +20,7 @@ import useOnScreen from "./useOnScreen";
 
 function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
   //STATE FOR ANIMATIONS
-  const [bgColor, setBgColor] = useState("#ABA800");
+  const [bgColor, setBgColor] = useState("#8700B0");
   //REDUX STORE
   const dispatch = useDispatch();
   const lyrics = useSelector(store => store.lyrics);
@@ -98,23 +98,25 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
   const albumsInView = useOnScreen(albumResultsRef, {threshold: 0.7});
   const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
   const trackResultsInView = useOnScreen(trackResultsRef, {threshold: 0.7});
-  const LyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
+  const LyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.1});
 
 
   useEffect(() => {
     const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView) => {
       if (albumsInView) {
-        setBgColor("#AB5D00");
+        setBgColor("#5019FF");
       } else if (selectLanguageInView) {
-        setBgColor("#ABA800");
+        //keep this color
+        setBgColor("#3046FF");
       } else if (trackResultsInView) {
+        //keep this color
         setBgColor("#8019FF");
       } else if (LyricsTranslationInView) {
-        setBgColor("#AB5D00");
+        setBgColor("#8019FF");
       } else if (artistsInView) {
-        setBgColor("#008FD1");
+        setBgColor("#76408B");
       } else if (categoriesInView) {
-        setBgColor("#ABA800");
+        setBgColor("#8700B0");
       }
     };
   changeInView(selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView);
@@ -160,7 +162,6 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
      if (!artists) ArtistsResultsDiv = (
     <animated.div style={springProps}  ref={artistsResultsRef}>
       <div className="Main-Container">
-        <p>Loading content</p>
       </div>
     </animated.div>
   );

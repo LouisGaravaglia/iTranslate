@@ -17,7 +17,7 @@ import useOnScreen from "./useOnScreen";
 
 const Search = () => {
   //STATE FOR ANIMATIONS
-  const [bgColor, setBgColor] = useState("#ABA800");
+  const [bgColor, setBgColor] = useState("#1D4DBE");
   //REDUX STORE
   const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
@@ -49,8 +49,9 @@ const Search = () => {
   useEffect(() => {
     const changeInView = (searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView) => {
       if (searchBarInView) {
-        setBgColor("#ABA800");
+        setBgColor("#1D4DBE");
       } else if (searchResultsInView) {
+        //keep this color
         setBgColor("#8019FF");
       } else if (selectLanguageInView) {
         setBgColor("#AB5D00");

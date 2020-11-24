@@ -21,7 +21,7 @@ import useOnScreen from "./useOnScreen";
 function Browse() {
   //REACT STATE
   const [category, setCategory] = useState("");
-  const [bgColor, setBgColor] = useState("#ABA800");
+  const [bgColor, setBgColor] = useState("#8700B0");
   //REDUX STORE
   const dispatch = useDispatch();
   const languageError = useSelector(store => store.errors.languageError);
@@ -112,19 +112,17 @@ function Browse() {
 
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
 
-  const artistsInView = useOnScreen(artistResultsRef, {threshold: 0.2});
-  const categoriesInView = useOnScreen(categoryRef, {threshold: 0.7});
+  // const artistsInView = useOnScreen(artistResultsRef, {threshold: 0.2});
+  // const categoriesInView = useOnScreen(categoryRef, {threshold: 0.7});
 
-  useEffect(() => {
-    const changeInView = (categoriesInView, artistsInView) => {
-      if (categoriesInView) {
-        setBgColor("#ABA800");
-      } else if (artistsInView) {
-        setBgColor("#8019FF");
-      } 
-    };
-  changeInView(categoriesInView, artistsInView);
-  }, [categoriesInView, artistsInView]);
+  // useEffect(() => {
+  //   const changeInView = (categoriesInView, artistsInView) => {
+  //     if (categoriesInView) {
+  //       setBgColor("#ABA800");
+  //     } 
+  //   };
+  // changeInView(categoriesInView, artistsInView);
+  // }, [categoriesInView, artistsInView]);
 
 
   const springProps = useSpring({

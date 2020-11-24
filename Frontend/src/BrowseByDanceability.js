@@ -13,7 +13,7 @@ import useOnScreen from "./useOnScreen";
 
 function BrowseByDanceability() {
   //STATE FOR ANIMATIONS
-  const [bgColor, setBgColor] = useState("#ABA800");
+  const [bgColor, setBgColor] = useState("#8700B0");
   //REDUX STORE
   const lyrics = useSelector(store => store.lyrics);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
@@ -59,13 +59,15 @@ function BrowseByDanceability() {
   useEffect(() => {
     const changeInView = (selectLanguageInView, LyricsTranslationInView, DanceabilitySearchInView, categoriesInView) => {
       if (selectLanguageInView) {
-        setBgColor("#ABA800");
+        //keep this color
+        setBgColor("#794089");
       } else if (LyricsTranslationInView) {
-        setBgColor("#AB5D00");
+        setBgColor("#8019FF");
       } else if (DanceabilitySearchInView) {
-        setBgColor("#008FD1");
+        //keep this color
+        setBgColor("#8019FF");
       } else if (categoriesInView) {
-        setBgColor("#ABA800");
+        setBgColor("#8700B0");
       }
     };
   changeInView(selectLanguageInView, LyricsTranslationInView, DanceabilitySearchInView, categoriesInView);

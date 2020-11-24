@@ -19,7 +19,7 @@ import useOnScreen from "./useOnScreen";
 
 function BrowseByGenre({handleCategoryClick}) {
     //STATE FOR ANIMATIONS
-  const [bgColor, setBgColor] = useState("#ABA800");
+  const [bgColor, setBgColor] = useState("#8700B0");
   //REDUX STORE
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
@@ -97,15 +97,17 @@ function BrowseByGenre({handleCategoryClick}) {
       if (albumsInView) {
         setBgColor("#AB5D00");
       } else if (selectLanguageInView) {
-        setBgColor("#ABA800");
+        //keep this color
+        setBgColor("#794089");
       } else if (trackResultsInView) {
+        //keep this color
         setBgColor("#8019FF");
       } else if (LyricsTranslationInView) {
-        setBgColor("#AB5D00");
-      } else if (artistsInView) {
         setBgColor("#008FD1");
+      } else if (artistsInView) {
+        setBgColor("#8019FF");
       } else if (categoriesInView) {
-        setBgColor("#ABA800");
+        setBgColor("#8700B0");
       } else if (genresInView) {
         setBgColor("#8019FF");
       }
