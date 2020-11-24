@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
 import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
+//CUSTOM HOOK IMPORTS
 import useOnScreen from "./useOnScreen";
 
 const Search = () => {
@@ -62,7 +63,7 @@ const Search = () => {
 
   const springProps = useSpring({
     backgroundColor: bgColor,
-    config: {duration: 800}
+    config: {duration: 300}
   });
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////

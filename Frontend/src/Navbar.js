@@ -26,6 +26,7 @@ const NavBar = () => {
   }
 
     const handleBrowseClickFromBrowse = () => {
+        dispatch(resetStore("lyrics", "translation", "searchResults"));
       history.push("/") ;
       setBrowseMode(mode => !mode);
   }

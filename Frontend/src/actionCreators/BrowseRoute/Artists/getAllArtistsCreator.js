@@ -9,7 +9,7 @@ export function getAllArtists() {
     try {
       const artists = await BackendCall.getArtistsAndArtistIds();
       console.log("My artist/id array: ", artists);
-      console.log("An artist name: ", artists[0].name);
+      console.log("An artist name: ", artists[0].artistName);
       dispatch(addArtists(artists));
     } catch(e) {
       dispatch(updateGeneralError(true));

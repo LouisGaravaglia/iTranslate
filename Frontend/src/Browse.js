@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {Spring} from 'react-spring/renderprops';
 import {useSpring, animated} from 'react-spring';
-
+import {NavLink, useHistory, useLocation} from "react-router-dom";
 import './App.css';
 //COMPONENT IMPORTS
 import FlashMessage from "./FlashMessage";
@@ -15,11 +15,13 @@ import {resetLanguageError, resetTranslationError, resetLyricsError, resetGenera
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
+//CUSTOM HOOK IMPORTS
+import useOnScreen from "./useOnScreen";
 
 function Browse() {
   //REACT STATE
   const [category, setCategory] = useState("");
-  const [bgColor, setBgColor] = useState("#22A833");
+  const [bgColor, setBgColor] = useState("#ABA800");
   //REDUX STORE
   const dispatch = useDispatch();
   const languageError = useSelector(store => store.errors.languageError);
@@ -38,6 +40,9 @@ function Browse() {
   const genreResultsRef = useRef();
   const danceabilityResultsRef = useRef();
   const categoryRef = useRef();
+  //REACT ROUTER HOOKS
+  const history = useHistory();
+  
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -105,19 +110,34 @@ function Browse() {
     displayFlashMessage();
   }, [languageError, translationError, lyricsError, generalError, dispatch])
 
-////////////////////////////////////////////////////  ANIMATION HOOKS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
+
+  const artistsInView = useOnScreen(artistResultsRef, {threshold: 0.2});
+  const categoriesInView = useOnScreen(categoryRef, {threshold: 0.7});
+
+  useEffect(() => {
+    const changeInView = (categoriesInView, artistsInView) => {
+      if (categoriesInView) {
+        setBgColor("#ABA800");
+      } else if (artistsInView) {
+        setBgColor("#8019FF");
+      } 
+    };
+  changeInView(categoriesInView, artistsInView);
+  }, [categoriesInView, artistsInView]);
+
 
   const springProps = useSpring({
     backgroundColor: bgColor,
-    config: {duration: 800}
+    config: {duration: 300}
   });
-
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
 const handleCategoryClick = (category) => {
-  setCategory([category, {}]);
-  dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "selectedTrack"));
+  // setCategory([category, {}]);
+  history.push("/browse/artists") ;
+  // dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "selectedTrack"));
 }
 
 const handleNoAlbumsError = () => {
@@ -130,18 +150,18 @@ const handleNoAlbumsError = () => {
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
   let ChooseCategoryDiv = (
       <animated.div style={springProps} ref={categoryRef}>
-               <Categories handleCategoryClick={handleCategoryClick}/>
+               <Categories handleCategoryClick={handleCategoryClick} needAnimation={true}/>
       </animated.div>
   );
 
-  //DISPLAY BROWSE BY ARTISTS COMPONENTS
-  let BrowseByArtistsDiv;
+  // //DISPLAY BROWSE BY ARTISTS COMPONENTS
+  // let BrowseByArtistsDiv;
 
-  if (category[0] === "Artists") BrowseByArtistsDiv = (
-      <div ref={artistResultsRef}>
-        <BrowseByArtists handleNoAlbumsError={() => handleNoAlbumsError()} />
-      </div>
-  );
+  // if (category[0] === "Artists") BrowseByArtistsDiv = (
+  //     <animated.div style={springProps} ref={artistResultsRef}>
+  //       <BrowseByArtists handleNoAlbumsError={() => handleNoAlbumsError()} handleCategoryClick={handleCategoryClick}/>
+  //     </animated.div>
+  // );
 
   //DISPLAY BROWSE BY GENRE COMPONENTS
   let BrowseByGenreDiv;
@@ -173,7 +193,7 @@ const handleNoAlbumsError = () => {
     //   <div style={props}>
 
   
-        <div className="Browse">
+        <div>
           <div className="Flash-Messages-Container">
             {searchFlashMessage && (<FlashMessage setState={setSearchFlashMessage} message="We couldn't find any songs with that Artist or Song name, please try again."/> )}
             {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
@@ -184,7 +204,7 @@ const handleNoAlbumsError = () => {
           </div>
           {ChooseCategoryDiv}
   
-          {BrowseByArtistsDiv}
+          {/* {BrowseByArtistsDiv} */}
           {BrowseByGenreDiv}
           {BrowseByDanceabilityDiv}
         </div>
