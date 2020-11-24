@@ -143,7 +143,7 @@ function BrowseByGenre() {
         //keep this color
         setBgColor("#8019FF");
       } else if (LyricsTranslationInView) {
-        setBgColor("#008FD1");
+        setBgColor("#8019FF");
       } else if (artistsInView) {
         setBgColor("#1D4DBE");
       } else if (categoriesInView) {

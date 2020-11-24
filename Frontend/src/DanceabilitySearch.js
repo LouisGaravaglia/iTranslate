@@ -45,6 +45,6 @@ function DanceabilitySearch() {
     )}
     </Spring>
   );
-}
+};
 
 export default DanceabilitySearch;

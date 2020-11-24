@@ -1,21 +1,19 @@
 import React from 'react';
 import {Spring} from 'react-spring/renderprops';
-import {NavLink, useHistory, useLocation} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 //REDUX IMPORTS
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import './App.css';
 
 function Categories({needAnimation}) {
   const history = useHistory();
-    //REDUX STORE
   const dispatch = useDispatch();
 
 ////////////////////////////////////////////////////  CLICK EVENTS  ////////////////////////////////////////////////////
 
 const handleCategoryClick = (category) => {
-  // setCategory([category, {}]);
-  console.log('INSIDE the handleCategoryClick', category);
+
   if (category === "Artists") {
     dispatch(resetStore("lyrics", "translation", "searchResults", "tracks", "artists", "albums"));
     history.push("/browse/artists") ;
@@ -25,11 +23,8 @@ const handleCategoryClick = (category) => {
   } else if (category === "Danceability") {
     dispatch(resetStore("lyrics", "translation", "searchResults", "tracks", "artists", "albums"));
     history.push("/browse/danceability") ;
-  } else {
-    console.log("yo no se");
-  }
-  // dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "selectedTrack"));
-}
+  };
+};
 
 ////////////////////////////////////////////////////  JSX  ////////////////////////////////////////////////////
 
@@ -68,9 +63,9 @@ if (!needAnimation) CategoriesDiv = (
 
   return (
     <>
-  {CategoriesDiv}
-  </>
+      {CategoriesDiv}
+    </>
   );
-}
+};
 
 export default Categories;
