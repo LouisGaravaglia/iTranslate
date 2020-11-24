@@ -11,7 +11,7 @@ import BrowseByDanceability from "./BrowseByDanceability";
 import Categories from "./BrowseCategories";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
+import {resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
@@ -24,7 +24,6 @@ function Browse() {
   const [bgColor, setBgColor] = useState("#8700B0");
   //REDUX STORE
   const dispatch = useDispatch();
-  const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
   const generalError = useSelector(store => store.errors.generalError);
@@ -90,11 +89,6 @@ function Browse() {
           console.log("There is a lyrics error");
           dispatch(resetLyricsError());
         }
-        if (languageError) {
-          setLanguageNotFoundFlashMessage(true);
-          console.log("There is a language error");
-          dispatch(resetLanguageError());
-        }
         if (translationError) {
           setTranslationErrorFlashMessage(true);
           console.log("Here is what translation error is: ", translationError);
@@ -108,7 +102,7 @@ function Browse() {
 
     }
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError, generalError, dispatch])
+  }, [translationError, lyricsError, generalError, dispatch])
 
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
 

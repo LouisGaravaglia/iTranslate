@@ -37,6 +37,9 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
       };
     } catch(e) {  
       //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
+      //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
+      //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
+      
     };
   };
 

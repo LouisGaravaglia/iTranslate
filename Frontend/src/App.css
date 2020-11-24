@@ -145,6 +145,7 @@ background-color: rgb(2, 206, 169);
 } */
 
 .Search-Field {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,7 +207,7 @@ background-color: rgb(2, 206, 169);
 }
 
 .Search-Field button:hover{
-  background-color: rgb(41, 162, 255);
+  background-color: rgb(58, 163, 255);
 }
 
 .Search-Field-Filler {
@@ -468,4 +469,20 @@ flex: 0.1 0 1vh;
   /* border: 4px solid #3e8e41; */
   text-align: center;
   flex: 3 0 20vh;
+}
+
+/* //////////////////////////////////////  LOADING ICON  ////////////////////////////////////// */
+
+/* .Loading-Container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+} */
+
+.Loading-Box {
+  position: absolute;
+  z-index: 2;
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%);
 }

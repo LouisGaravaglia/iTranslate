@@ -51,7 +51,7 @@ class BackendCall {
 
       try {
         const artistId = await this.addArtist(artistData);
-        // const albumId = await this.addAlbum(albumData);
+        const albumId = await this.addAlbum(albumData);
         const trackId = await this.addTrack(trackData);
         console.log("Here is the artistId: ", artistId);
         console.log("Sucessfully added all three things to Database");
@@ -107,7 +107,7 @@ class BackendCall {
 
 //////////////////////////////////////  GET/ADD TRANSLATION  //////////////////////////////////////
 
-    static async getTranslation(data) {
+    static async getTranslationFromDB(data) {
       console.log("This is data that im sending to getTranslation route: ", data);
       let res = await this.request("translation", data);
       console.log("getTranslation res: ", res);

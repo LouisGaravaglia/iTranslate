@@ -114,7 +114,7 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
       } else if (LyricsTranslationInView) {
         setBgColor("#8019FF");
       } else if (artistsInView) {
-        setBgColor("#76408B");
+        setBgColor("#8019FF");
       } else if (categoriesInView) {
         setBgColor("#8700B0");
       }

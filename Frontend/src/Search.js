@@ -9,7 +9,7 @@ import Tracks from "./Tracks";
 import SearchLanding from "./SearchLanding";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
-import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
+import {resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
 import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 //CUSTOM HOOK IMPORTS
@@ -19,7 +19,6 @@ const Search = () => {
   //STATE FOR ANIMATIONS
   const [bgColor, setBgColor] = useState("#1D4DBE");
   //REDUX STORE
-  const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
   const lyrics = useSelector(store => store.lyrics);
@@ -56,7 +55,7 @@ const Search = () => {
       } else if (selectLanguageInView) {
         setBgColor("#AB5D00");
       } else if (LyricsTranslationInView) {
-        setBgColor("#008FD1");
+        setBgColor("#5019FF");
       }
     };
   changeInView(searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView);
@@ -96,11 +95,6 @@ const Search = () => {
           console.log("There is a lyrics error");
           dispatch(resetLyricsError());
         }
-        if (languageError) {
-          setLanguageNotFoundFlashMessage(true);
-          console.log("There is a language error");
-          dispatch(resetLanguageError());
-        }
         if (translationError) {
           setTranslationErrorFlashMessage(true);
           console.log("Here is what translation error is: ", translationError);
@@ -114,7 +108,7 @@ const Search = () => {
 
     }
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError, searchError, dispatch])
+  }, [translationError, lyricsError, searchError, dispatch])
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 

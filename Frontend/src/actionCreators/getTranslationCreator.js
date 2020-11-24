@@ -1,4 +1,4 @@
-import { GET_TRANSLATION, UPDATE_TRANSLATION_ERRORS } from "../actionTypes";
+import { GET_TRANSLATION, UPDATE_TRANSLATION_ERROR } from "../actionTypes";
 import IBMWatsonAPI from "../IBMWatsonAPI";
 import BackendCall from '../BackendCall';
 
@@ -7,20 +7,21 @@ import BackendCall from '../BackendCall';
 export function getTranslation(searchVal, languages, trackId, lyrics) {
 
   return async function(dispatch) {
-    const errors = {languageError: false, translationError: false};
+    // const errors = {languageError: false, translationError: false};
+    let translationError = false;
 
-    const getTranslation = async (language, trackId, lyrics) => {
+    const fetchTranslation = async (language, trackId, lyrics) => {
       //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-      const response = await BackendCall.getTranslation({track_id: trackId, selectedLanguage: language});
+      const response = await BackendCall.getTranslationFromDB({track_id: trackId, selectedLanguage: language});
       console.log("databaseTranslation: ", response);
 
       if (response === "No Translation in DB") {
-        const IBMTranslation = await IBMWatsonAPI.getTranslation(lyrics, language);
+        const IBMTranslation = await IBMWatsonAPI.getTranslationFromAPI(lyrics, language);
         console.log("Translated lyrics: ", IBMTranslation);
 
         if (IBMTranslation === "Error attempting to read source text") {
           //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
-          errors["translationError"] = true;
+          translationError = true;
           return "No Translation Available";
         } else {
           await BackendCall.addTranslation({track_id: trackId, language, translation: IBMTranslation});
@@ -40,10 +41,10 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
         const [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
         console.log("language is: ", language);
 
-        const translation = await getTranslation(language, trackId, lyrics);
+        const translation = await fetchTranslation(language, trackId, lyrics);
         return translation;
       } catch(e) {
-        errors["languageError"] = true;
+        translationError = true;
         return "Could not read language value";
       }
     }
@@ -51,10 +52,10 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
     const translation = await handleLanguageSearchSubmit(searchVal, languages);
     console.log("Here is my translation from actionCreator:");
     console.log(translation);
-    console.log("here are my errors: ", errors);
+
 
     dispatch(retrieveTranslation(translation));
-    dispatch(updateGetTranslationErrors(errors))
+    dispatch(updateGetTranslationErrors(translationError))
   };
 }
 
@@ -62,6 +63,6 @@ function retrieveTranslation(translation) {
   return {type:GET_TRANSLATION, translation};
 }
 
-function updateGetTranslationErrors(errors) {
-  return {type: UPDATE_TRANSLATION_ERRORS, errors}
+function updateGetTranslationErrors(translationError) {
+  return {type: UPDATE_TRANSLATION_ERROR, translationError}
 }
