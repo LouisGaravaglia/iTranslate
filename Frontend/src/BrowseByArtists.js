@@ -38,10 +38,10 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
+  //SKIP OVER THE CATEGORIES SINCE THE USER NEEDED TO SEE THAT IN ORDER TO GET TO THIS COMPONENT
   useEffect(() => {
     const scrollPastCategories = () => {
-
-artistsResultsRef.current.scrollIntoView({behavior: "smooth"});
+      artistsResultsRef.current.scrollIntoView({behavior: "smooth"});
     }
     scrollPastCategories();
   }, []);
@@ -122,12 +122,16 @@ artistsResultsRef.current.scrollIntoView({behavior: "smooth"});
     dispatch(resetStore("tracks", "lyrics", "translation"));
   }
 
+  const scrollToGenres = () => {
+    artistsResultsRef.current.scrollIntoView({behavior: "smooth"});
+  };
+
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
   const ChooseCategoryDiv = (
-      <animated.div style={springProps} ref={categoryRef}>
-               <Categories handleCategoryClick={handleCategoryClick} needAnimation={false}/>
+      <animated.div onClick={scrollToGenres} style={springProps} ref={categoryRef}>
+               <Categories needAnimation={false}/>
       </animated.div>
   );
 

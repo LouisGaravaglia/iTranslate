@@ -134,11 +134,19 @@ function Browse() {
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
-const handleCategoryClick = (category) => {
-  // setCategory([category, {}]);
-  history.push("/browse/artists") ;
-  // dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "selectedTrack"));
-}
+// const handleCategoryClick = (category) => {
+//   // setCategory([category, {}]);
+
+//   if (category === "Artists") {
+//   history.push("/browse/artists") ;
+//   } else if (category === "Genres") {
+//       history.push("/browse/genres") ;
+//   } else if (category === "Danceability") {
+//       history.push("/browse/danceability") ;
+//   }
+
+//   // dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "selectedTrack"));
+// }
 
 const handleNoAlbumsError = () => {
    setNoAlbumsFlashMessage(true);
@@ -150,7 +158,7 @@ const handleNoAlbumsError = () => {
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
   let ChooseCategoryDiv = (
       <animated.div style={springProps} ref={categoryRef}>
-               <Categories handleCategoryClick={handleCategoryClick} needAnimation={true}/>
+               <Categories needAnimation={true}/>
       </animated.div>
   );
 
@@ -163,14 +171,14 @@ const handleNoAlbumsError = () => {
   //     </animated.div>
   // );
 
-  //DISPLAY BROWSE BY GENRE COMPONENTS
-  let BrowseByGenreDiv;
+  // //DISPLAY BROWSE BY GENRE COMPONENTS
+  // let BrowseByGenreDiv;
 
-  if (category[0] === "Genre") BrowseByGenreDiv = (
-      <div ref={genreResultsRef}>
-        <BrowseByGenre />
-      </div>
-  );
+  // if (category[0] === "Genre") BrowseByGenreDiv = (
+  //     <div ref={genreResultsRef}>
+  //       <BrowseByGenre />
+  //     </div>
+  // );
 
   //DISPLAY BROWSE BY DANCEABILITY COMPONENTS
   let BrowseByDanceabilityDiv;
@@ -205,7 +213,7 @@ const handleNoAlbumsError = () => {
           {ChooseCategoryDiv}
   
           {/* {BrowseByArtistsDiv} */}
-          {BrowseByGenreDiv}
+          {/* {BrowseByGenreDiv} */}
           {BrowseByDanceabilityDiv}
         </div>
 

@@ -1,13 +1,29 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React from 'react';
 import {Spring} from 'react-spring/renderprops';
-import {useSpring, animated} from 'react-spring';
+import {NavLink, useHistory, useLocation} from "react-router-dom";
 import './App.css';
 
-function Categories({handleCategoryClick, needAnimation}) {
-  //REACT STATE
-  const [category, setCategory] = useState("");
-  const [bgColor, setBgColor] = useState("#ABA800");
+function Categories({needAnimation}) {
+  const history = useHistory();
 
+////////////////////////////////////////////////////  CLICK EVENTS  ////////////////////////////////////////////////////
+
+const handleCategoryClick = (category) => {
+  // setCategory([category, {}]);
+  console.log('INSIDE the handleCategoryClick', category);
+  if (category === "Artists") {
+    history.push("/browse/artists") ;
+
+  } else if (category === "Genre") {
+      history.push("/browse/genres") ;
+
+  } else if (category === "Danceability") {
+      history.push("/browse/danceability") ;
+  } else {
+    console.log("yo no se");
+  }
+  // dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "selectedTrack"));
+}
 
 ////////////////////////////////////////////////////  JSX  ////////////////////////////////////////////////////
 
