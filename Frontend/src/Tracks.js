@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Spring} from 'react-spring/renderprops';
 //API IMPORTS
 import SpotifyAPI from "./SpotifyAPI";
@@ -6,18 +6,36 @@ import BackendCall from "./BackendCall";
 //COMPONENT IMPORTS
 import SearchResultList from "./SearchResultList";
 //REDUX IMPORTS
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getLyricsFromDB} from "./actionCreators/getLyricsFromDBCreator";
 import {findLyricsFromAPI} from "./actionCreators/findLyricsFromAPICreator";
 import {addSelectedTrack} from "./actionCreators/addSelectedTrackCreator";
+//IONICONS IMPORTS
+import MdPizza from 'react-ionicons/lib/MdPizza';
 
 const Tracks = ({typeOfResults, results, itemsPerPage}) => {
+  //REACT STATE
+  const [isLoading, setIsLoading] = useState(false);
+  //REDUX STORE
+  const lyrics = useSelector(store => store.lyrics);
+  const lyricsError = useSelector(store => store.errors.lyricsError);
   const dispatch = useDispatch();
+
+////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
+
+  //WATCHES FOR EITHER AN ERROR OR THE LYRICS TO COME THROUGH TO REMOVE LOADING ICON
+  useEffect(() => {
+    const updateIsLoading = () => {
+      if (lyrics || lyricsError) setIsLoading(false);
+    };
+    updateIsLoading();
+  }, [lyrics, lyricsError])
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackResultsClick = async (track) => {
+    setIsLoading(true);
     dispatch(addSelectedTrack(track));
     dispatch(resetStore("translation"));
 
@@ -35,13 +53,29 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
           dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
         };
       };
-    } catch(e) {  
+    } catch(e) {
+      setIsLoading(false);
       //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
       //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
       //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
-      
+
     };
   };
+
+////////////////////////////////////////////////////  JSX  ////////////////////////////////////////////////////
+
+  //DISPLAY LOADING ICON
+  let LoadingIconDiv;
+  
+  if (isLoading) LoadingIconDiv = (
+    <div className="Loading-Box">
+      <MdPizza rotate={true} fontSize="300px" color="orange" />
+    </div>
+  );
+
+  if (!isLoading) LoadingIconDiv = (
+    <div className="Loading-Box"></div>
+  );
 
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
@@ -55,7 +89,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
       {props => (
         <div style={props}>
 
-          <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage}/>
+          <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv}/>
 
         </div>
       )}

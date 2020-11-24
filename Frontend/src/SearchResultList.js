@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import SearchResult from "./SearchResult";
 import PaginationSlider from "./PaginationSlider";
 
-const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResults}) => {
+const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResults, loadingIcon}) => {
   const [sliderVal, setSliderVal] = useState(0);
   const resultsInView = resultsArray.slice(sliderVal * itemsPerPage, (sliderVal * itemsPerPage) + itemsPerPage);
   console.log("resultsArray in View: ", resultsArray);
@@ -18,6 +18,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "search-results") displaySearchResults = (
     <>
       <div className="Result-Box">
+        {loadingIcon}
         {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name} musicObject={r}/>)}
       </div> 
       {resultsArray.length > itemsPerPage && <PaginationSlider resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}

@@ -402,6 +402,7 @@ flex: 0.1 0 1vh;
 /* //////////////////////////////////////  MAIN CONTAINER ////////////////////////////////////// */
 
 .Main-Container{
+  position: relative;
   text-align: center;
   display: flex;
   justify-content: center;

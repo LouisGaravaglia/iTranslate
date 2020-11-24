@@ -10,24 +10,25 @@ import {getTranslation} from "./actionCreators/getTranslationCreator";
 import MdPizza from 'react-ionicons/lib/MdPizza';
 
 function LanguageSelect({selectedTrackId}) {
-  //REDUX STORE
+  //REACT STATE
   const [isLoading, setIsLoading] = useState(false);
   //REDUX STORE
   const dispatch = useDispatch();
   const languages = useSelector(store => store.languages);
   const lyrics = useSelector(store => store.lyrics);
   const translation = useSelector(store => store.translation);
-  const languageError = useSelector(store => store.errors.languageError);
   const translationError = useSelector(store => store.errors.translationError);
 
-////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
+  //WATCHES FOR EITHER AN ERROR OR THE TRANSLATION TO COME THROUGH TO REMOVE LOADING ICON
   useEffect(() => {
     const updateIsLoading = () => {
-      if (translation || translationError || languageError) setIsLoading(false);
+      if (translation || translationError) setIsLoading(false);
     };
     updateIsLoading();
-  }, [translation, translationError, languageError])
+  }, [translation, translationError])
+
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleLanguageSearchSubmit = async (searchVal) => {
@@ -45,18 +46,13 @@ function LanguageSelect({selectedTrackId}) {
   let LoadingIconDiv;
   
   if (isLoading) LoadingIconDiv = (
-    // <div className="Loading-Container">
-      <div className="Loading-Box">
-        <MdPizza rotate={true} fontSize="300px" color="orange" />
-      </div>
-    // </div>
+    <div className="Loading-Box">
+      <MdPizza rotate={true} fontSize="300px" color="orange" />
+    </div>
   );
 
   if (!isLoading) LoadingIconDiv = (
-    // <div className="Loading-Container">
-      <div className="Loading-Box">
-      </div>
-    // </div>
+    <div className="Loading-Box"></div>
   );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
