@@ -122,7 +122,7 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
     dispatch(resetStore("tracks", "lyrics", "translation"));
   }
 
-  const scrollToGenres = () => {
+  const scrollToArtists = () => {
     artistsResultsRef.current.scrollIntoView({behavior: "smooth"});
   };
 
@@ -130,9 +130,9 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
 
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
   const ChooseCategoryDiv = (
-      <animated.div onClick={scrollToGenres} style={springProps} ref={categoryRef}>
-               <Categories needAnimation={false}/>
-      </animated.div>
+    <animated.div onClick={scrollToArtists} style={springProps} ref={categoryRef}>
+      <Categories needAnimation={false}/>
+    </animated.div>
   );
 
   //DISPLAY ALBUMS FROM SELECTED ARTIST

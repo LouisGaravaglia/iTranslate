@@ -26,6 +26,8 @@ const SearchResult = memo((props) => {
     props.handleClick(props.genre);
   };
 
+
+
 ////////////////////////////////////////////////////  SEARCH RESULTS  ////////////////////////////////////////////////////
 
   let displaySearchResults;
@@ -43,7 +45,7 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "danceability-results") displayDanceabilityResults = (
     <div className="Danceability-Result-Container">
-      <p onClick={handleSearchClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
+      <p onClick={handleTrackClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
     </div>
   );
 

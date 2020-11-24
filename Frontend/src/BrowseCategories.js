@@ -1,10 +1,15 @@
 import React from 'react';
 import {Spring} from 'react-spring/renderprops';
 import {NavLink, useHistory, useLocation} from "react-router-dom";
+//REDUX IMPORTS
+import {useDispatch, useSelector} from "react-redux";
+import {resetStore} from "./actionCreators/resetStoreCreator";
 import './App.css';
 
 function Categories({needAnimation}) {
   const history = useHistory();
+    //REDUX STORE
+  const dispatch = useDispatch();
 
 ////////////////////////////////////////////////////  CLICK EVENTS  ////////////////////////////////////////////////////
 
@@ -12,13 +17,14 @@ const handleCategoryClick = (category) => {
   // setCategory([category, {}]);
   console.log('INSIDE the handleCategoryClick', category);
   if (category === "Artists") {
+    dispatch(resetStore("lyrics", "translation", "searchResults", "tracks", "artists", "albums"));
     history.push("/browse/artists") ;
-
   } else if (category === "Genre") {
-      history.push("/browse/genres") ;
-
+    dispatch(resetStore("lyrics", "translation", "searchResults", "tracks", "artists", "albums"));
+    history.push("/browse/genres") ;
   } else if (category === "Danceability") {
-      history.push("/browse/danceability") ;
+    dispatch(resetStore("lyrics", "translation", "searchResults", "tracks", "artists", "albums"));
+    history.push("/browse/danceability") ;
   } else {
     console.log("yo no se");
   }

@@ -5,7 +5,7 @@ import PaginationSlider from "./PaginationSlider";
 const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResults}) => {
   const [sliderVal, setSliderVal] = useState(0);
   const resultsInView = resultsArray.slice(sliderVal * itemsPerPage, (sliderVal * itemsPerPage) + itemsPerPage);
-  console.log("resultsArray: ", resultsArray);
+  console.log("resultsArray in View: ", resultsArray);
 
   const updateResultsInView = (val) => {
     setSliderVal(val);
@@ -87,7 +87,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
 
   let displayDanceabilityTracks;
 
-  if (typeOfResults === "danceability-tracks") displayDanceabilityTracks = (
+  if (typeOfResults === "danceability-results") displayDanceabilityTracks = (
     <>
       <div className="Result-Box">
         {resultsArray.length && resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="danceability-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r}/>)}
