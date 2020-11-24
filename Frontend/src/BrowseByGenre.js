@@ -13,6 +13,7 @@ import Genres from "./Genres";
 import Categories from "./BrowseCategories";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
+import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
 //CUSTOM HOOK IMPORTS
 import useOnScreen from "./useOnScreen";
 
@@ -38,6 +39,15 @@ function BrowseByGenre({handleCategoryClick}) {
   const showLyricsTranslationRef = useRef();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
+
+  //GET ALL GENRES IN DB AND STORE THEM FOR THE BROWSE BY GENRE COMPONENT
+  useEffect(() => {
+    async function getSeedData() {
+      dispatch(getGenres());
+    }
+    getSeedData();
+  }, [dispatch]);
+
 
   //SKIP OVER THE CATEGORIES SINCE THE USER NEEDED TO SEE THAT IN ORDER TO GET TO THIS COMPONENT
   useEffect(() => {

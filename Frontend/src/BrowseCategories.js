@@ -46,9 +46,9 @@ if (needAnimation) CategoriesDiv = (
       <div style={props}>
 
           <div className="Browse-Landing">
-            <button onClick={() => handleCategoryClick("Artists")}>Artists</button>
-            <button onClick={() => handleCategoryClick("Genre")}>Genre</button>
-            <button onClick={() => handleCategoryClick("Danceability")}>Danceability</button>
+            <p onClick={() => handleCategoryClick("Artists")}>Artists</p>
+            <p onClick={() => handleCategoryClick("Genre")}>Genre</p>
+            <p onClick={() => handleCategoryClick("Danceability")}>Danceability</p>
           </div>
 
       </div>
@@ -58,9 +58,9 @@ if (needAnimation) CategoriesDiv = (
 
 if (!needAnimation) CategoriesDiv = (
   <div className="Browse-Landing">
-    <button onClick={() => handleCategoryClick("Artists")}>Artists</button>
-    <button onClick={() => handleCategoryClick("Genre")}>Genre</button>
-    <button onClick={() => handleCategoryClick("Danceability")}>Danceability</button>
+    <p onClick={() => handleCategoryClick("Artists")}>Artists</p>
+    <p onClick={() => handleCategoryClick("Genre")}>Genre</p>
+    <p onClick={() => handleCategoryClick("Danceability")}>Danceability</p>
   </div>
 );
 

@@ -58,28 +58,28 @@ function Browse() {
     getSeedData();
   }, [dispatch]);
 
-  //SCROLL DOWN TO CATEGORY DIV WHEN USER SELECTS A CATEGORY
-  useEffect(() => {
+  // //SCROLL DOWN TO CATEGORY DIV WHEN USER SELECTS A CATEGORY
+  // useEffect(() => {
 
-    function scrollToCategory() {
+  //   function scrollToCategory() {
 
-      if (category[0] === "Artists") {
-        artistResultsRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      } else if (category[0] === "Genre") {
-        genreResultsRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      } else if (category[0] === "Danceability") {
-         danceabilityResultsRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
+  //     if (category[0] === "Artists") {
+  //       artistResultsRef.current.scrollIntoView({
+  //         behavior: "smooth",
+  //       });
+  //     } else if (category[0] === "Genre") {
+  //       genreResultsRef.current.scrollIntoView({
+  //         behavior: "smooth",
+  //       });
+  //     } else if (category[0] === "Danceability") {
+  //        danceabilityResultsRef.current.scrollIntoView({
+  //         behavior: "smooth",
+  //       });
+  //     }
 
-    }
-    scrollToCategory();
-  }, [category, setCategory]);
+  //   }
+  //   scrollToCategory();
+  // }, [category, setCategory]);
 
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
@@ -181,13 +181,13 @@ const handleNoAlbumsError = () => {
   // );
 
   //DISPLAY BROWSE BY DANCEABILITY COMPONENTS
-  let BrowseByDanceabilityDiv;
+  // let BrowseByDanceabilityDiv;
 
-  if (category[0] === "Danceability") BrowseByDanceabilityDiv = (
-      <div ref={danceabilityResultsRef}>
-        <BrowseByDanceability />
-      </div>
-  );
+  // if (category[0] === "Danceability") BrowseByDanceabilityDiv = (
+  //     <div ref={danceabilityResultsRef}>
+  //       <BrowseByDanceability />
+  //     </div>
+  // );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
@@ -214,7 +214,7 @@ const handleNoAlbumsError = () => {
   
           {/* {BrowseByArtistsDiv} */}
           {/* {BrowseByGenreDiv} */}
-          {BrowseByDanceabilityDiv}
+          {/* {BrowseByDanceabilityDiv} */}
         </div>
 
     //   </div>

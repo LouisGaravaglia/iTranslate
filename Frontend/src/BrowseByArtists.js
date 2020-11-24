@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
+import {getAllArtists} from "./actionCreators/BrowseRoute/Artists/getAllArtistsCreator";
 //CUSTOM HOOK IMPORTS
 import useOnScreen from "./useOnScreen";
 
@@ -38,9 +39,19 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
+  //GET ALL ARTISTS IN DB AND STORE THEM FOR THE BROWSE BY ARTISTS COMPONENT
+  useEffect(() => {
+    async function getSeedData() {
+      dispatch(getAllArtists());
+    }
+    getSeedData();
+  }, [dispatch]);
+
+
   //SKIP OVER THE CATEGORIES SINCE THE USER NEEDED TO SEE THAT IN ORDER TO GET TO THIS COMPONENT
   useEffect(() => {
     const scrollPastCategories = () => {
+      console.log("BrowseByArtists artists: ", artists);
       artistsResultsRef.current.scrollIntoView({behavior: "smooth"});
     }
     scrollPastCategories();
@@ -142,6 +153,14 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
     <animated.div style={springProps}  ref={artistsResultsRef}>
       <div className="Main-Container">
         <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
+      </div>
+    </animated.div>
+  );
+
+     if (!artists) ArtistsResultsDiv = (
+    <animated.div style={springProps}  ref={artistsResultsRef}>
+      <div className="Main-Container">
+        <p>Loading content</p>
       </div>
     </animated.div>
   );

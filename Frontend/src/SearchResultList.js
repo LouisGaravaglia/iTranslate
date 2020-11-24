@@ -92,8 +92,8 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
       <div className="Result-Box">
         {resultsArray.length && resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="danceability-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r}/>)}
       </div>
-      {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Danceability-Pagination-Slider-Container" sliderClass="Danceability-Pagination-Slider"/>}
-      {resultsArray.length <= itemsPerPage && <div className="Pagination-Slider-Placeholder-v2"></div>}
+      {resultsArray.length > itemsPerPage && <div><PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Danceability-Pagination-Slider-Container" sliderClass="Danceability-Pagination-Slider"/><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br></div>}
+      {resultsArray.length <= itemsPerPage && <div className="Temp-v2"><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br></div>}
     </>
   );
 
