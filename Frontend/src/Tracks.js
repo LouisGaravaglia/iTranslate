@@ -11,6 +11,7 @@ import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getLyricsFromDB} from "./actionCreators/getLyricsFromDBCreator";
 import {findLyricsFromAPI} from "./actionCreators/findLyricsFromAPICreator";
 import {addSelectedTrack} from "./actionCreators/addSelectedTrackCreator";
+import {sendGeneralError} from "./actionCreators/sendGeneralErrorCreator";
 //IONICONS IMPORTS
 import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
@@ -60,11 +61,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
       };
     } catch(e) {
       setIsLoading(false);
-      console.log("Hit catch inside Tracks component!!!!!!");
-      //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
-      //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
-      //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
-
+      dispatch(sendGeneralError());
     };
   };
 
