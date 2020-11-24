@@ -44,8 +44,8 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
         return "Could not read language value";
       };
 
-        const translation = await fetchTranslation(language, trackId, lyrics);
-        return translation;
+      const translation = await fetchTranslation(language, trackId, lyrics);
+      return translation;
     };
 
     const translation = await handleLanguageSearchSubmit(searchVal, languages);

@@ -33,7 +33,7 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
   const tracks = useSelector(store => store.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const translation = useSelector(store => store.translation);
-    const translationError = useSelector(store => store.errors.translationError);
+  const translationError = useSelector(store => store.errors.translationError);
   const languageError = useSelector(store => store.errors.languageError);
   const lyricsError = useSelector(store => store.errors.lyricsError);
   const generalError = useSelector(store => store.errors.generalError);
@@ -66,7 +66,7 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
           console.log("Here is what language error is: ", languageError);
           dispatch(resetLanguageError());
         }
-        if (languageError) {
+        if (translationError) {
           setTranslationErrorFlashMessage(true);
           console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
@@ -250,14 +250,7 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    // <Spring
-    //   from={{opacity: 0}}
-    //   to={{opacity: 1}}
-    //   config={{delay: 300, duration: 300}}
-    // >
-    //   {props => (
-    //     <div style={props}>
-<>
+    <>
       <div className="Flash-Messages-Container">
         {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
         {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
@@ -270,10 +263,7 @@ function BrowseByArtists({handleNoAlbumsError, handleCategoryClick}) {
           {TrackResultsDiv}
           {LanguageSelectDiv}
           {LyricsTranslationDiv}
-</>
-    //     </div>
-    //   )}
-    // </Spring>
+    </>
   );
 };
 

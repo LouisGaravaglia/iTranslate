@@ -221,7 +221,7 @@ flex: 0.1 0 1vh;
 .Flash-Messages-Container {
   position: sticky;
   top: 0;
-  z-index: 3;
+  z-index: 6;
 }
 
 .FlashMessage {
@@ -230,7 +230,7 @@ flex: 0.1 0 1vh;
   align-items: center;
   flex-wrap: nowrap;
   background-color: rgb(255, 86, 145);
-  height: 10vh;
+  height: 15vh;
   width: 100vw;
 }
 

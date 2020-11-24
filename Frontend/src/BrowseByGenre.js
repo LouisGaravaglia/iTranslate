@@ -11,9 +11,11 @@ import Artists from "./Artists";
 import Albums from "./Albums";
 import Genres from "./Genres";
 import Categories from "./BrowseCategories";
+import FlashMessage from "./FlashMessage";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
+import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
 //CUSTOM HOOK IMPORTS
 import useOnScreen from "./useOnScreen";
 
@@ -29,6 +31,10 @@ function BrowseByGenre({handleCategoryClick}) {
   const tracks = useSelector(store => store.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const translation = useSelector(store => store.translation);
+  const translationError = useSelector(store => store.errors.translationError);
+  const languageError = useSelector(store => store.errors.languageError);
+  const lyricsError = useSelector(store => store.errors.lyricsError);
+  const generalError = useSelector(store => store.errors.generalError);
   //REFS FOR PAGE TRAVERSAL
   const categoryRef = useRef();
   const selectGenresRef = useRef();
@@ -37,8 +43,42 @@ function BrowseByGenre({handleCategoryClick}) {
   const selectLanguageRef = useRef();
   const trackResultsRef = useRef();
   const showLyricsTranslationRef = useRef();
+  //STATE FOR FLASH MESSAGES
+  const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
+  const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
+  const [translationErrorFlashMessage, setTranslationErrorFlashMessage] = useState(false);
+  const [generalErrorFlashMessage, setGeneralErrorFlashMessage] = useState(false);
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
+
+  //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
+  useEffect(() => {
+    const displayFlashMessage = () => {
+
+        if (lyricsError) {
+          setNoLyricsFlashMessage(true);
+          console.log("There is a lyrics error");
+          dispatch(resetLyricsError());
+        }
+        if (languageError) {
+          setLanguageNotFoundFlashMessage(true);
+          console.log("Here is what language error is: ", languageError);
+          dispatch(resetLanguageError());
+        }
+        if (translationError) {
+          setTranslationErrorFlashMessage(true);
+          console.log("Here is what translation error is: ", translationError);
+          dispatch(resetTranslationError());
+        }
+        if (generalError) {
+          setGeneralErrorFlashMessage(true);
+          console.log("Here is what general error is: ", generalError);
+          dispatch(resetGeneralError());
+        }
+
+    }
+    displayFlashMessage();
+  }, [languageError, translationError, lyricsError, generalError, dispatch])
 
   //GET ALL GENRES IN DB AND STORE THEM FOR THE BROWSE BY GENRE COMPONENT
   useEffect(() => {
@@ -128,8 +168,6 @@ function BrowseByGenre({handleCategoryClick}) {
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
-
-
   //DISPLAY BROWSE BY ARTISTS COMPONENTS
   const ChooseCategoryDiv = (
       <animated.div onClick={scrollToGenres} style={springProps} ref={categoryRef}>
@@ -192,25 +230,21 @@ function BrowseByGenre({handleCategoryClick}) {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    // <Spring
-    //   from={{opacity: 0}}
-    //   to={{opacity: 1}}
-    //   config={{delay: 300, duration: 300}}
-    // >
-    //   {props => (
-    //     <div style={props}>
-<>
-          {ChooseCategoryDiv}
-          {selectGenresDiv}
-          {ArtistsResultsDiv}
-          {AlbumResultsDiv}
-          {TrackResultsDiv}
-          {LanguageSelectDiv}
-          {LyricsTranslationDiv}
-</>
-    //     </div>
-    //   )}
-    // </Spring>
+    <>
+      <div className="Flash-Messages-Container">
+        {noLyricsFlashMessage && (<FlashMessage setState={setNoLyricsFlashMessage} message="Unfortunately there are no Lyrics for that song yet."/> )}
+        {languageNotFoundFlashMessage && (<FlashMessage setState={setLanguageNotFoundFlashMessage} message="That Language was not found, please try again."/> )}
+        {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
+        {generalErrorFlashMessage && (<FlashMessage setState={setGeneralErrorFlashMessage} message="Uh oh, something went wrong. Please try again."/> )}
+      </div>
+      {ChooseCategoryDiv}
+      {selectGenresDiv}
+      {ArtistsResultsDiv}
+      {AlbumResultsDiv}
+      {TrackResultsDiv}
+      {LanguageSelectDiv}
+      {LyricsTranslationDiv}
+    </>
   );
 };
 

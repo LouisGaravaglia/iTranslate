@@ -18,16 +18,17 @@ function LanguageSelect({selectedTrackId}) {
   const lyrics = useSelector(store => store.lyrics);
   const translation = useSelector(store => store.translation);
   const translationError = useSelector(store => store.errors.translationError);
+  const languageError = useSelector(store => store.errors.languageError);
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
   //WATCHES FOR EITHER AN ERROR OR THE TRANSLATION TO COME THROUGH TO REMOVE LOADING ICON
   useEffect(() => {
     const updateIsLoading = () => {
-      if (translation || translationError) setIsLoading(false);
+      if (translation || translationError || languageError) setIsLoading(false);
     };
     updateIsLoading();
-  }, [translation, translationError])
+  }, [translation, translationError, languageError])
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
