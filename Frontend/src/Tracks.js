@@ -20,6 +20,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
   //REDUX STORE
   const lyrics = useSelector(store => store.lyrics);
   const lyricsError = useSelector(store => store.errors.lyricsError);
+  const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const dispatch = useDispatch();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
@@ -35,7 +36,11 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackResultsClick = async (track) => {
-    setIsLoading(true);
+
+    if (track.trackId !== selectedTrackId) {
+      setIsLoading(true);
+    }
+
     dispatch(addSelectedTrack(track));
     dispatch(resetStore("translation"));
 
@@ -55,6 +60,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
       };
     } catch(e) {
       setIsLoading(false);
+      console.log("Hit catch inside Tracks component!!!!!!");
       //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
       //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
       //*** NEED TO ADD A "NO LYRICS" FLASH MESSAGE FOR HANDLING A SPOTIFY API ERROR */
@@ -76,7 +82,6 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
   if (!isLoading) LoadingIconDiv = (
     <div className="Loading-Box"></div>
   );
-
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 

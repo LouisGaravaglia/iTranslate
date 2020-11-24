@@ -219,6 +219,7 @@ flex: 0.1 0 1vh;
 /* //////////////////////////////////////  FLASH MESSAGE  ////////////////////////////////////// */
 
 .Flash-Messages-Container {
+  position: absolute;
   position: sticky;
   top: 0;
   z-index: 6;

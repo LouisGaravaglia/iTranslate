@@ -65,7 +65,6 @@ function LanguageSelect({selectedTrackId}) {
         to={{opacity: 1}}
         config={{delay: 300, duration: 300}}
       >
-
       {props => (
         <div style={props}>
   
@@ -73,7 +72,6 @@ function LanguageSelect({selectedTrackId}) {
          
         </div>
       )}
-
     </Spring>
   </div>
   );
