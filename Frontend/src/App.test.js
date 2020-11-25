@@ -1,6 +1,6 @@
 import React from 'react'
-import {render, fireEvent, waitFor, screen, cleanup} from '@testing-library/react'
-import {Router} from 'react-router-dom';
+import {render, fireEvent, waitFor, screen, cleanup, getByTestId} from '@testing-library/react'
+import {Router, MemoryRouter} from 'react-router-dom';
 import '@testing-library/jest-dom/extend-expect'
 import { Provider } from 'react-redux'
 import { createStore } from "redux";
@@ -24,7 +24,7 @@ beforeEach(() => {
 const startingState = {
   selectedTrack: {trackName: "chanel", trackId: 42}, 
   errors: {translationError: false, languageError: false, lyricsError: false, searchError: false, generalError: false}
-  };
+};
 
 //REDUCER FUNCTION TO MIMIC REDUX REDUCER FOR STORE
 function reducer(state = startingState, action) {
@@ -46,13 +46,13 @@ function renderWithRedux(
   };
 };
 
+//SMOKE TEST
 describe('Smoke Test for App component', () => {
-  const store = createStore(rootReducer);
 
   it('renders without crashing', () => {
     const history = createMemoryHistory();
 
-    renderWithRedux(
+    const {getByText} = renderWithRedux(
       <Router history={history}>
         <App />
       </Router>
@@ -72,6 +72,33 @@ describe('Snapshot Test for App component', () => {
       </Router>
     );
     expect(asFragment()).toMatchSnapshot();
+  });
+
+});
+
+
+describe('Make sure appropriate text is appearing in certain routes', () => {
+
+  it('displays the "find your song!" search bar', () => {
+
+    const {getByText} = renderWithRedux(
+      <MemoryRouter initialEntries={["/"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(getByText("Find your song!")).toBeInTheDocument();
+  });
+
+  it('displays the "Artists Genre Danceability" in the Browse route', () => {
+
+    const {getByText} = renderWithRedux(
+      <MemoryRouter initialEntries={["/browse"]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(getByText("Artists")).toBeInTheDocument();
   });
 
 });

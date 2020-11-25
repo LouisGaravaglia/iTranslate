@@ -52,7 +52,7 @@ const NavBar = () => {
         </div>
         <div className="Navbar-Browse-Box">
           {!browseMode && <MdArrowRoundForward className="Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="40px" color="#fff" />}
-          {browseMode && <MdArrowRoundBack className="Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} fontSize="40px" color="#fff" />}
+          {browseMode && <MdArrowRoundBack  className="Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} fontSize="40px" color="#fff" />}
         </div>
         <NavLink exact to="/browse"></NavLink>
       </div>
