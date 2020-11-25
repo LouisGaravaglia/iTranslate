@@ -62,3 +62,17 @@ describe('Smoke Test for Routes component', () => {
   });
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for Routes component', () => {
+
+  it('matches snapshot', () => {
+    const history = createMemoryHistory();
+
+    const {asFragment} = renderWithRedux(
+      <Router history={history}>
+        <Routes />
+      </Router>)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});

@@ -40,4 +40,12 @@ describe('Smoke Test for Artists component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for Artists component', () => {
 
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<Artists />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});

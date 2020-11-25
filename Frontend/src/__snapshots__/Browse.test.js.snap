@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for Browse component matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      style="background-color: rgb(135, 0, 176);"
+    >
+      <div
+        style="opacity: 1; margin-left: 2500px;"
+      >
+        <div
+          class="Browse-Landing"
+        >
+          <p>
+            Artists
+          </p>
+          <p>
+            Genre
+          </p>
+          <p>
+            Danceability
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

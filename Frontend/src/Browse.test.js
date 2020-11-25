@@ -40,4 +40,12 @@ describe('Smoke Test for Browse component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for Browse component', () => {
 
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<Browse />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});

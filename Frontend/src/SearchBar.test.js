@@ -42,4 +42,15 @@ describe('Smoke Test for SearchBar component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for SearchBar component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<SearchBar />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
+
+
 

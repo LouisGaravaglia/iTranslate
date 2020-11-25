@@ -35,6 +35,9 @@ function renderWithRedux(
   };
 };
 
+    const history = createMemoryHistory();
+
+
 //SMOKE TEST
 describe('Smoke Test for Navbar component', () => {
 
@@ -47,6 +50,23 @@ describe('Smoke Test for Navbar component', () => {
       </Router>
     );
   });
+});
+
+
+//SNAPSHOT TEST
+describe('Snapshot Test for Navbar component', () => {
+
+  it('matches snapshot', () => {
+    const history = createMemoryHistory();
+
+    const {asFragment} = renderWithRedux(
+      <Router history={history}>
+        <Navbar />
+      </Router>
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
 });
 
 

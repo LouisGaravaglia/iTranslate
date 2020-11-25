@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for Navbar component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Navbar-Container"
+  >
+    <div
+      class="Navbar"
+    >
+      <div
+        class="Navbar-Search-Box"
+      >
+        <a
+          aria-current="page"
+          class="Navbar-Search active"
+          href="/"
+        >
+          LYRCS
+        </a>
+      </div>
+      <div
+        class="Navbar-Browse-Box"
+      >
+        <svg
+          class="sc-bdVaJa fUuvxv Navbar-Browse"
+          fill="#fff"
+          height="40px"
+          rotate="0"
+          viewBox="0 0 1024 1024"
+          width="40px"
+        >
+          <path
+            d="M569.8 825.2l276.2-268c12-11.6 18-27.4 18-44.8v-0.8c0-17.4-6-33.2-18-44.8l-276.2-268c-24-25-62.6-25-86.4 0s-23.8 65.4 0 90.4l166 158.8h-428c-34-0-61.4 28.6-61.4 64 0 36 27.4 64 61.2 64h428l-166 158.8c-23.8 25-23.8 65.4 0 90.4 24 25 62.6 25 86.6 0z"
+          />
+        </svg>
+      </div>
+      <a
+        href="/browse"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

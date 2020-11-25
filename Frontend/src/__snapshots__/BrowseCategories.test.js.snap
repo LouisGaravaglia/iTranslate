@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for BrowseCategories component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Browse-Landing"
+  >
+    <p>
+      Artists
+    </p>
+    <p>
+      Genre
+    </p>
+    <p>
+      Danceability
+    </p>
+  </div>
+</DocumentFragment>
+`;

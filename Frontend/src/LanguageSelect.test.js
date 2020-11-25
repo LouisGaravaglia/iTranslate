@@ -45,4 +45,13 @@ describe('Smoke Test for LanguageSelect component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for LanguageSelect component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<LanguageSelect />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
 

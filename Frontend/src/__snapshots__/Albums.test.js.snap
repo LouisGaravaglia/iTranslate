@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for Albums component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    style="opacity: 0;"
+  >
+    <div
+      class="Main-Container"
+    >
+      <div
+        class="Browse-Albums"
+      >
+        <div
+          class="Album"
+        >
+          <img
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="Main-Pagination-Slider-Placeholder"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

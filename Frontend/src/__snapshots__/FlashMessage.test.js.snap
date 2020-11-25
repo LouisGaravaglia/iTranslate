@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for FlashMessage component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="FlashMessage"
+  >
+    <p />
+  </div>
+</DocumentFragment>
+`;

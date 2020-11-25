@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for Routes component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main"
+  >
+    <div
+      class="Flash-Messages-Container"
+    />
+    <div
+      style="background-color: rgb(29, 77, 190);"
+    >
+      SearchLanding handleTrackSearchSubmit=/&gt;
+    </div>
+  </div>
+</DocumentFragment>
+`;

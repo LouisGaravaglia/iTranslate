@@ -42,4 +42,14 @@ describe('Smoke Test for SearchLanding component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for SearchLanding component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<SearchLanding />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
+
 

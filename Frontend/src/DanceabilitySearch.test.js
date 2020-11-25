@@ -42,4 +42,12 @@ describe('Smoke Test for DanceabilitySearch component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for DanceabilitySearch component', () => {
 
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<DanceabilitySearch />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});

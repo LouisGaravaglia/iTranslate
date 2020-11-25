@@ -58,4 +58,12 @@ describe('Smoke Test for BrowseByArtist component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for BrowseByArtists component', () => {
 
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<BrowseByArtists />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});

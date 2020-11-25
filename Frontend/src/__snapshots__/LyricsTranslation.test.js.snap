@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for LyricsTranslation component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    style="opacity: 0;"
+  >
+    <div
+      class="Lyrics-Translation"
+    >
+      <div
+        class="Lyrics-Container"
+      >
+        <p
+          class="Lyrics"
+        >
+          ORIGINAL LYRICS
+        </p>
+        <p
+          class="Lyrics"
+        />
+      </div>
+      <div
+        class="Translation-Container"
+      >
+        <p
+          class="Translation"
+        >
+          TRANSLATED LYRICS
+        </p>
+        <p
+          class="Translation"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

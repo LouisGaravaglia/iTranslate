@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for SearchLanding component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    style="opacity: 1; margin-left: -2500px;"
+  >
+    <div
+      class="Search-Field"
+    >
+      <div
+        class="Search-Field-Content"
+      >
+        <h1>
+          Find your song!
+        </h1>
+        <form
+          class="Search-Input-Container"
+        >
+          <div>
+            <input
+              id="SearchVal"
+              name="searchVal"
+              type="text"
+              value=""
+            />
+            <button
+              type="submit"
+            >
+              <i
+                class="fa fa-search icon"
+              />
+            </button>
+          </div>
+        </form>
+      </div>
+      <div
+        class="Search-Field-Filler"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

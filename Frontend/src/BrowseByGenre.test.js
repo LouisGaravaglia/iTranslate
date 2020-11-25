@@ -58,4 +58,14 @@ describe('Smoke Test for BrowseByGenre component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for BrowseByGenre component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<BrowseByGenre />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
+
 

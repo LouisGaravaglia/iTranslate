@@ -58,4 +58,13 @@ describe('Smoke Test for BrowseByDanceability component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for BrowseByDanceability component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<BrowseByDanceability />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
 

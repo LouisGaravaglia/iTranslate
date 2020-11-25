@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for Genres component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    style="opacity: 0;"
+  >
+    <p>
+      Loading
+    </p>
+  </div>
+</DocumentFragment>
+`;

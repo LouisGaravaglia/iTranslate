@@ -45,4 +45,14 @@ describe('Smoke Test for Tracks component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for Tracks component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<Tracks results={[{trackId: 1}, {trackId: 2} ]} itemsPerPage={2}/>)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
+
 

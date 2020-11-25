@@ -42,4 +42,14 @@ describe('Smoke Test for FlashMessage component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for FlashMessage component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<FlashMessage />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
+
 

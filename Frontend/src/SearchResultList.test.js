@@ -42,4 +42,14 @@ describe('Smoke Test for SearchResultList component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for SearchResultList component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<SearchResultList resultsArray={[{trackId: 1}, {trackId: 2} ]} itemsPerPage={2}/>)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
+
 

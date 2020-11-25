@@ -42,4 +42,13 @@ describe('Smoke Test for LyricsTranslation component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for LyricsTranslation component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<LyricsTranslation />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
 

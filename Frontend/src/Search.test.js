@@ -55,4 +55,13 @@ describe('Smoke Test for Search component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for Search component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<Search />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
 

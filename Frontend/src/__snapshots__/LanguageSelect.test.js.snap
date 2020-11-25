@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for LanguageSelect component matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      style="opacity: 0;"
+    >
+      <div
+        class="Search-Field"
+      >
+        <div
+          class="Loading-Box"
+        />
+        <div
+          class="Search-Field-Content"
+        >
+          <h1>
+            Select which language you'd like your lyrics translated to!
+          </h1>
+          <form
+            class="Search-Input-Container"
+          >
+            <div>
+              <input
+                id="SearchVal"
+                name="searchVal"
+                type="text"
+                value=""
+              />
+              <button
+                type="submit"
+              >
+                <i
+                  class="fa fa-search icon"
+                />
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          class="Search-Field-Filler"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

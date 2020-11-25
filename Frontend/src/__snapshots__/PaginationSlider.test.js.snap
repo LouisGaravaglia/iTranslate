@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for PaginationSlider component matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <span
+      class="MuiSlider-root WithStyles(ForwardRef(Slider))-root-12 MuiSlider-trackFalse"
+    >
+      <span
+        class="MuiSlider-rail WithStyles(ForwardRef(Slider))-rail-17"
+      />
+      <span
+        class="MuiSlider-track WithStyles(ForwardRef(Slider))-track-16"
+      />
+      <input
+        type="hidden"
+        value="NaN"
+      />
+      <span
+        aria-labelledby="continuous-slider"
+        aria-orientation="horizontal"
+        aria-valuemax="NaN"
+        aria-valuemin="0"
+        aria-valuenow="NaN"
+        class="MuiSlider-thumb WithStyles(ForwardRef(Slider))-thumb-13"
+        data-index="0"
+        role="slider"
+        tabindex="0"
+      />
+    </span>
+  </div>
+</DocumentFragment>
+`;

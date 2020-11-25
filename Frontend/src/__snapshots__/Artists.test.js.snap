@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for Artists component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    style="opacity: 0;"
+  >
+    <div
+      class="Main-Container"
+    >
+      <div
+        class="Result-Box"
+      >
+        <div
+          class="Main-Result-Container"
+        >
+          <p
+            class="Result-Main"
+          />
+        </div>
+      </div>
+      <div
+        class="Main-Pagination-Slider-Placeholder"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

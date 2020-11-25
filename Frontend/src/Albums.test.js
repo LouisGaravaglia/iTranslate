@@ -40,3 +40,13 @@ describe('Smoke Test for Albums component', () => {
   });
 
 });
+
+//SNAPSHOT TEST
+describe('Snapshot Test for Albums component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<Albums />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});

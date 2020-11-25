@@ -42,4 +42,14 @@ describe('Smoke Test for PaginationSlider component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for PaginationSlider component', () => {
+
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<PaginationSlider resultsArray={[{trackId: 1}, {trackId: 2}]}/>)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
+
 

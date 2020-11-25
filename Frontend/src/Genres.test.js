@@ -42,4 +42,12 @@ describe('Smoke Test for Genres component', () => {
 
 });
 
+//SNAPSHOT TEST
+describe('Snapshot Test for Genres component', () => {
 
+  it('matches snapshot', () => {
+    const {asFragment} = renderWithRedux(<Genres />)
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+});
