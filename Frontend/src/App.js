@@ -15,7 +15,7 @@ function App() {
     async function getSeedData() {
       //GET AVAILABLE LANGUAGES TO TRANSLATE LYRICS TO FROM IBM API
       dispatch(getLanguages());
-    }
+    };
 
     getSeedData();
   }, [dispatch]);

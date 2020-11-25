@@ -131,8 +131,7 @@ const Search = () => {
   const SearchBarDiv = (
     
     <animated.div style={springProps} ref={searchRef}>
-
-            <SearchLanding handleTrackSearchSubmit={handleTrackSearchSubmit}/>
+      SearchLanding handleTrackSearchSubmit={handleTrackSearchSubmit}/>
     </animated.div>
   );
 
