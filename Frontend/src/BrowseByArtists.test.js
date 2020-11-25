@@ -5,18 +5,32 @@ import '@testing-library/jest-dom/extend-expect'
 import { Provider } from 'react-redux'
 import { createStore } from "redux";
 import rootReducer from "./reducers/rootReducer";
-// import configureStore from 'redux-mock-store'
-import Albums from "./Albums";
+import BrowseByArtists from "./BrowseByArtists";
+
+//NEED TO IMPLEMENT A MOC INTERSECTION OBSERVER IN ORDER FOR TESTS TO PASS
+const mockIntersectionObserver = class {
+  constructor() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
+beforeEach(() => {
+  window.IntersectionObserver = mockIntersectionObserver;
+});
 
 afterEach(cleanup);
 
-const startingState = {albums: [{albumId: 42}]};
+const startingState = {
+  selectedTrack: {trackName: "chanel", trackId: 42}, 
+  errors: {translationError: false, languageError: false, lyricsError: false, searchError: false, generalError: false}
+  };
 
 //REDUCER FUNCTION TO MIMIC REDUX REDUCER FOR STORE
 function reducer(state = startingState, action) {
   switch (action.type) {
-    case "ADD_ALBUMs":
-      return {...state, albums: action.albums};
+    case "ADD_TRACKS":
+      return {...state, tracks: action.tracks};
     default:
       return state;
   };
@@ -33,10 +47,15 @@ function renderWithRedux(
 };
 
 //SMOKE TEST
-describe('Smoke Test for Albums component', () => {
+describe('Smoke Test for BrowseByArtist component', () => {
+
+  //NEED TO ESTABLISH THAT SCROLLINTOVIEW IS A FUNCTION IN ORDER FOR TESTS TO PASS
+  window.HTMLElement.prototype.scrollIntoView = function() {};
 
   it('renders without crashing', () => {
-    renderWithRedux(<Albums />)
+    renderWithRedux(<BrowseByArtists />)
   });
 
 });
+
+

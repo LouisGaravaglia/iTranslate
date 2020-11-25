@@ -9,18 +9,18 @@ import App from "./App";
 
 afterEach(cleanup);
 
-  const mockIntersectionObserver = class {
-    constructor() {}
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  };
+const mockIntersectionObserver = class {
+  constructor() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
 
-  beforeEach(() => {
-    window.IntersectionObserver = mockIntersectionObserver;
-  });
+beforeEach(() => {
+  window.IntersectionObserver = mockIntersectionObserver;
+});
 
-describe('Smoke Test for App components', () => {
+describe('Smoke Test for App component', () => {
   const store = createStore(rootReducer);
 
   it('renders without crashing', () => {

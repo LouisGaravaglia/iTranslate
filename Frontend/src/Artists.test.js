@@ -5,18 +5,17 @@ import '@testing-library/jest-dom/extend-expect'
 import { Provider } from 'react-redux'
 import { createStore } from "redux";
 import rootReducer from "./reducers/rootReducer";
-// import configureStore from 'redux-mock-store'
-import Albums from "./Albums";
+import Artists from "./Artists";
 
 afterEach(cleanup);
 
-const startingState = {albums: [{albumId: 42}]};
+const startingState = {artists: [{artistId: 42}]};
 
 //REDUCER FUNCTION TO MIMIC REDUX REDUCER FOR STORE
 function reducer(state = startingState, action) {
   switch (action.type) {
-    case "ADD_ALBUMs":
-      return {...state, albums: action.albums};
+    case "ADD_ARTISTS":
+      return {...state, artists: action.artists};
     default:
       return state;
   };
@@ -33,10 +32,12 @@ function renderWithRedux(
 };
 
 //SMOKE TEST
-describe('Smoke Test for Albums component', () => {
+describe('Smoke Test for Artists component', () => {
 
   it('renders without crashing', () => {
-    renderWithRedux(<Albums />)
+    renderWithRedux(<Artists />)
   });
 
 });
+
+
