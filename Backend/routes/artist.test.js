@@ -50,11 +50,11 @@ describe('GET /artist', () => {
 
 describe('POST /artist', () => {
 
-  it('successfully adds an album to the database.', async () => {
+  it('successfully adds an artist to the database.', async () => {
     const res = await request(app).post("/artist").send(artistThree);
     expect(res.statusCode).toBe(201);
     expect(res.body.response).toEqual('test_artist_id_3');
-    await request(app).delete("/artist").send({spotify_id: 'test_artist_id_3'});
+    // await request(app).delete("/artist").send({spotify_id: 'test_artist_id_3'});
   });
 });
 

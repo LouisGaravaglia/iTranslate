@@ -8,6 +8,18 @@ const {
   afterAllHook
 } = require('./testing.config');
 
+
+const artistThree = {
+  spotify_id: "test_artist_id_3",
+  name: "test_artist_name_3",
+  genre: "test_genre_3",
+  spotify_uri: "test_spotify_uri_3",
+  img_url: "test_img_url_3",
+  popularity: 99
+};
+
+
+
 //ALBUM OBJECT TO USE IN POST AND DELETE ROUTES
 const albumThree = {
   spotify_id: 'test_album_id_3',
@@ -15,8 +27,9 @@ const albumThree = {
   release_date: 'test_release_date_3',
   spotify_uri: 'test_spotify_uri_3',
   img_url: 'test_img_url_3',
-  artist_id: 'test_artist_id_1'
+  artist_id: 'test_artist_id_3'
 };
+
 
 beforeEach(async function() {
   await beforeEachHook();
@@ -35,24 +48,13 @@ describe('GET /album', () => {
 describe('POST /album', () => {
 
   it('successfully adds an album to the database.', async () => {
+    await request(app).post("/artist").send(artistThree);
     const res = await request(app).post("/album").send(albumThree);
     expect(res.statusCode).toBe(201);
     expect(res.body.response).toEqual('test_album_id_3');
-    await request(app).delete("/album").send({spotify_id: 'test_album_id_3'});
   });
 });
 
-describe('DELETE /album', () => {
-
-  it('successfully deletes an album from the database.', async () => {
-    const res = await request(app).post("/album").send(albumThree);
-    expect(res.statusCode).toBe(201);
-    expect(res.body.response).toEqual('test_album_id_3');
-    const deleteRes = await request(app).delete("/album").send({spotify_id: 'test_album_id_3'});
-    expect(deleteRes.statusCode).toBe(201);
-    expect(deleteRes.body.response).toEqual([{spotify_id: 'test_album_id_3'}]);
-  });
-});
 
 afterEach(async function() {
   await afterEachHook();
