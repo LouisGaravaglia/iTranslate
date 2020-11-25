@@ -71,7 +71,22 @@ router.patch( "/", async function( req, res, next ) {
     return res.status( 201 ).json( { response }  )
   } catch( err ) {
     return next( err );
-  }
-} );
+  };
+});
+
+router.delete( "/", async function( req, res, next ) {
+  try {
+    console.log("MADE IT TO THE Track DELETE ROUTE");
+    console.log("HERE IS REQ.BODY", req.body);
+
+    const response = await Tracks.delete( req.body.spotify_id );
+    console.log("RETURNING FROM THE Track DELETE ROUTE");
+    return res.status( 201 ).json( { response } );
+
+  } catch ( err ) {
+    next( err );
+  };
+});
+
 
 module.exports = router;

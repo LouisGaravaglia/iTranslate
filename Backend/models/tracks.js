@@ -118,7 +118,18 @@ class Tracks {
     } else {
       return "No Lyrics";
     }
-  }
+  };
+
+  static async delete(trackId) {
+    console.log("INSIDE tracks.delete METHOD", trackId);
+
+    const result = await db.query (
+      `DELETE FROM tracks WHERE spotify_id = $1 RETURNING spotify_id`, [trackId]);
+    console.log("Here is the result of rows from delete", result.rows);
+
+    return result.rows;
+  };
+
 
 
 }

@@ -5,17 +5,6 @@ const addAlbumSchema = require("../schemas/addAlbumSchema.json");
 const Albums = require("../models/Albums");
 const ExpressError = require("../helpers/expressError");
 
-// router.get( "/", async function( req, res, next ) {
-//   try {
-//     console.log("MADE IT TO THE ALBUM GET ROUTE");
-//     const response = await Albums.checkIfAlbumIsInDB( req.query.albumId );
-//     console.log("RETURNING FROM THE ALBUM GET ROUTE");
-//     return res.status( 201 ).json( { response } );
-//   } catch ( err ) {
-//     next( err );
-//   }
-// });
-
 router.get( "/", async function( req, res, next ) {
   try {
     console.log("MADE IT TO THE ALBUM GET ROUTE");
@@ -48,8 +37,22 @@ router.post( "/", async function( req, res, next ) {
 
   } catch ( err ) {
     next( err );
-  }
+  };
+
+});
+
+router.delete( "/", async function( req, res, next ) {
+  try {
+    console.log("MADE IT TO THE ALBUM DELETE ROUTE");
+    console.log("HERE IS REQ.BODY", req.body);
+
+    const response = await Albums.delete( req.body.spotify_id );
+    console.log("RETURNING FROM THE ALBUM DELETE ROUTE");
+    return res.status( 201 ).json( { response } );
+
+  } catch ( err ) {
+    next( err );
+  };
 });
 
 module.exports = router;
-

@@ -31,37 +31,16 @@ class Artists {
     return result.rows;
   }
 
-  //   static async getArtistsAndIds() {
-  //   const result = await db.query (`SELECT name, spotify_id FROM artists`);
-  //   console.log("HERE IS THE getArtistsAndIds RESULT FROM BACKEND: ", result);
-  //   return result.rows;
-  // }
+  static async delete(artistId) {
+    console.log("INSIDE artists.delete METHOD", artistId);
 
-  // static async getGenres() {
-  //   const result = await db.query (`
-  //     SELECT a.genre 
-  //     FROM artists a
-  //     JOIN tracks t
-  //     ON a.spotify_id = t.artist_id
-  //     WHERE t.lyrics != 'No Lyrics'
-  //     ORDER BY genre`);
-  //   console.log("HERE IS THE new getGenres RESULT FROM BACKEND: ", result);
-  //   return result.rows;
-  // }
+    const result = await db.query (
+      `DELETE FROM artists WHERE spotify_id = $1 RETURNING spotify_id`, [artistId]);
+    console.log("Here is the result of rows from delete", result.rows);
 
-  // SELECT a.genre, a.name 
-  //     FROM artists a
-  //     JOIN tracks t
-  //     ON a.spotify_id = t.artist_id
-  //     WHERE t.lyrics != 'No Lyrics'
-  //     ORDER BY genre GROP BY a.name
+    return result.rows;;
+  };
 
-  // SELECT a.genre, a.name 
-  //     FROM artists a
-  //     JOIN tracks t
-  //     ON a.spotify_id = t.artist_id
-  //     WHERE t.lyrics != 'No Lyrics'
-  //     ORDER BY genre GROP BY a.name
 
     static async getGenres() {
     const result = await db.query (`SELECT array_to_string(ARRAY(
@@ -76,11 +55,6 @@ class Artists {
     return result.rows;
   }
 
-  //   static async getGenres() {
-  //   const result = await db.query (`SELECT array_to_string(ARRAY(SELECT genre FROM artists ORDER BY genre), ', ') AS genres`);
-  //   console.log("HERE IS THE getGenres RESULT FROM BACKEND: ", result);
-  //   return result.rows;
-  // }
 
     static async getArtistByGenre(genre) {
       console.log("tHIs is the val of genre i'm passing: ", genre);
