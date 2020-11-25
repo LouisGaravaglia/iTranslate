@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS itranslatedb;
+DROP DATABASE IF EXISTS itranslatedb_test;
 
-CREATE DATABASE itranslatedb;
+CREATE DATABASE itranslatedb_test;
 
-\c itranslatedb;
+\c itranslatedb_test;
 
 DROP TABLE IF EXISTS artists;
 

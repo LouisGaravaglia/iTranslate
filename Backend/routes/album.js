@@ -19,6 +19,10 @@ const ExpressError = require("../helpers/expressError");
 router.get( "/", async function( req, res, next ) {
   try {
     console.log("MADE IT TO THE ALBUM GET ROUTE");
+    console.log("HERE IS REQ.BODY: ", req.body);
+    console.log("HERE IS REQ.QUERY: ", req.query);
+    console.log("HERE IS REQ.PARAMS: ", req.params);
+
     const response = await Albums.getAlbums( req.query.artistId );
     console.log("RETURNING FROM THE ALBUM GET ROUTE");
     return res.status( 201 ).json( { response } );
@@ -30,9 +34,11 @@ router.get( "/", async function( req, res, next ) {
 router.post( "/", async function( req, res, next ) {
   try {
     console.log("MADE IT TO THE ALBUM POST ROUTE");
+    console.log("HERE IS REQ.BODY", req.body);
     const validation = validate( req.body, addAlbumSchema );
 
     if ( !validation.valid ) {
+      console.log("OH NO!!! VALIDATION ERROR", e.stack);
       throw new ExpressError(validation.errors.map( e => e.stack ), 400 );
     }
 

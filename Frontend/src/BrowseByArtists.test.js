@@ -22,6 +22,7 @@ beforeEach(() => {
 afterEach(cleanup);
 
 const startingState = {
+  allArtists: [{trackName: "Frank Ocean"}],
   selectedTrack: {trackName: "chanel", trackId: 42}, 
   errors: {translationError: false, languageError: false, lyricsError: false, searchError: false, generalError: false}
   };
@@ -67,3 +68,4 @@ describe('Snapshot Test for BrowseByArtists component', () => {
   });
 
 });
+

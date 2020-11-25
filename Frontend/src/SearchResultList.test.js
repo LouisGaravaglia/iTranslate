@@ -11,7 +11,11 @@ import SearchResultList from "./SearchResultList";
 
 afterEach(cleanup);
 
-const startingState = {};
+const startingState = {
+  allArtists: [{trackName: "Frank Ocean"}],
+  selectedTrack: {trackName: "chanel", trackId: 42}, 
+  errors: {translationError: false, languageError: false, lyricsError: false, searchError: false, generalError: false}
+  };
 
 //REDUCER FUNCTION TO MIMIC REDUX REDUCER FOR STORE
 function reducer(state = startingState, action) {
@@ -51,5 +55,7 @@ describe('Snapshot Test for SearchResultList component', () => {
   });
 
 });
+
+
 
 
