@@ -12,7 +12,7 @@ async function beforeEachHook() {
     //ADD FIRST ARTIST
     await db.query (
       `INSERT INTO artists ( spotify_id, name, genre, spotify_uri, img_url, popularity )
-      VALUES ( 'test_artist_id_1', 'test_artist_name_1', 'test_genre_1', 'test_spotify_uri_1', 'test_img_url_1', 45 ) RETURNING spotify_id`
+      VALUES ( 'test_artist_id_1', 'test_artist_name_1', 'rock, folk', 'test_spotify_uri_1', 'test_img_url_1', 45 ) RETURNING spotify_id`
     );
 
     //ADD FIRST ALBUM
@@ -30,7 +30,7 @@ async function beforeEachHook() {
     //ADD SECOND ARTIST
     await db.query (
       `INSERT INTO artists ( spotify_id, name, genre, spotify_uri, img_url, popularity )
-      VALUES ( 'test_artist_id_2', 'test_artist_name_2', 'test_genre_2', 'test_spotify_uri_2', 'test_img_url_2', 45 ) RETURNING spotify_id`
+      VALUES ( 'test_artist_id_2', 'test_artist_name_2', 'rap, r&b', 'test_spotify_uri_2', 'test_img_url_2', 45 ) RETURNING spotify_id`
     );
 
     //ADD SECOND ALBUM
@@ -57,8 +57,8 @@ async function beforeEachHook() {
 
   } catch (error) {
     console.error(error);
-  }
-}
+  };
+};
 
 async function afterEachHook() {
   try {
@@ -68,16 +68,16 @@ async function afterEachHook() {
 
   } catch (error) {
     console.error(error);
-  }
-}
+  };
+};
 
 async function afterAllHook() {
   try {
     await db.end();
   } catch (err) {
     console.error(err);
-  }
-}
+  };
+};
 
 module.exports = {
   afterAllHook,

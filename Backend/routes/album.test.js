@@ -8,8 +8,7 @@ const {
   afterAllHook
 } = require('./testing.config');
 
-
-
+//ALBUM OBJECT TO USE IN POST AND DELETE ROUTES
 const albumThree = {
   spotify_id: 'test_album_id_3',
   name: 'test_album_name_3',
@@ -19,12 +18,9 @@ const albumThree = {
   artist_id: 'test_artist_id_1'
 };
 
-
-
 beforeEach(async function() {
   await beforeEachHook();
 });
-
 
 describe('GET /album', () => {
 
