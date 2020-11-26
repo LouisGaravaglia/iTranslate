@@ -1,23 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { validate } = require("jsonschema");
+const {validate} = require("jsonschema");
 const addAlbumSchema = require("../schemas/addAlbumSchema.json");
 const Albums = require("../models/Albums");
 const ExpressError = require("../helpers/expressError");
 
-router.get( "/", async function( req, res, next ) {
+router.get("/", async function(req, res, next) {
   try {
-    console.log("MADE IT TO THE ALBUM GET ROUTE");
-    console.log("HERE IS REQ.BODY: ", req.body);
-    console.log("HERE IS REQ.QUERY: ", req.query);
-    console.log("HERE IS REQ.PARAMS: ", req.params);
-
-    const response = await Albums.getAlbums( req.query.artistId );
-    console.log("RETURNING FROM THE ALBUM GET ROUTE");
-    return res.status( 201 ).json( { response } );
-  } catch ( err ) {
+    const response = await Albums.getAlbums(req.query.artistId);
+    return res.status( 201 ).json({response});
+  } catch (err) {
     next( err );
-  }
+  };
 });
 
 router.post( "/", async function( req, res, next ) {
@@ -27,7 +21,6 @@ router.post( "/", async function( req, res, next ) {
     const validation = validate( req.body, addAlbumSchema );
 
     if ( !validation.valid ) {
-      console.log("OH NO!!! VALIDATION ERROR", e.stack);
       throw new ExpressError(validation.errors.map( e => e.stack ), 400 );
     }
 
@@ -41,18 +34,18 @@ router.post( "/", async function( req, res, next ) {
 
 });
 
-router.delete( "/", async function( req, res, next ) {
-  try {
-    console.log("MADE IT TO THE ALBUM DELETE ROUTE");
-    console.log("HERE IS REQ.BODY", req.body);
+// router.delete( "/", async function( req, res, next ) {
+//   try {
+//     console.log("MADE IT TO THE ALBUM DELETE ROUTE");
+//     console.log("HERE IS REQ.BODY", req.body);
 
-    const response = await Albums.delete( req.body.spotify_id );
-    console.log("RETURNING FROM THE ALBUM DELETE ROUTE");
-    return res.status( 201 ).json( { response } );
+//     const response = await Albums.delete( req.body.spotify_id );
+//     console.log("RETURNING FROM THE ALBUM DELETE ROUTE");
+//     return res.status( 201 ).json( { response } );
 
-  } catch ( err ) {
-    next( err );
-  };
-});
+//   } catch ( err ) {
+//     next( err );
+//   };
+// });
 
 module.exports = router;

@@ -51,18 +51,18 @@ router.post( "/", async function( req, res, next ) {
   }
 });
 
-router.delete( "/", async function( req, res, next ) {
-  try {
-    console.log("MADE IT TO THE ARTIST DELETE ROUTE");
-    console.log("HERE IS REQ.BODY", req.body);
+// router.delete( "/", async function( req, res, next ) {
+//   try {
+//     console.log("MADE IT TO THE ARTIST DELETE ROUTE");
+//     console.log("HERE IS REQ.BODY", req.body);
 
-    const response = await Artists.delete( req.body.spotify_id );
-    console.log("RETURNING FROM THE ARTIST DELETE ROUTE");
-    return res.status( 201 ).json( { response } );
+//     const response = await Artists.delete( req.body.spotify_id );
+//     console.log("RETURNING FROM THE ARTIST DELETE ROUTE");
+//     return res.status( 201 ).json( { response } );
 
-  } catch ( err ) {
-    next( err );
-  };
-});
+//   } catch ( err ) {
+//     next( err );
+//   };
+// });
 
 module.exports = router;

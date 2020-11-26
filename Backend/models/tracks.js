@@ -19,14 +19,6 @@ class Tracks {
 
   }
 
-//           trackId: track.id, 
-//           trackName: track.name, 
-//           artistId: track.artists[0].id,
-//           artistName: track.artists[0].name,
-//           albumId,
-//           hasLyrics,
-//           inDatabase
-
   static async getTracks(albumId) {
     console.log("INSIDE TRACKS.getTracks METHOD", albumId);
     const result = await db.query (
@@ -120,15 +112,15 @@ class Tracks {
     }
   };
 
-  static async delete(trackId) {
-    console.log("INSIDE tracks.delete METHOD", trackId);
+  // static async delete(trackId) {
+  //   console.log("INSIDE tracks.delete METHOD", trackId);
 
-    const result = await db.query (
-      `DELETE FROM tracks WHERE spotify_id = $1 RETURNING spotify_id`, [trackId]);
-    console.log("Here is the result of rows from delete", result.rows);
+  //   const result = await db.query (
+  //     `DELETE FROM tracks WHERE spotify_id = $1 RETURNING spotify_id`, [trackId]);
+  //   console.log("Here is the result of rows from delete", result.rows);
 
-    return result.rows;
-  };
+  //   return result.rows;
+  // };
 
 
 

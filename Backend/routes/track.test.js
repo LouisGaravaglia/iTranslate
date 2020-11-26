@@ -82,6 +82,17 @@ describe('POST /track', () => {
   });
 });
 
+describe('PATCH /track', () => {
+
+  it('adds lyrics to an existing track.', async () => {
+    const res = await request(app).patch("/track").send({track_id: 'test_track_id_2', lyrics: "I have lyrics"});
+    expect(res.statusCode).toBe(201);
+    const updatedTrackRes = await request(app).get("/track/getLyrics").query({trackId: 'test_track_id_2'});
+    expect(updatedTrackRes.statusCode).toBe(201);
+    expect(updatedTrackRes.body.response).toEqual('I have lyrics');
+  });
+});
+
 
 afterEach(async function() {
   await afterEachHook();

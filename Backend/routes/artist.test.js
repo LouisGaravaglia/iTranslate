@@ -58,17 +58,17 @@ describe('POST /artist', () => {
   });
 });
 
-describe('DELETE /artist', () => {
+// describe('DELETE /artist', () => {
 
-  it('successfully deletes an artist from the database.', async () => {
-    const res = await request(app).post("/artist").send(artistThree);
-    expect(res.statusCode).toBe(201);
-    expect(res.body.response).toEqual('test_artist_id_3');
-    const deleteRes = await request(app).delete("/artist").send({spotify_id: 'test_artist_id_3'});
-    expect(deleteRes.statusCode).toBe(201);
-    expect(deleteRes.body.response).toEqual([{spotify_id: 'test_artist_id_3'}]);
-  });
-});
+//   it('successfully deletes an artist from the database.', async () => {
+//     const res = await request(app).post("/artist").send(artistThree);
+//     expect(res.statusCode).toBe(201);
+//     expect(res.body.response).toEqual('test_artist_id_3');
+//     const deleteRes = await request(app).delete("/artist").send({spotify_id: 'test_artist_id_3'});
+//     expect(deleteRes.statusCode).toBe(201);
+//     expect(deleteRes.body.response).toEqual([{spotify_id: 'test_artist_id_3'}]);
+//   });
+// });
 
 afterEach(async function() {
   await afterEachHook();

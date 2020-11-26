@@ -38,15 +38,15 @@ class Albums {
     return result.rows;
   };
 
-  static async delete(albumId) {
-    console.log("INSIDE ALBUMS.delete METHOD", albumId);
+  // static async delete(albumId) {
+  //   console.log("INSIDE ALBUMS.delete METHOD", albumId);
 
-    const result = await db.query (
-      `DELETE FROM albums WHERE spotify_id = $1 RETURNING spotify_id`, [albumId]);
-    console.log("Here is the result of rows from delete", result.rows);
+  //   const result = await db.query (
+  //     `DELETE FROM albums WHERE spotify_id = $1 RETURNING spotify_id`, [albumId]);
+  //   console.log("Here is the result of rows from delete", result.rows);
 
-    return result.rows;;
-  };
+  //   return result.rows;;
+  // };
 
 };
 

@@ -31,15 +31,15 @@ class Artists {
     return result.rows;
   }
 
-  static async delete(artistId) {
-    console.log("INSIDE artists.delete METHOD", artistId);
+  // static async delete(artistId) {
+  //   console.log("INSIDE artists.delete METHOD", artistId);
 
-    const result = await db.query (
-      `DELETE FROM artists WHERE spotify_id = $1 RETURNING spotify_id`, [artistId]);
-    console.log("Here is the result of rows from delete", result.rows);
+  //   const result = await db.query (
+  //     `DELETE FROM artists WHERE spotify_id = $1 RETURNING spotify_id`, [artistId]);
+  //   console.log("Here is the result of rows from delete", result.rows);
 
-    return result.rows;;
-  };
+  //   return result.rows;;
+  // };
 
 
     static async getGenres() {

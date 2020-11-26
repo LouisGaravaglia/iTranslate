@@ -55,6 +55,12 @@ async function beforeEachHook() {
       `UPDATE tracks SET lyrics = 'No Lyrics' WHERE spotify_id = 'test_track_id_2'`
     );
 
+    //ADD TRANSLATION TO THE FIRST TRACK
+    await db.query (
+      `INSERT INTO translation (track_id, translation, language)
+      VALUES ('test_track_id_1', 'es mi traducción', 'es')`
+    );
+
   } catch (error) {
     console.error(error);
   };
