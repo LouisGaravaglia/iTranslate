@@ -1,13 +1,9 @@
 import React from 'react'
-import {render, fireEvent, waitFor, screen, cleanup} from '@testing-library/react'
-import {MemoryRouter} from 'react-router-dom';
+import {render, cleanup} from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { Provider } from 'react-redux'
-import { createStore } from "redux";
-import rootReducer from "./reducers/rootReducer";
+import {Provider} from 'react-redux'
+import {createStore} from "redux";
 import SearchResultList from "./SearchResultList";
-
-
 
 afterEach(cleanup);
 
@@ -17,7 +13,11 @@ const startingState = {
   errors: {translationError: false, languageError: false, lyricsError: false, searchError: false, generalError: false}
   };
 
-//REDUCER FUNCTION TO MIMIC REDUX REDUCER FOR STORE
+/**
+ * reducer function to mimic the reducer used in Redux.
+ * @param {object} state - holds an object of data used within the components
+ * @param {object} action - object where the values are strings used to fire certain actions
+ */
 function reducer(state = startingState, action) {
   switch (action.type) {
     case "ADD_TRACKS":
@@ -27,7 +27,12 @@ function reducer(state = startingState, action) {
   };
 };
 
-//FUNCTION TO ALLOW THE COMPONENT TO BE RENDERED USING OUR MAKESHIF REDUX STORE
+/**
+ * Function that renders the component within a redux environment since most 
+ * components rely on redux for data in order to mount.
+ * @param {ReactComponent} component - private spotify client id
+ * @param {function} store - creates the react store using the createStore method imported from redux
+ */
 function renderWithRedux(
   component,
   {initialState, store = createStore(reducer, initialState)} = {}
@@ -41,21 +46,15 @@ function renderWithRedux(
 describe('Smoke Test for SearchResultList component', () => {
 
   it('renders without crashing', () => {
-    renderWithRedux(<SearchResultList itemsPerPage={1} resultsArray={[{trackId: 1}, {trackId: 2}]}/>)
+    renderWithRedux(<SearchResultList itemsPerPage={1} resultsArray={[{trackId: 1}, {trackId: 2}]}/>);
   });
-
 });
 
 //SNAPSHOT TEST
 describe('Snapshot Test for SearchResultList component', () => {
 
   it('matches snapshot', () => {
-    const {asFragment} = renderWithRedux(<SearchResultList resultsArray={[{trackId: 1}, {trackId: 2} ]} itemsPerPage={2}/>)
+    const {asFragment} = renderWithRedux(<SearchResultList resultsArray={[{trackId: 1}, {trackId: 2} ]} itemsPerPage={2}/>);
     expect(asFragment()).toMatchSnapshot();
   });
-
 });
-
-
-
-

@@ -13,7 +13,7 @@ function Albums() {
   const dispatch = useDispatch();
   const albums = useSelector(store => store.albums);
 
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleAlbumClick = async (albumId) => {
     dispatch(getTracks(albumId));
@@ -40,6 +40,5 @@ function Albums() {
     </Spring>
   );
 };
-
 
 export default Albums;

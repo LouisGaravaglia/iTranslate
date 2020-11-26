@@ -1,13 +1,11 @@
 import React from 'react'
-import {render, fireEvent, waitFor, screen, cleanup} from '@testing-library/react'
-import {MemoryRouter} from 'react-router-dom';
+import {render, cleanup} from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { Provider } from 'react-redux'
-import { createStore } from "redux";
-import rootReducer from "./reducers/rootReducer";
+import {Provider} from 'react-redux'
+import {createStore} from "redux";
 import BrowseByArtists from "./BrowseByArtists";
 
-//NEED TO IMPLEMENT A MOC INTERSECTION OBSERVER IN ORDER FOR TESTS TO PASS
+//CREATE A MOCK INTERSECTION OBSERVER CLASS FOR TESTING AND APPEND IT TO THE WINDOW OBJECT
 const mockIntersectionObserver = class {
   constructor() {}
   observe() {}
@@ -25,9 +23,13 @@ const startingState = {
   allArtists: [{trackName: "Frank Ocean"}],
   selectedTrack: {trackName: "chanel", trackId: 42}, 
   errors: {translationError: false, languageError: false, lyricsError: false, searchError: false, generalError: false}
-  };
+};
 
-//REDUCER FUNCTION TO MIMIC REDUX REDUCER FOR STORE
+/**
+ * reducer function to mimic the reducer used in Redux.
+ * @param {object} state - holds an object of data used within the components
+ * @param {object} action - object where the values are strings used to fire certain actions
+ */
 function reducer(state = startingState, action) {
   switch (action.type) {
     case "ADD_TRACKS":
@@ -37,7 +39,12 @@ function reducer(state = startingState, action) {
   };
 };
 
-//FUNCTION TO ALLOW THE COMPONENT TO BE RENDERED USING OUR MAKESHIF REDUX STORE
+/**
+ * Function that renders the component within a redux environment since most 
+ * components rely on redux for data in order to mount.
+ * @param {ReactComponent} component - private spotify client id
+ * @param {function} store - creates the react store using the createStore method imported from redux
+ */
 function renderWithRedux(
   component,
   {initialState, store = createStore(reducer, initialState)} = {}
@@ -54,18 +61,16 @@ describe('Smoke Test for BrowseByArtist component', () => {
   window.HTMLElement.prototype.scrollIntoView = function() {};
 
   it('renders without crashing', () => {
-    renderWithRedux(<BrowseByArtists />)
+    renderWithRedux(<BrowseByArtists />);
   });
-
 });
 
 //SNAPSHOT TEST
 describe('Snapshot Test for BrowseByArtists component', () => {
 
   it('matches snapshot', () => {
-    const {asFragment} = renderWithRedux(<BrowseByArtists />)
+    const {asFragment} = renderWithRedux(<BrowseByArtists />);
     expect(asFragment()).toMatchSnapshot();
   });
-
 });
 

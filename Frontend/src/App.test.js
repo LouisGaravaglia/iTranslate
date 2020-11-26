@@ -1,15 +1,15 @@
 import React from 'react'
-import {render, fireEvent, waitFor, screen, cleanup, getByTestId} from '@testing-library/react'
+import {render, cleanup} from '@testing-library/react'
 import {Router, MemoryRouter} from 'react-router-dom';
 import '@testing-library/jest-dom/extend-expect'
-import { Provider } from 'react-redux'
-import { createStore } from "redux";
-import { createMemoryHistory } from 'history'
-import rootReducer from "./reducers/rootReducer";
+import {Provider} from 'react-redux'
+import {createStore} from "redux";
+import {createMemoryHistory} from 'history'
 import App from "./App";
 
 afterEach(cleanup);
 
+//CREATE A MOCK INTERSECTION OBSERVER CLASS FOR TESTING AND APPEND IT TO THE WINDOW OBJECT
 const mockIntersectionObserver = class {
   constructor() {}
   observe() {}
@@ -26,7 +26,11 @@ const startingState = {
   errors: {translationError: false, languageError: false, lyricsError: false, searchError: false, generalError: false}
 };
 
-//REDUCER FUNCTION TO MIMIC REDUX REDUCER FOR STORE
+/**
+ * reducer function to mimic the reducer used in Redux.
+ * @param {object} state - holds an object of data used within the components
+ * @param {object} action - object where the values are strings used to fire certain actions
+ */
 function reducer(state = startingState, action) {
   switch (action.type) {
     case "ADD_ALBUMs":
@@ -36,7 +40,12 @@ function reducer(state = startingState, action) {
   };
 };
 
-//FUNCTION TO ALLOW THE COMPONENT TO BE RENDERED USING OUR MAKESHIF REDUX STORE
+/**
+ * Function that renders the component within a redux environment since most 
+ * components rely on redux for data in order to mount.
+ * @param {ReactComponent} component - private spotify client id
+ * @param {function} store - creates the react store using the createStore method imported from redux
+ */
 function renderWithRedux(
   component,
   {initialState, store = createStore(reducer, initialState)} = {}
@@ -52,7 +61,7 @@ describe('Smoke Test for App component', () => {
   it('renders without crashing', () => {
     const history = createMemoryHistory();
 
-    const {getByText} = renderWithRedux(
+    renderWithRedux(
       <Router history={history}>
         <App />
       </Router>
@@ -73,9 +82,7 @@ describe('Snapshot Test for App component', () => {
     );
     expect(asFragment()).toMatchSnapshot();
   });
-
 });
-
 
 describe('Make sure appropriate text is appearing in certain routes', () => {
 
@@ -86,7 +93,6 @@ describe('Make sure appropriate text is appearing in certain routes', () => {
         <App />
       </MemoryRouter>
     );
-
     expect(getByText("Find your song!")).toBeInTheDocument();
   });
 
@@ -97,8 +103,6 @@ describe('Make sure appropriate text is appearing in certain routes', () => {
         <App />
       </MemoryRouter>
     );
-
     expect(getByText("Artists")).toBeInTheDocument();
   });
-
 });

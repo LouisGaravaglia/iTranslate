@@ -17,6 +17,7 @@ const languageTranslator = new LanguageTranslatorV3({
 router.get("/:handle", async function(req, res, next) {
   try {
 
+    //GETS AN OBJECT OF TRANSLATED TEXT WHEN PROVIDED SOURCE TEXT AND TARGET LANGUAGE
     if (req.params.handle === "translate") {
       const lyrics = req.query.lyrics;
       const language = req.query.language;
@@ -26,10 +27,12 @@ router.get("/:handle", async function(req, res, next) {
         target: language,
       };
 
+      //NOT PROVIDING SOURCE LANGUAGE, SO IT CAN FAIL IF IT CAN NOT FIGURE OUT WHAT LANGUAGE THE SOURCE TEXT IS
       const response =  await languageTranslator.translate(translateParams);
       return res.json(JSON.stringify({response: response.result.translations[0].translation}));
 
     } else {
+      //GETS AN ARRAY OF AVAILABLIE LANGUAGES IBM CAN TRANSLATE TO
       const response =  await languageTranslator.listLanguages();
       return res.json(JSON.stringify({response}));
     };
