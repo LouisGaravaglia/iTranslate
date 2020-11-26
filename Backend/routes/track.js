@@ -8,22 +8,23 @@ const ExpressError = require("../helpers/expressError");
 router.get("/:handle", async function(req, res, next) {
   try {
 
+    //GETS ALL TRACKS THAT FALL INTO THAT DANCEABILITY SCORE RANGE PROVIDED
     if (req.params.handle === "danceability") {
       const response = await Tracks.getDanceabilityTracks(req.query);
       return res.status(201).json({response});
-
+    //GETS ALL TRACKS FROM AN ALBUM
     } else if (req.params.handle === "getTracks") {
       const response = await Tracks.getTracks(req.query.albumId);
       return res.status(201).json({response});
-
+    //GETS LYRICS FROM A TRACK
     } else if (req.params.handle === "getLyrics") {
       const response = await Tracks.getLyrics(req.query.trackId);
       return res.status(201).json({response});
-
+    //CHECKS TO SEE IF TRACK HAS LYRICS, IF SO, RETURNS TRUE
     } else if (req.params.handle === "hasLyrics") {
       const response = await Tracks.checkIfTrackHasLyrics(req.query.trackId);
       return res.status(201).json({response});
-
+    //CHECKS TO SEE IF TRACK IS IN DATABASE, IF SO, RETURNS TRUE
     } else if (req.params.handle === "inDatabase") {
       const response = await Tracks.checkIfTrackIsInDB(req.query.trackId);
       return res.status(201).json({response});

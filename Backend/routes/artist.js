@@ -8,12 +8,15 @@ const ExpressError = require("../helpers/expressError");
 router.get("/:handle", async function(req, res, next) {
   try {
 
+    //GETS ARTIST IDS AND NAMES
     if (req.params.handle === "ids") {
       const response = await Artists.getArtistsAndIds();
       return res.status(201).json({response});
+    //GETS ALL GENRES OF ALL ARTISTS
     } else if (req.params.handle === "allGenres") {
       const response = await Artists.getGenres();
       return res.status(201).json({response});
+    //GETS ALL ARTIST WHO HAVE THAT SPECIFIC GENRE
     } else if (req.params.handle === "byGenre") {
       const response = await Artists.getArtistByGenre(req.query.genre);
       return res.status(201).json({response});
