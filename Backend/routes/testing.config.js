@@ -2,7 +2,7 @@ process.env.NODE_ENV = "test";
 const db = require('../db');
 
 /**
- * Hooks to insert an artist, album, track and translations.
+ * Hooks to insert an artist, album, track and translations
  */
 async function beforeEachHook() {
   try {
