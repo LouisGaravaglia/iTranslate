@@ -1,14 +1,16 @@
-import { GET_ALBUMS, UPDATE_GENERAL_ERROR } from "../../../actionTypes";
+import {GET_ALBUMS, UPDATE_GENERAL_ERROR} from "../../../actionTypes";
 import BackendCall from "../../../BackendCall";
 
-////////////////////////////////// GET ALL POSTS //////////////////////////////////
+/**
+* Makes a call to the backend to get all albums by a particular aritst
+* as long as they contain at least one track that has lyrics. Updates albums state.
+* @param {string} artistId - spotify id for selected artist
+*/
 export function getAlbums(artistId) {
 
   return async function(dispatch) {
-
-    try { 
+    try {
       let albums = await BackendCall.getAlbums({artistId});
-      console.log("here are the alubms", albums); 
       dispatch(addAlbums(albums));
     } catch(e) {
       dispatch(updateGeneralError(true));
@@ -17,7 +19,7 @@ export function getAlbums(artistId) {
 };
 
 function addAlbums(albums) {
-  return {type:GET_ALBUMS, albums};
+  return {type: GET_ALBUMS, albums};
 };
 
 function updateGeneralError(generalError) {

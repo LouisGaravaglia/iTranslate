@@ -7,7 +7,5 @@ export default function languagesReducer(state=INITIAL_STATE, action) {
       return action.languages;
     default:
       return state;
-  }
-}
-
-
+  };
+};

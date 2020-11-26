@@ -1,20 +1,21 @@
-import { GET_TRACKS, UPDATE_GENERAL_ERROR } from "../../../actionTypes";
+import {GET_TRACKS, UPDATE_GENERAL_ERROR} from "../../../actionTypes";
 import BackendCall from "../../../BackendCall";
 
-////////////////////////////////// GET ALL POSTS //////////////////////////////////
+/**
+* Gets all tracks for the selected album that exist in our backend and
+* that contain at least one track that has lyrics. Updates tracks state.
+* @param {string} albumId - spotify id for the selected album
+*/
 export function getTracks(albumId) {
 
   return async function(dispatch) {
-
     try {
       let tracks = await BackendCall.getTracks({albumId});
 
       for (let track of tracks) {
         track["hasLyrics"] = true;
         track["inDatabase"] = true;
-      }
-
-      console.log("here are the tracks from getTracksCREATOR", tracks);
+      };
       dispatch(addTracks(tracks));
     } catch(e) {
       dispatch(updateGeneralError(true));
@@ -23,7 +24,7 @@ export function getTracks(albumId) {
 };
 
 function addTracks(tracks) {
-  return {type:GET_TRACKS, tracks};
+  return {type: GET_TRACKS, tracks};
 };
 
 function updateGeneralError(generalError) {

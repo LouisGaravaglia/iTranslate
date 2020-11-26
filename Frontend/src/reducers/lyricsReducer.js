@@ -9,7 +9,5 @@ export default function lyricsReducer(state=INITIAL_STATE, action) {
       return "";
     default:
       return state;
-  }
-}
-
-
+  };
+};

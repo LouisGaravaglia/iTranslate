@@ -9,5 +9,5 @@ export default function artistsReducer(state=INITIAL_STATE, action) {
       return "";
     default:
       return state;
-  }
-}
+  };
+};

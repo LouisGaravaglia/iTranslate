@@ -7,5 +7,5 @@ export default function genresReducer(state=INITIAL_STATE, action) {
       return action.genres;
     default:
       return state;
-  }
-}
+  };
+};

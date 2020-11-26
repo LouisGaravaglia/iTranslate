@@ -1,14 +1,15 @@
 import {GET_LANGUAGES, UPDATE_GENERAL_ERROR} from "../actionTypes";
 import IBMWatsonAPI from "../IBMWatsonAPI";
 
-////////////////////////////////// GET ALL POSTS //////////////////////////////////
+/**
+* Makes a call to the IBM API to get the array of approved target
+* languages we can translate to.
+*/
 export function getLanguages() {
 
   return async function(dispatch) {
-
     try {
       const languages = await IBMWatsonAPI.getLanguages();
-      console.log("HERE are the languages: ", languages);
       dispatch(addLanguages(languages));
     } catch(e) {
       dispatch(addLanguages([{language:""}]));
@@ -18,7 +19,7 @@ export function getLanguages() {
 };
 
 function addLanguages(languages) {
-  return {type:GET_LANGUAGES, languages};
+  return {type: GET_LANGUAGES, languages};
 };
 
 function updateGeneralError(generalError) {

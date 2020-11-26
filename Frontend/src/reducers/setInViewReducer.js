@@ -7,7 +7,5 @@ export default function bgColorReducer(state=INITIAL_STATE, action) {
       return action.component;
     default:
       return state;
-  }
-}
-
-
+  };
+};

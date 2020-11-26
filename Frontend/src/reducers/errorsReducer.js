@@ -1,5 +1,5 @@
 import {UPDATE_TRANSLATION_ERRORS, UPDATE_LYRICS_ERROR, UPDATE_SEARCH_ERROR, RESET_LYRICS_ERROR, RESET_LANGUAGE_ERROR, RESET_TRANSLATION_ERROR, RESET_SEARCH_ERROR, UPDATE_GENERAL_ERROR, RESET_GENERAL_ERROR} from "../actionTypes";
-const INITIAL_STATE = {generalError: false, searchError: false, lyricsError: false, languageError: false, translationError: false}
+const INITIAL_STATE = {generalError: false, searchError: false, lyricsError: false, languageError: false, translationError: false};
 
 export default function errorsReducer(state=INITIAL_STATE, action) {
   switch(action.type) {
@@ -25,5 +25,5 @@ export default function errorsReducer(state=INITIAL_STATE, action) {
       return {...state, generalError: false};
     default:
       return state;
-  }
-}
+  };
+};

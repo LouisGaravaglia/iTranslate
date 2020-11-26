@@ -7,5 +7,5 @@ export default function allArtistsReducer(state=INITIAL_STATE, action) {
       return action.artists;
     default:
       return state;
-  }
-}
+  };
+};

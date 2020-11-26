@@ -9,7 +9,5 @@ export default function translationReducer(state=INITIAL_STATE, action) {
       return "";
     default:
       return state;
-  }
-}
-
-
+  };
+};

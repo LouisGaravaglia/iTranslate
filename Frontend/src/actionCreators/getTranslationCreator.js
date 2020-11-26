@@ -1,9 +1,17 @@
-import { GET_TRANSLATION, UPDATE_TRANSLATION_ERRORS } from "../actionTypes";
+import {GET_TRANSLATION, UPDATE_TRANSLATION_ERRORS} from "../actionTypes";
 import IBMWatsonAPI from "../IBMWatsonAPI";
 import BackendCall from '../BackendCall';
 
-////////////////////////////////// GET ALL POSTS //////////////////////////////////
-export function getTranslation(searchVal, languages, trackId, lyrics) {
+/**
+* Receives the lyrics and desired target language and checks the databse
+* to see if we have that specific translation. If not, it will make a call
+* to the IBM API to get translation. 
+* @param {string} targetLanguage - language input value user entered
+* @param {array} languages - available languages IBM can translate to
+* @param {string} trackId - spotify id of song selected
+* @param {string} lyrics - lyrics from song selected
+*/
+export function getTranslation(targetLanguage, languages, trackId, lyrics) {
 
   return async function(dispatch) {
     const errors = {languageError: false, translationError: false};
@@ -11,34 +19,27 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
     const fetchTranslation = async (language, trackId, lyrics) => {
       //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
       const response = await BackendCall.getTranslationFromDB({track_id: trackId, selectedLanguage: language});
-      console.log("databaseTranslation: ", response);
 
       if (response === "No Translation in DB") {
         const IBMTranslation = await IBMWatsonAPI.getTranslationFromAPI(lyrics, language);
-        console.log("Translated lyrics: ", IBMTranslation);
 
         if (IBMTranslation === "Error attempting to read source text") {
-          //FLASH MESSAGE SAYING TRANSLATION WAS NOT FOUND
           errors["translationError"] = true;
           return "No Translation Available";
         } else {
           await BackendCall.addTranslation({track_id: trackId, language, translation: IBMTranslation});
           return IBMTranslation;
         };
-
       } else {
-        console.log("got transltion from DB");
         return response;
       };
     };
 
-    const handleLanguageSearchSubmit = async (searchVal, languages) => {
+    const handleLanguageSearchSubmit = async (targetLanguage, languages) => {
       let language;
-
       try{
         //FILTER OVER LANGUAGES IBM CAN TRANSLATE TO AND PULL OUT THE LANGUAGE-CODE OF THE LANGUAGE THE USER WANT'S TO USE
-        [{language}] = languages.filter(l => l.language_name.toLowerCase() === searchVal.toLowerCase());
-        console.log("language is: ", language);
+        [{language}] = languages.filter(l => l.language_name.toLowerCase() === targetLanguage.toLowerCase());
       } catch(e) {
         errors["languageError"] = true;
         return "Could not read language value";
@@ -48,20 +49,16 @@ export function getTranslation(searchVal, languages, trackId, lyrics) {
       return translation;
     };
 
-    const translation = await handleLanguageSearchSubmit(searchVal, languages);
-    console.log("Here is my translation from actionCreator:");
-    console.log(translation);
-    console.log("here are my errors: ", errors);
-
+    const translation = await handleLanguageSearchSubmit(targetLanguage, languages);
     dispatch(retrieveTranslation(translation));
-    dispatch(updateGetTranslationErrors(errors))
+    dispatch(updateGetTranslationErrors(errors));
   };
-}
+};
 
 function retrieveTranslation(translation) {
-  return {type:GET_TRANSLATION, translation};
-}
+  return {type: GET_TRANSLATION, translation};
+};
 
 function updateGetTranslationErrors(errors) {
-  return {type: UPDATE_TRANSLATION_ERRORS, errors}
-}
+  return {type: UPDATE_TRANSLATION_ERRORS, errors};
+};

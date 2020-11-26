@@ -9,5 +9,5 @@ export default function albumsRedcuer(state=INITIAL_STATE, action) {
       return "";
     default:
       return state;
-  }
-}
+  };
+};

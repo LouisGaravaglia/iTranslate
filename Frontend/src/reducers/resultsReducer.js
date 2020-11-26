@@ -9,7 +9,5 @@ export default function resultsReducer(state=INITIAL_STATE, action) {
       return "";
     default:
       return state;
-  }
-}
-
-
+  };
+};

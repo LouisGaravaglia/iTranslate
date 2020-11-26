@@ -1,14 +1,16 @@
 import {GET_ARTISTS, UPDATE_GENERAL_ERROR} from "../../../actionTypes";
 import BackendCall from "../../../BackendCall";
 
-////////////////////////////////// GET ALL POSTS //////////////////////////////////
+/**
+* Makes a call to the backend to select all artists that have at least
+* this genre within their list of genres given by spotify.
+* @param {string} genre - selected genre from browse by genre route
+*/
 export function getArtists(genre) {
 
   return async function(dispatch) {
-
     try {
       const artists = await BackendCall.getArtistByGenre(genre);
-      console.log("Here are the artists from getArtistByGenre: ", artists);
       dispatch(addArtists(artists));
     } catch(e) {
       dispatch(updateGeneralError(true));
@@ -17,7 +19,7 @@ export function getArtists(genre) {
 };
 
 function addArtists(artists) {
-  return {type:GET_ARTISTS, artists};
+  return {type: GET_ARTISTS, artists};
 };
 
 function updateGeneralError(generalError) {

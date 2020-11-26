@@ -9,5 +9,5 @@ export default function selectedTrackReducer(state=INITIAL_STATE, action) {
       return "";
     default:
       return state;
-  }
-}
+  };
+};
