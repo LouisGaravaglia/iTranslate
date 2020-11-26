@@ -1,26 +1,25 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
   function useOnScreen(ref, options={threshold: 0.3}) {
-    // State and setter for storing whether element is visible
+    // STATE AND SETTER FOR STORING WHETER ELEMENT IS VISIBLE
     const [isIntersecting, setIntersecting] = useState(false);
 
     useEffect(() => {
       const observer = new IntersectionObserver(([entry]) => {
-        // Update our state when observer callback fires
+        // UPDATE OUR STATE WHEN OBSERVER CALLBACK FIRES
         setIntersecting(entry.isIntersecting);
       }, options);
 
       if (ref.current) {
         observer.observe(ref.current);
-      }
+      };
 
       return () => {
         if (ref.current) {
           observer.unobserve(ref.current);
         };
       };
-    }, [ref, options]); // Empty array ensures that effect is only run on mount and unmount
-
+    }, [ref, options]); 
     return isIntersecting;
   };
 

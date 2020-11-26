@@ -52,58 +52,53 @@ function BrowseByArtists() {
 
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
+
     const displayFlashMessage = () => {
 
         if (lyricsError) {
           setNoLyricsFlashMessage(true);
-          console.log("There is a lyrics error");
           dispatch(resetLyricsError());
-        }
+        };
         if (languageError) {
           setLanguageNotFoundFlashMessage(true);
-          console.log("Here is what language error is: ", languageError);
           dispatch(resetLanguageError());
-        }
+        };
         if (translationError) {
           setTranslationErrorFlashMessage(true);
-          console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
-        }
+        };
         if (generalError) {
           setGeneralErrorFlashMessage(true);
-          console.log("Here is what general error is: ", generalError);
           dispatch(resetGeneralError());
-        }
-
-    }
+        };
+    };
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError, generalError, dispatch])
+  }, [languageError, translationError, lyricsError, generalError, dispatch]);
 
   //GET ALL ARTISTS IN DB AND STORE THEM FOR THE BROWSE BY ARTISTS COMPONENT
   useEffect(() => {
+
     async function getSeedData() {
       dispatch(getAllArtists());
-    }
+    };
     getSeedData();
   }, [dispatch]);
 
   //SKIP OVER THE CATEGORIES SINCE THE USER NEEDED TO SEE THAT IN ORDER TO GET TO THIS COMPONENT
   useEffect(() => {
+
     const scrollPastCategories = () => {
-      console.log("BrowseByArtists artists: ", artists);
       artistsResultsRef.current.scrollIntoView({behavior: "smooth"});
-    }
+    };
     scrollPastCategories();
   }, []);
-
 
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
 
     if (state && state !== "Could not read language value") {
       ref.current.scrollIntoView({behavior: "smooth"});
-    }
-
+    };
   }, []);
 
   //SCROLL DOWN TO ALBUMS DIV WHEN ALBUMS ARE SET IN STATE
@@ -129,13 +124,12 @@ function BrowseByArtists() {
 
   useEffect(() => {
     const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView) => {
+
       if (albumsInView) {
         setBgColor("#5019FF");
       } else if (selectLanguageInView) {
-        //keep this color
         setBgColor("#3046FF");
       } else if (trackResultsInView) {
-        //keep this color
         setBgColor("#8019FF");
       } else if (LyricsTranslationInView) {
         setBgColor("#8019FF");
@@ -143,7 +137,7 @@ function BrowseByArtists() {
         setBgColor("#8019FF");
       } else if (categoriesInView) {
         setBgColor("#8700B0");
-      }
+      };
     };
   changeInView(selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView);
   }, [selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView]);
@@ -153,13 +147,12 @@ function BrowseByArtists() {
     config: {duration: 300}
   });
 
-
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleArtistClick = async (artistId) => {
     dispatch(getAlbums(artistId));
     dispatch(resetStore("tracks", "lyrics", "translation"));
-  }
+  };
 
   const scrollToArtists = () => {
     artistsResultsRef.current.scrollIntoView({behavior: "smooth"});
@@ -167,7 +160,7 @@ function BrowseByArtists() {
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
-  //DISPLAY BROWSE BY ARTISTS COMPONENTS
+  //DISPLAY THE THREE CATEGORIES
   const ChooseCategoryDiv = (
     <animated.div onClick={scrollToArtists} style={springProps} ref={categoryRef}>
       <Categories needAnimation={false}/>
@@ -241,12 +234,12 @@ function BrowseByArtists() {
         {translationErrorFlashMessage && (<FlashMessage setState={setTranslationErrorFlashMessage} message="Sorry, we couldn't get a translation at this moment."/> )}
         {generalErrorFlashMessage && (<FlashMessage setState={setGeneralErrorFlashMessage} message="Uh oh, something went wrong. Please try again."/> )}
       </div>
-          {ChooseCategoryDiv}
-          {ArtistsResultsDiv}
-          {AlbumResultsDiv}
-          {TrackResultsDiv}
-          {LanguageSelectDiv}
-          {LyricsTranslationDiv}
+      {ChooseCategoryDiv}
+      {ArtistsResultsDiv}
+      {AlbumResultsDiv}
+      {TrackResultsDiv}
+      {LanguageSelectDiv}
+      {LyricsTranslationDiv}
     </>
   );
 };

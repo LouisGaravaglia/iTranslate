@@ -28,11 +28,13 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
 
   //WATCHES FOR EITHER AN ERROR OR THE LYRICS TO COME THROUGH TO REMOVE LOADING ICON
   useEffect(() => {
+
     const updateIsLoading = () => {
+
       if (lyrics || lyricsError) setIsLoading(false);
     };
     updateIsLoading();
-  }, [lyrics, lyricsError])
+  }, [lyrics, lyricsError]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -40,7 +42,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
 
     if (track.trackId !== selectedTrackId) {
       setIsLoading(true);
-    }
+    };
 
     dispatch(addSelectedTrack(track));
     dispatch(resetStore("translation"));
@@ -55,7 +57,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
           dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
         } else {
           const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(track.trackId, track.artistId, track.albumId);
-          const response = await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
+          await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
           dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
         };
       };
@@ -98,6 +100,5 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
     </Spring>
   );
 };
-
 
 export default Tracks;

@@ -16,13 +16,13 @@ const handleCategoryClick = (category) => {
 
   if (category === "Artists") {
     dispatch(resetStore("lyrics", "translation", "searchResults", "tracks", "artists", "albums"));
-    history.push("/browse/artists") ;
+    history.push("/browse/artists");
   } else if (category === "Genre") {
     dispatch(resetStore("lyrics", "translation", "searchResults", "tracks", "artists", "albums"));
-    history.push("/browse/genres") ;
+    history.push("/browse/genres");
   } else if (category === "Danceability") {
     dispatch(resetStore("lyrics", "translation", "searchResults", "tracks", "artists", "albums"));
-    history.push("/browse/danceability") ;
+    history.push("/browse/danceability");
   };
 };
 

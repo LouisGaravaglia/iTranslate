@@ -20,26 +20,24 @@ const NavBar = () => {
         if (location.pathname === "/browse/danceability") setBrowseMode(true);
         if (location.pathname === "/") setBrowseMode(false);
     };
-
     updateBrowseMode();
   }, []);
 
   const handleBrowseClickFromHome = () => {
-    console.log("this is location: ", location);
-    history.push("/browse") ;
+    history.push("/browse");
     setBrowseMode(mode => !mode);
     dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
   };
 
   const handleBrowseClickFromBrowse = () => {
     dispatch(resetStore("lyrics", "translation", "searchResults"));
-    history.push("/") ;
+    history.push("/");
     setBrowseMode(mode => !mode);
     dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
   };
 
   const handleHomeClick = () => {
-    history.push("/") ;
+    history.push("/");
     setBrowseMode(false);
     dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
   };
@@ -57,7 +55,7 @@ const NavBar = () => {
         <NavLink exact to="/browse"></NavLink>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default NavBar;

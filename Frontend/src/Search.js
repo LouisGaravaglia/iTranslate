@@ -48,17 +48,16 @@ const Search = () => {
   useEffect(() => {
 
     const changeInView = (searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView) => {
+
       if (searchBarInView) {
         setBgColor("#1D4DBE");
       } else if (searchResultsInView) {
-        //keep this color
         setBgColor("#8019FF");
       } else if (selectLanguageInView) {
         setBgColor("#AB5D00");
       } else if (LyricsTranslationInView) {
         setBgColor("#5019FF");
       };
-
     };
   changeInView(searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView);
   }, [searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView]);
@@ -71,12 +70,11 @@ const Search = () => {
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
-  const scrollToNextDiv = useCallback(async (state, ref, divId) => {
+  const scrollToNextDiv = useCallback(async (state, ref) => {
 
     if (state && state !== "Could not read language value") {
       ref.current.scrollIntoView({behavior: "smooth"});
-    }
-
+    };
   }, []);
 
   //SCROLL DOWN TO SEARCH RESULTS DIV WHEN RESULTS ARE SET IN STATE
@@ -95,30 +93,25 @@ const Search = () => {
 
         if (lyricsError) {
           setNoLyricsFlashMessage(true);
-          console.log("There is a lyrics error");
           dispatch(resetLyricsError());
         };
         if (languageError) {
           setLanguageNotFoundFlashMessage(true);
-          console.log("Here is what language error is: ", languageError);
           dispatch(resetLanguageError());
         };
         if (translationError) {
           setTranslationErrorFlashMessage(true);
-          console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
         };
         if (searchError) {
           setSearchFlashMessage(true);
-          console.log("Here is what search error is: ", searchError);
           dispatch(resetSearchError());
         };
-
-    }
+    };
     displayFlashMessage();
-  }, [translationError, lyricsError, searchError, dispatch])
+  }, [translationError, lyricsError, searchError, dispatch]);
 
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackSearchSubmit = async (searchVal) => {
     dispatch(setResultsArray(searchVal));
@@ -129,7 +122,6 @@ const Search = () => {
 
   //DISPLAY SEARCH RESULTS FROM SPOTIFY API COMPONENT
   const SearchBarDiv = (
-    
     <animated.div style={springProps} ref={searchRef}>
       <SearchLanding handleTrackSearchSubmit={handleTrackSearchSubmit}/>
     </animated.div>
@@ -139,21 +131,18 @@ const Search = () => {
   let SearchResultsDiv;
   
   if (searchResults) SearchResultsDiv = (
-        <animated.div style={springProps}  className="Main-Container" ref={searchResultsRef}>
+    <animated.div style={springProps}  className="Main-Container" ref={searchResultsRef}>
       <Tracks results={searchResults} typeOfResults={"search-results"} itemsPerPage={1} />
     </animated.div>
-  
   );
 
   //DISPLAY LANGUAGE SELECTION SEARCH BAR
   let LanguageSelectDiv;
 
   if (lyrics) LanguageSelectDiv = (
-
     <animated.div style={springProps}  ref={selectLanguageRef}>
       <LanguageSelect selectedTrackId={selectedTrackId}/>
     </animated.div>
-
   );
 
   //DISPLAY LYRICS AND TRANSLATION

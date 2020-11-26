@@ -5,10 +5,15 @@ const SEARCH_URL = "https://api.spotify.com/v1/search?q="
 
 class SpotifyAPI {
 
+  /**
+  * Converts input value into a string value formatted to be appended to 
+  * the Spotify API search endpoint. This will return an array of up to 
+  * 20 music objects that most fit the search value submitted.
+  * @param {string} search - input value that user types into search for song field
+  */
   static async requestSearch(search) {
     const minifiedSearchVal = search.replace(" ", "%20");
     const accessToken = await requestAccessToken();
-
     try {
       const res = await axios({
         method: "get",
@@ -20,16 +25,19 @@ class SpotifyAPI {
         return res.data.tracks.items;
       } else {
         return "Not Found";
-      }
-
+      };
     } catch(err) {
-      console.error("SPOTIFY API Error:", err.response);
       return "Not Found";
-    }
-  }
+    };
+  };
 
 /////////////////////////////////  GET ARTIST ID  /////////////////////////////////
 
+  /**
+  * Makes a call to the Spotify API to get a the unique spotify id for
+  * the artist passed as the argument.
+  * @param {string} artist - artist name
+  */
   static async getArtistId(artist) {
     const noSpacesArtist = artist.replace(" ", "%20");
     const accessToken = await requestAccessToken();
@@ -46,66 +54,23 @@ class SpotifyAPI {
         return artistID;
       } else {
         return "Artist ID not found";
-      }
-      
-    } catch(err) {
-      console.error("API Error:", err.response);
-      let message = err.response.data.message;
-      throw Array.isArray(message) ? message : [message];
-    }
-  }
-
-/////////////////////////////////  GET ALBUMS BY ARTIST /////////////////////////////////
-
-  static async getAlbums(ID) {
-    const accessToken = await requestAccessToken();
-
-    try {
-
-      const allArtistAlbums = await axios({
-        method: "get",
-        url: `https://api.spotify.com/v1/artists/${ID}/albums?include_groups=album`,
-        headers: {'Authorization': `Bearer ${accessToken}`}
-      });
-
-      return allArtistAlbums.data.items;
-
-    } catch(err) {
-      console.error("API Error:", err.response);
-      let message = err.response.data.message;
-      throw Array.isArray(message) ? message : [message];
-    }
-  }
-
-/////////////////////////////////  GET TRACKS BY ALBUM  /////////////////////////////////
-
-  static async getTracks(albumId) {
-    const accessToken = await requestAccessToken();
-
-    try {
-
-      const albumData = await axios({
-        method: "get",
-        url: `https://api.spotify.com/v1/albums/${albumId}/tracks`,
-        headers: {'Authorization': `Bearer ${accessToken}`}
-      });
-
-      const tracks = albumData.data.items;
-
-      return [tracks, albumId];
-
-    } catch(err) {
-      console.error("API Error:", err.response);
-      let message = err.response.data.message;
-      throw Array.isArray(message) ? message : [message];
-    }
-  }
+      };
+    } catch(e) {
+    };
+  };
 
 /////////////////////////////////  GET SEED DATA FOR ARTISTS  /////////////////////////////////
 
+  /**
+  * Pulls down more detailed data objects for the track, artist, and album
+  * and we then parse that info and create our own objects for each
+  * element containg the information we need.
+  * @param {string} trackId - unique spotify id for that track
+  * @param {string} artistId - unique spotify id for that artist
+  * @param {string} albumId - unique spotify id for that album
+  */
   static async getTrackArtistAlbumData(trackId, artistId, albumId) {
     const accessToken = await requestAccessToken();
-
     try {
 
       const artistDetails = await axios({
@@ -129,11 +94,6 @@ class SpotifyAPI {
         headers: {'Authorization': `Bearer ${accessToken}`}
       });
 
-      console.log("Here are album tracks: ", artistDetails);
-      console.log("Here is the song anaylsis: ", songAnalysis);
-      console.log("Here is the track details: ", trackDetails);
-      console.log("Here is the album details: ", albumDetails);
-        
       const trackData = {spotify_id: trackId};
       const artistData = {spotify_id: artistId};
       const albumData = {spotify_id: albumId};
@@ -163,68 +123,10 @@ class SpotifyAPI {
       artistData["popularity"] = artistDetails.data.popularity;
 
       return [trackData, artistData, albumData];
+    } catch(e) {
+    };
+  };
 
-    } catch(err) {
-      console.error("API Error:", err.response);
-    }
-  }
+};
 
-  static async getNewAlbums() {
-    const accessToken = await requestAccessToken();
-
-    try {
-
-
-      const newAlbums = await axios({
-        method: "get",
-        url: `https://api.spotify.com/v1/browse/new-releases?limit=50`,
-        headers: {'Authorization': `Bearer ${accessToken}`}
-      });
-
-    console.log("newAlbums: ", newAlbums);
-
-    } catch(err) {
-      console.error("API Error:", err.response);
-
-    }
-  }
-
-  }
-
-  export default SpotifyAPI;
-
-
-        // const songData = await axios({
-        //   method: "get",
-        //   url: `https://api.spotify.com/v1/tracks/${trackId}`,
-        //   headers: {'Authorization': `Bearer ${accessToken}`}
-        // });
-        // const allArtistAlbums = await axios({
-        //   method: "get",
-        //   url: `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album`,
-        //   headers: {'Authorization': `Bearer ${accessToken}`}
-        // });
-        // const artistTopTracks = await axios({
-        //   method: "get",
-        //   url: `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`,
-        //   headers: {'Authorization': `Bearer ${accessToken}`}
-        // });
-          // return res.data.tracks.items;
-          // const base = res.data.tracks.items[0];
-          // const trackData = { spotify_id: base.id, name: base.name, explicit: base.explicit, popularity: base.popularity, preview_url: base.preview_url  };
-          // const artistData = { spotify_id: base.artists[0].id, name: base.artists[0].name, spotify_uri: base.artists[0].uri };
-          // const albumData = { spotify_id: base.album.id, name: base.album.name, release_date: base.album.release_date, spotify_uri: base.album.uri, img_url: base.album.images[1] };
-          // const artist = res.data.tracks.items[0].artists[0].name;
-          // const album = res.data.tracks.items[0].album.name;
-          // const albumID = res.data.tracks.items[0].album.id;
-          // const track = res.data.tracks.items[0].name;
-          // const image = res.data.tracks.items[0].album.images[0].url;
-          // console.log("this is search request ARTISTS: ", artist);
-          // console.log("this is search request ALBUM: ", album);
-          // console.log("this is search request TRACK: ", track);
-          // console.log("this is search request IMAGE: ", image);
-        // const albumDetails = await axios({
-        //   method: "get",
-        //   url: `https://api.spotify.com/v1/albums/${albumId}/tracks`,
-        //   headers: {'Authorization': `Bearer ${accessToken}`}
-        // });
+export default SpotifyAPI;

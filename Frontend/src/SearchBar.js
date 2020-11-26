@@ -6,11 +6,11 @@ const SearchBar = ( { header, handleSubmit, loadingIcon} ) => {
   const triggerSubmit = (e) => {
     e.preventDefault();
     handleSubmit(searchVal);
-  }
+  };
 
   const handleChange = (e) => {
     setSearchVal(e.target.value);
-  }
+  };
 
   return (
     <div className="Search-Field">

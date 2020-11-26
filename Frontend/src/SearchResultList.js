@@ -5,8 +5,6 @@ import PaginationSlider from "./PaginationSlider";
 const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResults, loadingIcon}) => {
   const [sliderVal, setSliderVal] = useState(0);
   const resultsInView = resultsArray.slice(sliderVal * itemsPerPage, (sliderVal * itemsPerPage) + itemsPerPage);
-  console.log("resultsArray in View: ", resultsArray);
-
   const updateResultsInView = (val) => {
     setSliderVal(val);
   };
@@ -41,7 +39,6 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   );
 
 ////////////////////////////////////////////////////  DISPLAY ALBUMS  ////////////////////////////////////////////////////
-
 
   let displayAlbums;
 

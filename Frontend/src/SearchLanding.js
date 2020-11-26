@@ -11,15 +11,15 @@ const SearchLanding = ({handleTrackSearchSubmit}) => {
       reverse={false}
       config={{delay: 0, duration: 200}}
     >
-    {props => (
-      <div style={props}>
+      {props => (
+        <div style={props}>
 
-        <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
+          <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
 
-      </div>
-    )}
+        </div>
+      )}
     </Spring>
   );
-}
+};
 
 export default SearchLanding;

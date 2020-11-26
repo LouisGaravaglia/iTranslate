@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Spring } from 'react-spring/renderprops';
+import {Spring} from 'react-spring/renderprops';
 import './App.css';
 //COMPONENT IMPORTS
 import SearchBar from "./SearchBar";
@@ -24,6 +24,7 @@ function LanguageSelect({selectedTrackId}) {
 
   //WATCHES FOR EITHER AN ERROR OR THE TRANSLATION TO COME THROUGH TO REMOVE LOADING ICON
   useEffect(() => {
+
     const updateIsLoading = () => {
       if (translation || translationError || languageError) setIsLoading(false);
     };

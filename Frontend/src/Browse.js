@@ -6,7 +6,7 @@ import Categories from "./BrowseCategories";
 
 function Browse() {
 
-////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  SPRING PROPS FOR BACKGROUND COLOR ANIMATION  ////////////////////////////////////////////////////
 
   const springProps = useSpring({
     backgroundColor: "#8700B0",
@@ -15,7 +15,7 @@ function Browse() {
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
-  //DISPLAY BROWSE BY ARTISTS COMPONENTS
+  //DISPLAY THE THREE CATEGORIES
   let ChooseCategoryDiv = (
     <animated.div style={springProps}>
       <Categories needAnimation={true}/>

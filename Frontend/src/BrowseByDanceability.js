@@ -44,31 +44,27 @@ function BrowseByDanceability() {
 
         if (lyricsError) {
           setNoLyricsFlashMessage(true);
-          console.log("There is a lyrics error");
           dispatch(resetLyricsError());
-        }
+        };
         if (languageError) {
           setLanguageNotFoundFlashMessage(true);
-          console.log("Here is what language error is: ", languageError);
           dispatch(resetLanguageError());
-        }
+        };
         if (translationError) {
           setTranslationErrorFlashMessage(true);
-          console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
-        }
+        };
         if (generalError) {
           setGeneralErrorFlashMessage(true);
-          console.log("Here is what general error is: ", generalError);
           dispatch(resetGeneralError());
-        }
-
-    }
+        };
+    };
     displayFlashMessage();
-  }, [languageError, translationError, lyricsError, generalError, dispatch])
+  }, [languageError, translationError, lyricsError, generalError, dispatch]);
 
   //SKIP OVER THE CATEGORIES SINCE THE USER NEEDED TO SEE THAT IN ORDER TO GET TO THIS COMPONENT
   useEffect(() => {
+
     const scrollPastCategories = () => {
       DanceabilitySearchRef.current.scrollIntoView({behavior: "smooth"});
     }
@@ -80,8 +76,7 @@ function BrowseByDanceability() {
 
     if (state && state !== "Could not read language value") {
       ref.current.scrollIntoView({behavior: "smooth"});
-    }
-
+    };
   }, []);
 
   //SCROLL DOWN TO LANGUAGE SEARCH BAR WHEN SELECTED TRACK HAS BE SET IN STATE
@@ -99,17 +94,16 @@ function BrowseByDanceability() {
 
   useEffect(() => {
     const changeInView = (selectLanguageInView, LyricsTranslationInView, DanceabilitySearchInView, categoriesInView) => {
+
       if (selectLanguageInView) {
-        //keep this color
         setBgColor("#794089");
       } else if (LyricsTranslationInView) {
         setBgColor("#8019FF");
       } else if (DanceabilitySearchInView) {
-        //keep this color
         setBgColor("#8019FF");
       } else if (categoriesInView) {
         setBgColor("#8700B0");
-      }
+      };
     };
   changeInView(selectLanguageInView, LyricsTranslationInView, DanceabilitySearchInView, categoriesInView);
   }, [selectLanguageInView, LyricsTranslationInView, DanceabilitySearchInView, categoriesInView]);
@@ -123,11 +117,11 @@ function BrowseByDanceability() {
 
   const scrollToDanceability = () => {
     DanceabilitySearchRef.current.scrollIntoView({behavior: "smooth"});
-  }
+  };
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
-  //DISPLAY BROWSE BY ARTISTS COMPONENTS
+  //DISPLAY THE THREE CATEGORIES
   const ChooseCategoryDiv = (
     <animated.div onClick={scrollToDanceability} style={springProps} ref={categoryRef}>
       <Categories needAnimation={false}/>

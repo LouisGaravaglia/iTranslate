@@ -9,9 +9,7 @@ import {getArtists} from "./actionCreators/BrowseRoute/Genre/getArtistsCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
 
-
 function Genres() {
-  //REDUX STORE
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
 
@@ -19,22 +17,21 @@ function Genres() {
 
   //GET ALL GENRES IN DB AND STORE THEM FOR THE BROWSE BY GENRE COMPONENT
   useEffect(() => {
+
     async function getSeedData() {
       dispatch(getGenres());
     }
     getSeedData();
   }, [dispatch]);
 
-
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleGenreClick = async (genre) => {
     dispatch(getArtists({genre}));
     dispatch(resetStore("albums", "tracks", "lyrics", "translation"));
-  }
+  };
 
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////  JSX  ////////////////////////////////////////////////////
 
   //DISPLAY GENRES
   let GenresDiv;
@@ -47,8 +44,7 @@ function Genres() {
 
   if (!genres) GenresDiv = (
     <p>Loading</p>
-  )
-
+  );
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 

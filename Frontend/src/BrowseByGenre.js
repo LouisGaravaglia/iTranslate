@@ -53,47 +53,45 @@ function BrowseByGenre() {
 
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
+
     const displayFlashMessage = () => {
 
         if (lyricsError) {
           setNoLyricsFlashMessage(true);
-          console.log("There is a lyrics error");
           dispatch(resetLyricsError());
-        }
+        };
         if (languageError) {
           setLanguageNotFoundFlashMessage(true);
-          console.log("Here is what language error is: ", languageError);
           dispatch(resetLanguageError());
-        }
+        };
         if (translationError) {
           setTranslationErrorFlashMessage(true);
-          console.log("Here is what translation error is: ", translationError);
           dispatch(resetTranslationError());
-        }
+        };
         if (generalError) {
           setGeneralErrorFlashMessage(true);
-          console.log("Here is what general error is: ", generalError);
           dispatch(resetGeneralError());
         };
-
     };
     displayFlashMessage();
   }, [languageError, translationError, lyricsError, generalError, dispatch]);
 
   //GET ALL GENRES IN DB AND STORE THEM FOR THE BROWSE BY GENRE COMPONENT
   useEffect(() => {
+
     async function getSeedData() {
       dispatch(getGenres());
-    }
+    };
     getSeedData();
   }, [dispatch]);
 
 
   //SKIP OVER THE CATEGORIES SINCE THE USER NEEDED TO SEE THAT IN ORDER TO GET TO THIS COMPONENT
   useEffect(() => {
+
     const scrollPastCategories = () => {
       selectGenresRef.current.scrollIntoView({behavior: "smooth"});
-    }
+    };
     scrollPastCategories();
   }, []);
 
@@ -102,8 +100,7 @@ function BrowseByGenre() {
 
     if (state && state !== "Could not read language value") {
       ref.current.scrollIntoView({behavior: "smooth"});
-    }
-
+    };
   }, []);
 
   //SCROLL DOWN TO SHOW ARTISTS WHEN GENRE HAS BEEN SELECTED AND CORRESPONDING ARTISTS SET IN STATE
@@ -131,16 +128,14 @@ function BrowseByGenre() {
   const trackResultsInView = useOnScreen(trackResultsRef, {threshold: 0.7});
   const LyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
 
-
   useEffect(() => {
     const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView, genresInView) => {
+
       if (albumsInView) {
         setBgColor("#AB5D00");
       } else if (selectLanguageInView) {
-        //keep this color
         setBgColor("#794089");
       } else if (trackResultsInView) {
-        //keep this color
         setBgColor("#8019FF");
       } else if (LyricsTranslationInView) {
         setBgColor("#8019FF");
@@ -150,7 +145,7 @@ function BrowseByGenre() {
         setBgColor("#8700B0");
       } else if (genresInView) {
         setBgColor("#8019FF");
-      }
+      };
     };
   changeInView(selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView, genresInView);
   }, [selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView, genresInView]);
@@ -164,21 +159,21 @@ function BrowseByGenre() {
 
   const scrollToGenres = () => {
     selectGenresRef.current.scrollIntoView({behavior: "smooth"});
-  }
+  };
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
 
-  //DISPLAY BROWSE BY ARTISTS COMPONENTS
+  //DISPLAY THE THREE CATEGORIES
   const ChooseCategoryDiv = (
-      <animated.div onClick={scrollToGenres} style={springProps} ref={categoryRef}>
-               <Categories needAnimation={false}/>
-      </animated.div>
+    <animated.div onClick={scrollToGenres} style={springProps} ref={categoryRef}>
+      <Categories needAnimation={false}/>
+    </animated.div>
   );
 
   //DISPLAY GENRES
   let selectGenresDiv;
   
-   if (genres) selectGenresDiv = (
+  if (genres) selectGenresDiv = (
      <animated.div style={springProps} ref={selectGenresRef}>
        <Genres />
      </animated.div>
@@ -260,6 +255,5 @@ function BrowseByGenre() {
     </>
   );
 };
-
 
 export default BrowseByGenre;

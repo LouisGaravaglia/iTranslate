@@ -13,7 +13,7 @@ function Artists() {
   const dispatch = useDispatch();
   const artists = useSelector(store => store.artists);
 
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleArtistClick = async (artistId) => {
     dispatch(getAlbums(artistId));
@@ -40,6 +40,5 @@ function Artists() {
     </Spring>
   );
 };
-
 
 export default Artists;

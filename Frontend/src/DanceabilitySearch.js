@@ -10,14 +10,12 @@ import {getDanceabilityTracks} from "./actionCreators/BrowseRoute/Danceability/g
 
 function DanceabilitySearch() {
   const [sliderVal, setSliderVal] = useState(0);
-  //REDUX STORE
   const dispatch = useDispatch();
   const tracks = useSelector(store => store.tracks);
 
-////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
+////////////////////////////////////////////////////  HANDLE SLIDER MOVE FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleSliderMouseMove = async (val) => {
-    console.log("Here is the val: ", val);
     setSliderVal(val);
     let upperLimit = (val + 0.01).toFixed(2);
     dispatch(getDanceabilityTracks(val, upperLimit));
@@ -31,18 +29,18 @@ function DanceabilitySearch() {
       to={{opacity: 1}}
       config={{delay: 300, duration: 300}}
     >
-    {props => (
-      <div style={props}>
+      {props => (
+        <div style={props}>
 
-        <div className="Browse-Danceability-v2">
-          <h1>{(sliderVal * 100).toFixed(0)}</h1>
-          <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
-          {!tracks && <><div className="Danceability-No-Results-Container"> <p className="Danceability-No-Results">KEEP SLIDING!</p></div> <div className="Pagination-Slider-Placeholder-v2"></div></>}
-          {tracks && <Tracks results={tracks} typeOfResults={"danceability-results"} itemsPerPage={1} />}
+          <div className="Browse-Danceability-v2">
+            <h1>{(sliderVal * 100).toFixed(0)}</h1>
+            <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
+            {!tracks && <><div className="Danceability-No-Results-Container"> <p className="Danceability-No-Results">KEEP SLIDING!</p></div> <div className="Pagination-Slider-Placeholder-v2"></div></>}
+            {tracks && <Tracks results={tracks} typeOfResults={"danceability-results"} itemsPerPage={1} />}
+          </div>
+
         </div>
-
-      </div>
-    )}
+      )}
     </Spring>
   );
 };

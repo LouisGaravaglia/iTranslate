@@ -2,56 +2,54 @@ import React, {useState} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 
+//CUSTOM STYLE FOR THE MUI SLIDER
 const MyDanceabilitySlider = withStyles({
-         root: {
-          color: "#777777",
-          height: 8
-        },
-        thumb: {
-          height: 24,
-          width: 24,
-          backgroundColor: "#fff",
-          border: "2px solid currentColor",
-          marginTop: -10,
-          marginLeft: -12,
-          "&:focus,&:hover,&$active": {
-            boxShadow: "inherit"
-          }
-        },
-        active: {},
-        valueLabel: {
-          left: "calc(-50% + 14px)",
-          top: -22,
-          "& *": {
-            backgroundColor: "transparent",
-            color: "#885511"
-          }
-        },
-        track: {
-          color: "#777777",
-          height: 8,
-          borderRadius: 4
-        },
-        rail: {
-          height: 4,
-          borderRadius: 4,
-          opacity: 0.5,
-          backgroundColor: "#bfbfbf"
-
-        }
+    root: {
+    color: "#777777",
+    height: 8
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#fff",
+    border: "2px solid currentColor",
+    marginTop: -10,
+    marginLeft: -12,
+    "&:focus,&:hover,&$active": {
+      boxShadow: "inherit"
+    }
+  },
+  active: {},
+  valueLabel: {
+    left: "calc(-50% + 14px)",
+    top: -22,
+    "& *": {
+      backgroundColor: "transparent",
+      color: "#885511"
+    }
+  },
+  track: {
+    color: "#777777",
+    height: 8,
+    borderRadius: 4
+  },
+  rail: {
+    height: 4,
+    borderRadius: 4,
+    opacity: 0.5,
+    backgroundColor: "#bfbfbf"
+  }
 })(Slider);
 
 const DanceabilitySlider = ({handleSliderMouseMove}) => {
   const [sliderVal, setSliderVal] = useState(0);
 
+////////////////////////////////////////////////////  HANDLE CHANGE FUNCTION  ////////////////////////////////////////////////////
+
   const handleChange = (event, newValue) => {
     setSliderVal(newValue);
-    console.log("Slider Value: ", newValue);
     handleSliderMouseMove(newValue);
   };
-
-
-
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
