@@ -9,43 +9,24 @@ router.get("/", async function(req, res, next) {
   try {
     const response = await Albums.getAlbums(req.query.artistId);
     return res.status( 201 ).json({response});
-  } catch (err) {
-    next( err );
+  } catch(e) {
+    next(e);
   };
 });
 
-router.post( "/", async function( req, res, next ) {
+router.post("/", async function(req, res, next) {
   try {
-    console.log("MADE IT TO THE ALBUM POST ROUTE");
-    console.log("HERE IS REQ.BODY", req.body);
-    const validation = validate( req.body, addAlbumSchema );
+    const validation = validate(req.body, addAlbumSchema);
 
-    if ( !validation.valid ) {
-      throw new ExpressError(validation.errors.map( e => e.stack ), 400 );
-    }
+    if (!validation.valid) {
+      throw new ExpressError(validation.errors.map(e => e.stack), 400);
+    };
 
-    const response = await Albums.add( req.body );
-    console.log("RETURNING FROM THE ALBUM POST ROUTE");
-    return res.status( 201 ).json( { response } );
-
-  } catch ( err ) {
-    next( err );
+    const response = await Albums.add(req.body);
+    return res.status(201).json({response});
+  } catch(e) {
+    next(e);
   };
-
 });
-
-// router.delete( "/", async function( req, res, next ) {
-//   try {
-//     console.log("MADE IT TO THE ALBUM DELETE ROUTE");
-//     console.log("HERE IS REQ.BODY", req.body);
-
-//     const response = await Albums.delete( req.body.spotify_id );
-//     console.log("RETURNING FROM THE ALBUM DELETE ROUTE");
-//     return res.status( 201 ).json( { response } );
-
-//   } catch ( err ) {
-//     next( err );
-//   };
-// });
 
 module.exports = router;

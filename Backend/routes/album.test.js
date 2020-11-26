@@ -8,7 +8,6 @@ const {
   afterAllHook
 } = require('./testing.config');
 
-
 const artistThree = {
   spotify_id: "test_artist_id_3",
   name: "test_artist_name_3",
@@ -17,8 +16,6 @@ const artistThree = {
   img_url: "test_img_url_3",
   popularity: 99
 };
-
-
 
 //ALBUM OBJECT TO USE IN POST AND DELETE ROUTES
 const albumThree = {
@@ -30,7 +27,6 @@ const albumThree = {
   artist_id: 'test_artist_id_3'
 };
 
-
 beforeEach(async function() {
   await beforeEachHook();
 });
@@ -39,7 +35,6 @@ describe('GET /album', () => {
 
   it('gets back albums array of artist with matching id, and that contains songs in DB that have lyrics.', async () => {
     const res = await request(app).get("/album").query({artistId: 'test_artist_id_1'});
-    console.log("Here is my res ***** = ", res.body);
     expect(res.statusCode).toBe(201);
     expect(res.body.response).toEqual([{albumId:'test_album_id_1', albumImg:'test_img_url_1', albumName:'test_album_name_1', release_date:'test_release_date_1'}]);
   });
@@ -54,7 +49,6 @@ describe('POST /album', () => {
     expect(res.body.response).toEqual('test_album_id_3');
   });
 });
-
 
 afterEach(async function() {
   await afterEachHook();

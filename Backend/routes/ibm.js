@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const LanguageTranslatorV3 = require('ibm-watson/language-translator/v3');
-const { IamAuthenticator } = require('ibm-watson/auth');
+const {IamAuthenticator} = require('ibm-watson/auth');
 const IBM_API_KEY = process.env.IBM_API_KEY;
 const IBM_URL  = process.env.IBM_URL;
 const IBM_VERSION = process.env.IBM_VERSION;
@@ -20,6 +20,7 @@ router.get("/:handle", async function(req, res, next) {
     if (req.params.handle === "translate") {
       const lyrics = req.query.lyrics;
       const language = req.query.language;
+
       const translateParams = {
         text: lyrics,
         target: language,
@@ -30,16 +31,12 @@ router.get("/:handle", async function(req, res, next) {
 
     } else {
       const response =  await languageTranslator.listLanguages();
-      return res.json(JSON.stringify({response}))
-    }
+      return res.json(JSON.stringify({response}));
+    };
   }
-  catch (err) {
-    console.log(err);
-    return next(err);
-  }
-
+  catch (e) {
+    return next(e);
+  };
 });
-
-
 
 module.exports = router;

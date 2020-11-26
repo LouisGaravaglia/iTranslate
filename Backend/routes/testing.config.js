@@ -1,6 +1,4 @@
 process.env.NODE_ENV = "test";
-const request = require("supertest");
-const app = require("../app");
 const db = require('../db');
 
 /**
@@ -71,17 +69,16 @@ async function afterEachHook() {
     await db.query('DELETE FROM artists');
     await db.query('DELETE FROM albums');
     await db.query('DELETE FROM tracks');
-
-  } catch (error) {
-    console.error(error);
+  } catch(e) {
+    console.error(e);
   };
 };
 
 async function afterAllHook() {
   try {
     await db.end();
-  } catch (err) {
-    console.error(err);
+  } catch(e) {
+    console.error(e);
   };
 };
 

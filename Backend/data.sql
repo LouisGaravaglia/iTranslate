@@ -55,4 +55,3 @@ CREATE TABLE translation (
   language TEXT NOT NULL,
   translation TEXT NOT NULL
 )
-

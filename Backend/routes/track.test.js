@@ -93,7 +93,6 @@ describe('PATCH /track', () => {
   });
 });
 
-
 afterEach(async function() {
   await afterEachHook();
 });

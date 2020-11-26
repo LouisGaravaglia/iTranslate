@@ -22,7 +22,6 @@ beforeEach(async function() {
   await beforeEachHook();
 });
 
-
 describe('GET /artist', () => {
 
   it('("/artist/ids") - gets back array of artist names and artist ids of artists who have lyrics in DB.', async () => {
@@ -41,7 +40,9 @@ describe('GET /artist', () => {
     const res = await request(app).get("/artist/byGenre").query({genre: 'folk'});
     expect(res.statusCode).toBe(201);
     expect(res.body.response).toEqual([{artistName:'test_artist_name_1', artistId:'test_artist_id_1'}]);
-    //SHOULD NOT RETURN ANY ARTISTS SINCE THE ARTIST WHO HAS GENRE OF RAP HAS NO TRACKS WITH LYRICS
+  });
+
+  it('("/artist/byGenre") - should not return any artists since the artist who has genre of rap has no tracks with lyrics.', async () => {
     const noLyricsGenreRes = await request(app).get("/artist/byGenre").query({genre: 'rap'});
     expect(noLyricsGenreRes.statusCode).toBe(201);
     expect(noLyricsGenreRes.body.response).toEqual([]);
@@ -54,21 +55,8 @@ describe('POST /artist', () => {
     const res = await request(app).post("/artist").send(artistThree);
     expect(res.statusCode).toBe(201);
     expect(res.body.response).toEqual('test_artist_id_3');
-    // await request(app).delete("/artist").send({spotify_id: 'test_artist_id_3'});
   });
 });
-
-// describe('DELETE /artist', () => {
-
-//   it('successfully deletes an artist from the database.', async () => {
-//     const res = await request(app).post("/artist").send(artistThree);
-//     expect(res.statusCode).toBe(201);
-//     expect(res.body.response).toEqual('test_artist_id_3');
-//     const deleteRes = await request(app).delete("/artist").send({spotify_id: 'test_artist_id_3'});
-//     expect(deleteRes.statusCode).toBe(201);
-//     expect(deleteRes.body.response).toEqual([{spotify_id: 'test_artist_id_3'}]);
-//   });
-// });
 
 afterEach(async function() {
   await afterEachHook();

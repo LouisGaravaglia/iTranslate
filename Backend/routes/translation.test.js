@@ -35,7 +35,6 @@ describe('GET /translation', () => {
     expect(res.statusCode).toBe(201);
     expect(res.body.response).toEqual("No Translation in DB");
   });
-
 });
 
 describe('POST /translation', () => {
@@ -46,8 +45,6 @@ describe('POST /translation', () => {
     expect(res.body.response).toEqual({track_id: 'test_track_id_2'});
   });
 });
-
-
 
 afterEach(async function() {
   await afterEachHook();
