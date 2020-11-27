@@ -56,10 +56,10 @@ class Tracks {
     }; 
   };
 
-  static async addTrackData ( data ) {
+  static async addTrackData (data) {
     const duplicateCheck = await db.query (
       `SELECT spotify_id FROM tracks WHERE spotify_id = $1`,
-      [ data.spotify_id ]
+      [data.spotify_id]
     );
 
     if ( duplicateCheck.rows.length ) {
@@ -69,7 +69,7 @@ class Tracks {
     const result = await db.query (
       `INSERT INTO tracks ( spotify_id, name, explicit, popularity, preview_url, spotify_uri, danceability, tempo, valence, duration, artist_id, album_id)
       VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING spotify_id`, 
-      [ data.spotify_id, data.name, data.explicit, data.popularity, data.preview_url, data.spotify_uri, data.danceability, data.tempo, data.valence, data.duration, data.artist_id, data.album_id]
+      [data.spotify_id, data.name, data.explicit, data.popularity, data.preview_url, data.spotify_uri, data.danceability, data.tempo, data.valence, data.duration, data.artist_id, data.album_id]
     );
     return result.rows[0].spotify_id;
   };

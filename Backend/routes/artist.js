@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Artists = require('../models/Artists');
+const Artists = require("../models/Artists");
 const {validate} = require('jsonschema');
 const addArtistSchema = require('../schemas/addArtistSchema.json');
 const ExpressError = require("../helpers/expressError");

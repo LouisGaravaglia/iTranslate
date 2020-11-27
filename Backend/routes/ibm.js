@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const dotevn = require("dotenv");
 const LanguageTranslatorV3 = require('ibm-watson/language-translator/v3');
 const {IamAuthenticator} = require('ibm-watson/auth');
 const IBM_API_KEY = process.env.IBM_API_KEY;
