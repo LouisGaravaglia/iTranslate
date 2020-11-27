@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Artists = require("../models/Artists");
+const Artists = require("../models/artists_model");
 const {validate} = require('jsonschema');
 const addArtistSchema = require('../schemas/addArtistSchema.json');
 const ExpressError = require("../helpers/expressError");
@@ -8,7 +8,7 @@ const ExpressError = require("../helpers/expressError");
 router.get("/:handle", async function(req, res, next) {
   try {
 
-    //GETS ARTIST IDS AND NAMES
+    //GETS ARTIST IDS AND NAMES.
     if (req.params.handle === "ids") {
       const response = await Artists.getArtistsAndIds();
       return res.status(201).json({response});

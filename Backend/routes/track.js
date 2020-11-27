@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const {validate} = require("jsonschema");
 const addTrackSchema = require("../schemas/addTrackSchema.json");
-const Tracks = require("../models/Tracks.js");
+const Tracks = require("../models/tracks_model");
 const ExpressError = require("../helpers/expressError");
 
 router.get("/:handle", async function(req, res, next) {
   try {
 
-    //GETS ALL TRACKS THAT FALL INTO THAT DANCEABILITY SCORE RANGE PROVIDED
+    //GETS ALL TRACKS THAT FALL INTO THAT DANCEABILITY SCORE RANGE PROVIDED.
     if (req.params.handle === "danceability") {
       const response = await Tracks.getDanceabilityTracks(req.query);
       return res.status(201).json({response});

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Translation = require('../models/Translation');
+const Translation = require('../models/translation_model');
 
+//TRANSLATION GET ROUTE
 router.get("/", async function(req, res, next) {
   try {
     const response = await Translation.get(req.query);
