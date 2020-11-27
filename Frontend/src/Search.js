@@ -132,7 +132,7 @@ const Search = () => {
   
   if (searchResults) SearchResultsDiv = (
     <animated.div style={springProps}  className="Main-Container" ref={searchResultsRef}>
-      <Tracks results={searchResults} typeOfResults={"search-results"} itemsPerPage={1} />
+      <Tracks results={searchResults} typeOfResults={"search-results"} itemsPerPage={1} animateIn={true}/>
     </animated.div>
   );
 

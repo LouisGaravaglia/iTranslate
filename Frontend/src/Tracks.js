@@ -15,7 +15,7 @@ import {sendGeneralError} from "./actionCreators/sendGeneralErrorCreator";
 //IONICONS IMPORTS
 import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
-const Tracks = ({typeOfResults, results, itemsPerPage}) => {
+const Tracks = ({typeOfResults, results, itemsPerPage, animateIn}) => {
   //REACT STATE
   const [isLoading, setIsLoading] = useState(false);
   //REDUX STORE
@@ -85,9 +85,10 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
     <div className="Loading-Box"></div>
   );
 
-////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
-
-  return (
+  //DISPLAY TRACK SELECTION
+  let TrackResults;
+  
+  if (animateIn) TrackResults = (
     <Spring
       from={{opacity: 0}}
       to={{opacity: 1}}
@@ -101,6 +102,17 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
         </div>
       )}
     </Spring>
+  );
+
+  if (!animateIn) TrackResults = (
+    <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv}/>
+  );
+
+
+////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
+
+  return (
+    {TrackResults}
   );
 };
 

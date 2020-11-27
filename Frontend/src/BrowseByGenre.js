@@ -213,7 +213,7 @@ function BrowseByGenre() {
   
   if (tracks) TrackResultsDiv = (
     <animated.div style={springProps}  className="Main-Container" ref={trackResultsRef}>
-      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} />
+      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true}/>
     </animated.div>
   );
 
