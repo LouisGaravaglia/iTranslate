@@ -12,7 +12,7 @@ const spotifyRoutes = require("./routes/spotify");
 
 app.use(express.json());
 // app.use(cors({origin: true, credentials: true}));
-// app.options('*', cors()) 
+// app.options('*', cors());
 app.use(cors());
 
 app.use("/ibm", ibmRoutes);
