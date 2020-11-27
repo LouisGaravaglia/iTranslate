@@ -17,7 +17,7 @@ const languageTranslator = new LanguageTranslatorV3({
 router.get("/:handle", async function(req, res, next) {
   try {
 
-    //GETS AN OBJECT OF TRANSLATED TEXT WHEN PROVIDED SOURCE TEXT AND TARGET LANGUAGE
+    //GETS AN OBJECT OF TRANSLATED TEXT WHEN PROVIDED SOURCE TEXT AND TARGET LANGUAGE.
     if (req.params.handle === "translate") {
       const lyrics = req.query.lyrics;
       const language = req.query.language;
