@@ -13,7 +13,12 @@ const spotifyRoutes = require("./routes/spotify");
 app.use(express.json());
 // app.use(cors({origin: true, credentials: true}));
 // app.options('*', cors());
-app.use(cors());
+
+var corsOptions = {
+    origin: ['http://localhost:3001', 'https://lyrcsbackend.herokuapp.com', 'https://lyrcsfrontend.herokuapp.com'],
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'] };
+app.use(cors(corsOptions));
 
 app.use("/ibm", ibmRoutes);
 app.use("/track", trackRoutes);
