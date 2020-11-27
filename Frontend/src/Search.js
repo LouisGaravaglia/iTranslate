@@ -149,7 +149,8 @@ const Search = () => {
   let LyricsTranslationDiv;
   
   if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
-    <animated.div style={springProps}  ref={showLyricsTranslationRef}>
+    <animated.div style={springProps}>
+      <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
       <LyricsTranslation  />
     </animated.div>
   );

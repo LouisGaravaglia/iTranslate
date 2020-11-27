@@ -21,8 +21,15 @@ import useOnScreen from "./useOnScreen";
 import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
 function BrowseByArtists() {
-  //STATE FOR ANIMATIONS
+  //REACT STATE
   const [bgColor, setBgColor] = useState("#8700B0");
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedArtistId, setSelectedArtistId] = useState("");
+  //STATE FOR FLASH MESSAGES
+  const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
+  const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
+  const [translationErrorFlashMessage, setTranslationErrorFlashMessage] = useState(false);
+  const [generalErrorFlashMessage, setGeneralErrorFlashMessage] = useState(false);
   //REDUX STORE
   const dispatch = useDispatch();
   const lyrics = useSelector(store => store.lyrics);
@@ -42,13 +49,18 @@ function BrowseByArtists() {
   const trackResultsRef = useRef();
   const showLyricsTranslationRef = useRef();
   const artistsResultsRef = useRef();
-  //STATE FOR FLASH MESSAGES
-  const [noLyricsFlashMessage, setNoLyricsFlashMessage] = useState(false);
-  const [languageNotFoundFlashMessage, setLanguageNotFoundFlashMessage] = useState(false);
-  const [translationErrorFlashMessage, setTranslationErrorFlashMessage] = useState(false);
-  const [generalErrorFlashMessage, setGeneralErrorFlashMessage] = useState(false);
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
+
+  //WATCHES FOR EITHER AN ERROR OR THE LYRICS TO COME THROUGH TO REMOVE LOADING ICON
+  useEffect(() => {
+
+    const updateIsLoading = () => {
+
+      if (albums || generalError) setIsLoading(false);
+    };
+    updateIsLoading();
+  }, [albums, generalError]);
 
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
@@ -150,6 +162,11 @@ function BrowseByArtists() {
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleArtistClick = async (artistId) => {
+
+    if (artistId !== selectedArtistId) {
+      setIsLoading(true);
+      setSelectedArtistId(artistId)
+    };
     dispatch(getAlbums(artistId));
     dispatch(resetStore("tracks", "lyrics", "translation"));
   };
@@ -159,6 +176,19 @@ function BrowseByArtists() {
   };
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
+
+  //DISPLAY LOADING ICON
+  let LoadingIconDiv;
+
+  if (isLoading) LoadingIconDiv = (
+    <div className="Loading-Box">
+      <IosMusicalNotes rotate={true} fontSize="300px" color="orange" />
+    </div>
+  );
+
+  if (!isLoading) LoadingIconDiv = (
+    <div className="Loading-Box"></div>
+  );
 
   //DISPLAY THE THREE CATEGORIES
   const ChooseCategoryDiv = (
@@ -173,7 +203,7 @@ function BrowseByArtists() {
    if (artists) ArtistsResultsDiv = (
     <animated.div style={springProps}  ref={artistsResultsRef}>
       <div className="Main-Container">
-        <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
+        <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}  loadingIcon={LoadingIconDiv}/>
       </div>
     </animated.div>
   );
@@ -219,7 +249,8 @@ function BrowseByArtists() {
   let LyricsTranslationDiv;
   
   if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
-    <animated.div style={springProps}  ref={showLyricsTranslationRef}>
+    <animated.div style={springProps}>
+      <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
       <LyricsTranslation  />
     </animated.div>
   );

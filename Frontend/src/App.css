@@ -129,6 +129,11 @@ a {
   margin: 40px 40px;
 }
 
+.inViewPlaceholder {
+  height: 10px;
+  width: 100vw;
+}
+
 /* //////////////////////////////////////  SEARCH BAR  ////////////////////////////////////// */
 
 /* .Search-Home-Container {
