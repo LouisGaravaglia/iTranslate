@@ -16,7 +16,6 @@ class BackendCall {
         // and request body data via the "data" key,
         // so the key we need depends on the HTTP verb
     } catch(e) {
-      console.log("BackendCall.js error: ", e);
     };
   };
 

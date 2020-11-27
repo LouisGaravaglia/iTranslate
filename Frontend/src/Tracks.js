@@ -39,17 +39,9 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackResultsClick = async (track) => {
-    console.log("Inside handle track click");
-    console.log("track object", track);
-   
     const trackId = track.trackId;
     const artistId = track.artistId;
     const albumId = track.albumId;
-
-     console.log("trackId", trackId);
-     console.log("artistId", artistId);
-     console.log("albumId", albumId);
- 
 
     if (trackId !== selectedTrackId) {
       setIsLoading(true);
@@ -62,21 +54,17 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
       //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
       if (track.hasLyrics) {
-        console.log("in tracks has lyrics");
         dispatch(getLyricsFromDB(trackId));
       } else {
         if (track.inDatabase) {
-          console.log("in track in database");
           dispatch(findLyricsFromAPI(trackId, track.artistName, track.trackName));
         } else {
-          console.log("in the else clause");
           const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData({trackId, artistId, albumId});
           await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
           dispatch(findLyricsFromAPI(trackId, track.artistName, track.trackName));
         };
       };
     } catch(e) {
-      console.log("Hit an error in tracks: ", e);
       setIsLoading(false);
       dispatch(sendGeneralError());
     };

@@ -11,14 +11,7 @@ const translationRoutes = require("./routes/translation");
 const spotifyRoutes = require("./routes/spotify");
 
 app.use(express.json());
-// app.use(cors({origin: true, credentials: true}));
-// app.options('*', cors());
-
-var corsOptions = {
-    origin: ['http://localhost:3001', 'https://lyrcsbackend.herokuapp.com', 'https://lyrcsfrontend.herokuapp.com'],
-    credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'] };
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use("/ibm", ibmRoutes);
 app.use("/track", trackRoutes);
