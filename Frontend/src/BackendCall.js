@@ -16,8 +16,7 @@ class BackendCall {
         // and request body data via the "data" key,
         // so the key we need depends on the HTTP verb
     } catch(e) {
-      let message = e.response.data.message;
-      throw Array.isArray(message) ? message : [message];
+      console.log("BackendCall.js error: ", e);
     };
   };
 
