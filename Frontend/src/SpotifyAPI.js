@@ -8,6 +8,9 @@ class SpotifyAPI {
 
   static async request(endpoint, paramsOrData = {}, verb = "get") {
     try {
+      console.log("This is BASE_URL", BASE_URL);
+      console.log("This is process.env.REACT_APP_BASE_URL", process.env.REACT_APP_BASE_URL);
+      console.log("This is process.env.REACT_APP", process.env.REACT_APP);
       return (await axios({
         method: verb,
         url: `${BASE_URL}/${endpoint}`,
