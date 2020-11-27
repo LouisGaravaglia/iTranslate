@@ -1,4 +1,71 @@
-##iTranslate Proposal
+##LYRCS
+
+
+**LINK**
+
+https://lyrcsfrontend.herokuapp.com/
+
+**About**
+
+LYRCS is a web app that displays lyrics for a song in it's original language as well as a translated language of the user's choice. 
+
+**Features**
+
+LYRCS is designed to be more inline with the expressive and fluid quality of a lot of the music one might search for. 
+
+The most obvious feature you will notice is the animating background color. This was to give a visual clue that the section the user moved to contains different content then the previous and following ones. Also, it aligns with the changing of tempo an artist may direct, or the changing styles of music in genral.
+
+A large search bar was implemented front and center on the landing page. This is to benefit what the majority of users want to acheive when they come to a lyrics webiste: Find the song they want to pull down lyrics for.
+
+All sections when displaying results only display one result (artist, album, track, or genre) at a time. This is to not create a cluttered or overwhelming amount of information. When the user would like to see more results there is a slider in place of traditional pagination buttons. This allows for quick scrolling from beginning to end, and can also be used with arrow keys for a more indiviualized experience.
+
+**Testing**
+
+Frontend tests are located in the src folder next to each component which it tests. To run Frontend tests, cd to the Frontend folder and run the command: npm test
+
+Backend tests are located in the routes folder next to each route which it tests. To run Backend tests, cd to the Backend folder and run the command: jest --runInBand --coverage
+
+**User Flow**
+
+On first load to the main url, users will see a search bar with the prompt "Find your song!". A user can type anything from just an artist name, to just a song or album name, and it utilizes Spotify's search endpoint to query their datbase for the top 20 best results.
+
+The viewport will automatically scroll down to the next container and will then be displayed those results. 
+
+Once the user finds the song they would like lyrics for and click it, a call is made to the Lyrics API to get the lyrics and the viewport will scroll down to the next section to pick which language they would like those lyrics translated to. 
+
+After entering a language that they would like a translation (up to 65 languages are supported) to, a backend call to the IBM Watson Language Translator API will then get the translation.
+
+The viewport then scrolls down one more time to display that translation next to the original lyrics received from a call to the Lyrics API.
+
+**Tech Stack**
+
+I will be using React / Redux / Node / Javascript / Express / PostgreSQL / JWT / Spring-React.
+
+**User Demographic**
+
+Teen to twenty somethings. Users who are looking for a more UX forward approach to finding song lyrics with translations.
+
+**APIs**
+
+Spotify API: https://developer.spotify.com/documentation
+
+Lyrics API: https://lyricsovh.docs.apiary.io/#reference/0/lyrics-of-a-song/search?console=1
+
+IBM Watson Translation API: https://www.ibm.com/watson/services/language-translator/
+
+Spotify's API is used to get search results based on the user's search request. This will then get the intial song info needed as well to get future song data utilized spotify's unique ids for each song, album, and artist.
+
+Lyrics API is used to get the lyrics for the song. It require the artist name and song name.
+
+IBM Watson Translation API is used to translate the lyrics. They provide over 60 languges to translate to and lucikly have a pretty effective source text read feature where you don't need to explicitly say what language the source text is in ordet to translate to the desired target text.
+
+**Database Schema**
+
+![](Schema/schema.png)
+
+**Stretch Goals**
+
+I have a couple stretch goals. One is having user profiles where a user can update a translation to be more accurate. Another would be to imbed music videos of the songs using YouTube’s API. Implementing a typeahead searchbar would be great as well.
 
 **Project Roadmap**
 
@@ -15,62 +82,3 @@ Phase 4: Make a React Front End. Simplify it to have one component with a search
 Phase 5: Refine React components/structure and implement sorting ability to search by genre/tempo/etc for entries already in DB.
 
 Extenstions: Youtube Music Video to be embeded on lyrics page. More complex searching ability. Linking either lyrics or artist/song details to listen on your spotify account. Possibly embed spotify player instead of Youtube Music Video.
-
-**What Tech Stack will you be implementing?**
-
-I will be using React / Node / Javascript / Express / PostgreSQL.
-
-**Will you be focusing on front-end UI or back-end?**
-
-I will be focusing on the both. At the moment, both are equally interesting and import to me.
-
-**Website or mobile app? Something else?**
-
-This will be a web app.
-
-**What goal will your project be designed to achieve?**
-
-My goal is to have a user friendly and efficient app that allows users to find lyrics of songs sung in Spanish translated to English and vice versa.
-
-**What is the demographic of the users?**
-
-I know that I have a bias towards Reggaeton and Pop music coming from Hispanic artists. I’ll most likely be designing my app with the teen and twenty-something English speaking music fans who either enjoy Latin or Spanish music and would like to better understand it, or those who really enjoy using the music as a way to better learn Spanish.
-
-**What kind of data will your site be using?**
-The site will be using pretty simple database entries consisting of a song artist, tile, spanish lyrics, english lyrics, and possibly some category types like “Reggaeton, pop, etc”.
-
-**How are you planning on collecting data?**
-
-I’ll be collecting song lyric data from Lyrics API (https://lyricsovh.docs.apiary.io/#reference/0/lyrics-of-a-song/search?console=1) and then collecting the translated lyrics by utilzing IBM Watson translation API (https://www.ibm.com/watson/services/language-translator/).
-
-**Outline your approach to designing this app?**
-
-I plan on creating a backend using Express that will handle retrieving data from the API’s and then storing that info into the Databasse. React will then be responsible for making async calls to the DB to pull artist/song information and displaying it.
-
-**What does your database schema look like?**
-
-![](Schema/schema.png)
-
-**What kinds of issues might you run into with your API?**
-
-Definitely a lot of potential issues. One big one is going to be accuracy of translation from one language to another. Especially, when you consider a lot of lyrics contain slang and metaphors. Another is the general availability of lyrics. There will definitely not be lyrics out there for all the songs I want to include. Speaking of including, since I will only be able to host this on the free account of Heroku. I will only be able to have 10k db entries. And since I plan on creating a DB first approach where all songs that are queried for a lyric translation on the site will first be stored into DB then retrieved and shown to the user, this will limit the number of songs I'll have available for translation.
-
-**Is there any sensitive information you need to secure?**
-
-Besides API keys, I may have to store user information if I end up implementing a stretch goal of allowing user profiles to be created where they can update lyrics to be more accurate.
-
-**What functionality will your app include?**
-
-The app will allow users to search for songs stored in our DB and if not included in the DB we will inform them we are retrieving lyrics and then add to DOM once we have the translated lyrics. Potentially be able to sort songs by genre or artists.
-
-**What will the user flow look like?**
-
-A User will first interact with a landing page with a large search bar prompting them to enter a name of a song or artist to find translated lyrics for. If a song can’t be found in the Lyrics API and there is not one already stored in the DB, a prompt will let the user know that unfortunately we can not translate that song, and to pick another. If the user found a song that is already in the DB a page will be loaded dynamically using React-Router. If that song is found on the Lyrics API, but not in DB. We will display a loading icon while we fetch the data and then shortly display the translated song lyric page after inserting into the DB.
-
-**What features make your site more than a CRUD app?**
-
-I don’t know if this site will really be a true CRUD application. If I am able to implement user profiles where a user can update and potentially delete song translations, as well as updating and deleting their profiles, then it definitely should fit into that model. Otherwise, it’s more focused on creating and reading aspects.
-
-**What are your stretch goals?**
-
-I have a couple stretch goals. One is having user profiles where a user can update a translation to be more accurate. And I may need to assign certain users, obviously probably myself to start out with, be admins to approve any changes made so that they are valid translations. Another, would be to imbed music videos of the songs using YouTube’s API. Implementing a typeahead searchbar would be great as well.
