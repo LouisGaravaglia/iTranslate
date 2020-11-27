@@ -39,26 +39,32 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackResultsClick = async (track) => {
+    const trackId = track.trackId;
+    const artistId = track.artistId;
+    const albumId = track.albumId;
 
-    if (track.trackId !== selectedTrackId) {
+    if (trackId !== selectedTrackId) {
       setIsLoading(true);
     };
 
     dispatch(addSelectedTrack(track));
     dispatch(resetStore("translation"));
+    console.log("This is the track: ", track);
 
     try {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
       //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
       if (track.hasLyrics) {
-        dispatch(getLyricsFromDB(track.trackId));
+        dispatch(getLyricsFromDB(trackId));
       } else {
         if (track.inDatabase) {
-          dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
+          dispatch(findLyricsFromAPI(trackId, track.artistName, track.trackName));
         } else {
-          const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData(track.trackId, track.artistId, track.albumId);
+          console.log("Entered else in Tracks.js");
+          const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData({trackId, artistId, albumId});
+          console.log("TRACK, ARTIST, ALBUM:", trackData, artistData, albumData);
           await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
-          dispatch(findLyricsFromAPI(track.trackId, track.artistName, track.trackName));
+          dispatch(findLyricsFromAPI(trackId, track.artistName, track.trackName));
         };
       };
     } catch(e) {
