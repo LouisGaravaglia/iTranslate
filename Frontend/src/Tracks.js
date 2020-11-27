@@ -112,7 +112,9 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn}) => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    {TrackResults}
+    <>
+      {TrackResults}
+    </>
   );
 };
 
