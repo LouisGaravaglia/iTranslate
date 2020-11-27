@@ -49,7 +49,6 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
 
     dispatch(addSelectedTrack(track));
     dispatch(resetStore("translation"));
-    console.log("This is the track: ", track);
 
     try {
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
@@ -60,9 +59,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage}) => {
         if (track.inDatabase) {
           dispatch(findLyricsFromAPI(trackId, track.artistName, track.trackName));
         } else {
-          console.log("Entered else in Tracks.js");
           const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData({trackId, artistId, albumId});
-          console.log("TRACK, ARTIST, ALBUM:", trackData, artistData, albumData);
           await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
           dispatch(findLyricsFromAPI(trackId, track.artistName, track.trackName));
         };
