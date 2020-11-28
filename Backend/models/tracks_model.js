@@ -34,7 +34,6 @@ class Tracks {
       `SELECT lyrics FROM tracks WHERE spotify_id = $1`,
       [trackId]
     );
-    console.log("checkIfTrackHasLyrics: ", result.rows[0]);
 
     if (result.rows[0] === undefined) {
       console.log("hasLyrics returning false");

@@ -40,7 +40,6 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn}) => {
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleTrackResultsClick = async (track) => {
-    console.log("This is the track obj: ", track);
     const trackId = track.trackId;
     const artistId = track.artistId;
     const albumId = track.albumId;
