@@ -11,7 +11,7 @@ export function getLyricsFromDB(trackId) {
     try {
       const lyrics = await BackendCall.getLyrics({trackId});
 
-      if (lyrics === undefined || lyrics === 'No Lyrics') {
+      if (lyrics === undefined || lyrics === null || lyrics === 'No Lyrics') {
         throw new Error("Lyrics are not actual lyrics");
       };
       dispatch(addLyrics(lyrics));
