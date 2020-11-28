@@ -10,6 +10,10 @@ export function getLyricsFromDB(trackId) {
   return async function(dispatch) {
     try {
       const lyrics = await BackendCall.getLyrics({trackId});
+
+      if (lyrics === undefined || lyrics === 'No Lyrics') {
+        throw new Error("Lyrics are not actual lyrics");
+      };
       dispatch(addLyrics(lyrics));
     } catch(e) {
       dispatch(updateLyricsError(true));

@@ -9,6 +9,36 @@ https://lyrcsfrontend.herokuapp.com/
 
 LYRCS is a web app that displays lyrics for a song in it's original language as well as a translated language of the user's choice. 
 
+**Start Up Instructions From CL**
+
+* cd to the Folder where you would like to store project files and run the git command: git clone https://github.com/LouisGaravaglia/iTranslate.git
+* command: cd itranslate
+* command: psql 
+* create the database to updload starter data in the dump.sql file: CREATE DATABASE new_itranslatedb;
+* exit out of the psql interface: (control + d) 
+* move into the Backend folder: cd Backend
+* command: psql new_itranslatedb < dump.sql
+* while in the Backend folder, create the .env file needed to access the IBM Translate API. Copy the text from the env.rtf file attached to the email. Run the following command in your terminal: echo 'PASTE TEXT HERE BETWEEN THE QUOTATIONS' > .env
+* in your terminal, move back to the main project folder: cd ..
+* in your terminal, move to the Frontend folder: cd Frontend
+* in your terminal, move to the src folder: cd src
+* while in the src folder, create the accessToken.js file needed to access the Spotify API. Run the following command in your terminal: touch accessToken.js
+* open that file: open accessToken.js
+* then paste the text from the acessToken.rtf file included in the email to the newly created acessToken.js file. Save the file after pasting and close it.
+* in your terminal, move back to the Frontend folder to install dependencies: cd ..
+* while in the Frontend folder, run: npm i
+* in your terminal, move back to the main project folder: cd ..
+* move to the Backend folder now: cd Backend
+* while in the Backend folder, run to instal Backend dependencies: npm i
+* while in the Backend folder, spin up the server: npm start
+* open up a new terminal window and cd to the Frontend folder, and start up react as well: npm start
+* this should now automatically open up a new browser tab where you’ll be taken to the site. If it doesn’t, you should be able to find it at: http://localhost:3000
+
+Instructions for running tests:
+* In the Backend folder, in your terminal, run the command: jest --runInBand
+* In the Frontend folder, in your terminal, run the command: npm test
+
+
 **Features**
 
 LYRCS is designed to be more inline with the expressive and fluid quality of a lot of the music one might search for. 

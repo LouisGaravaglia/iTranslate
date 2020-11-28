@@ -25,6 +25,7 @@ class Tracks {
       WHERE t.album_id = $1 AND lyrics != 'No Lyrics'`,
       [albumId]
     );
+
     return result.rows;
   };
 
@@ -35,10 +36,13 @@ class Tracks {
     );
 
     if (result.rows[0] === undefined) {
+      console.log("hasLyrics returning false");
       return false;
     } else if (result.rows[0].lyrics === "No Lyrics"){
+            console.log("hasLyrics returning false");
       return false;
     } else {
+            console.log("hasLyrics returning true");
       return true
     };
   };
@@ -87,7 +91,7 @@ class Tracks {
       `SELECT lyrics FROM tracks WHERE spotify_id = $1`,
       [track_id]
     );
-
+    console.log("getLyrics result.rows:", result.rows);
     if (result.rows.length) {
       return result.rows[0].lyrics;
     } else {

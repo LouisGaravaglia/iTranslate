@@ -115,7 +115,7 @@ const Search = () => {
 
   const handleTrackSearchSubmit = async (searchVal) => {
     dispatch(setResultsArray(searchVal));
-    dispatch(resetStore("lyrics", "translation, selectedTrack"));
+    dispatch(resetStore("lyrics", "translation", "selectedTrack"));
   };
 
 ////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////

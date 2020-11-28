@@ -21,6 +21,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn}) => {
   //REDUX STORE
   const lyrics = useSelector(store => store.lyrics);
   const lyricsError = useSelector(store => store.errors.lyricsError);
+  const generalError = useSelector(store => store.errors.generalError);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const dispatch = useDispatch();
 
@@ -31,10 +32,10 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn}) => {
 
     const updateIsLoading = () => {
 
-      if (lyrics || lyricsError) setIsLoading(false);
+      if (lyrics || lyricsError || generalError) setIsLoading(false);
     };
     updateIsLoading();
-  }, [lyrics, lyricsError]);
+  }, [lyrics, lyricsError, generalError]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK AND SUBMIT FUNCTIONS  ////////////////////////////////////////////////////
 

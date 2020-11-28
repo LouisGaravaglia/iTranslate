@@ -14,6 +14,7 @@ router.get("/:handle", async function(req, res, next) {
       return res.status(201).json({response});
     //GETS ALL TRACKS FROM AN ALBUM
     } else if (req.params.handle === "getTracks") {
+      console.log("in the getTracks route");
       const response = await Tracks.getTracks(req.query.albumId);
       return res.status(201).json({response});
     //GETS LYRICS FROM A TRACK
