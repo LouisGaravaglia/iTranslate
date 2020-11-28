@@ -34,11 +34,12 @@ class Tracks {
       `SELECT lyrics FROM tracks WHERE spotify_id = $1`,
       [trackId]
     );
+    console.log("checkIfTrackHasLyrics: ", reslt.rows[0]);
 
     if (result.rows[0] === undefined) {
       console.log("hasLyrics returning false");
       return false;
-    } else if (result.rows[0].lyrics === "No Lyrics"){
+    } else if (result.rows[0].lyrics === "No Lyrics" || result.rows[0].lyrics === null){
             console.log("hasLyrics returning false");
       return false;
     } else {
