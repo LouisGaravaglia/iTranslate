@@ -49,12 +49,10 @@ const ToTopArrow = ({topRef, topInView}) => {
 
   return (
     <div className="TopArrow-Container">
-
         <div className="TopArrow-Box" onMouseEnter={() => setArrowColor("#000000")} onMouseLeave={() => setArrowColor("#fff")}>
           {!hitBottom && <div></div>}
           {hitBottom && <IosArrowUp  className="TopArrow"  onClick={handleClick} fontSize="100px" color={arrowColor} />}
         </div>
-
     </div>
   );
 };

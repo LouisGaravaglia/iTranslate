@@ -7,6 +7,7 @@ import LanguageSelect from "./LanguageSelect";
 import DanceabilitySearch from "./DanceabilitySearch";
 import Categories from "./BrowseCategories";
 import FlashMessage from "./FlashMessage";
+import ToTopArrow from "./ToTopArrow";
 //REDUX IMPORTS
 import {useSelector, useDispatch} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
@@ -150,6 +151,7 @@ function BrowseByDanceability() {
   if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
     <animated.div style={springProps} >
       <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
+      <ToTopArrow topRef={categoryRef} topInView={categoriesInView}/>
       <LyricsTranslation  />
     </animated.div>
   );

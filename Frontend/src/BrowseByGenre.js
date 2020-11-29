@@ -10,6 +10,7 @@ import Albums from "./Albums";
 import Genres from "./Genres";
 import Categories from "./BrowseCategories";
 import FlashMessage from "./FlashMessage";
+import ToTopArrow from "./ToTopArrow";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
@@ -232,6 +233,7 @@ function BrowseByGenre() {
   if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
     <animated.div style={springProps}>
       <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
+      <ToTopArrow topRef={categoryRef} topInView={categoriesInView}/>
       <LyricsTranslation  />
     </animated.div>
   );

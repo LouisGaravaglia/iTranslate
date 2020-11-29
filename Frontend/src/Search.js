@@ -71,14 +71,6 @@ const Search = () => {
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
-  // useEffect(() => {
-  //   const clearStoreAfterReturingToTop = () => {
-  //     if (searchBarInView)
-  //     dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
-  //   }
-  // }, [searchBarInView, dispatch, resetStore])
-
-  //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
 
     if (state && state !== "Could not read language value") {
