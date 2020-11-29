@@ -9,34 +9,21 @@ https://lyrcsfrontend.herokuapp.com/
 
 LYRCS is a web app that displays lyrics for a song in it's original language as well as a translated language of the user's choice. 
 
-**Start Up Instructions From CL**
+**Start Up Instructions**
 
-* cd to the Folder where you would like to store project files and run the git command: git clone https://github.com/LouisGaravaglia/iTranslate.git
-* command: cd itranslate
-* command: psql 
-* create the database to updload starter data in the dump.sql file: CREATE DATABASE new_itranslatedb;
-* exit out of the psql interface: (control + d) 
-* move into the Backend folder: cd Backend
-* command: psql new_itranslatedb < dump.sql
-* while in the Backend folder, create the .env file needed to access the IBM Translate API. Copy the text from the env.rtf file attached to the email. Run the following command in your terminal: echo 'PASTE TEXT HERE BETWEEN THE QUOTATIONS' > .env
-* in your terminal, move back to the main project folder: cd ..
-* in your terminal, move to the Frontend folder: cd Frontend
-* in your terminal, move to the src folder: cd src
-* while in the src folder, create the accessToken.js file needed to access the Spotify API. Run the following command in your terminal: touch accessToken.js
-* open that file: open accessToken.js
-* then paste the text from the acessToken.rtf file included in the email to the newly created acessToken.js file. Save the file after pasting and close it.
-* in your terminal, move back to the Frontend folder to install dependencies: cd ..
-* while in the Frontend folder, run: npm i
-* in your terminal, move back to the main project folder: cd ..
-* move to the Backend folder now: cd Backend
-* while in the Backend folder, run to instal Backend dependencies: npm i
-* while in the Backend folder, spin up the server: npm start
-* open up a new terminal window and cd to the Frontend folder, and start up react as well: npm start
-* this should now automatically open up a new browser tab where you’ll be taken to the site. If it doesn’t, you should be able to find it at: http://localhost:3000
+* git clone https://github.com/LouisGaravaglia/iTranslate.git
+* Sign up for Spotify API in order to get API Key: https://developer.spotify.com/documentation/web-api/quick-start/
+* Sign up for IBM Watson Translator API as well: https://www.ibm.com/watson/services/language-translator/
+* in the Backend folder, enter the psql environment and create a database to updload starter data in the dump.sql file: CREATE DATABASE new_itranslatedb;
+* run: psql new_itranslatedb < dump.sql
+* create .env file 
+* install dependencies in both Backend and Frontend folders
+* npm start in both Backend and Frontend in order to spin up server and react.
 
-Instructions for running tests:
-* In the Backend folder, in your terminal, run the command: jest --runInBand
-* In the Frontend folder, in your terminal, run the command: npm test
+**Testing Instructions**
+
+* Backend: jest --runInBand
+* Frontend: npm test
 
 
 **Features**
@@ -97,7 +84,7 @@ IBM Watson Translation API is used to translate the lyrics. They provide over 60
 
 I have a couple stretch goals. One is having user profiles where a user can update a translation to be more accurate. Another would be to imbed music videos of the songs using YouTube’s API. Implementing a typeahead searchbar would be great as well.
 
-**Project Roadmap**
+**Initial Project Roadmap**
 
 Core Functionality: Need to be able to gather song/artist details (Genre, Popularity, Tempo, Release Year, etc) in order to be able to sort songs in database. Need to be able to take that artist name and song name in order to make an API call to get song lyrics. Store those lyrics with artist/song details in database. Make a call to Translation API to get translated lyrics and store with artist/song details in DB. Display all of the above on a single page to the user.
 
@@ -112,3 +99,5 @@ Phase 4: Make a React Front End. Simplify it to have one component with a search
 Phase 5: Refine React components/structure and implement sorting ability to search by genre/tempo/etc for entries already in DB.
 
 Extenstions: Youtube Music Video to be embeded on lyrics page. More complex searching ability. Linking either lyrics or artist/song details to listen on your spotify account. Possibly embed spotify player instead of Youtube Music Video.
+
+**Acheived By Deadline**

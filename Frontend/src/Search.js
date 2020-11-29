@@ -6,6 +6,7 @@ import LanguageSelect from "./LanguageSelect";
 import LyricsTranslation from "./LyricsTranslation";
 import Tracks from "./Tracks";
 import SearchLanding from "./SearchLanding";
+import ToTopArrow from "./ToTopArrow";
 //REDUX IMPORTS
 import {useDispatch, useSelector} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearchError} from "./actionCreators/handleErrorsCreator";
@@ -68,6 +69,14 @@ const Search = () => {
   });
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
+
+  //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
+  // useEffect(() => {
+  //   const clearStoreAfterReturingToTop = () => {
+  //     if (searchBarInView)
+  //     dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
+  //   }
+  // }, [searchBarInView, dispatch, resetStore])
 
   //FUNCTION TO BE CALLED IN BELOW USE-EFFECTS TO SCROLL TO NEXT DIV AFTER CLICK
   const scrollToNextDiv = useCallback(async (state, ref) => {
@@ -151,6 +160,7 @@ const Search = () => {
   if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
     <animated.div style={springProps}>
       <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
+      <ToTopArrow topRef={searchRef} topInView={searchBarInView}/>
       <LyricsTranslation  />
     </animated.div>
   );
