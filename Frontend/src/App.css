@@ -51,6 +51,7 @@ a {
   font-size: 1.5rem;
   color: #000000;
   margin-left: 50px;
+  cursor: pointer;
 }
 
 .Navbar-Browse-Box {
@@ -60,7 +61,7 @@ a {
 
 .Navbar-Browse {
   float: right;
-
+  cursor: pointer;
 }
 
 /* .Navbar-Browse-Arrow:hover {
@@ -88,6 +89,7 @@ a {
   text-decoration: none;
   width: 80px;
   height: 60px;
+  cursor: pointer;
 }
 
 
@@ -115,6 +117,7 @@ a {
 
 .Browse-Landing p:hover {
   color: rgb(2, 206, 169);
+  cursor: pointer;
 }
 
 /* //////////////////////////////////////  LYRICS  ////////////////////////////////////// */
@@ -193,6 +196,7 @@ background-color: rgb(2, 206, 169);
   color: rgb(86, 182, 255);
   display: block;
   text-align: center;
+  cursor: default;
   /* margin: 0 80px; */
 }
 
@@ -231,6 +235,7 @@ background-color: rgb(2, 206, 169);
 
 .Search-Field button:hover{
   background-color: rgb(58, 163, 255);
+  cursor: pointer;
 }
 
 .Search-Field-Filler {
@@ -384,6 +389,7 @@ flex: 0.1 0 1vh;
   font-weight: 100;
   font-size: 5rem;
   color: rgb(86, 182, 255);
+  cursor: default;
 }
 
 /* //////////////////////////////////////  RESULT (HEADER & SUBHEADER) ////////////////////////////////////// */
@@ -414,6 +420,7 @@ flex: 0.1 0 1vh;
 
 .Result-Header:hover {
   color: rgb(2, 206, 169);
+  cursor: pointer;
 }
 
 .Result-Subheader {
@@ -421,6 +428,7 @@ flex: 0.1 0 1vh;
   font-weight: 200;
   font-size: 2rem;
   color: rgb(86, 182, 255);
+  cursor: default;
 }
 
 /* //////////////////////////////////////  MAIN CONTAINER ////////////////////////////////////// */
@@ -448,6 +456,7 @@ flex: 0.1 0 1vh;
 
 .Result-Main:hover {
   color: rgb(2, 206, 169);
+  cursor: pointer;
 }
 
 .Browse-Albums {
@@ -459,41 +468,7 @@ flex: 0.1 0 1vh;
   /* border: 4px solid yellow; */
 }
 
-.Album {
-  position: relative;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  flex: 1 0 21%;
-  margin: 40px;
-}
 
-.Album-Name-Box {
-  position: relative;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  position: absolute;
-  top:0;
-  left: 0;
-  height: 300px;
-  width: 300px;
-  background-color: #000000;
-  opacity: 0.7;
-}
-
-.Album-Name {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: #fff;
-  z-index: 6;
-  margin: 5px 5px;
-}
 
 .Main-Result-Container {
   text-align: center;
@@ -523,6 +498,45 @@ flex: 0.1 0 1vh;
   /* border: 4px solid #3e8e41; */
   text-align: center;
   flex: 3 0 20vh;
+}
+
+/* //////////////////////////////////////  ALBUM ////////////////////////////////////// */
+
+.Album {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1 0 21%;
+  margin: 40px;
+}
+
+.Album-Name-Box {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 300px;
+  width: 300px;
+  background-color: #000000;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.Album-Name {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #fff;
+  z-index: 6;
+  margin: 5px 5px;
 }
 
 /* //////////////////////////////////////  LOADING ICON  ////////////////////////////////////// */
