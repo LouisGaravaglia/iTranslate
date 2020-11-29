@@ -1,7 +1,8 @@
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
 import BackendCall from "./BackendCall";
 
 const SearchResult = memo((props) => {
+  const [albumHover, setAlbumHover] = useState(false);
 
   const handleSearchClick = async () => {
     const updatedTrack = await BackendCall.consolidateSelectedSearchResultInfo(props.musicObject)
@@ -59,8 +60,13 @@ const SearchResult = memo((props) => {
   let displayAlbums;
 
   if (props.typeOfResults === "albums") displayAlbums = (
-    <div className="Album">
-      <img onClick={handleAlbumClick} src={props.image} alt=""/>
+    <div className="Album" onMouseEnter={() => setAlbumHover(true)} onMouseLeave={() => setAlbumHover(false)}>
+      {albumHover && 
+      <div className="Album-Name-Box" onClick={handleAlbumClick}>
+      <p className="Album-Name">{props.name}</p>
+      </div>
+      }
+      <img src={props.image} alt=""/>
     </div>
   );
 
