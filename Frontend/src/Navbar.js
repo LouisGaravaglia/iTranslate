@@ -13,17 +13,21 @@ const NavBar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+////////////////////////////////////////////////////  USE EFFECT  ////////////////////////////////////////////////////
+
   useEffect(() => {
 
     const updateBrowseMode = () => {
-        if (location.pathname === "/browse") setBrowseMode(true);
-        if (location.pathname === "/browse/artists") setBrowseMode(true);
-        if (location.pathname === "/browse/genres") setBrowseMode(true);
-        if (location.pathname === "/browse/danceability") setBrowseMode(true);
-        if (location.pathname === "/") setBrowseMode(false);
+      if (location.pathname === "/browse") setBrowseMode(true);
+      if (location.pathname === "/browse/artists") setBrowseMode(true);
+      if (location.pathname === "/browse/genres") setBrowseMode(true);
+      if (location.pathname === "/browse/danceability") setBrowseMode(true);
+      if (location.pathname === "/") setBrowseMode(false);
     };
     updateBrowseMode();
   }, []);
+
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleBrowseClickFromHome = () => {
     history.push("/browse");
@@ -43,6 +47,8 @@ const NavBar = () => {
     setBrowseMode(false);
     dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
   };
+
+////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
     <div className="Navbar-Container">

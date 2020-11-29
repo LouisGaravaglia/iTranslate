@@ -17,9 +17,9 @@ const ToTopArrow = ({topRef, topInView}) => {
 
     const updateSetHitBottom = () => {
 
-        if (translation) {
-          setHitBottom(true);
-        };
+      if (translation) {
+        setHitBottom(true);
+      };
     };
     updateSetHitBottom();
   }, [translation, setHitBottom]);
@@ -29,10 +29,10 @@ const ToTopArrow = ({topRef, topInView}) => {
 
     const resetStoreReachingTop = () => {
 
-        if (movingUp && topInView) {
-          setMovingUp(false);
-          dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
-        };
+      if (movingUp && topInView) {
+        setMovingUp(false);
+        dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
+      };
     };
     resetStoreReachingTop();
   }, [movingUp, topInView, dispatch, setMovingUp]);
@@ -49,10 +49,10 @@ const ToTopArrow = ({topRef, topInView}) => {
 
   return (
     <div className="TopArrow-Container">
-        <div className="TopArrow-Box" onMouseEnter={() => setArrowColor("#000000")} onMouseLeave={() => setArrowColor("#fff")}>
-          {!hitBottom && <div></div>}
-          {hitBottom && <IosArrowUp  className="TopArrow"  onClick={handleClick} fontSize="100px" color={arrowColor} />}
-        </div>
+      <div className="TopArrow-Box" onMouseEnter={() => setArrowColor("#000000")} onMouseLeave={() => setArrowColor("#fff")}>
+        {!hitBottom && <div></div>}
+        {hitBottom && <IosArrowUp  className="TopArrow"  onClick={handleClick} fontSize="100px" color={arrowColor} />}
+      </div>
     </div>
   );
 };
