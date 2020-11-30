@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 
-const SearchBar = ( { header, handleSubmit, loadingIcon} ) => {
+const SearchBar = ( { header, handleSubmit, loadingIcon, typeOfSearch} ) => {
   const [searchVal, setSearchVal] = useState("")
+
+////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const triggerSubmit = (e) => {
     e.preventDefault();
@@ -12,11 +14,23 @@ const SearchBar = ( { header, handleSubmit, loadingIcon} ) => {
     setSearchVal(e.target.value);
   };
 
+////////////////////////////////////////////////////  JSX VARIABLES  ////////////////////////////////////////////////////
+
+let headerClassName;
+
+if (typeOfSearch === "search-landing") headerClassName = "Search-Landing";
+if (typeOfSearch === "search-language") headerClassName = "Search-Language";
+if (typeOfSearch === "artists-language") headerClassName = "Artist-Language";
+if (typeOfSearch === "genre-language") headerClassName = "Genre-Language";
+if (typeOfSearch === "danceability-language") headerClassName = "Danceability-Language";
+
+////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
+
   return (
     <div className="Search-Field">
       {loadingIcon}
       <div className="Search-Field-Content">
-      <h1>{header}</h1>
+      <h1 className={headerClassName}>{header}</h1>
       <form className="Search-Input-Container">
       <div >
         <input

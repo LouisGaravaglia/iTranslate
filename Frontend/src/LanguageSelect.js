@@ -9,7 +9,7 @@ import {getTranslation} from "./actionCreators/getTranslationCreator";
 //IONICONS IMPORTS
 import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
-function LanguageSelect({selectedTrackId}) {
+function LanguageSelect({selectedTrackId, typeOfSearch}) {
   //REACT STATE
   const [isLoading, setIsLoading] = useState(false);
   //REDUX STORE
@@ -69,7 +69,7 @@ function LanguageSelect({selectedTrackId}) {
       {props => (
         <div style={props}>
   
-            <SearchBar loadingIcon={LoadingIconDiv} header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit}/>
+            <SearchBar loadingIcon={LoadingIconDiv} header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit} typeOfSearch={typeOfSearch}/>
          
         </div>
       )}

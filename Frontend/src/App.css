@@ -198,9 +198,6 @@ background-color: rgb(2, 206, 169);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 800;
   font-size: 5rem;
-  background: linear-gradient(to right, #b171ac 0%, #743edf 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   display: block;
   text-align: center;
   cursor: default;
@@ -573,19 +570,46 @@ flex: 10 1 auto;
 
 /* //////////////////////////////////////  SEARCH FONT COLORS  ////////////////////////////////////// */
 
+.Search-Landing {
+  background: linear-gradient(to right, #062bff 0%, #6000FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .Search-Track-Subheader {
-  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  background: linear-gradient(to right, #ffaad3 0%, #ee67fa  100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
 
 .Search-Track-Header {
-  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  background: linear-gradient(to right, #ffaad3  0%, #ee67fa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
+
+.Search-Language {
+  background: linear-gradient(to right, #ee67fa 0%, #bf00ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Search-Lyrics {
+  background: linear-gradient(to right, #ffc1ed 0%, #ee67fa  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Search-Translation {
+  background: linear-gradient(to right, #fc92ec  0%, #ac37ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
 
 /* //////////////////////////////////////  BROWSE BY GENRE FONT COLORS  ////////////////////////////////////// */
 

@@ -14,7 +14,7 @@ const SearchLanding = ({handleTrackSearchSubmit}) => {
       {props => (
         <div style={props}>
 
-          <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit}/>
+          <SearchBar header="Find your song!" handleSubmit={handleTrackSearchSubmit} typeOfSearch="search-landing"/>
 
         </div>
       )}

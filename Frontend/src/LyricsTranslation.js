@@ -16,8 +16,10 @@ function LyricsTranslation({typeOfLyricsTranslation}) {
   if (typeOfLyricsTranslation === "genre") translationClassName = "Translation Genre-Translation"
   if (typeOfLyricsTranslation === "artists") lyricsClassName = "Lyrics Artist-Lyrics"
   if (typeOfLyricsTranslation === "artists") translationClassName = "Translation Artist-Translation"
-    if (typeOfLyricsTranslation === "danceability") lyricsClassName = "Lyrics Danceability-Lyrics"
+  if (typeOfLyricsTranslation === "danceability") lyricsClassName = "Lyrics Danceability-Lyrics"
   if (typeOfLyricsTranslation === "danceability") translationClassName = "Translation Danceability-Translation"
+  if (typeOfLyricsTranslation === "search") lyricsClassName = "Lyrics Search-Lyrics"
+  if (typeOfLyricsTranslation === "search") translationClassName = "Translation Search-Translation"
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 

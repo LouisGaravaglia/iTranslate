@@ -142,7 +142,7 @@ const Search = () => {
 
   if (lyrics) LanguageSelectDiv = (
     <animated.div style={springProps}  ref={selectLanguageRef}>
-      <LanguageSelect selectedTrackId={selectedTrackId}/>
+      <LanguageSelect selectedTrackId={selectedTrackId} typeOfSearch="search-language"/>
     </animated.div>
   );
 
@@ -153,7 +153,7 @@ const Search = () => {
     <animated.div style={springProps}>
       <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
       <ToTopArrow topRef={searchRef} topInView={searchBarInView}/>
-      <LyricsTranslation  />
+      <LyricsTranslation typeOfLyricsTranslation="search"/>
     </animated.div>
   );
 
