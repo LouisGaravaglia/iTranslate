@@ -51,13 +51,13 @@ const Search = () => {
     const changeInView = (searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView) => {
 
       if (searchBarInView) {
-        setBgColor("#1D4DBE");
+        setBgColor("#A800FF");
       } else if (searchResultsInView) {
-        setBgColor("#8019FF");
+        setBgColor("#7F00FF");
       } else if (selectLanguageInView) {
-        setBgColor("#AB5D00");
+        setBgColor("#6000FF");
       } else if (LyricsTranslationInView) {
-        setBgColor("#5019FF");
+        setBgColor("#4200FF");
       };
     };
   changeInView(searchResultsInView, searchBarInView, selectLanguageInView, LyricsTranslationInView);

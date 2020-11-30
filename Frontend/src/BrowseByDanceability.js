@@ -16,7 +16,7 @@ import useOnScreen from "./useOnScreen";
 
 function BrowseByDanceability() {
   //STATE FOR ANIMATIONS
-  const [bgColor, setBgColor] = useState("#8700B0");
+  const [bgColor, setBgColor] = useState("#4e1eff");
   //REDUX STORE
   const lyrics = useSelector(store => store.lyrics);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
@@ -89,25 +89,25 @@ function BrowseByDanceability() {
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
 
   const categoriesInView = useOnScreen(categoryRef, {threshold: 0.2});
-  const DanceabilitySearchInView = useOnScreen(DanceabilitySearchRef, {threshold: 0.2});
+  const danceabilitySearchInView = useOnScreen(DanceabilitySearchRef, {threshold: 0.2});
   const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
-  const LyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
+  const lyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
 
   useEffect(() => {
-    const changeInView = (selectLanguageInView, LyricsTranslationInView, DanceabilitySearchInView, categoriesInView) => {
+    const changeInView = (selectLanguageInView, lyricsTranslationInView, danceabilitySearchInView, categoriesInView) => {
 
-      if (selectLanguageInView) {
-        setBgColor("#794089");
-      } else if (LyricsTranslationInView) {
-        setBgColor("#8019FF");
-      } else if (DanceabilitySearchInView) {
-        setBgColor("#8019FF");
-      } else if (categoriesInView) {
-        setBgColor("#8700B0");
+      if (categoriesInView) {
+        setBgColor("#4e1eff");
+      } else if (danceabilitySearchInView) {
+        setBgColor("#7c75fc");
+      } else if (selectLanguageInView) {
+        setBgColor("#9eb5fa");
+      } else if (lyricsTranslationInView) {
+        setBgColor("#c1f7f7");
       };
     };
-  changeInView(selectLanguageInView, LyricsTranslationInView, DanceabilitySearchInView, categoriesInView);
-  }, [selectLanguageInView, LyricsTranslationInView, DanceabilitySearchInView, categoriesInView]);
+  changeInView(selectLanguageInView, lyricsTranslationInView, danceabilitySearchInView, categoriesInView);
+  }, [selectLanguageInView, lyricsTranslationInView, danceabilitySearchInView, categoriesInView]);
 
   const springProps = useSpring({
     backgroundColor: bgColor,

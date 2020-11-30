@@ -1,5 +1,7 @@
 import React, {memo, useState} from 'react';
 import BackendCall from "./BackendCall";
+import {useSpring, animated} from 'react-spring';
+import Hover from "./Hover";
 
 const SearchResult = memo((props) => {
   const [albumHover, setAlbumHover] = useState(false);
@@ -24,6 +26,16 @@ const SearchResult = memo((props) => {
   const handleGenreClick = () => {
     props.handleClick(props.genre);
   };
+
+  // const springProps = useSpring({opacity: 1, color: 'red'});
+
+  //   const springProps = useSpring({
+  //   // color: props.fontColor1,
+  //   color: 'linear-gradient(#fff, #000000)',
+  //   config: {duration: 300}
+  // });
+
+
 
 ////////////////////////////////////////////////////  SEARCH RESULTS  ////////////////////////////////////////////////////
 
@@ -86,7 +98,10 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "genres") displayGenres = (
     <div className="Main-Result-Container">
-      <p onClick={handleGenreClick} className="Result-Main">{props.genre}</p>
+    <div className="Result-Main-TopFiller"></div>
+      <Hover rotation={10} timing={100}>
+        <p onClick={handleGenreClick} dataInfo="testing" className="Result-Main Result-Main-Genres">{props.genre}</p>
+      </Hover>
     </div>
   );
 

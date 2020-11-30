@@ -9,7 +9,7 @@ import {getArtists} from "./actionCreators/BrowseRoute/Genre/getArtistsCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
 
-function Genres() {
+function Genres({fontColor1, fontColor2}) {
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
 
@@ -38,7 +38,7 @@ function Genres() {
   
   if (genres) GenresDiv = (
     <div className="Main-Container">
-      <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={1}/>
+      <SearchResultList key={genres.length} typeOfResults="genres" resultsArray={genres} handleSearch={handleGenreClick} itemsPerPage={1} fontColor1={fontColor1} fontColor2={fontColor2}/>
     </div>  
   );
 

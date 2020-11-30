@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import SearchResult from "./SearchResult";
 import PaginationSlider from "./PaginationSlider";
 
-const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResults, loadingIcon}) => {
+const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResults, loadingIcon, fontColor1, fontColor2}) => {
   const [sliderVal, setSliderVal] = useState(0);
   const resultsInView = resultsArray.slice(sliderVal * itemsPerPage, (sliderVal * itemsPerPage) + itemsPerPage);
   const updateResultsInView = (val) => {
@@ -75,7 +75,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "genres") displayGenres = (
     <>
       <div className="Result-Box">
-        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="genres" handleClick={handleSearch} genre={r}/>)}
+        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="genres" handleClick={handleSearch} genre={r} fontColor1={fontColor1} fontColor2={fontColor2}/>)}
       </div> 
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
       {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>}

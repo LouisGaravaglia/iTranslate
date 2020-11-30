@@ -4,6 +4,8 @@ import {resetStore} from "./actionCreators/resetStoreCreator";
 import {useDispatch} from "react-redux";
 import MdMenu from 'react-ionicons/lib/MdMenu';
 import MdSearch from 'react-ionicons/lib/MdSearch';
+import Hover from "./Hover";
+
 
 const NavBar = () => {
   const [browseMode, setBrowseMode] = useState(false);
@@ -53,14 +55,16 @@ const NavBar = () => {
   return (
     <div className="Navbar-Container">
       <div className="Navbar">
-        <div className="Navbar-Search-Box" onMouseEnter={() => setLogoClassName("Navbar-Search-Hover")} onMouseLeave={() => setLogoClassName("Navbar-Search")}>
-          <NavLink  className={logoClassName} exact to="/" onClick={() => handleHomeClick()}>LYRCS</NavLink>
+        <div className="Navbar-Search-Box">
+          <Hover rotation={10} timing={100} navbar={true}>
+            <NavLink  className="Navbar-Search" exact to="/" onClick={() => handleHomeClick()}>LYRCS</NavLink>
+          </Hover>
         </div>
         <div className="Navbar-Browse-Box">
-          <div onMouseEnter={() => setBrowseIconColor("#000000")} onMouseLeave={() => setBrowseIconColor("#fff")}>
+          <Hover rotation={10} timing={100} navbar={true}>
             {!browseMode && <MdMenu className="Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="30px" color={browseIconColor}/>}
             {browseMode && <MdSearch  className="Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} fontSize="30px" color={browseIconColor}/>}
-          </div>
+          </Hover>
         </div>
         <NavLink exact to="/browse"></NavLink>
       </div>

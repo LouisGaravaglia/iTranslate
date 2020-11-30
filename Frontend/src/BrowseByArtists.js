@@ -23,7 +23,7 @@ import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
 function BrowseByArtists() {
   //REACT STATE
-  const [bgColor, setBgColor] = useState("#8700B0");
+  const [bgColor, setBgColor] = useState("#4e1eff");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedArtistId, setSelectedArtistId] = useState("");
   //STATE FOR FLASH MESSAGES
@@ -133,27 +133,42 @@ function BrowseByArtists() {
   const albumsInView = useOnScreen(albumResultsRef, {threshold: 0.7});
   const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
   const trackResultsInView = useOnScreen(trackResultsRef, {threshold: 0.7});
-  const LyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.1});
+  const lyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.1});
 
   useEffect(() => {
-    const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView) => {
+    const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInView, artistsInView, categoriesInView) => {
 
-      if (albumsInView) {
-        setBgColor("#5019FF");
-      } else if (selectLanguageInView) {
-        setBgColor("#3046FF");
-      } else if (trackResultsInView) {
-        setBgColor("#8019FF");
-      } else if (LyricsTranslationInView) {
-        setBgColor("#8019FF");
+      if (categoriesInView) {
+        setBgColor("#4e1eff");
       } else if (artistsInView) {
-        setBgColor("#8019FF");
-      } else if (categoriesInView) {
-        setBgColor("#8700B0");
+        setBgColor("#7745f8");
+      } else if (albumsInView) {
+        setBgColor("#9d69f1");
+      } else if (trackResultsInView) {
+        setBgColor("#bd86eb");
+      } else if (selectLanguageInView) {
+        setBgColor("#dba3e6");
+      } else if (lyricsTranslationInView) {
+        setBgColor("#fdc3df");
       };
+
+
+      //       if (categoriesInView) {
+      //   setBgColor("#522df1");
+      // } else if (artistsInView) {
+      //   setBgColor("#5c2cf0");
+      // } else if (albumsInView) {
+      //   setBgColor("#7339ec");
+      // } else if (trackResultsInView) {
+      //   setBgColor("#9e67e3");
+      // } else if (selectLanguageInView) {
+      //   setBgColor("#ce92dd");
+      // } else if (lyricsTranslationInView) {
+      //   setBgColor("#f1b4d8");
+      // };
     };
-  changeInView(selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView);
-  }, [selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView]);
+  changeInView(selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInView, artistsInView, categoriesInView);
+  }, [selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInView, artistsInView, categoriesInView]);
 
   const springProps = useSpring({
     backgroundColor: bgColor,

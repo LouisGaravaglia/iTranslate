@@ -9,7 +9,7 @@ function Browse() {
 ////////////////////////////////////////////////////  SPRING PROPS FOR BACKGROUND COLOR ANIMATION  ////////////////////////////////////////////////////
 
   const springProps = useSpring({
-    backgroundColor: "#8700B0",
+    backgroundColor: "#4e1eff",
     config: {duration: 300}
   });
 

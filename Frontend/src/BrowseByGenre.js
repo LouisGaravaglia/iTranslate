@@ -22,7 +22,9 @@ import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
 function BrowseByGenre() {
   //STATE FOR ANIMATIONS
-  const [bgColor, setBgColor] = useState("#8700B0");
+  const [bgColor, setBgColor] = useState("#4e1eff");
+  const [fontColor1, setFontColor1] = useState();
+  const [fontColor2, setFontColor2] = useState();
   //REDUX STORE
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
@@ -127,29 +129,33 @@ function BrowseByGenre() {
   const albumsInView = useOnScreen(albumResultsRef, {threshold: 0.7});
   const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
   const trackResultsInView = useOnScreen(trackResultsRef, {threshold: 0.7});
-  const LyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
+  const lyricsTranslationInvView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
 
   useEffect(() => {
-    const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView, genresInView) => {
+    const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInvView, artistsInView, categoriesInView, genresInView) => {
 
-      if (albumsInView) {
-        setBgColor("#AB5D00");
-      } else if (selectLanguageInView) {
-        setBgColor("#794089");
-      } else if (trackResultsInView) {
-        setBgColor("#8019FF");
-      } else if (LyricsTranslationInView) {
-        setBgColor("#8019FF");
-      } else if (artistsInView) {
-        setBgColor("#1D4DBE");
-      } else if (categoriesInView) {
-        setBgColor("#8700B0");
+      if (categoriesInView) {
+        setBgColor("#4e1eff");
+        setFontColor1();
+        setFontColor2();
       } else if (genresInView) {
-        setBgColor("#8019FF");
+        setBgColor("#6e3eee");
+        setFontColor1("Result-Main-Genres");
+        setFontColor2("#eba37b");
+      } else if (artistsInView) {
+        setBgColor("#9161db");
+      } else if (albumsInView) {
+        setBgColor("#aa79ce");
+      } else if (trackResultsInView) {
+        setBgColor("#c594bf");
+      } else if (selectLanguageInView) {
+        setBgColor("#e3b2af");
+      } else if (lyricsTranslationInvView) {
+        setBgColor("#fecda1");
       };
     };
-  changeInView(selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView, genresInView);
-  }, [selectLanguageInView, albumsInView, trackResultsInView, LyricsTranslationInView, artistsInView, categoriesInView, genresInView]);
+  changeInView(selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInvView, artistsInView, categoriesInView, genresInView);
+  }, [selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInvView, artistsInView, categoriesInView, genresInView]);
 
   const springProps = useSpring({
     backgroundColor: bgColor,
@@ -176,7 +182,7 @@ function BrowseByGenre() {
   
   if (genres) selectGenresDiv = (
      <animated.div style={springProps} ref={selectGenresRef}>
-       <Genres />
+       <Genres  fontColor1={fontColor1} fontColor2={fontColor2}/>
      </animated.div>
   );
 
@@ -196,7 +202,7 @@ function BrowseByGenre() {
   
   if (artists) ArtistsResultsDiv = (
     <animated.div style={springProps}  ref={artistsResultsRef}>
-      <Artists />
+      <Artists fontColor1={fontColor1} fontColor2={fontColor2}/>
     </animated.div>
   );
 
