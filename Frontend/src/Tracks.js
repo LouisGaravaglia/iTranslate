@@ -15,7 +15,7 @@ import {sendGeneralError} from "./actionCreators/sendGeneralErrorCreator";
 //IONICONS IMPORTS
 import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
-const Tracks = ({typeOfResults, results, itemsPerPage, animateIn}) => {
+const Tracks = ({typeOfResults, results, itemsPerPage, animateIn, typeOfTracks}) => {
   //REACT STATE
   const [isLoading, setIsLoading] = useState(false);
   //REDUX STORE
@@ -98,7 +98,9 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn}) => {
       {props => (
         <div style={props}>
 
-          <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv}/>
+          <div className="Main-Container">
+            <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv}  typeOfTracks={typeOfTracks}/>
+          </div>
 
         </div>
       )}
@@ -106,7 +108,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn}) => {
   );
 
   if (!animateIn) TrackResults = (
-    <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv}/>
+    <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv} typeOfTracks={typeOfTracks}/>
   );
 
 

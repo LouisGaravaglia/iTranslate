@@ -23,8 +23,6 @@ import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 function BrowseByGenre() {
   //STATE FOR ANIMATIONS
   const [bgColor, setBgColor] = useState("#4e1eff");
-  const [fontColor1, setFontColor1] = useState();
-  const [fontColor2, setFontColor2] = useState();
   //REDUX STORE
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
@@ -136,12 +134,8 @@ function BrowseByGenre() {
 
       if (categoriesInView) {
         setBgColor("#4e1eff");
-        setFontColor1();
-        setFontColor2();
       } else if (genresInView) {
         setBgColor("#6e3eee");
-        setFontColor1("Result-Main-Genres");
-        setFontColor2("#eba37b");
       } else if (artistsInView) {
         setBgColor("#9161db");
       } else if (albumsInView) {
@@ -182,7 +176,7 @@ function BrowseByGenre() {
   
   if (genres) selectGenresDiv = (
      <animated.div style={springProps} ref={selectGenresRef}>
-       <Genres  fontColor1={fontColor1} fontColor2={fontColor2}/>
+       <Genres />
      </animated.div>
   );
 
@@ -201,8 +195,8 @@ function BrowseByGenre() {
   let ArtistsResultsDiv;
   
   if (artists) ArtistsResultsDiv = (
-    <animated.div style={springProps}  ref={artistsResultsRef}>
-      <Artists fontColor1={fontColor1} fontColor2={fontColor2}/>
+    <animated.div style={springProps} ref={artistsResultsRef}>
+      <Artists typeOfArtists="genre"/>
     </animated.div>
   );
 
@@ -210,8 +204,8 @@ function BrowseByGenre() {
   let AlbumResultsDiv;
   
   if (albums) AlbumResultsDiv = (
-    <animated.div style={springProps}   ref={albumResultsRef}>
-      <Albums />
+    <animated.div style={springProps} ref={albumResultsRef}>
+      <Albums typeOfAlbums="genre"/>
     </animated.div>
   );
 
@@ -219,8 +213,8 @@ function BrowseByGenre() {
   let TrackResultsDiv;
   
   if (tracks) TrackResultsDiv = (
-    <animated.div style={springProps}  className="Main-Container" ref={trackResultsRef}>
-      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true}/>
+    <animated.div style={springProps} ref={trackResultsRef}>
+      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true}  typeOfTracks="genre"/>
     </animated.div>
   );
 
@@ -240,7 +234,7 @@ function BrowseByGenre() {
     <animated.div style={springProps}>
       <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
       <ToTopArrow topRef={categoryRef} topInView={categoriesInView}/>
-      <LyricsTranslation  />
+      <LyricsTranslation  typeOfLyricsTranslation="genre"/>
     </animated.div>
   );
 

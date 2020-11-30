@@ -3,11 +3,12 @@ import {resetStore} from "./actionCreators/resetStoreCreator";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import IosArrowUp from 'react-ionicons/lib/IosArrowUp';
+import Hover from "./Hover";
+
 
 const ToTopArrow = ({topRef, topInView}) => {
   const [hitBottom, setHitBottom] = useState(false);
   const [movingUp, setMovingUp] = useState(false);
-  const [arrowColor, setArrowColor] = useState("#fff");
   const translation = useSelector(store => store.translation);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -52,9 +53,11 @@ const ToTopArrow = ({topRef, topInView}) => {
 
   return (
     <div className="TopArrow-Container">
-      <div className="TopArrow-Box" onMouseEnter={() => setArrowColor("#000000")} onMouseLeave={() => setArrowColor("#fff")}>
+      <div className="TopArrow-Box">
         {!hitBottom && <div></div>}
-        {hitBottom && <IosArrowUp  className="TopArrow"  onClick={handleClick} fontSize="100px" color={arrowColor} />}
+        <Hover scale={1.20}>
+          {hitBottom && <IosArrowUp  className="TopArrow"  onClick={handleClick} fontSize="100px" color="#fff"/>}
+        </Hover>
       </div>
     </div>
   );

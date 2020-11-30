@@ -56,12 +56,12 @@ const NavBar = () => {
     <div className="Navbar-Container">
       <div className="Navbar">
         <div className="Navbar-Search-Box">
-          <Hover scale={1.80}>
+          <Hover scale={1.20}>
             <NavLink  className="Navbar-Search" exact to="/" onClick={() => handleHomeClick()}>LYRCS</NavLink>
           </Hover>
         </div>
         <div className="Navbar-Browse-Box">
-          <Hover scale={1.80}>
+          <Hover scale={1.20}>
             {!browseMode && <MdMenu className="Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="35px" color={browseIconColor}/>}
             {browseMode && <MdSearch  className="Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} fontSize="35px" color={browseIconColor}/>}
           </Hover>

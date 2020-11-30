@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getAlbums} from "./actionCreators/BrowseRoute/Artists/getAlbumsCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 
-function Artists() {
+function Artists({typeOfArtists}) {
   //REDUX STORE
   const dispatch = useDispatch();
   const artists = useSelector(store => store.artists);
@@ -32,7 +32,7 @@ function Artists() {
         <div style={props}>
 
           <div className="Main-Container">
-              <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}/>
+              <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1} typeOfArtists={typeOfArtists}/>
           </div>
 
         </div>

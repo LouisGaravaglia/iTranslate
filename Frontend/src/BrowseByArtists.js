@@ -216,10 +216,10 @@ function BrowseByArtists() {
   //DISPLAY ALBUMS FROM SELECTED ARTIST
   let ArtistsResultsDiv;
   
-   if (artists) ArtistsResultsDiv = (
+  if (artists) ArtistsResultsDiv = (
     <animated.div style={springProps}  ref={artistsResultsRef}>
       <div className="Main-Container">
-        <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1}  loadingIcon={LoadingIconDiv}/>
+        <SearchResultList key={artists[0].artistId} typeOfResults="artists" resultsArray={artists} handleSearch={handleArtistClick} itemsPerPage={1} loadingIcon={LoadingIconDiv} typeOfArtists="artists"/>
       </div>
     </animated.div>
   );
@@ -248,7 +248,7 @@ function BrowseByArtists() {
   
   if (tracks) TrackResultsDiv = (
     <animated.div style={springProps}  className="Main-Container" ref={trackResultsRef}>
-      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true}/>
+      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true} typeOfTracks="artists"/>
     </animated.div>
   );
 

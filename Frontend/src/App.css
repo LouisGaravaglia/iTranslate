@@ -142,7 +142,7 @@ a {
 }
 
 .Lyrics-Container {
-  background-color: #ef97bc;
+  /* background-color: #ef97bc; */
   margin: 80px 20px 20px 50px;
   flex-basis: 0;
   flex: 1 1 0px
@@ -154,14 +154,14 @@ a {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
-  color: #522df1;
+  /* color: #522df1; */
   margin: 40px 40px;
 }
 
 /* //////////////////////////////////////  TRANSLATION  ////////////////////////////////////// */
 
 .Translation-Container {
-  background-color: #522df1;
+  /* background-color: #522df1; */
   margin: 80px 20px 20px;
   flex-basis: 0;
   flex: 1 1 0px
@@ -172,7 +172,7 @@ a {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
-  color: #fff;
+  /* color: #fff; */
   margin: 40px 40px;
 }
 
@@ -428,7 +428,8 @@ flex: 0.1 0 1vh;
   font-weight: 100;
   font-size: 5rem;
   color: #fff;
-  /* margin: 15vh 0 0; */
+  margin: 0;
+  padding: 0;
 }
 
 .Result-Header:hover {
@@ -442,6 +443,8 @@ flex: 0.1 0 1vh;
   font-size: 2rem;
   color: #fff;
   cursor: default;
+  margin: 0;
+  padding: 0;
 }
 
 /* //////////////////////////////////////  MAIN CONTAINER ////////////////////////////////////// */
@@ -553,7 +556,7 @@ flex: 10 1 auto;
   left: 0;
   height: 300px;
   width: 300px;
-  background-color: #000000;
+  background-color: #3800a7;
   opacity: 0.7;
   cursor: pointer;
 }
@@ -562,10 +565,11 @@ flex: 10 1 auto;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   font-size: 2rem;
-  color: #fff;
+  /* color: rgb(255, 183, 95); */
   z-index: 6;
   margin: 5px 5px;
 }
+
 
 /* //////////////////////////////////////  LOADING ICON  ////////////////////////////////////// */
 
@@ -577,19 +581,87 @@ flex: 10 1 auto;
   transform: translate(-50%, -50%);
 }
 
-/* //////////////////////////////////////  FONT COLORS  ////////////////////////////////////// */
+/* //////////////////////////////////////  SEARCH FONT COLORS  ////////////////////////////////////// */
 
-.Result-Main-Genres {
+.Search-Track-Subheader {
+  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Search-Track-Header {
+  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+/* //////////////////////////////////////  BROWSE BY GENRE FONT COLORS  ////////////////////////////////////// */
+
+.Genre-Genres {
   background: linear-gradient(to right, #ffb22e 0%, #bf6571 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-    cursor: pointer;
+  cursor: pointer;
 }
-/* 
-.Result-Main-Genres:hover {
-  background: linear-gradient(to right, #ff7700 100%, #ff7700 100%);
+
+.Genre-Artists {
+  background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 1px 1px 2px #ff7700, 0 0 1em #ff7700, 0 0 0.1em #ff7700;
   cursor: pointer;
-} */
+}
+
+.Genre-Albums {
+  background: linear-gradient(to right, #bf6571 0%, #ffb22e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Genre-Tracks {
+  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Genre-Lyrics {
+  background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Genre-Translation {
+  background: linear-gradient(to right, #7c3bc5 0%, #c1666f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+/* //////////////////////////////////////  BROWSE BY ARTISTS FONT COLORS  ////////////////////////////////////// */
+
+.Artist-Artists {
+  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Artist-Tracks {
+  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+/* //////////////////////////////////////  BROWSE BY DANCEABILITY FONT COLORS  ////////////////////////////////////// */
+
+.Danceability-Tracks {
+  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}

@@ -4,10 +4,16 @@ import './App.css';
 //REDUX IMPORTS
 import {useSelector} from "react-redux";
 
-function LyricsTranslation() {
+function LyricsTranslation({typeOfLyricsTranslation}) {
   //REDUX STORE
   const translation = useSelector(store => store.translation);
   const lyrics = useSelector(store => store.lyrics);
+
+  let lyricsClassName;
+  let translationClassName;
+
+  if (typeOfLyricsTranslation === "genre") lyricsClassName = "Lyrics Genre-Lyrics"
+  if (typeOfLyricsTranslation === "genre") translationClassName = "Translation Genre-Translation"
 
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
@@ -22,12 +28,12 @@ function LyricsTranslation() {
 
           <div className="Lyrics-Translation">
             <div className="Lyrics-Container">
-              <p className="Lyrics">ORIGINAL LYRICS</p>
-              <p className="Lyrics">{lyrics}</p>
+              <p className={lyricsClassName}>ORIGINAL LYRICS</p>
+              <p className={lyricsClassName}>{lyrics}</p>
             </div>
             <div className="Translation-Container">
-              <p className="Translation">TRANSLATED LYRICS</p>
-              <p className="Translation">{translation}</p>
+              <p className={translationClassName}>TRANSLATED LYRICS</p>
+              <p className={translationClassName}>{translation}</p>
             </div>
           </div>
 
