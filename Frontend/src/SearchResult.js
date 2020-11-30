@@ -99,8 +99,8 @@ const SearchResult = memo((props) => {
   if (props.typeOfResults === "genres") displayGenres = (
     <div className="Main-Result-Container">
     <div className="Result-Main-TopFiller"></div>
-      <Hover rotation={10} timing={100}>
-        <p onClick={handleGenreClick} dataInfo="testing" className="Result-Main Result-Main-Genres">{props.genre}</p>
+      <Hover scale={1.30}>
+        <p onClick={handleGenreClick} className="Result-Main Result-Main-Genres">{props.genre}</p>
       </Hover>
     </div>
   );
