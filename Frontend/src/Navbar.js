@@ -56,7 +56,7 @@ const NavBar = () => {
     <div className="Navbar-Container">
       <div className="Navbar">
         <div className="Navbar-Search-Box">
-          <Hover scale={1.20}>
+          <Hover scale={1.15}>
             <NavLink  className="Navbar-Search" exact to="/" onClick={() => handleHomeClick()}>LYRCS</NavLink>
           </Hover>
         </div>

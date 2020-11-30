@@ -120,15 +120,9 @@ a {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 900;
   font-size: 4rem;
-  color: rgb(86, 182, 255);
   margin: 0px 40px;
   padding: 6px 12px;
   flex: 0 1 100%;
-}
-
-.Browse-Landing p:hover {
-  color: rgb(2, 206, 169);
-  cursor: pointer;
 }
 
 /* //////////////////////////////////////  LYRICS  ////////////////////////////////////// */
@@ -136,17 +130,17 @@ a {
 .Lyrics-Translation {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-around;
   min-width: 100vw;
   min-height: 100vh;
+  /* margin: 0 20px; */
 }
 
 .Lyrics-Container {
   /* background-color: #ef97bc; */
   margin: 80px 20px 20px 50px;
-  flex-basis: 0;
-  flex: 1 1 0px
-
+  flex: 1 1 50vw;
+/* border: 2px solid #fff; */
 }
 
 .Lyrics {
@@ -156,15 +150,16 @@ a {
   font-size: 1.5rem;
   /* color: #522df1; */
   margin: 40px 40px;
+
 }
 
 /* //////////////////////////////////////  TRANSLATION  ////////////////////////////////////// */
 
 .Translation-Container {
   /* background-color: #522df1; */
-  margin: 80px 20px 20px;
-  flex-basis: 0;
-  flex: 1 1 0px
+  margin: 80px 50px 20px 20px;
+  flex: 1 1 50vw;
+  /* border: 2px solid #fff; */
 }
 
 .Translation {
@@ -599,15 +594,22 @@ flex: 10 1 auto;
 
 /* //////////////////////////////////////  BROWSE BY GENRE FONT COLORS  ////////////////////////////////////// */
 
+.Browse-Categories {
+  background: linear-gradient(to right, #e767f0 0%,#aa35fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
 .Genre-Genres {
-  background: linear-gradient(to right, #ffb22e 0%, #bf6571 100%);
+  background: linear-gradient(to right, #ffa114 0%, #d563c0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
 
 .Genre-Artists {
-  background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);
+  background: linear-gradient(to right, #4410ff 0%, #722cff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;

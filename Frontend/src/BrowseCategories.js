@@ -1,10 +1,12 @@
 import React from 'react';
+import './App.css';
 import {Spring} from 'react-spring/renderprops';
 import {useHistory} from "react-router-dom";
 //REDUX IMPORTS
 import {useDispatch} from "react-redux";
 import {resetStore} from "./actionCreators/resetStoreCreator";
-import './App.css';
+//COMPONENT IMPORTS
+import Hover from "./Hover";
 
 function Categories({needAnimation}) {
   const history = useHistory();
@@ -41,9 +43,15 @@ if (needAnimation) CategoriesDiv = (
       <div style={props}>
 
           <div className="Browse-Landing">
-            <p onClick={() => handleCategoryClick("Artists")}>Artists</p>
-            <p onClick={() => handleCategoryClick("Genre")}>Genre</p>
-            <p onClick={() => handleCategoryClick("Danceability")}>Danceability</p>
+            <Hover scale={1.15}>
+              <p className="Browse-Categories" onClick={() => handleCategoryClick("Artists")}>Artists</p>
+            </Hover>
+            <Hover scale={1.15}>
+              <p className="Browse-Categories" onClick={() => handleCategoryClick("Genre")}>Genre</p>
+            </Hover>
+            <Hover scale={1.15}>
+              <p className="Browse-Categories" onClick={() => handleCategoryClick("Danceability")}>Danceability</p>
+            </Hover>
           </div>
 
       </div>
@@ -53,9 +61,15 @@ if (needAnimation) CategoriesDiv = (
 
 if (!needAnimation) CategoriesDiv = (
   <div className="Browse-Landing">
-    <p onClick={() => handleCategoryClick("Artists")}>Artists</p>
-    <p onClick={() => handleCategoryClick("Genre")}>Genre</p>
-    <p onClick={() => handleCategoryClick("Danceability")}>Danceability</p>
+    <Hover scale={1.15}>
+      <p className="Browse-Categories" onClick={() => handleCategoryClick("Artists")}>Artists</p>
+    </Hover>
+    <Hover scale={1.15}>
+      <p className="Browse-Categories" onClick={() => handleCategoryClick("Genre")}>Genre</p>
+    </Hover>
+    <Hover scale={1.15}>
+      <p className="Browse-Categories" onClick={() => handleCategoryClick("Danceability")}>Danceability</p>
+    </Hover>
   </div>
 );
 

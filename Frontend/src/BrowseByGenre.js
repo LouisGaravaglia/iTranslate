@@ -121,13 +121,13 @@ function BrowseByGenre() {
 
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
 
-  const categoriesInView = useOnScreen(categoryRef, {threshold: 0.2});
-  const genresInView = useOnScreen(selectGenresRef, {threshold: 0.2});
-  const artistsInView = useOnScreen(artistsResultsRef, {threshold: 0.2});
+  const categoriesInView = useOnScreen(categoryRef, {threshold: 0.7});
+  const genresInView = useOnScreen(selectGenresRef, {threshold: 0.7});
+  const artistsInView = useOnScreen(artistsResultsRef, {threshold: 0.7});
   const albumsInView = useOnScreen(albumResultsRef, {threshold: 0.7});
   const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
   const trackResultsInView = useOnScreen(trackResultsRef, {threshold: 0.7});
-  const lyricsTranslationInvView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
+  const lyricsTranslationInvView = useOnScreen(showLyricsTranslationRef, {threshold: 0.7});
 
   useEffect(() => {
     const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInvView, artistsInView, categoriesInView, genresInView) => {
