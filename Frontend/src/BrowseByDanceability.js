@@ -141,7 +141,7 @@ function BrowseByDanceability() {
 
   if (lyrics) LanguageSelectDiv = (
     <animated.div style={springProps} ref={selectLanguageRef}>
-      <LanguageSelect selectedTrackId={selectedTrackId}/>
+      <LanguageSelect selectedTrackId={selectedTrackId} typeOfSearch="danceability-language"/>
     </animated.div>
   );
 

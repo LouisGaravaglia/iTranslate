@@ -50,6 +50,7 @@ const NavBar = () => {
     dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
   };
 
+
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
@@ -62,6 +63,8 @@ const NavBar = () => {
         </div>
         <div className="Navbar-Browse-Box">
           <Hover scale={1.20}>
+                      {/* {!browseMode && <i className="fa fa-search icon Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="35px" color={browseIconColor}></i>}
+            {browseMode && <i  className="fa fa-search icon Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} fontSize="35px" color={browseIconColor}></i>} */}
             {!browseMode && <MdMenu className="Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="35px" color={browseIconColor}/>}
             {browseMode && <MdSearch  className="Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} fontSize="35px" color={browseIconColor}/>}
           </Hover>

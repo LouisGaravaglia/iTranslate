@@ -217,30 +217,35 @@ background-color: rgb(2, 206, 169);
 .Search-Field input {
   width: 40vw;
   height: 50px;
-  border: 2px solid  #12006B;
-  border-radius: 4px;
+    border: none;
+  /* border: 2px solid  #12006B;
+  border-radius: 4px; */
 }
 
 .Search-Field button{
-  background-color: #12006B;
+  background-color: #fff;
   border: none;
   font-size: 1rem;
-  color: white;
   padding: 6px 12px;
   margin: auto;
   position: absolute;
   text-align: center;
   right:0;
-  height: 54px;
-  width: 56px;
+  top:50%;
+  transform: translate(-10%, -50%);
+  /* height: 54px;
+  width: 56px; */
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-}
-
-.Search-Field button:hover{
-  background-color: rgb(58, 163, 255);
   cursor: pointer;
 }
+
+
+
+/* .Search-Field button:hover{
+  background-color: rgb(58, 163, 255);
+  cursor: pointer;
+} */
 
 .Search-Field-Filler {
 flex: 0.1 0 1vh;
@@ -250,10 +255,11 @@ flex: 0.1 0 1vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   font-size: 1.3rem;
-  color: rgb(55, 55, 55);
   padding-left: 25px;
   outline:none;
 }
+
+
 
 .icon {
   font-size: 1.5rem;
@@ -576,15 +582,23 @@ flex: 10 1 auto;
   -webkit-text-fill-color: transparent;
 }
 
+.Search-Landing-Text {
+  color: #A800FF;
+}
+
+.Search-Landing-Button {
+  color: #A800FF;
+}
+
 .Search-Track-Subheader {
-  background: linear-gradient(to right, #ffaad3 0%, #ee67fa  100%);
+  background: linear-gradient(to right, #ff7ebc 0%, #ee67fa  100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
 
 .Search-Track-Header {
-  background: linear-gradient(to right, #ffaad3  0%, #ee67fa 100%);
+  background: linear-gradient(to right, #ff7ebc  0%, #ee67fa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
@@ -594,6 +608,14 @@ flex: 10 1 auto;
   background: linear-gradient(to right, #ee67fa 0%, #bf00ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.Search-Language-Text {
+  color: #6000FF;
+}
+
+.Search-Language-Button {
+  color: #6000FF;
 }
 
 .Search-Lyrics {
@@ -621,14 +643,14 @@ flex: 10 1 auto;
 }
 
 .Genre-Genres {
-  background: linear-gradient(to right, #ffa114 0%, #d563c0 100%);
+  background: linear-gradient(to right, #ee6cd7 0%, #d11ff4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
 
 .Genre-Artists {
-  background: linear-gradient(to right, #4410ff 0%, #722cff 100%);
+  background: linear-gradient(to right, #ffa114 0%, #d563c0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
@@ -646,6 +668,20 @@ flex: 10 1 auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
+}
+
+.Genre-Language {
+  background: linear-gradient(to right, #9161db 0%, #c594bf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Genre-Language-Text {
+  color: #e3b2af;
+}
+
+.Genre-Language-Button {
+  color: #e3b2af;
 }
 
 .Genre-Lyrics {
@@ -671,6 +707,13 @@ flex: 10 1 auto;
   cursor: pointer;
 }
 
+.Artist-Albums {
+  background: linear-gradient(to right, #fdc3df 0%, #b84dfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
 .Artist-Tracks {
   background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
   -webkit-background-clip: text;
@@ -678,11 +721,18 @@ flex: 10 1 auto;
   cursor: pointer;
 }
 
-.Artist-Albums {
-  background: linear-gradient(to right, #fdc3df 0%, #b84dfa 100%);
+.Artist-Language {
+  background: linear-gradient(to right, #bf00ff 0%, #e167fa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  cursor: pointer;
+}
+
+.Artist-Language-Text {
+  color: #dba3e6;
+}
+
+.Artist-Language-Button {
+  color: #dba3e6;
 }
 
 .Artist-Lyrics {
@@ -714,6 +764,21 @@ flex: 10 1 auto;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
+
+.Danceability-Language {
+  background: linear-gradient(to right, #7c3bc5 0%, #d383fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Danceability-Language-Text {
+  color: #9eb5fa;
+}
+
+.Danceability-Language-Button {
+  color: #9eb5fa;
+}
+
 
 .Danceability-Lyrics {
   background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);

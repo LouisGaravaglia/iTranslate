@@ -242,7 +242,7 @@ function BrowseByArtists() {
 
   if (lyrics) LanguageSelectDiv = (
     <animated.div style={springProps}  ref={selectLanguageRef}>
-      <LanguageSelect selectedTrackId={selectedTrackId}/>
+      <LanguageSelect selectedTrackId={selectedTrackId} typeOfSearch="artists-language"/>
     </animated.div>
   );
 
