@@ -45,7 +45,7 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "danceability-results") displayDanceabilityResults = (
     <div className="Danceability-Result-Container">
-      <p onClick={handleTrackClick} className="Result-Subheader">{<span className="Result-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
+      <p onClick={handleTrackClick} className="Result-Subheader Danceability-Track-Subheader">{<span className="Result-Header Danceability-Track-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
     </div>
   );
 
@@ -72,7 +72,7 @@ const SearchResult = memo((props) => {
   let albumsClassName;
 
   if (props.typeOfAlbums === "genre") albumsClassName = "Album-Name Genre-Albums";
-  if (props.typeOfAlbums === "artists") albumsClassName = "Result-Main Artist-Artists";
+  if (props.typeOfAlbums === "artists") albumsClassName = "Album-Name Artist-Albums";
 
   let displayAlbums;
 
@@ -95,7 +95,6 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfTracks === "artists") trackClassNames = "Result-Main Artist-Tracks";
   if (props.typeOfTracks === "genre") trackClassNames = "Result-Main Genre-Tracks";
-  if (props.typeOfTracks === "danceability") trackClassNames = "Result-Main Danceability-Tracks";
 
   let displayTracks;
   

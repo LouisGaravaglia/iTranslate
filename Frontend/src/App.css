@@ -113,7 +113,6 @@ a {
   flex-wrap: nowrap;
   width: 100vw;
   height: 100vh;
-
 }
 
 .Browse-Landing p {
@@ -138,9 +137,9 @@ a {
 
 .Lyrics-Container {
   /* background-color: #ef97bc; */
-  margin: 80px 20px 20px 50px;
+  margin: 0 20px 20px 50px;
   flex: 1 1 50vw;
-/* border: 2px solid #fff; */
+  /* border: 2px solid #fff; */
 }
 
 .Lyrics {
@@ -157,7 +156,7 @@ a {
 
 .Translation-Container {
   /* background-color: #522df1; */
-  margin: 80px 50px 20px 20px;
+  margin: 0 50px 20px 20px;
   flex: 1 1 50vw;
   /* border: 2px solid #fff; */
 }
@@ -323,8 +322,9 @@ flex: 0.1 0 1vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 900;
   font-size: 3rem;
-  color: rgb(130, 201, 255);
-  opacity: 0.5;
+  background: linear-gradient(to right, #4f1efe  0%, #5d3bc5  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   /* border: 2px solid blue; */
   text-align: center;
   margin: 20px 0 0;
@@ -396,11 +396,11 @@ flex: 0.1 0 1vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 100;
   font-size: 5rem;
-  color: rgb(86, 182, 255);
+  background: linear-gradient(to right, #4f1efe  0%, #7c3bc5  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   cursor: default;
 }
-
-/* //////////////////////////////////////  RESULT (HEADER & SUBHEADER) ////////////////////////////////////// */
 
 .Danceability-Result-Container {
   text-align: center;
@@ -410,6 +410,8 @@ flex: 0.1 0 1vh;
   flex-wrap: wrap;
   /* border: 2px solid black; */
 }
+
+/* //////////////////////////////////////  RESULT (HEADER & SUBHEADER) ////////////////////////////////////// */
 
 .Result-Box {
   /* border: 2px solid magenta; */
@@ -422,21 +424,14 @@ flex: 0.1 0 1vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 100;
   font-size: 5rem;
-  color: #fff;
   margin: 0;
   padding: 0;
-}
-
-.Result-Header:hover {
-  color: #FFFB47;
-  cursor: pointer;
 }
 
 .Result-Subheader {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 200;
   font-size: 2rem;
-  color: #fff;
   cursor: default;
   margin: 0;
   padding: 0;
@@ -646,7 +641,7 @@ flex: 10 1 auto;
 /* //////////////////////////////////////  BROWSE BY ARTISTS FONT COLORS  ////////////////////////////////////// */
 
 .Artist-Artists {
-  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  background: linear-gradient(to right, #fdc3df 0%, #b84dfa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
@@ -659,10 +654,52 @@ flex: 10 1 auto;
   cursor: pointer;
 }
 
+.Artist-Albums {
+  background: linear-gradient(to right, #fdc3df 0%, #b84dfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Artist-Lyrics {
+  background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Artist-Translation {
+  background: linear-gradient(to right, #7c3bc5 0%, #ce5b93 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
 /* //////////////////////////////////////  BROWSE BY DANCEABILITY FONT COLORS  ////////////////////////////////////// */
 
-.Danceability-Tracks {
-  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+.Danceability-Track-Subheader {
+  background: linear-gradient(to right, #4f1efe  0%, #7c3bc5  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Danceability-Track-Header {
+  background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Danceability-Lyrics {
+  background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Danceability-Translation {
+  background: linear-gradient(to right, #7c3bc5 0%, #f263a8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;

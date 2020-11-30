@@ -128,12 +128,12 @@ function BrowseByArtists() {
 
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
 
-  const categoriesInView = useOnScreen(categoryRef, {threshold: 0.2});
-  const artistsInView = useOnScreen(artistsResultsRef, {threshold: 0.2});
+  const categoriesInView = useOnScreen(categoryRef, {threshold: 0.7});
+  const artistsInView = useOnScreen(artistsResultsRef, {threshold: 0.7});
   const albumsInView = useOnScreen(albumResultsRef, {threshold: 0.7});
   const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
   const trackResultsInView = useOnScreen(trackResultsRef, {threshold: 0.7});
-  const lyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.1});
+  const lyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.7});
 
   useEffect(() => {
     const changeInView = (selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInView, artistsInView, categoriesInView) => {
@@ -151,21 +151,6 @@ function BrowseByArtists() {
       } else if (lyricsTranslationInView) {
         setBgColor("#fdc3df");
       };
-
-
-      //       if (categoriesInView) {
-      //   setBgColor("#522df1");
-      // } else if (artistsInView) {
-      //   setBgColor("#5c2cf0");
-      // } else if (albumsInView) {
-      //   setBgColor("#7339ec");
-      // } else if (trackResultsInView) {
-      //   setBgColor("#9e67e3");
-      // } else if (selectLanguageInView) {
-      //   setBgColor("#ce92dd");
-      // } else if (lyricsTranslationInView) {
-      //   setBgColor("#f1b4d8");
-      // };
     };
   changeInView(selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInView, artistsInView, categoriesInView);
   }, [selectLanguageInView, albumsInView, trackResultsInView, lyricsTranslationInView, artistsInView, categoriesInView]);
@@ -239,7 +224,7 @@ function BrowseByArtists() {
   
   if (albums) AlbumResultsDiv = (
     <animated.div style={springProps}  ref={albumResultsRef}>
-      <Albums />
+      <Albums typeOfAlbums="artists"/>
     </animated.div>
   );
 
@@ -268,7 +253,7 @@ function BrowseByArtists() {
     <animated.div style={springProps}>
       <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
       <ToTopArrow topRef={categoryRef} topInView={categoriesInView}/>
-      <LyricsTranslation  />
+      <LyricsTranslation typeOfLyricsTranslation="artists"/>
     </animated.div>
   );
 

@@ -88,10 +88,10 @@ function BrowseByDanceability() {
 
 ////////////////////////////////////////////////////  ANIMATION FOR BACKGROUND COLOR  ////////////////////////////////////////////////////
 
-  const categoriesInView = useOnScreen(categoryRef, {threshold: 0.2});
-  const danceabilitySearchInView = useOnScreen(DanceabilitySearchRef, {threshold: 0.2});
+  const categoriesInView = useOnScreen(categoryRef, {threshold: 0.7});
+  const danceabilitySearchInView = useOnScreen(DanceabilitySearchRef, {threshold: 0.7});
   const selectLanguageInView = useOnScreen(selectLanguageRef, {threshold: 0.7});
-  const lyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.2});
+  const lyricsTranslationInView = useOnScreen(showLyricsTranslationRef, {threshold: 0.7});
 
   useEffect(() => {
     const changeInView = (selectLanguageInView, lyricsTranslationInView, danceabilitySearchInView, categoriesInView) => {
@@ -152,7 +152,7 @@ function BrowseByDanceability() {
     <animated.div style={springProps} >
       <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
       <ToTopArrow topRef={categoryRef} topInView={categoriesInView}/>
-      <LyricsTranslation  />
+      <LyricsTranslation typeOfLyricsTranslation="danceability"/>
     </animated.div>
   );
 
