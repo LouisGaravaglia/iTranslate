@@ -5,7 +5,7 @@ import Slider from '@material-ui/core/Slider';
 //CUSTOM STYLING FOR MUI SLIDER
 const MyPaginationSlider = withStyles({
     root: {
-    color: "#3880ff",
+    color: "#fff",
     height: 8
   },
   thumb: {

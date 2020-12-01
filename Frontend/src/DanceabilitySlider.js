@@ -5,7 +5,7 @@ import Slider from '@material-ui/core/Slider';
 //CUSTOM STYLE FOR THE MUI SLIDER
 const MyDanceabilitySlider = withStyles({
     root: {
-    color: "#777777",
+    color: "#fff",
     height: 8
   },
   thumb: {
@@ -29,7 +29,7 @@ const MyDanceabilitySlider = withStyles({
     }
   },
   track: {
-    color: "#777777",
+    color: "#062bff",
     height: 8,
     borderRadius: 4
   },
