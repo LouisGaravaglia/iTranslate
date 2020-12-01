@@ -73,6 +73,8 @@ a {
 .Navbar-Browse {
   float: right;
   cursor: pointer;
+  color: #fff;
+  
 }
 
 /* .Navbar-Browse-Arrow:hover {

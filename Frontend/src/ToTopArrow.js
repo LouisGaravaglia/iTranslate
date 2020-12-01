@@ -45,7 +45,7 @@ const ToTopArrow = ({topRef, topInView}) => {
       };
     };
     resetStoreReachingTop();
-  }, [movingUp, topInView, dispatch, setMovingUp]);
+  }, [movingUp, topInView, dispatch, setMovingUp, history, location.pathname]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTION  ////////////////////////////////////////////////////
 

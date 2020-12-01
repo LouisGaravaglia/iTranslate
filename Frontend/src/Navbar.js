@@ -3,14 +3,11 @@ import {NavLink, useHistory, useLocation} from "react-router-dom";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {useDispatch} from "react-redux";
 import MdMenu from 'react-ionicons/lib/MdMenu';
-import MdSearch from 'react-ionicons/lib/MdSearch';
 import Hover from "./Hover";
 
 
 const NavBar = () => {
   const [browseMode, setBrowseMode] = useState(false);
-  const [logoClassName, setLogoClassName] = useState("Navbar-Search");
-  const [browseIconColor, setBrowseIconColor] = useState("#fff");
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -27,7 +24,7 @@ const NavBar = () => {
       if (location.pathname === "/") setBrowseMode(false);
     };
     updateBrowseMode();
-  }, []);
+  }, [location.pathname, setBrowseMode]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -63,10 +60,8 @@ const NavBar = () => {
         </div>
         <div className="Navbar-Browse-Box">
           <Hover scale={1.20}>
-                      {/* {!browseMode && <i className="fa fa-search icon Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="35px" color={browseIconColor}></i>}
-            {browseMode && <i  className="fa fa-search icon Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} fontSize="35px" color={browseIconColor}></i>} */}
-            {!browseMode && <MdMenu className="Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="35px" color={browseIconColor}/>}
-            {browseMode && <MdSearch  className="Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} fontSize="35px" color={browseIconColor}/>}
+            {!browseMode && <MdMenu className="Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="35px" color="#fff"/>}
+            {browseMode && <i  className="fa fa-search icon Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} color="#fff"></i>}
           </Hover>
         </div>
         <NavLink exact to="/browse"></NavLink>

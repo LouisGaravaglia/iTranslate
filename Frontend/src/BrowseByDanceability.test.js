@@ -1,10 +1,8 @@
 import React from 'react'
-import {render, fireEvent, waitFor, screen, cleanup} from '@testing-library/react'
-import {MemoryRouter} from 'react-router-dom';
+import {render, cleanup} from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { Provider } from 'react-redux'
-import { createStore } from "redux";
-import rootReducer from "./reducers/rootReducer";
+import {Provider} from 'react-redux'
+import {createStore} from "redux";
 import BrowseByDanceability from "./BrowseByDanceability";
 
 //CREATE A MOCK INTERSECTION OBSERVER CLASS FOR TESTING AND APPEND IT TO THE WINDOW OBJECT
