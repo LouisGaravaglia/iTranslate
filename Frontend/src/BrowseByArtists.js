@@ -73,7 +73,6 @@ function BrowseByArtists() {
           dispatch(resetLyricsError());
         };
         if (languageError) {
-          console.log("INSIDE browse by artists language error, resetting here.");
           setLanguageNotFoundFlashMessage(true);
           dispatch(resetLanguageError());
         };

@@ -97,7 +97,6 @@ const Search = () => {
           dispatch(resetLyricsError());
         };
         if (languageError) {
-          console.log("LANGUAGE ERROR: inside search language error");
           setLanguageNotFoundFlashMessage(true);
           dispatch(resetLanguageError());
         };

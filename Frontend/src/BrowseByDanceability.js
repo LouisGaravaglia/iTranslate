@@ -19,6 +19,7 @@ function BrowseByDanceability() {
   const [bgColor, setBgColor] = useState("#4e1eff");
   //REDUX STORE
   const lyrics = useSelector(store => store.lyrics);
+  const tracks = useSelector(store => store.tracks.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const translation = useSelector(store => store.translation);
   const translationError = useSelector(store => store.errors.translationError);
@@ -129,12 +130,28 @@ function BrowseByDanceability() {
     </animated.div>
   );
 
-  //DISPLAY DANCEABILITY SEARCH BAR 
+  //DISPLAY DANCEABILITY SEARCH BAR
   const DanceabilitySearchDiv = (
     <animated.div style={springProps} ref={DanceabilitySearchRef}>
-       <DanceabilitySearch />
+      <DanceabilitySearch />
     </animated.div>
   );
+
+  //DISPLAY DANCEABILITY SEARCH BAR
+  // let DanceabilitySearchDiv;
+
+  // if (tracks) {
+  //   DanceabilitySearchDiv = (
+  //     <animated.div style={springProps} ref={DanceabilitySearchRef}>
+  //       <DanceabilitySearch />
+  //     </animated.div>
+  //   );
+  // } else {
+  //   DanceabilitySearchDiv = (
+  //     <animated.div style={springProps} ref={DanceabilitySearchRef}>
+  //     </animated.div>
+  //   );
+  // };
 
   //DISPLAY LANGUAGE SELECTION SEARCH BAR
   let LanguageSelectDiv;

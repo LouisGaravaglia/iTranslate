@@ -27,7 +27,6 @@ function LanguageSelect({selectedTrackId, typeOfSearch}) {
 
     const updateIsLoading = () => {
       if (translation || translationError || languageError) {
-        console.log("In LanguageSelect updateIsLoading");
         setIsLoading(false);
       }
     };
@@ -38,7 +37,6 @@ function LanguageSelect({selectedTrackId, typeOfSearch}) {
   useEffect(() => {
 
     const updateIsLoading = () => {
-      console.log("Translation changed");
     };
     updateIsLoading();
   }, [translation])
