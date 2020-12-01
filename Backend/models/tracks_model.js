@@ -17,6 +17,7 @@ class Tracks {
   };
 
   static async getTracks(albumId) {
+    console.log("in getTracks, albumId is: ", albumId);
     const result = await db.query (
       `SELECT t.name AS "trackName", t.spotify_id AS "trackId",
       t.artist_id AS "artistId", a.name AS "artistName", t.album_id AS "albumId"
@@ -25,7 +26,7 @@ class Tracks {
       WHERE t.album_id = $1 AND lyrics != 'No Lyrics'`,
       [albumId]
     );
-
+    console.log("getTrack result.rows: ", result.rows);
     return result.rows;
   };
 

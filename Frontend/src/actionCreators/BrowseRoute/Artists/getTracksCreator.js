@@ -16,6 +16,7 @@ export function getTracks(albumId) {
         track["hasLyrics"] = true;
         track["inDatabase"] = true;
       };
+      console.log("This is what i'm updating tracks to be:  ", tracks);
       dispatch(addTracks(tracks));
     } catch(e) {
       dispatch(updateGeneralError(true));

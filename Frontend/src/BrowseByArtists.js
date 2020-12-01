@@ -36,7 +36,7 @@ function BrowseByArtists() {
   const lyrics = useSelector(store => store.lyrics);
   const artists = useSelector(store => store.allArtists);
   const albums = useSelector(store => store.albums);
-  const tracks = useSelector(store => store.tracks);
+  const tracks = useSelector(store => store.tracks.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const translation = useSelector(store => store.translation);
   const translationError = useSelector(store => store.errors.translationError);
@@ -62,6 +62,16 @@ function BrowseByArtists() {
     };
     updateIsLoading();
   }, [albums, generalError]);
+
+
+    useEffect(() => {
+
+    const updateIsLoading = () => {
+
+      console.log("This is tracks; ", tracks);
+    };
+    updateIsLoading();
+  }, [tracks]);
 
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
