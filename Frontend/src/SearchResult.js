@@ -68,7 +68,7 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "artists") displayArtists = (
     <div className="Main-Result-Container">
-    <div className="Result-Main-TopFiller"></div>
+    {props.needsPaginationSlider && <div className="Result-Main-TopFiller"></div>}
       <Hover scale={1.05}>
         <p onClick={handleArtistsClick} className={artistClassName}>{props.artist}</p>
       </Hover>
@@ -108,7 +108,7 @@ const SearchResult = memo((props) => {
   
   if (props.typeOfResults === "tracks") displayTracks = (
     <div className="Main-Result-Container">
-    <div className="Result-Main-TopFiller"></div>
+    {props.needsPaginationSlider && <div className="Result-Main-TopFiller"></div>}
       <Hover scale={1.05}>
         <p onClick={handleTrackClick} className={trackClassNames}>{props.trackName}</p>
       </Hover>

@@ -5,6 +5,8 @@ import PaginationSlider from "./PaginationSlider";
 const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResults, loadingIcon, typeOfTracks, typeOfArtists, typeOfAlbums}) => {
   const [sliderVal, setSliderVal] = useState(0);
   const resultsInView = resultsArray.slice(sliderVal * itemsPerPage, (sliderVal * itemsPerPage) + itemsPerPage);
+  const needsPaginationSlider = resultsArray.length > itemsPerPage;
+  
   const updateResultsInView = (val) => {
     setSliderVal(val);
   };
@@ -19,8 +21,8 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
         {loadingIcon}
         {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name} musicObject={r}/>)}
       </div> 
-      {resultsArray.length > itemsPerPage && <PaginationSlider resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
-      {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>}
+      {needsPaginationSlider && <PaginationSlider resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
+      {!needsPaginationSlider && <div className="Main-Pagination-Slider-Placeholder"></div>}
     </>
   );
 
@@ -32,10 +34,10 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
     <>
       <div className="Result-Box">
         {loadingIcon}
-        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artistName} spotify_id={r.artistId} typeOfArtists={typeOfArtists}/>)}
+        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artistName} spotify_id={r.artistId} typeOfArtists={typeOfArtists} needsPaginationSlider={needsPaginationSlider}/>)}
       </div>
-      {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
-      {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>}
+      {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
+      {/* {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>} */}
     </>
   );
 
@@ -49,7 +51,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
         {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} name={r.albumName} id={r.albumId} image={r.albumImg} typeOfAlbums={typeOfAlbums}/>)}
       </div>
       {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
-      {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>}
+      {/* {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>} */}
     </>
   );
 
@@ -60,10 +62,10 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "tracks") displayTracks = (
     <>
       <div className="Result-Box">
-        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="tracks" handleClick={handleSearch} artistName={r.artistName} trackName={r.trackName} musicObject={r} typeOfTracks={typeOfTracks}/>)}
+        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="tracks" handleClick={handleSearch} artistName={r.artistName} trackName={r.trackName} musicObject={r} typeOfTracks={typeOfTracks} needsPaginationSlider={needsPaginationSlider}/>)}
       </div>
-      {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
-      {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>}
+      {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
+      {/* {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>} */}
     </>
   );
 
@@ -77,8 +79,8 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
       <div className="Result-Box">
         {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="genres" handleClick={handleSearch} genre={r}/>)}
       </div> 
-      {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
-      {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>}
+      {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
+      {!needsPaginationSlider && <div className="Main-Pagination-Slider-Placeholder"></div>}
     </>
   );
 
@@ -91,8 +93,8 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
       <div className="Danceability-Result-Box">
         {resultsArray.length && resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="danceability-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r} typeOfTracks="danceability"/>)}
       </div>
-      {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Danceability-Pagination-Slider-Container" sliderClass="Danceability-Pagination-Slider"/>}
-      {resultsArray.length <= itemsPerPage && <div className="Temp-v2"></div>}
+      {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Danceability-Pagination-Slider-Container" sliderClass="Danceability-Pagination-Slider"/>}
+      {!needsPaginationSlider && <div className="Temp-v2"></div>}
     </>
   );
 

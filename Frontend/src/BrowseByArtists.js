@@ -234,13 +234,13 @@ function BrowseByArtists() {
   if (tracks) {
 
     if (tracks.length) TrackResultsDiv = (
-      <animated.div style={springProps}  className="Main-Container" ref={trackResultsRef}>
+      <animated.div style={springProps} ref={trackResultsRef}>
         <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true} typeOfTracks="artists"/>
       </animated.div>
     );
 
     if (!tracks.length) TrackResultsDiv = (
-      <animated.div style={springProps}  className="Main-Container" ref={trackResultsRef}>
+      <animated.div style={springProps} ref={trackResultsRef}>
       </animated.div>
     );
   };
