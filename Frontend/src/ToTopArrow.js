@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 import {useDispatch, useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import IosArrowUp from 'react-ionicons/lib/IosArrowUp';
 import Hover from "./Hover";
 
@@ -12,6 +12,7 @@ const ToTopArrow = ({topRef, topInView}) => {
   const translation = useSelector(store => store.translation);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
 ////////////////////////////////////////////////////  USE EFFECTS  ////////////////////////////////////////////////////
 
@@ -33,7 +34,12 @@ const ToTopArrow = ({topRef, topInView}) => {
     const resetStoreReachingTop = () => {
 
       if (movingUp && topInView) {
-        history.push("/browse");
+
+        if (location.pathname === "/") {
+          history.push("/");
+        } else {
+          history.push("/browse");
+        };
         setMovingUp(false);
         dispatch(resetStore("artists", "albums", "tracks", "lyrics", "translation", "searchResults", "selectedTrack"));
       };

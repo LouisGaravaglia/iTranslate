@@ -34,10 +34,9 @@ let CategoriesDiv;
 
 if (needAnimation) CategoriesDiv = (
   <Spring
-    from={{opacity: 1, marginLeft: 2500}}
-    to={{opacity: 1, marginLeft: 0}}
-    reverse={false}
-    config={{delay: 0, duration: 200}}
+    from={{opacity: 0}}
+    to={{opacity: 1}}
+    config={{delay: 300, duration: 300}}
   >
     {props => (
       <div style={props}>

@@ -55,11 +55,14 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn, typeOfTracks})
       //MAKE CALL TO SPOTIFY API TO GET ADDITIONAL TRACK AND ARTIST INFO (GENRE, TEMPO, DANCEABILITY, ETC).
       //THIS ALSO MAKES THE PROCESS OF GETTING INFO FOR DB STREAMLINED SINCE WE ONLY NEED 3 ID'S
       if (track.hasLyrics) {
+        console.log("in track hasLyrics");
         dispatch(getLyricsFromDB(trackId));
       } else {
         if (track.inDatabase) {
+          console.log("in track inDatabase");
           dispatch(findLyricsFromAPI(trackId, track.artistName, track.trackName));
         } else {
+          console.log("in track isElse");
           const [trackData, artistData, albumData] = await SpotifyAPI.getTrackArtistAlbumData({trackId, artistId, albumId});
           await BackendCall.addTrackArtistAlbum(trackData, artistData, albumData);
           dispatch(findLyricsFromAPI(trackId, track.artistName, track.trackName));
@@ -78,7 +81,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn, typeOfTracks})
   
   if (isLoading) LoadingIconDiv = (
     <div className="Loading-Box">
-      <IosMusicalNotes rotate={true} fontSize="300px" color="orange" />
+      <IosMusicalNotes rotate={true} fontSize="200px" color="#fff" />
     </div>
   );
 

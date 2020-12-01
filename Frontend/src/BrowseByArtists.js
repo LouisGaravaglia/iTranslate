@@ -73,6 +73,7 @@ function BrowseByArtists() {
           dispatch(resetLyricsError());
         };
         if (languageError) {
+          console.log("INSIDE browse by artists language error, resetting here.");
           setLanguageNotFoundFlashMessage(true);
           dispatch(resetLanguageError());
         };
@@ -183,7 +184,7 @@ function BrowseByArtists() {
 
   if (isLoading) LoadingIconDiv = (
     <div className="Loading-Box">
-      <IosMusicalNotes rotate={true} fontSize="300px" color="orange" />
+      <IosMusicalNotes rotate={true} fontSize="200px" color="#fff" />
     </div>
   );
 

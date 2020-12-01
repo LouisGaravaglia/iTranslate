@@ -9,20 +9,20 @@ import {BrowserRouter} from 'react-router-dom';
 import thunk from "redux-thunk";
 
 // FOR DEVELOPMENT / THERE ARE ISSUES WITH SOME BROWSERS WHEN USING REDUX DEVTOOLS
-// const store = createStore(
-//   rootReducer,
-//   compose(
-//     applyMiddleware(thunk),
-//     window.__REDUX_DEVTOOLS_EXTENSION__
-//     && window.__REDUX_DEVTOOLS_EXTENSION__()
-//   )
-// );
-
-// FOR PRODUCTION
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk)
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__
+    && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
+
+// // FOR PRODUCTION
+// const store = createStore(
+//   rootReducer,
+//   applyMiddleware(thunk)
+// );
 
 ReactDOM.render(
   <Provider store={store}>

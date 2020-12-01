@@ -632,7 +632,6 @@ flex: 10 1 auto;
   cursor: pointer;
 }
 
-
 /* //////////////////////////////////////  BROWSE BY GENRE FONT COLORS  ////////////////////////////////////// */
 
 .Browse-Categories {
@@ -778,7 +777,6 @@ flex: 10 1 auto;
 .Danceability-Language-Button {
   color: #9eb5fa;
 }
-
 
 .Danceability-Lyrics {
   background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);

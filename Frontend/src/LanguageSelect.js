@@ -26,11 +26,22 @@ function LanguageSelect({selectedTrackId, typeOfSearch}) {
   useEffect(() => {
 
     const updateIsLoading = () => {
-      if (translation || translationError || languageError) setIsLoading(false);
+      if (translation || translationError || languageError) {
+        console.log("In LanguageSelect updateIsLoading");
+        setIsLoading(false);
+      }
     };
     updateIsLoading();
   }, [translation, translationError, languageError])
 
+
+  useEffect(() => {
+
+    const updateIsLoading = () => {
+      console.log("Translation changed");
+    };
+    updateIsLoading();
+  }, [translation])
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleLanguageSearchSubmit = async (searchVal) => {
@@ -49,7 +60,7 @@ function LanguageSelect({selectedTrackId, typeOfSearch}) {
   
   if (isLoading) LoadingIconDiv = (
     <div className="Loading-Box">
-      <IosMusicalNotes rotate={true} fontSize="300px" color="orange" />
+      <IosMusicalNotes rotate={true} fontSize="200px" color="#fff" />
     </div>
   );
 

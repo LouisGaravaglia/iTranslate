@@ -97,6 +97,7 @@ const Search = () => {
           dispatch(resetLyricsError());
         };
         if (languageError) {
+          console.log("LANGUAGE ERROR: inside search language error");
           setLanguageNotFoundFlashMessage(true);
           dispatch(resetLanguageError());
         };
@@ -110,7 +111,7 @@ const Search = () => {
         };
     };
     displayFlashMessage();
-  }, [translationError, lyricsError, searchError, dispatch]);
+  }, [translationError, lyricsError, searchError, languageError, dispatch]);
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
