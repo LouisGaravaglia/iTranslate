@@ -51,22 +51,23 @@ const NavBar = () => {
 ////////////////////////////////////////////////////  RETURN  ////////////////////////////////////////////////////
 
   return (
-    <div className="Navbar-Container">
-      <div className="Navbar">
+    <>
+      <div className="Navbar-Container-Left">
         <div className="Navbar-Search-Box">
           <Hover scale={1.15}>
             <NavLink  className="Navbar-Search" exact to="/" onClick={() => handleHomeClick()}>LYRCS</NavLink>
           </Hover>
         </div>
+      </div>
+      <div className="Navbar-Container-Right">
         <div className="Navbar-Browse-Box">
           <Hover scale={1.20}>
             {!browseMode && <MdMenu className="Navbar-Browse" onClick={() => handleBrowseClickFromHome()} fontSize="35px" color="#fff"/>}
             {browseMode && <i  className="fa fa-search icon Navbar-Browse" onClick={() => handleBrowseClickFromBrowse()} color="#fff"></i>}
           </Hover>
         </div>
-        <NavLink exact to="/browse"></NavLink>
       </div>
-    </div>
+    </>
   );
 };
 
