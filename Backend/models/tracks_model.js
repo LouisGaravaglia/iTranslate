@@ -17,7 +17,6 @@ class Tracks {
   };
 
   static async getTracks(albumId) {
-    console.log("in getTracks, albumId is: ", albumId);
     const result = await db.query (
       `SELECT t.name AS "trackName", t.spotify_id AS "trackId",
       t.artist_id AS "artistId", a.name AS "artistName", t.album_id AS "albumId"
@@ -26,7 +25,6 @@ class Tracks {
       WHERE t.album_id = $1 AND lyrics != 'No Lyrics'`,
       [albumId]
     );
-    console.log("getTrack result.rows: ", result.rows);
     return result.rows;
   };
 
@@ -37,7 +35,6 @@ class Tracks {
     );
 
     if (result.rows[0] === undefined) {
-      console.log("hasLyrics returning false");
       return false;
     } else if (result.rows[0].lyrics === "No Lyrics" || result.rows[0].lyrics === null){
             console.log("hasLyrics returning false");
@@ -92,7 +89,6 @@ class Tracks {
       `SELECT lyrics FROM tracks WHERE spotify_id = $1`,
       [track_id]
     );
-    console.log("getLyrics result.rows:", result.rows);
     if (result.rows.length) {
       return result.rows[0].lyrics;
     } else {

@@ -17,21 +17,28 @@ export function getTranslation(targetLanguage, languages, trackId, lyrics) {
     const errors = {languageError: false, translationError: false};
 
     const fetchTranslation = async (language, trackId, lyrics) => {
-      //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
-      const response = await BackendCall.getTranslationFromDB({track_id: trackId, selectedLanguage: language});
+      try {
 
-      if (response === "No Translation in DB") {
-        const IBMTranslation = await IBMWatsonAPI.getTranslationFromAPI(lyrics, language);
+        //CHECKING TO SEE IF WE HAVE THAT SONG WITH THAT TRACK ID AND THE SPECIFIED LANGUAGE IN OUR TRANSLATION TABLE
+        const response = await BackendCall.getTranslationFromDB({track_id: trackId, selectedLanguage: language});
 
-        if (IBMTranslation === "Error attempting to read source text") {
-          errors["translationError"] = true;
-          return "No Translation Available";
+        if (response === "No Translation in DB") {
+          const IBMTranslation = await IBMWatsonAPI.getTranslationFromAPI(lyrics, language);
+
+          if (IBMTranslation === "Error attempting to read source text") {
+            errors["translationError"] = true;
+            return "No Translation Available";
+          } else {
+            await BackendCall.addTranslation({track_id: trackId, language, translation: IBMTranslation});
+            return IBMTranslation;
+          };
         } else {
-          await BackendCall.addTranslation({track_id: trackId, language, translation: IBMTranslation});
-          return IBMTranslation;
+          return response;
         };
-      } else {
-        return response;
+
+      } catch(e) {
+        errors["translationError"] = true;
+        return "No Translation Available";
       };
     };
 

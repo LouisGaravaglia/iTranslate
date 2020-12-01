@@ -1,13 +1,21 @@
 import React, {memo, useState} from 'react';
 import BackendCall from "./BackendCall";
 import Hover from "./Hover";
+//REDUX IMPORTS
+import {useDispatch} from "react-redux";
+import {sendGeneralError} from "./actionCreators/sendGeneralErrorCreator";
 
 const SearchResult = memo((props) => {
   const [albumHover, setAlbumHover] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSearchClick = async () => {
-    const updatedTrack = await BackendCall.consolidateSelectedSearchResultInfo(props.musicObject)
-    props.handleClick(updatedTrack);
+    try {
+      const updatedTrack = await BackendCall.consolidateSelectedSearchResultInfo(props.musicObject)
+      props.handleClick(updatedTrack);
+    } catch(e) {
+      dispatch(sendGeneralError());
+    };
   };
 
   const handleArtistsClick = () => {

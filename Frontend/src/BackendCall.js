@@ -7,16 +7,13 @@ class BackendCall {
 //////////////////////////////////////  REQUEST METHOD  //////////////////////////////////////
 
   static async request(endpoint, paramsOrData = {}, verb = "get") {
-    try {
-      return (await axios({
-        method: verb,
-        url: `${BASE_URL}/${endpoint}`,
-        [verb === "get" ? "params" : "data"]: paramsOrData}));
-        // axios sends query string data via the "params" key,
-        // and request body data via the "data" key,
-        // so the key we need depends on the HTTP verb
-    } catch(e) {
-    };
+    return (await axios({
+      method: verb,
+      url: `${BASE_URL}/${endpoint}`,
+      [verb === "get" ? "params" : "data"]: paramsOrData}));
+      // axios sends query string data via the "params" key,
+      // and request body data via the "data" key,
+      // so the key we need depends on the HTTP verb
   };
 
 //////////////////////////////////////  ADD SONG DATA  //////////////////////////////////////
@@ -46,18 +43,15 @@ class BackendCall {
   * @param {object} albumData - object where the values are strings used to fire certain actions  
   */
   static async addTrackArtistAlbum(trackData, artistData, albumData) {
-    try {
-      await this.addArtist(artistData);
-      await this.addAlbum(albumData);
-      const trackId = await this.addTrack(trackData);
+    await this.addArtist(artistData);
+    await this.addAlbum(albumData);
+    const trackId = await this.addTrack(trackData);
 
-      if (trackId === "This song already exists in DB") {
-        return "No data was added to the DB";
-      };
-
-      return "Added new track to the DB";
-    } catch(e) {
+    if (trackId === "This song already exists in DB") {
+      return "No data was added to the DB";
     };
+
+    return "Added new track to the DB";
   };
 
 //////////////////////////////////////  CHECK AGAINST BACKEND FOR VARIOUS CONCNERS //////////////////////////////////////
