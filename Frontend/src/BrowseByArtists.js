@@ -63,16 +63,6 @@ function BrowseByArtists() {
     updateIsLoading();
   }, [albums, generalError]);
 
-
-    useEffect(() => {
-
-    const updateIsLoading = () => {
-
-      console.log("This is tracks; ", tracks);
-    };
-    updateIsLoading();
-  }, [tracks]);
-
   //LISTENS FOR ANY CHANGES IN ERRORS IN STATE AND WILL TRIGGER FLASH MESSAGES ACCORDINGLY
   useEffect(() => {
 
@@ -241,12 +231,20 @@ function BrowseByArtists() {
 
   //DISPLAY TRACKS FROM SELECTED ALBUM
   let TrackResultsDiv;
-  
-  if (tracks) TrackResultsDiv = (
-    <animated.div style={springProps}  className="Main-Container" ref={trackResultsRef}>
-      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true} typeOfTracks="artists"/>
-    </animated.div>
-  );
+
+  if (tracks) {
+
+    if (tracks.length) TrackResultsDiv = (
+      <animated.div style={springProps}  className="Main-Container" ref={trackResultsRef}>
+        <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true} typeOfTracks="artists"/>
+      </animated.div>
+    );
+
+    if (!tracks.length) TrackResultsDiv = (
+      <animated.div style={springProps}  className="Main-Container" ref={trackResultsRef}>
+      </animated.div>
+    );
+  };
 
   //DISPLAY LANGUAGE SELECTION SEARCH BAR
   let LanguageSelectDiv;

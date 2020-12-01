@@ -102,7 +102,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn, typeOfTracks})
         <div style={props}>
 
           <div className="Main-Container">
-            <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv}  typeOfTracks={typeOfTracks}/>
+            <SearchResultList key={results[0].trackId} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv}  typeOfTracks={typeOfTracks}/>
           </div>
 
         </div>
@@ -111,7 +111,7 @@ const Tracks = ({typeOfResults, results, itemsPerPage, animateIn, typeOfTracks})
   );
 
   if (!animateIn) TrackResults = (
-    <SearchResultList key={results[0].id} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv} typeOfTracks={typeOfTracks}/>
+    <SearchResultList key={results[0].trackId} typeOfResults={typeOfResults} resultsArray={results} handleSearch={handleTrackResultsClick} itemsPerPage={itemsPerPage} loadingIcon={LoadingIconDiv} typeOfTracks={typeOfTracks}/>
   );
 
 

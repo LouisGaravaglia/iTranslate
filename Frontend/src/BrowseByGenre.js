@@ -211,13 +211,21 @@ function BrowseByGenre() {
 
   //DISPLAY TRACKS FROM SELECTED ALBUM
   let TrackResultsDiv;
-  
-  if (tracks) TrackResultsDiv = (
-    <animated.div style={springProps} ref={trackResultsRef}>
-      <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true}  typeOfTracks="genre"/>
-    </animated.div>
-  );
 
+  if (tracks) {
+
+    if (tracks.length) TrackResultsDiv = (
+        <animated.div style={springProps} ref={trackResultsRef}>
+          <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true}  typeOfTracks="genre"/>
+        </animated.div>
+      );
+
+      if (!tracks.length) TrackResultsDiv = (
+        <animated.div style={springProps} ref={trackResultsRef}>
+        </animated.div>
+      );
+  };
+ 
   //DISPLAY LANGUAGE SELECTION SEARCH BAR
   let LanguageSelectDiv;
 
