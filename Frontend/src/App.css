@@ -283,7 +283,7 @@ flex: 0.1 0 1vh;
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  background-color: rgb(255, 86, 145);
+  background-color: #e767f0;
   height: 15vh;
   width: 100vw;
 }
