@@ -16,7 +16,13 @@ LYRCS is a web app that displays lyrics for a song in it's original language as 
 * Sign up for IBM Watson Translator API as well: https://www.ibm.com/watson/services/language-translator/
 * in the Backend folder, enter the psql environment and create a database to updload starter data in the dump.sql file: CREATE DATABASE new_itranslatedb;
 * run: psql new_itranslatedb < dump.sql
-* create .env file 
+* create .env file and enter the following variables:
+* IBM_URL=(GET THIS BY CLICKING ON FULL DETAILS OF THE LANGUAGE TRANSLATOR SERVICE IN YOUR IBM DASHBOARD)
+* CLIENT_ID=(GET THIS FROM YOUR SPOTIFY DEVELOPER DASHBOARD - https://developer.spotify.com/dashboard/applications)
+* CLIENT_SECRET=(GET THIS FROM YOUR SPOTIFY DEVELOPER DASHBOARD - https://developer.spotify.com/dashboard/applications)
+* ACCESS_TOKEN_URL=https://accounts.spotify.com/api/token
+* IBM_API_KEY=(GET THIS BY CLICKING ON FULL DETAILS OF THE LANGUAGE TRANSLATOR SERVICE IN YOUR IBM DASHBOARD)
+* IBM_VERSION=2018-05-01
 * install dependencies in both Backend and Frontend folders
 * npm start in both Backend and Frontend in order to spin up server and react.
 

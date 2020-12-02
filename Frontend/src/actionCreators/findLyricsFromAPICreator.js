@@ -1,5 +1,4 @@
 import {GET_LYRICS, UPDATE_LYRICS_ERROR} from "../actionTypes";
-import LyricsAPI from "../LyricsAPI";
 import BackendCall from '../BackendCall';
 
 /**
@@ -15,7 +14,7 @@ export function findLyricsFromAPI(track_id, artist, track) {
   return async function(dispatch) {
     try {
       //GET LYRICS FROM LYRICS API
-      const lyrics = await LyricsAPI.getLyrics(artist, track);
+      const lyrics = await BackendCall.getLyricsFromAPI({artist, track});
 
       //IF THERE ARE NO LYRICS FOR THAT SONG FROM LYRICS API
       if (lyrics === "No Lyrics from API") {
