@@ -6,24 +6,45 @@ exports[`Snapshot Test for BrowseByArtists component matches snapshot 1`] = `
     class="Flash-Messages-Container"
   />
   <div
-    style="background-color: rgb(135, 0, 176);"
+    style="background-color: rgb(78, 30, 255);"
   >
     <div
       class="Browse-Landing"
     >
-      <p>
-        Artists
-      </p>
-      <p>
-        Genre
-      </p>
-      <p>
-        Danceability
-      </p>
+      <span
+        class="Hover-Box"
+        style="display: inline-block; transform: scale(1);"
+      >
+        <p
+          class="Browse-Categories"
+        >
+          Artists
+        </p>
+      </span>
+      <span
+        class="Hover-Box"
+        style="display: inline-block; transform: scale(1);"
+      >
+        <p
+          class="Browse-Categories"
+        >
+          Genre
+        </p>
+      </span>
+      <span
+        class="Hover-Box"
+        style="display: inline-block; transform: scale(1);"
+      >
+        <p
+          class="Browse-Categories"
+        >
+          Danceability
+        </p>
+      </span>
     </div>
   </div>
   <div
-    style="background-color: rgb(135, 0, 176);"
+    style="background-color: rgb(78, 30, 255);"
   >
     <div
       class="Main-Container"
@@ -32,16 +53,21 @@ exports[`Snapshot Test for BrowseByArtists component matches snapshot 1`] = `
         class="Result-Box"
       >
         <div
+          class="Loading-Box"
+        />
+        <div
           class="Main-Result-Container"
         >
-          <p
-            class="Result-Main"
-          />
+          <span
+            class="Hover-Box"
+            style="display: inline-block; transform: scale(1);"
+          >
+            <p
+              class="Result-Main Artist-Artists"
+            />
+          </span>
         </div>
       </div>
-      <div
-        class="Main-Pagination-Slider-Placeholder"
-      />
     </div>
   </div>
 </DocumentFragment>

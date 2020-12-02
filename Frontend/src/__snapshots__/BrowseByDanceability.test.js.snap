@@ -6,24 +6,45 @@ exports[`Snapshot Test for BrowseByDanceability component matches snapshot 1`] =
     class="Flash-Messages-Container"
   />
   <div
-    style="background-color: rgb(135, 0, 176);"
+    style="background-color: rgb(78, 30, 255);"
   >
     <div
       class="Browse-Landing"
     >
-      <p>
-        Artists
-      </p>
-      <p>
-        Genre
-      </p>
-      <p>
-        Danceability
-      </p>
+      <span
+        class="Hover-Box"
+        style="display: inline-block; transform: scale(1);"
+      >
+        <p
+          class="Browse-Categories"
+        >
+          Artists
+        </p>
+      </span>
+      <span
+        class="Hover-Box"
+        style="display: inline-block; transform: scale(1);"
+      >
+        <p
+          class="Browse-Categories"
+        >
+          Genre
+        </p>
+      </span>
+      <span
+        class="Hover-Box"
+        style="display: inline-block; transform: scale(1);"
+      >
+        <p
+          class="Browse-Categories"
+        >
+          Danceability
+        </p>
+      </span>
     </div>
   </div>
   <div
-    style="background-color: rgb(135, 0, 176);"
+    style="background-color: rgb(78, 30, 255);"
   >
     <div
       style="opacity: 0;"
@@ -68,14 +89,12 @@ exports[`Snapshot Test for BrowseByDanceability component matches snapshot 1`] =
         <div
           class="Danceability-No-Results-Container"
         >
-           
           <p
             class="Danceability-No-Results"
           >
             KEEP SLIDING!
           </p>
         </div>
-         
         <div
           class="Pagination-Slider-Placeholder-v2"
         />

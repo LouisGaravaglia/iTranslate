@@ -45,14 +45,12 @@ exports[`Snapshot Test for DanceabilitySearch component matches snapshot 1`] = `
       <div
         class="Danceability-No-Results-Container"
       >
-         
         <p
           class="Danceability-No-Results"
         >
           KEEP SLIDING!
         </p>
       </div>
-       
       <div
         class="Pagination-Slider-Placeholder-v2"
       />

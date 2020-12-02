@@ -22,9 +22,12 @@ exports[`Snapshot Test for SearchBar component matches snapshot 1`] = `
           <button
             type="submit"
           >
-            <i
-              class="fa fa-search icon"
-            />
+            <span
+              class="Hover-Box"
+              style="display: inline-block; transform: scale(1);"
+            >
+              <i />
+            </span>
           </button>
         </div>
       </form>
