@@ -628,7 +628,7 @@ flex: 10 1 auto;
 }
 
 .Genre-Genres {
-  background: linear-gradient(to right, #ee6cd7 0%, #d11ff4 100%);
+  background: linear-gradient(to right, #ff4bde 0%, #b84dfa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
@@ -686,7 +686,7 @@ flex: 10 1 auto;
 /* //////////////////////////////////////  BROWSE BY ARTISTS FONT COLORS  ////////////////////////////////////// */
 
 .Artist-Artists {
-  background: linear-gradient(to right, #fdc3df 0%, #b84dfa 100%);
+  background: linear-gradient(to right, #ff4bde 0%, #b84dfa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
