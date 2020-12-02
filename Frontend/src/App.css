@@ -96,7 +96,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
 }
@@ -135,7 +135,6 @@ a {
   font-size: 1.5rem;
   /* color: #522df1; */
   margin: 40px 40px;
-
 }
 
 /* //////////////////////////////////////  TRANSLATION  ////////////////////////////////////// */
@@ -187,7 +186,7 @@ background-color: rgb(2, 206, 169);
   display: block;
   text-align: center;
   cursor: default;
-  /* margin: 0 80px; */
+  /* margin: 0 20px; */
 }
 
 .Search-Field-Content {
@@ -217,19 +216,10 @@ background-color: rgb(2, 206, 169);
   right:0;
   top:50%;
   transform: translate(-10%, -50%);
-  /* height: 54px;
-  width: 56px; */
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   cursor: pointer;
 }
-
-
-
-/* .Search-Field button:hover{
-  background-color: rgb(58, 163, 255);
-  cursor: pointer;
-} */
 
 .Search-Field-Filler {
 flex: 0.1 0 1vh;
@@ -418,7 +408,7 @@ flex: 0.1 0 1vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 100;
   font-size: 5rem;
-  margin: 0;
+  margin: 40px 0;
   padding: 0;
 }
 
@@ -427,7 +417,7 @@ flex: 0.1 0 1vh;
   font-weight: 200;
   font-size: 2rem;
   cursor: default;
-  margin: 0;
+  margin: 0 40px;
   padding: 0;
 }
 
@@ -466,7 +456,7 @@ flex: 0.1 0 1vh;
   /* margin-bottom: 80px; */
   flex: 1 0 200px;
   /* border: 2px solid yellow; */
-  margin: 0;
+  margin: 0 20px;
   padding: 0;
 }
 
@@ -621,7 +611,7 @@ flex: 10 1 auto;
 /* //////////////////////////////////////  BROWSE BY GENRE FONT COLORS  ////////////////////////////////////// */
 
 .Browse-Categories {
-  background: linear-gradient(to right, #67dbf0 0%,#8235fe 100%);
+  background: linear-gradient(to right, #67dbf0 0%,#357ffe 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
@@ -777,3 +767,98 @@ flex: 10 1 auto;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
+
+/* //////////////////////////////////////  MEDIA QUERIES  ////////////////////////////////////// */
+
+@media only screen and (max-width: 768px) {
+
+  .Search-Field-Content h1 {
+    font-size: 4rem;
+  }
+
+  .Result-Header {
+    font-size: 4rem;
+  }
+
+  .Result-Subheader {
+    font-size: 1.5rem;
+  }
+
+  .Result-Main {
+    font-size: 4rem;
+  }
+
+  .Danceability-No-Results {
+    font-size: 4rem;
+  }
+
+  .Lyrics-Translation {
+    flex-wrap: wrap;
+  }
+
+  .Translation-Container {
+    margin: 0 10px 20px 5px;
+  }
+
+  .Lyrics-Container {
+    margin: 0 10px 20px 5px;
+  }
+
+  .Lyrics {
+    font-size: 1rem;
+    margin: 40px 40px;
+  }
+
+  .Translation {
+    font-size: 1rem;
+    margin: 40px 40px;
+  }
+
+}
+
+@media only screen and (max-width: 610px) {
+
+  .Search-Field-Content h1 {
+    font-size: 3rem;
+  }
+
+  .Result-Header {
+    font-size: 3rem;
+  }
+
+  .Result-Subheader {
+    font-size: 1rem;
+  }
+
+  .Result-Main {
+    font-size: 3rem;
+  }
+
+  .Danceability-No-Results {
+    font-size: 3rem;
+  }
+
+  .Browse-Landing p {
+    font-size: 3rem;
+  }
+
+  .Lyrics-Translation {
+    flex-wrap: wrap;
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+  .Search-Field-Content h1 {
+    font-size: 2.5rem;
+  }
+
+  .Browse-Landing p {
+    font-size: 2.5rem;
+  }
+
+  .Lyrics-Translation {
+    flex-wrap: wrap;
+  }
+} 

@@ -78,7 +78,7 @@ function LanguageSelect({selectedTrackId, typeOfSearch}) {
       {props => (
         <div style={props}>
   
-            <SearchBar loadingIcon={LoadingIconDiv} header="Select which language you'd like your lyrics translated to!" handleSubmit={handleLanguageSearchSubmit} typeOfSearch={typeOfSearch}/>
+            <SearchBar loadingIcon={LoadingIconDiv} header="What language would you like your lyrics translated to?" handleSubmit={handleLanguageSearchSubmit} typeOfSearch={typeOfSearch}/>
          
         </div>
       )}
