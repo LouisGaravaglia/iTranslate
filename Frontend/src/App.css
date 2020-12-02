@@ -790,33 +790,27 @@ flex: 10 1 auto;
     font-size: 4rem;
   }
 
-  .Lyrics-Translation {
-    flex-wrap: wrap;
-  }
-
   .Translation-Container {
-    flex: 1 0 100%;
     margin: 0 10px 20px 5px;
   }
 
   .Lyrics-Container {
-    flex: 1 0 100%;
     margin: 0 10px 20px 5px;
   }
 
   .Lyrics {
     font-size: 1rem;
-    margin: 40px 40px;
+    margin: 20px 20px;
   }
 
   .Translation {
     font-size: 1rem;
-    margin: 40px 40px;
+    margin: 20px 20px;
   }
 
 }
 
-@media only screen and (max-width: 610px) {
+@media only screen and (max-width: 623px) {
 
   .Search-Field-Content h1 {
     font-size: 3rem;
@@ -842,6 +836,10 @@ flex: 10 1 auto;
     font-size: 3rem;
   }
 
+  .Lyrics-Translation {
+    flex-wrap: wrap;
+  }
+
   .Translation-Container {
     flex: 1 0 100%;
     margin: 0 10px 20px 5px;
@@ -850,6 +848,16 @@ flex: 10 1 auto;
   .Lyrics-Container {
     flex: 1 0 100%;
     margin: 0 10px 20px 5px;
+  }
+
+    .Lyrics {
+    font-size: 1rem;
+    margin: 20px 20px;
+  }
+
+  .Translation {
+    font-size: 1rem;
+    margin: 20px 20px;
   }
 
 }
@@ -872,6 +880,16 @@ flex: 10 1 auto;
   .Lyrics-Container {
     flex: 1 0 100%;
     margin: 0 10px 20px 5px;
+  }
+
+    .Lyrics {
+    font-size: 1rem;
+    margin: 20px 20px;
+  }
+
+  .Translation {
+    font-size: 1rem;
+    margin: 20px 20px;
   }
 
 } 
