@@ -595,23 +595,21 @@ flex: 10 1 auto;
 }
 
 .Search-Lyrics {
-  background: linear-gradient(to right, #f6beff 0%, #ff5cde  100%);
+  background: linear-gradient(to right, #b0faff 0%, #80b9ff  100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  cursor: pointer;
 }
 
 .Search-Translation {
-  background: linear-gradient(to right, #ff5cde  0%, #ac37ff 100%);
+  background: linear-gradient(to right, #80d9ff  0%, #d34fff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  cursor: pointer;
 }
 
 /* //////////////////////////////////////  BROWSE BY GENRE FONT COLORS  ////////////////////////////////////// */
 
 .Browse-Categories {
-  background: linear-gradient(to right, #67dbf0 0%,#357ffe 100%);
+  background: linear-gradient(to right, #16bdfa 0%,#357ffe 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
@@ -797,10 +795,12 @@ flex: 10 1 auto;
   }
 
   .Translation-Container {
+    flex: 1 0 100%;
     margin: 0 10px 20px 5px;
   }
 
   .Lyrics-Container {
+    flex: 1 0 100%;
     margin: 0 10px 20px 5px;
   }
 
@@ -842,8 +842,14 @@ flex: 10 1 auto;
     font-size: 3rem;
   }
 
-  .Lyrics-Translation {
-    flex-wrap: wrap;
+  .Translation-Container {
+    flex: 1 0 100%;
+    margin: 0 10px 20px 5px;
+  }
+
+  .Lyrics-Container {
+    flex: 1 0 100%;
+    margin: 0 10px 20px 5px;
   }
 
 }
@@ -858,7 +864,14 @@ flex: 10 1 auto;
     font-size: 2.5rem;
   }
 
-  .Lyrics-Translation {
-    flex-wrap: wrap;
+  .Translation-Container {
+    flex: 1 0 100%;
+    margin: 0 10px 20px 5px;
   }
+
+  .Lyrics-Container {
+    flex: 1 0 100%;
+    margin: 0 10px 20px 5px;
+  }
+
 } 
