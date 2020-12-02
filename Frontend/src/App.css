@@ -595,13 +595,13 @@ flex: 10 1 auto;
 }
 
 .Search-Lyrics {
-  background: linear-gradient(to right, #b0faff 0%, #80b9ff  100%);
+  background: linear-gradient(to right, #d1f1fc 0%, #80d9ff  100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Search-Translation {
-  background: linear-gradient(to right, #80d9ff  0%, #d34fff 100%);
+  background: linear-gradient(to right, #80d9ff  0%, #f04fff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -838,19 +838,22 @@ flex: 10 1 auto;
 
   .Lyrics-Translation {
     flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .Translation-Container {
     flex: 1 0 100%;
     margin: 0 10px 20px 5px;
+    max-width: 450px;
   }
 
   .Lyrics-Container {
     flex: 1 0 100%;
     margin: 0 10px 20px 5px;
+    max-width: 450px;
   }
 
-    .Lyrics {
+  .Lyrics {
     font-size: 1rem;
     margin: 20px 20px;
   }
@@ -875,14 +878,16 @@ flex: 10 1 auto;
   .Translation-Container {
     flex: 1 0 100%;
     margin: 0 10px 20px 5px;
+    max-width: 300px;
   }
 
   .Lyrics-Container {
     flex: 1 0 100%;
     margin: 0 10px 20px 5px;
+    max-width: 300px;
   }
 
-    .Lyrics {
+  .Lyrics {
     font-size: 1rem;
     margin: 20px 20px;
   }
