@@ -10,10 +10,9 @@ import {useState, useEffect} from "react";
 function useOnScreen(ref, options={threshold: 0.3}) {
   // STATE AND SETTER FOR STORING WHETER ELEMENT IS VISIBLE
   const [isIntersecting, setIntersecting] = useState(false);
-  
 
   useEffect(() => {
-const elementRef = ref;
+    const elementRef = ref;
     const observer = new IntersectionObserver(([entry]) => {
       
       // UPDATE OUR STATE WHEN OBSERVER CALLBACK FIRES

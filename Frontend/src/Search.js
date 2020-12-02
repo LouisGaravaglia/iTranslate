@@ -13,7 +13,7 @@ import {resetLanguageError, resetTranslationError, resetLyricsError, resetSearch
 import {setResultsArray} from "./actionCreators/setResultsArrayCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
 //CUSTOM HOOK IMPORTS
-import useOnScreen from "./useOnScreen";
+import useOnScreen from "./hooks/useOnScreen";
 
 const Search = () => {
   //STATE FOR ANIMATIONS

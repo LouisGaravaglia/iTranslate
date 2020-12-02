@@ -7,11 +7,27 @@ import SearchResultList from "./SearchResultList";
 import {useDispatch, useSelector} from "react-redux";
 import {getTracks} from "./actionCreators/BrowseRoute/Artists/getTracksCreator";
 import {resetStore} from "./actionCreators/resetStoreCreator";
+//CUSTOM HOOK IMPORTS
+import useViewport from "./hooks/useViewport";
 
 function Albums({typeOfAlbums}) {
   //REDUX STORE
   const dispatch = useDispatch();
   const albums = useSelector(store => store.albums);
+  //VALUE OF VIEWPORT WIDTH
+  const {viewportWidth} = useViewport();
+  let itemsPerPage;
+  //NEED TO USE A RANDOM NUMBER TO FORCE COMPONENT RERENDER SO THAT THE VALUE OF ALBUM SLIDER GETS RESET TO 0 ON VIEWPORT RESIZING
+  const randomKeyForReRender = Math.random();
+
+  //VIEWPORT BREAKPOINTS TO DETERMINT HOW MANY ALBUM COVERS TO VIEW AT ONCE
+  if (viewportWidth < 1180 && viewportWidth > 770) {
+    itemsPerPage = 2;
+  } else if (viewportWidth < 780) {
+    itemsPerPage = 1;
+  } else {
+    itemsPerPage = 3;
+  }
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -32,7 +48,7 @@ function Albums({typeOfAlbums}) {
         <div style={props}>
 
           <div className="Main-Container">
-            <SearchResultList key={albums[0].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={3} typeOfAlbums={typeOfAlbums}/>
+            <SearchResultList key={randomKeyForReRender} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={itemsPerPage} typeOfAlbums={typeOfAlbums}/>
           </div>
 
         </div>

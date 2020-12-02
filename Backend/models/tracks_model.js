@@ -37,10 +37,8 @@ class Tracks {
     if (result.rows[0] === undefined) {
       return false;
     } else if (result.rows[0].lyrics === "No Lyrics" || result.rows[0].lyrics === null){
-            console.log("hasLyrics returning false");
       return false;
     } else {
-            console.log("hasLyrics returning true");
       return true
     };
   };

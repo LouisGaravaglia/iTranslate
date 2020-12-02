@@ -50,7 +50,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
       <div className="Browse-Albums">
         {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} name={r.albumName} id={r.albumId} image={r.albumImg} typeOfAlbums={typeOfAlbums}/>)}
       </div>
-      {resultsArray.length > itemsPerPage && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
+      {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
       {/* {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>} */}
     </>
   );

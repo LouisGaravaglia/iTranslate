@@ -12,7 +12,7 @@ import ToTopArrow from "./ToTopArrow";
 import {useSelector, useDispatch} from "react-redux";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
 //CUSTOM HOOK IMPORTS
-import useOnScreen from "./useOnScreen";
+import useOnScreen from "./hooks/useOnScreen";
 
 function BrowseByDanceability() {
   //STATE FOR ANIMATIONS

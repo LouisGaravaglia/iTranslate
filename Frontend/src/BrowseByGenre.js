@@ -16,7 +16,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getGenres} from "./actionCreators/BrowseRoute/Genre/getGenresCreator";
 import {resetLanguageError, resetTranslationError, resetLyricsError, resetGeneralError} from "./actionCreators/handleErrorsCreator";
 //CUSTOM HOOK IMPORTS
-import useOnScreen from "./useOnScreen";
+import useOnScreen from "./hooks/useOnScreen";
 //IONICONS IMPORTS
 import IosMusicalNotes from 'react-ionicons/lib/IosMusicalNotes';
 
