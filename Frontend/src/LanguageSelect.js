@@ -58,7 +58,7 @@ function LanguageSelect({selectedTrackId, typeOfSearch}) {
   
   if (isLoading) LoadingIconDiv = (
     <div className="Loading-Box">
-      <IosMusicalNotes rotate={true} fontSize="200px" color="#fff" />
+      <IosMusicalNotes rotate={true} fontSize="200px" color="#fff"/>
     </div>
   );
 

@@ -11,26 +11,18 @@ exports[`Snapshot Test for LyricsTranslation component matches snapshot 1`] = `
       <div
         class="Lyrics-Container"
       >
-        <p
-          class="Lyrics"
-        >
+        <p>
           ORIGINAL LYRICS
         </p>
-        <p
-          class="Lyrics"
-        />
+        <p />
       </div>
       <div
         class="Translation-Container"
       >
-        <p
-          class="Translation"
-        >
+        <p>
           TRANSLATED LYRICS
         </p>
-        <p
-          class="Translation"
-        />
+        <p />
       </div>
     </div>
   </div>

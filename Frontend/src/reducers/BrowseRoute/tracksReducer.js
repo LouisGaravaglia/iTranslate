@@ -1,5 +1,5 @@
 import {GET_TRACKS, RESET_TRACKS} from "../../actionTypes";
-const INITIAL_STATE = {tracks: []};
+const INITIAL_STATE = {tracks: ""};
 
 export default function tracksReducer(state=INITIAL_STATE, action) {
   switch(action.type) {

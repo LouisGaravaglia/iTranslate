@@ -34,8 +34,8 @@ function DanceabilitySearch() {
 
           <div className="Browse-Danceability-v2">
             <h1>{(sliderVal * 100).toFixed(0)}</h1>
-            <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove} />
-            {!tracks && <><div className="Danceability-No-Results-Container"> <p className="Danceability-No-Results">KEEP SLIDING!</p></div> <div className="Pagination-Slider-Placeholder-v2"></div></>}
+            <DanceabilitySlider handleSliderMouseMove={handleSliderMouseMove}/>
+            {!tracks && <><div className="Danceability-No-Results-Container"><p className="Danceability-No-Results">KEEP SLIDING!</p></div><div className="Pagination-Slider-Placeholder-v2"></div></>}
             {tracks && <Tracks results={tracks} typeOfResults={"danceability-results"} itemsPerPage={1} animateIn={false}/>}
           </div>
 

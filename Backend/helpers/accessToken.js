@@ -23,20 +23,17 @@ async function requestAccessToken() {
     return encodedVal;
   };
 
-  try {
-    const key = await getEncodedKey(CLIENT_ID, CLIENT_SECRET)
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${key}`
-      }
-    };
-    const params = new URLSearchParams();
-    params.append('grant_type', 'client_credentials');
-    const {data} = await axios.post(ACCESS_TOKEN_URL, params, config);
-    return data.access_token;
-  } catch(err) {
+  const key = await getEncodedKey(CLIENT_ID, CLIENT_SECRET)
+  const config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': `Basic ${key}`
+    }
   };
+  const params = new URLSearchParams();
+  params.append('grant_type', 'client_credentials');
+  const {data} = await axios.post(ACCESS_TOKEN_URL, params, config);
+  return data.access_token;
 };
 
 module.exports = requestAccessToken;

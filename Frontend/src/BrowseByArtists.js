@@ -183,7 +183,7 @@ function BrowseByArtists() {
 
   if (isLoading) LoadingIconDiv = (
     <div className="Loading-Box">
-      <IosMusicalNotes rotate={true} fontSize="200px" color="#fff" />
+      <IosMusicalNotes rotate={true} fontSize="200px" color="#fff"/>
     </div>
   );
 
@@ -223,7 +223,7 @@ function BrowseByArtists() {
   let AlbumResultsDiv;
   
   if (albums) AlbumResultsDiv = (
-    <animated.div style={springProps}  ref={albumResultsRef}>
+    <animated.div style={springProps} ref={albumResultsRef}>
       <Albums typeOfAlbums="artists"/>
     </animated.div>
   );
@@ -249,7 +249,7 @@ function BrowseByArtists() {
   let LanguageSelectDiv;
 
   if (lyrics) LanguageSelectDiv = (
-    <animated.div style={springProps}  ref={selectLanguageRef}>
+    <animated.div style={springProps} ref={selectLanguageRef}>
       <LanguageSelect selectedTrackId={selectedTrackId} typeOfSearch="artists-language"/>
     </animated.div>
   );

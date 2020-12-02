@@ -269,7 +269,6 @@ flex: 0.1 0 1vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 800;
   font-size: 2rem;
-
 }
 
 .FlashMessage span {
@@ -808,6 +807,10 @@ flex: 10 1 auto;
     margin: 20px 20px;
   }
 
+  .FlashMessage p {
+    font-size: 1.5rem;
+  }
+
 }
 
 @media only screen and (max-width: 623px) {
@@ -863,6 +866,10 @@ flex: 10 1 auto;
     margin: 20px 20px;
   }
 
+  .FlashMessage p {
+    font-size: 1rem;
+  }
+
 }
 
 @media only screen and (max-width: 500px) {
@@ -895,6 +902,10 @@ flex: 10 1 auto;
   .Translation {
     font-size: 1rem;
     margin: 20px 20px;
+  }
+
+  .FlashMessage p {
+    font-size: 1rem;
   }
 
 } 

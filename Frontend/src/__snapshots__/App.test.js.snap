@@ -6,13 +6,14 @@ exports[`Snapshot Test for App component matches snapshot 1`] = `
     class="App"
   >
     <div
-      class="Navbar-Container"
+      class="Navbar-Container-Left"
     >
       <div
-        class="Navbar"
+        class="Navbar-Search-Box"
       >
-        <div
-          class="Navbar-Search-Box"
+        <span
+          class="Hover-Box"
+          style="display: inline-block; transform: scale(1);"
         >
           <a
             aria-current="page"
@@ -21,26 +22,32 @@ exports[`Snapshot Test for App component matches snapshot 1`] = `
           >
             LYRCS
           </a>
-        </div>
-        <div
-          class="Navbar-Browse-Box"
+        </span>
+      </div>
+    </div>
+    <div
+      class="Navbar-Container-Right"
+    >
+      <div
+        class="Navbar-Browse-Box"
+      >
+        <span
+          class="Hover-Box"
+          style="display: inline-block; transform: scale(1);"
         >
           <svg
             class="sc-bdVaJa fUuvxv Navbar-Browse"
             fill="#fff"
-            height="40px"
+            height="35px"
             rotate="0"
             viewBox="0 0 1024 1024"
-            width="40px"
+            width="35px"
           >
             <path
-              d="M569.8 825.2l276.2-268c12-11.6 18-27.4 18-44.8v-0.8c0-17.4-6-33.2-18-44.8l-276.2-268c-24-25-62.6-25-86.4 0s-23.8 65.4 0 90.4l166 158.8h-428c-34-0-61.4 28.6-61.4 64 0 36 27.4 64 61.2 64h428l-166 158.8c-23.8 25-23.8 65.4 0 90.4 24 25 62.6 25 86.6 0z"
+              d="M128 768h768v-85.332h-768v85.332zM128 554.668h768v-85.334h-768v85.334zM128 256v85.33h768v-85.33h-768z"
             />
           </svg>
-        </div>
-        <a
-          href="/browse"
-        />
+        </span>
       </div>
     </div>
     <div
@@ -53,7 +60,7 @@ exports[`Snapshot Test for App component matches snapshot 1`] = `
         style="background-color: rgb(29, 77, 190);"
       >
         <div
-          style="opacity: 1; margin-left: -2500px;"
+          style="opacity: 0;"
         >
           <div
             class="Search-Field"
@@ -61,7 +68,9 @@ exports[`Snapshot Test for App component matches snapshot 1`] = `
             <div
               class="Search-Field-Content"
             >
-              <h1>
+              <h1
+                class="Search-Landing"
+              >
                 Find your song!
               </h1>
               <form
@@ -69,6 +78,7 @@ exports[`Snapshot Test for App component matches snapshot 1`] = `
               >
                 <div>
                   <input
+                    class="Search-Landing-Text"
                     id="SearchVal"
                     name="searchVal"
                     type="text"
@@ -77,9 +87,14 @@ exports[`Snapshot Test for App component matches snapshot 1`] = `
                   <button
                     type="submit"
                   >
-                    <i
-                      class="fa fa-search icon"
-                    />
+                    <span
+                      class="Hover-Box"
+                      style="display: inline-block; transform: scale(1);"
+                    >
+                      <i
+                        class="fa fa-search icon Search-Landing-Button"
+                      />
+                    </span>
                   </button>
                 </div>
               </form>

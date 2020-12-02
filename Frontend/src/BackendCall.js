@@ -11,9 +11,6 @@ class BackendCall {
       method: verb,
       url: `${BASE_URL}/${endpoint}`,
       [verb === "get" ? "params" : "data"]: paramsOrData}));
-      // axios sends query string data via the "params" key,
-      // and request body data via the "data" key,
-      // so the key we need depends on the HTTP verb
   };
 
 //////////////////////////////////////  ADD SONG DATA  //////////////////////////////////////

@@ -37,7 +37,6 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
         {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="artists" handleClick={handleSearch} artist={r.artistName} spotify_id={r.artistId} typeOfArtists={typeOfArtists} needsPaginationSlider={needsPaginationSlider}/>)}
       </div>
       {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
-      {/* {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>} */}
     </>
   );
 
@@ -51,7 +50,6 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
         {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="albums" handleClick={handleSearch} name={r.albumName} id={r.albumId} image={r.albumImg} typeOfAlbums={typeOfAlbums}/>)}
       </div>
       {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
-      {/* {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>} */}
     </>
   );
 
@@ -65,7 +63,6 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
         {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="tracks" handleClick={handleSearch} artistName={r.artistName} trackName={r.trackName} musicObject={r} typeOfTracks={typeOfTracks} needsPaginationSlider={needsPaginationSlider}/>)}
       </div>
       {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
-      {/* {resultsArray.length <= itemsPerPage && <div className="Main-Pagination-Slider-Placeholder"></div>} */}
     </>
   );
 

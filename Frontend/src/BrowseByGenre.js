@@ -182,10 +182,10 @@ function BrowseByGenre() {
 
   //DISPLAY MUSIC ICON IF THERE IS AN ERROR LOADING GENRES
   if (!genres) selectGenresDiv = (
-    <animated.div style={springProps}  ref={selectGenresRef}>
+    <animated.div style={springProps} ref={selectGenresRef}>
       <div className="Main-Container">
         <div className="Loading-Box">
-          <IosMusicalNotes fontSize="300px" color="orange" />
+          <IosMusicalNotes fontSize="300px" color="orange"/>
         </div>
       </div>
     </animated.div>
@@ -216,7 +216,7 @@ function BrowseByGenre() {
 
     if (tracks.length) TrackResultsDiv = (
         <animated.div style={springProps} ref={trackResultsRef}>
-          <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true}  typeOfTracks="genre"/>
+          <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true} typeOfTracks="genre"/>
         </animated.div>
       );
 
@@ -230,7 +230,7 @@ function BrowseByGenre() {
   let LanguageSelectDiv;
 
   if (lyrics) LanguageSelectDiv = (
-    <animated.div style={springProps}  ref={selectLanguageRef}>
+    <animated.div style={springProps} ref={selectLanguageRef}>
       <LanguageSelect selectedTrackId={selectedTrackId} typeOfSearch="genre-language"/>
     </animated.div>
   );
@@ -238,7 +238,7 @@ function BrowseByGenre() {
   //DISPLAY LYRICS AND TRANSLATION
   let LyricsTranslationDiv;
   
-  if (translation && translation !== "Could not read language value")  LyricsTranslationDiv = (
+  if (translation && translation !== "Could not read language value") LyricsTranslationDiv = (
     <animated.div style={springProps}>
       <div className="inViewPlaceholder" ref={showLyricsTranslationRef}></div>
       <ToTopArrow topRef={categoryRef} topInView={categoriesInView}/>

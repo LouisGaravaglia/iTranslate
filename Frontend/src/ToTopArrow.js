@@ -5,7 +5,6 @@ import {useHistory, useLocation} from "react-router-dom";
 import IosArrowUp from 'react-ionicons/lib/IosArrowUp';
 import Hover from "./Hover";
 
-
 const ToTopArrow = ({topRef, topInView}) => {
   const [hitBottom, setHitBottom] = useState(false);
   const [movingUp, setMovingUp] = useState(false);
@@ -62,7 +61,7 @@ const ToTopArrow = ({topRef, topInView}) => {
       <div className="TopArrow-Box">
         {!hitBottom && <div></div>}
         <Hover scale={1.20}>
-          {hitBottom && <IosArrowUp  className="TopArrow"  onClick={handleClick} fontSize="100px" color="#fff"/>}
+          {hitBottom && <IosArrowUp className="TopArrow" onClick={handleClick} fontSize="100px" color="#fff"/>}
         </Hover>
       </div>
     </div>

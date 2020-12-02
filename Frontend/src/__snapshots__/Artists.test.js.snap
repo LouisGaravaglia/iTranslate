@@ -14,14 +14,14 @@ exports[`Snapshot Test for Artists component matches snapshot 1`] = `
         <div
           class="Main-Result-Container"
         >
-          <p
-            class="Result-Main"
-          />
+          <span
+            class="Hover-Box"
+            style="display: inline-block; transform: scale(1);"
+          >
+            <p />
+          </span>
         </div>
       </div>
-      <div
-        class="Main-Pagination-Slider-Placeholder"
-      />
     </div>
   </div>
 </DocumentFragment>

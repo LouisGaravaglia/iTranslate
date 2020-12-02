@@ -16,7 +16,7 @@ exports[`Snapshot Test for LanguageSelect component matches snapshot 1`] = `
           class="Search-Field-Content"
         >
           <h1>
-            Select which language you'd like your lyrics translated to!
+            What language would you like your lyrics translated to?
           </h1>
           <form
             class="Search-Input-Container"
@@ -31,9 +31,12 @@ exports[`Snapshot Test for LanguageSelect component matches snapshot 1`] = `
               <button
                 type="submit"
               >
-                <i
-                  class="fa fa-search icon"
-                />
+                <span
+                  class="Hover-Box"
+                  style="display: inline-block; transform: scale(1);"
+                >
+                  <i />
+                </span>
               </button>
             </div>
           </form>

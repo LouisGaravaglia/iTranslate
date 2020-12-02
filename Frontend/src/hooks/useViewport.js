@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 
 /**
 * Hook to constantly monitor viewport dimensions so that I can change make any

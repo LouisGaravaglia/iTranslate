@@ -11,12 +11,12 @@ const Routes = () => {
   return (
     <div className="main">
       <Switch>
-        <Route exact path="/"><Search /></Route>
-        <Route exact path="/browse"><Browse /></Route>
-        <Route exact path="/browse/artists"><BrowseByArtists /></Route>
-        <Route exact path="/browse/genres"><BrowseByGenre /></Route>
-        <Route exact path="/browse/danceability"><BrowseByDanceability /></Route>
-        <Redirect to="/" />
+        <Route exact path="/"><Search/></Route>
+        <Route exact path="/browse"><Browse/></Route>
+        <Route exact path="/browse/artists"><BrowseByArtists/></Route>
+        <Route exact path="/browse/genres"><BrowseByGenre/></Route>
+        <Route exact path="/browse/danceability"><BrowseByDanceability/></Route>
+        <Redirect to="/"/>
       </Switch>
     </div>
   );

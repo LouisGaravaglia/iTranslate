@@ -12,7 +12,7 @@ exports[`Snapshot Test for Routes component matches snapshot 1`] = `
       style="background-color: rgb(29, 77, 190);"
     >
       <div
-        style="opacity: 1; margin-left: -2500px;"
+        style="opacity: 0;"
       >
         <div
           class="Search-Field"
@@ -20,7 +20,9 @@ exports[`Snapshot Test for Routes component matches snapshot 1`] = `
           <div
             class="Search-Field-Content"
           >
-            <h1>
+            <h1
+              class="Search-Landing"
+            >
               Find your song!
             </h1>
             <form
@@ -28,6 +30,7 @@ exports[`Snapshot Test for Routes component matches snapshot 1`] = `
             >
               <div>
                 <input
+                  class="Search-Landing-Text"
                   id="SearchVal"
                   name="searchVal"
                   type="text"
@@ -36,9 +39,14 @@ exports[`Snapshot Test for Routes component matches snapshot 1`] = `
                 <button
                   type="submit"
                 >
-                  <i
-                    class="fa fa-search icon"
-                  />
+                  <span
+                    class="Hover-Box"
+                    style="display: inline-block; transform: scale(1);"
+                  >
+                    <i
+                      class="fa fa-search icon Search-Landing-Button"
+                    />
+                  </span>
                 </button>
               </div>
             </form>

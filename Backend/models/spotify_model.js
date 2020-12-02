@@ -11,9 +11,9 @@ class SpotifyAPI {
   * @param {string} search - input value that user types into search for song field
   */
   static async requestSearch(search) {
-    const minifiedSearchVal = search.replace(" ", "%20");
-    const accessToken = await requestAccessToken();
     try {
+      const minifiedSearchVal = search.replace(" ", "%20");
+      const accessToken = await requestAccessToken();
       const res = await axios({
         method: "get",
         url: `${SEARCH_URL}/${minifiedSearchVal}&type=track`,
@@ -43,60 +43,56 @@ class SpotifyAPI {
     const artistId = data.artistId;
     const albumId = data.albumId
     const accessToken = await requestAccessToken();
-    try {
+    const artistDetails = await axios({
+      method: "get",
+      url: `https://api.spotify.com/v1/artists/${artistId}`,
+      headers: {'Authorization': `Bearer ${accessToken}`}
+    });
+    const songAnalysis = await axios({
+      method: "get",
+      url: `https://api.spotify.com/v1/audio-features/${trackId}`,
+      headers: {'Authorization': `Bearer ${accessToken}`}
+    });
+    const trackDetails = await axios({
+      method: "get",
+      url: `https://api.spotify.com/v1/tracks/${trackId}`,
+      headers: {'Authorization': `Bearer ${accessToken}`}
+    });
+    const albumDetails = await axios({
+      method: "get",
+      url: `https://api.spotify.com/v1/albums/${albumId}`,
+      headers: {'Authorization': `Bearer ${accessToken}`}
+    });
 
-      const artistDetails = await axios({
-        method: "get",
-        url: `https://api.spotify.com/v1/artists/${artistId}`,
-        headers: {'Authorization': `Bearer ${accessToken}`}
-      });
-      const songAnalysis = await axios({
-        method: "get",
-        url: `https://api.spotify.com/v1/audio-features/${trackId}`,
-        headers: {'Authorization': `Bearer ${accessToken}`}
-      });
-      const trackDetails = await axios({
-        method: "get",
-        url: `https://api.spotify.com/v1/tracks/${trackId}`,
-        headers: {'Authorization': `Bearer ${accessToken}`}
-      });
-      const albumDetails = await axios({
-        method: "get",
-        url: `https://api.spotify.com/v1/albums/${albumId}`,
-        headers: {'Authorization': `Bearer ${accessToken}`}
-      });
+    const trackData = {spotify_id: trackId};
+    const artistData = {spotify_id: artistId};
+    const albumData = {spotify_id: albumId};
 
-      const trackData = {spotify_id: trackId};
-      const artistData = {spotify_id: artistId};
-      const albumData = {spotify_id: albumId};
+    albumData["name"] = albumDetails.data.name;
+    albumData["release_date"] = albumDetails.data.release_date;
+    albumData["spotify_uri"] = albumDetails.data.uri;
+    albumData["img_url"] = albumDetails.data.images[1].url;
+    albumData["artist_id"] = artistId;
 
-      albumData["name"] = albumDetails.data.name;
-      albumData["release_date"] = albumDetails.data.release_date;
-      albumData["spotify_uri"] = albumDetails.data.uri;
-      albumData["img_url"] = albumDetails.data.images[1].url;
-      albumData["artist_id"] = artistId;
+    trackData["name"] = trackDetails.data.name;
+    trackData["spotify_uri"] = trackDetails.data.uri;
+    trackData["explicit"] = trackDetails.data.explicit;
+    trackData["popularity"] = trackDetails.data.popularity;
+    trackData["preview_url"] = trackDetails.data.preview_url;
+    trackData["danceability"] = songAnalysis.data.danceability;
+    trackData["tempo"] = songAnalysis.data.tempo;
+    trackData["valence"] = songAnalysis.data.valence;
+    trackData["duration"] = songAnalysis.data.duration_ms;
+    trackData["artist_id"] = artistId;
+    trackData["album_id"] = albumId;
 
-      trackData["name"] = trackDetails.data.name;
-      trackData["spotify_uri"] = trackDetails.data.uri;
-      trackData["explicit"] = trackDetails.data.explicit;
-      trackData["popularity"] = trackDetails.data.popularity;
-      trackData["preview_url"] = trackDetails.data.preview_url;
-      trackData["danceability"] = songAnalysis.data.danceability;
-      trackData["tempo"] = songAnalysis.data.tempo;
-      trackData["valence"] = songAnalysis.data.valence;
-      trackData["duration"] = songAnalysis.data.duration_ms;
-      trackData["artist_id"] = artistId;
-      trackData["album_id"] = albumId;
+    artistData["name"] = artistDetails.data.name;
+    artistData["spotify_uri"] = artistDetails.data.uri;
+    artistData["genre"] = artistDetails.data.genres.join(",");
+    artistData["img_url"] = artistDetails.data.images[1].url;
+    artistData["popularity"] = artistDetails.data.popularity;
 
-      artistData["name"] = artistDetails.data.name;
-      artistData["spotify_uri"] = artistDetails.data.uri;
-      artistData["genre"] = artistDetails.data.genres.join(",");
-      artistData["img_url"] = artistDetails.data.images[1].url;
-      artistData["popularity"] = artistDetails.data.popularity;
-
-      return [trackData, artistData, albumData];
-    } catch(e) {
-    };
+    return [trackData, artistData, albumData];
   };
 
 };

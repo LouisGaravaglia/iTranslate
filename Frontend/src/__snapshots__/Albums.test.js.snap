@@ -14,14 +14,16 @@ exports[`Snapshot Test for Albums component matches snapshot 1`] = `
         <div
           class="Album"
         >
-          <img
-            alt=""
-          />
+          <span
+            class="Hover-Box"
+            style="display: inline-block; transform: scale(1);"
+          >
+            <img
+              alt=""
+            />
+          </span>
         </div>
       </div>
-      <div
-        class="Main-Pagination-Slider-Placeholder"
-      />
     </div>
   </div>
 </DocumentFragment>
