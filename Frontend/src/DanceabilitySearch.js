@@ -11,7 +11,7 @@ import {getDanceabilityTracks} from "./actionCreators/BrowseRoute/Danceability/g
 function DanceabilitySearch() {
   const [sliderVal, setSliderVal] = useState(0);
   const dispatch = useDispatch();
-  const tracks = useSelector(store => store.tracks.tracks);
+  const tracks = useSelector(store => store.tracks);
 
 ////////////////////////////////////////////////////  HANDLE SLIDER MOVE FUNCTIONS  ////////////////////////////////////////////////////
 

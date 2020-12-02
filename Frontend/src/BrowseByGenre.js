@@ -29,7 +29,7 @@ function BrowseByGenre() {
   const lyrics = useSelector(store => store.lyrics);
   const artists = useSelector(store => store.artists);
   const albums = useSelector(store => store.albums);
-  const tracks = useSelector(store => store.tracks.tracks);
+  const tracks = useSelector(store => store.tracks);
   const selectedTrackId = useSelector(store => store.selectedTrack.trackId);
   const translation = useSelector(store => store.translation);
   const translationError = useSelector(store => store.errors.translationError);
@@ -212,19 +212,19 @@ function BrowseByGenre() {
   //DISPLAY TRACKS FROM SELECTED ALBUM
   let TrackResultsDiv;
 
-  if (tracks) {
 
-    if (tracks.length) TrackResultsDiv = (
+
+    if (tracks) TrackResultsDiv = (
         <animated.div style={springProps} ref={trackResultsRef}>
           <Tracks results={tracks} typeOfResults={"tracks"} itemsPerPage={1} animateIn={true} typeOfTracks="genre"/>
         </animated.div>
       );
 
-      if (!tracks.length) TrackResultsDiv = (
+      if (!tracks) TrackResultsDiv = (
         <animated.div style={springProps} ref={trackResultsRef}>
         </animated.div>
       );
-  };
+
  
   //DISPLAY LANGUAGE SELECTION SEARCH BAR
   let LanguageSelectDiv;

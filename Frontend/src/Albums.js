@@ -17,8 +17,6 @@ function Albums({typeOfAlbums}) {
   //VALUE OF VIEWPORT WIDTH
   const {viewportWidth} = useViewport();
   let itemsPerPage;
-  //NEED TO USE A RANDOM NUMBER TO FORCE COMPONENT RERENDER SO THAT THE VALUE OF ALBUM SLIDER GETS RESET TO 0 ON VIEWPORT RESIZING
-  const randomKeyForReRender = Math.random();
 
   //VIEWPORT BREAKPOINTS TO DETERMINT HOW MANY ALBUM COVERS TO VIEW AT ONCE
   if (viewportWidth < 1180 && viewportWidth > 770) {
@@ -48,7 +46,7 @@ function Albums({typeOfAlbums}) {
         <div style={props}>
 
           <div className="Main-Container">
-            <SearchResultList key={randomKeyForReRender} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={itemsPerPage} typeOfAlbums={typeOfAlbums}/>
+            <SearchResultList key={albums[0].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={itemsPerPage} typeOfAlbums={typeOfAlbums}/>
           </div>
 
         </div>
