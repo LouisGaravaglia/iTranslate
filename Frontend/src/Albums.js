@@ -14,12 +14,11 @@ function Albums({typeOfAlbums}) {
   //REDUX STORE
   const dispatch = useDispatch();
   const albums = useSelector(store => store.albums);
-  //VALUE OF VIEWPORT WIDTH
   const {viewportWidth} = useViewport();
   let itemsPerPage;
 
-  //VIEWPORT BREAKPOINTS TO DETERMINT HOW MANY ALBUM COVERS TO VIEW AT ONCE
-  if (viewportWidth < 1180 && viewportWidth > 770) {
+  //VIEWPORT BREAKPOINTS TO DETERMINT HOW MANY ALBUM COVERS TO DISPLAY AT ONCE
+  if (viewportWidth < 1180 && viewportWidth > 780) {
     itemsPerPage = 2;
   } else if (viewportWidth < 780) {
     itemsPerPage = 1;
@@ -46,7 +45,7 @@ function Albums({typeOfAlbums}) {
         <div style={props}>
 
           <div className="Main-Container">
-            <SearchResultList key={albums[0].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={itemsPerPage} typeOfAlbums={typeOfAlbums}/>
+            <SearchResultList key={albums[itemsPerPage].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={itemsPerPage} typeOfAlbums={typeOfAlbums}/>
           </div>
 
         </div>
