@@ -33,7 +33,7 @@ LYRCS is a web app that displays lyrics for a song in it's original language as 
 
 **Features**
 
-LYRCS is designed to be more inline with the expressive and fluid quality of the music one might search for. 
+LYRCS is designed with the UX in mind and to align with the expressive and fluid quality of music in general. 
 
 The most obvious feature you will notice is the animating background color. This was to give a visual clue that the section the user moved to contains different content then the previous and following ones. Also, it aligns with the changing of tempo an artist may direct, or the changing styles of music in genral.
 
@@ -79,7 +79,7 @@ Lyrics API is used to get the lyrics for the song. It require the artist name an
 
 IBM Watson Translation API is used to translate the lyrics. They provide over 60 languges to translate to and lucikly have a pretty effective source text read feature where you don't need to explicitly say what language the source text is in ordet to translate to the desired target text.
 
-**Database Schema**
+**Schema**
 
 ![](Schema/schema.png)
 
@@ -100,4 +100,4 @@ Deadline: November 28th, 2020
 * Phase 3 (11/20): Create browse by Danceability route with a bare bones slider to retrieve all songs based on the spotify danceability score.
 * Phase 4 (11/24): Update styling to have production ready typefaces and colors and finalize formatting.
 
-After Submitting my MVP on Deadline: Created bounce animations on hover for actionable items. Also, added color gradients for fonts.
+Things accomplished after submitting the MVP on Deadline: Created bounce animations on hover for actionable items. Also, added color gradients for fonts.
