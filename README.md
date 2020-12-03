@@ -3,7 +3,7 @@
 
 **LINK**
 
-https://lyrcsfrontend.herokuapp.com/
+https://lyrcs.herokuapp.com/
 
 **About**
 
@@ -26,11 +26,10 @@ LYRCS is a web app that displays lyrics for a song in it's original language as 
 * install dependencies in both Backend and Frontend folders
 * npm start in both Backend and Frontend in order to spin up server and react.
 
-**Testing Instructions**
+**Testing**
 
 * Backend: jest --runInBand
 * Frontend: npm test
-
 
 **Features**
 
@@ -41,12 +40,6 @@ The most obvious feature you will notice is the animating background color. This
 A large search bar was implemented front and center on the landing page. This is to benefit what the majority of users want to acheive when they come to a lyrics webiste: Find the song they want to pull down lyrics for.
 
 All sections when displaying results only display one result (artist, album, track, or genre) at a time. This is to not create a cluttered or overwhelming amount of information. When the user would like to see more results there is a slider in place of traditional pagination buttons. This allows for quick scrolling from beginning to end, and can also be used with arrow keys for a more indiviualized experience.
-
-**Testing**
-
-Frontend tests are located in the src folder next to each component which it tests. To run Frontend tests, cd to the Frontend folder and run the command: npm test
-
-Backend tests are located in the routes folder next to each route which it tests. To run Backend tests, cd to the Backend folder and run the command: jest --runInBand --coverage
 
 **User Flow**
 
@@ -68,19 +61,17 @@ This way, everything goes through the database first and keeps a consitent appro
 
 **Tech Stack**
 
-I will be using React / Redux / Node / Javascript / Express / PostgreSQL / JWT / Spring-React.
+React / Redux / Node / Javascript / Express / PostgreSQL / JWT / Spring-React.
 
 **User Demographic**
 
-Teen to twenty somethings. Users who are looking for a more UX forward approach to finding song lyrics with translations.
+Teen to twenty somethings. Users who are looking for a more UX centric approach to finding song lyrics with translations.
 
 **APIs**
 
-Spotify API: https://developer.spotify.com/documentation
-
-Lyrics API: https://lyricsovh.docs.apiary.io/#reference/0/lyrics-of-a-song/search?console=1
-
-IBM Watson Translation API: https://www.ibm.com/watson/services/language-translator/
+* Spotify API: https://developer.spotify.com/documentation
+* Lyrics API: https://lyricsovh.docs.apiary.io/#reference/0/lyrics-of-a-song/search?console=1
+* IBM Watson Translation API: https://www.ibm.com/watson/services/language-translator/
 
 Spotify's API is used to get search results based on the user's search request. This will then get the intial song info needed as well to get future song data utilized spotify's unique ids for each song, album, and artist.
 
@@ -94,7 +85,9 @@ IBM Watson Translation API is used to translate the lyrics. They provide over 60
 
 **Stretch Goals**
 
-I have a couple stretch goals. One is having user profiles where a user can update a translation to be more accurate. Another would be to imbed music videos of the songs using YouTube’s API. I'd also like to implement a typeahead searchbar would be as well.
+* Having user profiles where a user can update a translation to be 
+* Imbed music videos of the songs using YouTube’s API.
+* Implement a typeahead searchbar.
 
 **Initial Project Roadmap**
 
@@ -107,4 +100,4 @@ Deadline: November 28th, 2020
 * Phase 3 (11/20): Create browse by Danceability route with a bare bones slider to retrieve all songs based on the spotify danceability score.
 * Phase 4 (11/24): Update styling to have production ready typefaces and colors and finalize formatting.
 
-After Submitting MVP: Created animations for hover state.
+After Submitting my MVP on Deadline: Created bounce animations on hover for actionable items. Also, added color gradients for fonts.
