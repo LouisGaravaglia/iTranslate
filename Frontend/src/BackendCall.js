@@ -161,9 +161,7 @@ class BackendCall {
 //////////////////////////////////////  GET LYRICS FROM LYRICS API  //////////////////////////////////////
 
   static async getLyricsFromAPI(data) {
-    console.log("getLyricsFromAPI data: ", data);
     let res = await this.request("lyrics", data);
-    console.log("getLyricsFromAPI res: ", res);
     return res.data.response;
   };
 };

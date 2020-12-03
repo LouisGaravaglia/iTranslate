@@ -16,7 +16,7 @@ LYRCS is a web app that displays lyrics for a song in it's original language as 
 * Sign up for IBM Watson Translator API as well: https://www.ibm.com/watson/services/language-translator/
 * in the Backend folder, enter the psql environment and create a database to updload starter data in the dump.sql file: CREATE DATABASE new_itranslatedb;
 * run: psql new_itranslatedb < dump.sql
-* create .env file and enter the following variables:
+* create .env file in Backend and enter the following variables:
 * IBM_URL=(GET THIS BY CLICKING ON FULL DETAILS OF THE LANGUAGE TRANSLATOR SERVICE IN YOUR IBM DASHBOARD)
 * CLIENT_ID=(GET THIS FROM YOUR SPOTIFY DEVELOPER DASHBOARD - https://developer.spotify.com/dashboard/applications)
 * CLIENT_SECRET=(GET THIS FROM YOUR SPOTIFY DEVELOPER DASHBOARD - https://developer.spotify.com/dashboard/applications)
@@ -34,7 +34,7 @@ LYRCS is a web app that displays lyrics for a song in it's original language as 
 
 **Features**
 
-LYRCS is designed to be more inline with the expressive and fluid quality of a lot of the music one might search for. 
+LYRCS is designed to be more inline with the expressive and fluid quality of the music one might search for. 
 
 The most obvious feature you will notice is the animating background color. This was to give a visual clue that the section the user moved to contains different content then the previous and following ones. Also, it aligns with the changing of tempo an artist may direct, or the changing styles of music in genral.
 
@@ -59,6 +59,12 @@ Once the user finds the song they would like lyrics for and click it, a call is 
 After entering a language that they would like a translation (up to 65 languages are supported) to, a backend call to the IBM Watson Language Translator API will then get the translation.
 
 The viewport then scrolls down one more time to display that translation next to the original lyrics received from a call to the Lyrics API.
+
+**Data Flow**
+
+Get song objects from Spotify based on the value the user searched for. Take that artist name and song name from the Spotify object and make a call to the backend to see if it's already in the database. If so, retrieve from db. Otherwise, use that Spotify artist name, song, and album to make an API call to get song lyrics. Patch those lyrics in the Tracks table in database with the matching song. When we receive which language the user wants the song translated to, check databse to see if we have that language/translation in database. If so, retrieve from db. Otherwise, make a call to Translation API to get translated lyrics and store in a Translations table in DB. 
+
+This way, everything goes through the database first and keeps a consitent approach to how all aspects of the app function.
 
 **Tech Stack**
 
@@ -88,22 +94,17 @@ IBM Watson Translation API is used to translate the lyrics. They provide over 60
 
 **Stretch Goals**
 
-I have a couple stretch goals. One is having user profiles where a user can update a translation to be more accurate. Another would be to imbed music videos of the songs using YouTube’s API. Implementing a typeahead searchbar would be great as well.
+I have a couple stretch goals. One is having user profiles where a user can update a translation to be more accurate. Another would be to imbed music videos of the songs using YouTube’s API. I'd also like to implement a typeahead searchbar would be as well.
 
 **Initial Project Roadmap**
 
-Core Functionality: Need to be able to gather song/artist details (Genre, Popularity, Tempo, Release Year, etc) in order to be able to sort songs in database. Need to be able to take that artist name and song name in order to make an API call to get song lyrics. Store those lyrics with artist/song details in database. Make a call to Translation API to get translated lyrics and store with artist/song details in DB. Display all of the above on a single page to the user.
+Starting-Date: November 5th, 2020 
 
-Phase 1: Create a backend using Express to create Models and routes to make API requests and queries using pg to then insert into DB.
+Deadline: November 28th, 2020
 
-Phase 2: Create a database using PostgreSQL to store artist and song entries.
+* Phase 1 (11/16): Working minimalistic single page app for searching for songs and displaying lyrics/translation.
+* Phase 2 (11/18): Extend functionality to have two additional routes for browsing what is in the database and guaranteed to have lyrics.
+* Phase 3 (11/20): Create browse by Danceability route with a bare bones slider to retrieve all songs based on the spotify danceability score.
+* Phase 4 (11/24): Update styling to have production ready typefaces and colors and finalize formatting.
 
-Phase 3: Be able to make successful API calls to Spotify API in order to get artist and song info. Then be able to store that info in DB, and use it to make successful call to Lyrics API. Use that result to be able to make successful call to IBM Translation API. Store all to DB.
-
-Phase 4: Make a React Front End. Simplify it to have one component with a search bar asking for query, a confimration component display results to confirm the artist and song (whether that was found already in our DB, or pulled down from Spotify API). Then a display component to show the results.
-
-Phase 5: Refine React components/structure and implement sorting ability to search by genre/tempo/etc for entries already in DB.
-
-Extenstions: Youtube Music Video to be embeded on lyrics page. More complex searching ability. Linking either lyrics or artist/song details to listen on your spotify account. Possibly embed spotify player instead of Youtube Music Video.
-
-**Acheived By Deadline**
+After Submitting MVP: Created animations for hover state.

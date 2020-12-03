@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Spotify = require('../models/spotify_model');
 
-//SPOTIFY GET ROUTE
 router.get("/:handle", async function(req, res, next) {
   try {
     if (req.params.handle === "requestSearch") {
