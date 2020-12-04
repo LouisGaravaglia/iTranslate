@@ -33,13 +33,6 @@ function LanguageSelect({selectedTrackId, typeOfSearch}) {
     updateIsLoading();
   }, [translation, translationError, languageError])
 
-
-  useEffect(() => {
-
-    const updateIsLoading = () => {
-    };
-    updateIsLoading();
-  }, [translation])
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
   const handleLanguageSearchSubmit = async (searchVal) => {

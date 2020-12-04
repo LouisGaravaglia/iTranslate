@@ -16,6 +16,7 @@ function Albums({typeOfAlbums}) {
   const albums = useSelector(store => store.albums);
   const {viewportWidth} = useViewport();
   let itemsPerPage;
+  let albumKey;
 
   //VIEWPORT BREAKPOINTS TO DETERMINT HOW MANY ALBUM COVERS TO DISPLAY AT ONCE
   if (viewportWidth < 1180 && viewportWidth > 780) {
@@ -24,7 +25,14 @@ function Albums({typeOfAlbums}) {
     itemsPerPage = 1;
   } else {
     itemsPerPage = 3;
-  }
+  };
+
+  //ALBUM KEY WHICH WOULD CHANGE IF ITEMS PER PAGE CHANGED TO RERENDER COMPONENT IF NUMBER OF ALUMBS DISPLAYING IS CHANGING
+  if (itemsPerPage < albums.length) {
+    albumKey = itemsPerPage;
+  } else {
+    albumKey = 0;
+  };
 
 ////////////////////////////////////////////////////  HANDLE CLICK FUNCTIONS  ////////////////////////////////////////////////////
 
@@ -45,7 +53,7 @@ function Albums({typeOfAlbums}) {
         <div style={props}>
 
           <div className="Main-Container">
-            <SearchResultList key={albums[itemsPerPage].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={itemsPerPage} typeOfAlbums={typeOfAlbums}/>
+            <SearchResultList key={albums[albumKey].albumId} typeOfResults="albums" resultsArray={albums} handleSearch={handleAlbumClick} itemsPerPage={itemsPerPage} typeOfAlbums={typeOfAlbums}/>
           </div>
 
         </div>
