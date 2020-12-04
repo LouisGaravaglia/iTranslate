@@ -53,7 +53,9 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "danceability-results") displayDanceabilityResults = (
     <div className="Danceability-Result-Container">
-      <p onClick={handleTrackClick} className="Result-Subheader Danceability-Track-Subheader">{<span className="Result-Header Danceability-Track-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
+      <Hover scale={1.05}>
+        <p onClick={handleTrackClick} className="Result-Subheader Danceability-Track-Subheader">{<span className="Result-Header Danceability-Track-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
+      </Hover>
     </div>
   );
 
