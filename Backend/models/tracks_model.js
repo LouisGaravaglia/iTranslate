@@ -26,7 +26,6 @@ class Tracks {
       WHERE t.album_id = $1 AND lyrics != 'No Lyrics'`,
       [albumId]
     );
-        console.log("this is result: ", result.rows);
     return result.rows;
   };
 
