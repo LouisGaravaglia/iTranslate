@@ -34,9 +34,7 @@ class SpotifyAPI {
   * Pulls down more detailed data objects for the track, artist, and album
   * and we then parse that info and create our own objects for each
   * element containg the information we need.
-  * @param {string} trackId - unique spotify id for that track
-  * @param {string} artistId - unique spotify id for that artist
-  * @param {string} albumId - unique spotify id for that album
+  * @param {object} data - object containing unique spotify id for track, album, and artist
   */
   static async getTrackArtistAlbumData(data) {
     const trackId = data.trackId;

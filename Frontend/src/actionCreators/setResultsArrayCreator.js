@@ -13,6 +13,7 @@ export function setResultsArray(searchVal) {
 
   return async function(dispatch) {
     const results = await SpotifyAPI.requestSearch(searchVal);
+
     try {
 
       if (results === "Not Found") {

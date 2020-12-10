@@ -4,7 +4,7 @@ class Tracks {
 
   static async getDanceabilityTracks(data) {
     const result = await db.query (
-      `SELECT t.name AS "trackName", t.spotify_id AS "trackId",
+      `SELECT t.name AS "trackName", t.spotify_id AS "trackId", t.preview_url AS "previewURL",
        a.name AS "artistName", a.spotify_id AS "artistId",
       d.name AS "albumName", d.spotify_id AS "albumId"
       FROM tracks t 
@@ -13,18 +13,20 @@ class Tracks {
       WHERE t.danceability >= $1 AND t.danceability < $2 AND t.lyrics != 'No Lyrics'`, 
       [data.lowerLimit, data.upperLimit]
     );
+
     return result.rows;
   };
 
   static async getTracks(albumId) {
     const result = await db.query (
-      `SELECT t.name AS "trackName", t.spotify_id AS "trackId",
+      `SELECT t.name AS "trackName", t.spotify_id AS "trackId", t.preview_url AS "previewURL",
       t.artist_id AS "artistId", a.name AS "artistName", t.album_id AS "albumId"
       FROM tracks t
       JOIN artists a ON t.artist_id = a.spotify_id 
       WHERE t.album_id = $1 AND lyrics != 'No Lyrics'`,
       [albumId]
     );
+        console.log("this is result: ", result.rows);
     return result.rows;
   };
 

@@ -41,7 +41,7 @@ const SearchResult = memo((props) => {
   if (props.typeOfResults === "search-results") displaySearchResults = (
     <div className="Main-Result-Container">
     <div className="Result-Main-TopFiller"></div>
-      <Hover scale={1.05}>
+      <Hover scale={1.05} previewURL={props.previewURL ? props.previewURL : 'No URL'}>
         <p onClick={handleSearchClick} className="Result-Subheader Search-Track-Subheader">{<span className="Result-Header Search-Track-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
       </Hover>
     </div>
@@ -53,7 +53,7 @@ const SearchResult = memo((props) => {
 
   if (props.typeOfResults === "danceability-results") displayDanceabilityResults = (
     <div className="Danceability-Result-Container">
-      <Hover scale={1.05}>
+      <Hover scale={1.05} previewURL={props.previewURL ? props.previewURL : 'No URL'}>
         <p onClick={handleTrackClick} className="Result-Subheader Danceability-Track-Subheader">{<span className="Result-Header Danceability-Track-Header">{props.track}</span>} {<br></br>} by {props.artist} on {props.album}</p>
       </Hover>
     </div>
@@ -111,7 +111,7 @@ const SearchResult = memo((props) => {
   if (props.typeOfResults === "tracks") displayTracks = (
     <div className="Main-Result-Container">
     {props.needsPaginationSlider && <div className="Result-Main-TopFiller"></div>}
-      <Hover scale={1.05}>
+      <Hover scale={1.05} previewURL={props.previewURL ? props.previewURL : 'No URL'}>
         <p onClick={handleTrackClick} className={trackClassNames}>{props.trackName}</p>
       </Hover>
     </div>

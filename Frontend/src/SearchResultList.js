@@ -19,7 +19,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
     <>
       <div className="Result-Box">
         {loadingIcon}
-        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="search-results" handleClick={handleSearch} artist={r.artists[0].name} album={r.album.name} track={r.name} musicObject={r}/>)}
+        {resultsInView.map((r, i) => <SearchResult key={r.id} index={i} typeOfResults="search-results" handleClick={handleSearch} previewURL={r.preview_url} artist={r.artists[0].name} album={r.album.name} track={r.name} musicObject={r}/>)}
       </div> 
       {needsPaginationSlider && <PaginationSlider resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
       {!needsPaginationSlider && <div className="Main-Pagination-Slider-Placeholder"></div>}
@@ -60,7 +60,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "tracks") displayTracks = (
     <>
       <div className="Result-Box">
-        {resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="tracks" handleClick={handleSearch} artistName={r.artistName} trackName={r.trackName} musicObject={r} typeOfTracks={typeOfTracks} needsPaginationSlider={needsPaginationSlider}/>)}
+        {resultsInView.map((r, i) => <SearchResult key={r.trackId} index={i} typeOfResults="tracks" handleClick={handleSearch} artistName={r.artistName} trackName={r.trackName} previewURL={r.previewURL} musicObject={r} typeOfTracks={typeOfTracks} needsPaginationSlider={needsPaginationSlider}/>)}
       </div>
       {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Main-Pagination-Slider-Container" sliderClass="Main-Pagination-Slider"/>}
     </>
@@ -88,7 +88,7 @@ const SearchResultList = ({resultsArray, handleSearch, itemsPerPage, typeOfResul
   if (typeOfResults === "danceability-results") displayDanceabilityTracks = (
     <>
       <div className="Danceability-Result-Box">
-        {resultsArray.length && resultsInView.map((r, i) => <SearchResult key={i} index={i} typeOfResults="danceability-results" handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r} typeOfTracks="danceability"/>)}
+        {resultsArray.length && resultsInView.map((r, i) => <SearchResult key={r.trackId} index={i} typeOfResults="danceability-results" previewURL={r.previewURL} handleClick={handleSearch} artist={r.artistName} album={r.albumName} track={r.trackName} musicObject={r} typeOfTracks="danceability"/>)}
       </div>
       {needsPaginationSlider && <PaginationSlider  resultsArray={resultsArray} itemsPerPage={itemsPerPage} handleSliderChange={updateResultsInView} containerClass="Danceability-Pagination-Slider-Container" sliderClass="Danceability-Pagination-Slider"/>}
       {!needsPaginationSlider && <div className="Temp-v2"></div>}

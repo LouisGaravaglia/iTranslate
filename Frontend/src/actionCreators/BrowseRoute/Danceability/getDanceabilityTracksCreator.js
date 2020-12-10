@@ -24,6 +24,7 @@ export function getDanceabilityTracks(lowerLimit, upperLimit) {
         track["hasLyrics"] = true;
         track["inDatabase"] = true;
       };
+
       dispatch(addTracks(tracks));
     } catch(e) {
       dispatch(updateGeneralError(true));

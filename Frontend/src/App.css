@@ -89,7 +89,6 @@ a {
   cursor: pointer;
 }
 
-
 /* //////////////////////////////////////  BROWSE LANDING INDEX  ////////////////////////////////////// */
 
 .Browse-Landing {
@@ -233,8 +232,6 @@ flex: 0.1 0 1vh;
   outline:none;
   padding-right: 60px;
 }
-
-
 
 .icon {
   font-size: 1.5rem;
@@ -455,7 +452,7 @@ flex: 0.1 0 1vh;
   /* margin-bottom: 80px; */
   flex: 1 0 200px;
   /* border: 2px solid yellow; */
-  margin: 0 20px;
+  margin: 0 40px;
   padding: 0;
 }
 
