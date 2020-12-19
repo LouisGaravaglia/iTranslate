@@ -63,7 +63,15 @@ This way, everything goes through the database first and keeps a consitent appro
 
 **Tech Stack**
 
-React / Redux / Node / Javascript / Express / PostgreSQL / JWT / Spring-React.
+* Javascript
+* React
+* Redux
+* Node
+* Express
+* PostgreSQL
+* JWT
+* Spring-React
+* Material-UI
 
 **User Demographic**
 

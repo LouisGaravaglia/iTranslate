@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useRef, useCallback} from "react";
 import {animated, useSpring} from 'react-spring';
 
-
 const Hover = ({scale, timing = 150, children, previewURL='Not a Track'}) => {
   const [isHovered, setIsHovered] = useState(false);
   let audioVolume = 0.2;
@@ -12,8 +11,10 @@ const Hover = ({scale, timing = 150, children, previewURL='Not a Track'}) => {
     audioVolume = 0.0;
   };
 
+  //REF FOR EACH AUDIO OBJECT THAT IS UNIQUE TO EACH TRACK SO THAT IT CAN PLAY/PAUSE ON MOUSE-ENTER MOUSE-LEAVE
   const audio = useRef(new Audio(previewURL));
 
+  //BOUNCE ANIMATION CONFIGURATIONS
   const style = useSpring({
     display: 'inline-block',
     transform: isHovered
@@ -25,6 +26,7 @@ const Hover = ({scale, timing = 150, children, previewURL='Not a Track'}) => {
     },
   });
 
+  //SET THE TIMER TO STOP THE ANIMATION AFTER A SET AMOUNT OF TIME
   useEffect(() => {
 
     if (!isHovered) {
@@ -40,7 +42,7 @@ const Hover = ({scale, timing = 150, children, previewURL='Not a Track'}) => {
     };
   }, [isHovered, timing]);
 
-
+  //TRIGGER THE ANIMATION AND THE AUDIO ON MOUSE-ENTER
   const trigger = () => {
     setIsHovered(true);
 
@@ -50,6 +52,7 @@ const Hover = ({scale, timing = 150, children, previewURL='Not a Track'}) => {
     };
   };
 
+  //PAUSE THE AUDIO ON MOUSE-LEAVE
   const stopMusic = () => {
     
     if (previewURL !== 'Not a Track') {
@@ -59,7 +62,6 @@ const Hover = ({scale, timing = 150, children, previewURL='Not a Track'}) => {
 
   return (
     <animated.span className="Hover-Box" onMouseEnter={trigger} onMouseLeave={stopMusic} style={style}>
-
       {children}
     </animated.span>
   );

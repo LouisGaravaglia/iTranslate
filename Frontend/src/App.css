@@ -12,14 +12,12 @@ html, body {
 .Navbar-Container-Left {
   position: absolute;
   height: 80px;
-  /* border: solid 2px red; */
 }
 
 .Navbar-Container-Right {
   position: absolute;
   right: 0;
   height: 80px;
-  /* border: solid 2px red; */
 }
 
 a {
@@ -36,7 +34,6 @@ a {
   margin: 0;
   padding: 0;
   margin-left: 50px;
-  /* border: 2px solid magenta; */
 }
 
 .Navbar-Search {
@@ -46,7 +43,6 @@ a {
   color: #fff;
   margin: 0;
   padding: 0;
-  /* margin-left: 50px; */
 }
 
 .Navbar-Browse-Box {
@@ -56,7 +52,6 @@ a {
   margin: 0;
   padding: 0;
   margin-right: 50px;
-  /* border: 2px solid yellow; */
 }
 
 .Navbar-Browse {
@@ -117,14 +112,11 @@ a {
   justify-content: space-around;
   min-width: 100vw;
   min-height: 100vh;
-  /* margin: 0 20px; */
 }
 
 .Lyrics-Container {
-  /* background-color: #ef97bc; */
   margin: 0 20px 20px 50px;
   flex: 1 1 50vw;
-  /* border: 2px solid #fff; */
 }
 
 .Lyrics {
@@ -132,17 +124,14 @@ a {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
-  /* color: #522df1; */
   margin: 40px 40px;
 }
 
 /* //////////////////////////////////////  TRANSLATION  ////////////////////////////////////// */
 
 .Translation-Container {
-  /* background-color: #522df1; */
   margin: 0 50px 20px 20px;
   flex: 1 1 50vw;
-  /* border: 2px solid #fff; */
 }
 
 .Translation {
@@ -150,7 +139,6 @@ a {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
-  /* color: #fff; */
   margin: 40px 40px;
 }
 
@@ -278,8 +266,6 @@ flex: 0.1 0 1vh;
 
 /* //////////////////////////////////////  DANCEABILITY ROUTE ////////////////////////////////////// */
 
-
-/* DANCEABILITY */
 .Browse-Danceability-v2 {
   display: flex;
   flex-direction: column;
@@ -288,10 +274,8 @@ flex: 0.1 0 1vh;
   flex-wrap: nowrap;
   width: 100vw;
   height: 100vh;
-  /* border: 2px solid turquoise; */
 }
 
-/* DANCEABILITY */
 .Browse-Danceability-v2 h1{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 900;
@@ -299,22 +283,17 @@ flex: 0.1 0 1vh;
   background: linear-gradient(to right, #4f1efe  0%, #5d3bc5  100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* border: 2px solid blue; */
   text-align: center;
   margin: 20px 0 0;
 }
 
 
-/* DANCEABILITY - NO TRACKS */
 .Pagination-Slider-Placeholder-v2 {
-  /* border: 4px solid red; */
   width: 100vw;
   flex: 2;
 }
 
-/* DANCEABILITY - WITH TRACKS */
 .Temp-v2 {
-  /* border: 4px solid Purple; */
   width: 100vw;
   flex: 2;
 }
@@ -326,29 +305,24 @@ flex: 0.1 0 1vh;
   flex-wrap: wrap;
   width: 100vw;
   flex: 2;
-  /* border: 4px solid brown; */
 }
 
 .Danceability-Pagination-Slider {
   flex: 0 0 30vw;
 }
 
-/* DANCEABILITY */
 .Danceability-Slider-Container-v2 {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  /* border: 2px solid yellow; */
   width: 100vw;
 }
 
-/* DANCEABILITY */
 .Danceability-Slider-Item-v2 {
   flex: 0 0 80vw;
 }
 
-/* DANCEABILITY - NO TRACKS */
 .Danceability-No-Results-Container {
   text-align: center;
   display: flex;
@@ -358,7 +332,6 @@ flex: 0.1 0 1vh;
   width: 100vw;
   height: 100%;
   flex: 2;
-  /* border: 2px solid black; */
 }
 
 .Danceability-No-Results {
@@ -369,14 +342,12 @@ flex: 0.1 0 1vh;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: default;
-   /* border: 2px solid rgb(92, 255, 111); */
 }
 
 .Danceability-Result-Box {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 2px solid green; */
   text-align: center;
   width: 100vw;
   flex: 2;
@@ -388,13 +359,11 @@ flex: 0.1 0 1vh;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  /* border: 2px solid black; */
 }
 
 /* //////////////////////////////////////  RESULT (HEADER & SUBHEADER) ////////////////////////////////////// */
 
 .Result-Box {
-  /* border: 2px solid green; */
   text-align: center;
   width: 100vw;
   flex: 4;
@@ -429,7 +398,6 @@ flex: 0.1 0 1vh;
   flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
-  /* border: 4px solid red; */
 }
 
 .Main-Result-Container {
@@ -441,7 +409,6 @@ flex: 0.1 0 1vh;
   flex-direction: column;
   width: 100vw;
   height: 100%;
-  /* border: 2px solid black; */
 }
 
 .Result-Main {
@@ -449,23 +416,19 @@ flex: 0.1 0 1vh;
   font-weight: 100;
   font-size: 5rem;
   color: #fff;
-  /* margin-bottom: 80px; */
   flex: 1 0 200px;
-  /* border: 2px solid yellow; */
   margin: 0 40px;
   padding: 0;
 }
 
 .Hover-Box {
   flex: 0 1 auto;
-  /* border: 2px solid blue; */
   margin: 0;
   padding: 0;
 }
 
 .Result-Main-TopFiller {
-flex: 10 1 auto;
-/* border: 2px solid pink; */
+  flex: 10 1 auto;
 }
 
 .Main-Pagination-Slider-Container {
@@ -473,7 +436,6 @@ flex: 10 1 auto;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  /* border: 4px solid #3e8e41; */
   width: 100vw;
   flex: 3 0 20vh;
 }
@@ -483,7 +445,6 @@ flex: 10 1 auto;
 }
 
 .Main-Pagination-Slider-Placeholder {
-  /* border: 4px solid #3e8e41; */
   text-align: center;
   flex: 2 0 20vh;
 }
@@ -496,7 +457,6 @@ flex: 10 1 auto;
   align-items: center;
   flex-wrap: wrap;
   flex: 1 0 60vh;
-  /* border: 4px solid yellow; */
 }
 
 .Album {
@@ -531,7 +491,6 @@ flex: 10 1 auto;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   font-size: 2rem;
-  /* color: rgb(255, 183, 95); */
   z-index: 6;
   margin: 5px 5px;
 }
