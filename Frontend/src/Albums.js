@@ -14,6 +14,7 @@ function Albums({typeOfAlbums}) {
   //REDUX STORE
   const dispatch = useDispatch();
   const albums = useSelector(store => store.albums);
+  //VIEWPORT SIZE BASED VARIABLES
   const {viewportWidth} = useViewport();
   let itemsPerPage;
   let albumKey;
