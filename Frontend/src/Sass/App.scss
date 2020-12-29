@@ -1,0 +1,26 @@
+@import "components/navbar";
+@import "components/toTopArrow";
+@import "components/browseLanding";
+@import "components/lyrics";
+@import "components/translation";
+@import "components/searchBar";
+@import "components/flashMessage";
+@import "components/danceabilityRoute";
+@import "components/result";
+@import "components/mainContainer";
+@import "components/album";
+@import "components/loadingIcon";
+@import "components/searchFontColors";
+@import "components/browseByDanceabilityFontColors";
+@import "components/browseByArtistsFontColors";
+@import "components/browseByGenreFontColors";
+@import "mediaQueries";
+
+html, body {
+  min-width: 100vh;
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px !important;
+  overflow-x: hidden; 
+}

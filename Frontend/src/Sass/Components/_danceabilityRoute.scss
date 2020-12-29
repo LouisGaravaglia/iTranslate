@@ -1,0 +1,94 @@
+.Browse-Danceability-v2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100vw;
+  height: 100vh;
+}
+
+.Browse-Danceability-v2 h1{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  background: linear-gradient(to right, #4f1efe  0%, #5d3bc5  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 20px 0 0;
+}
+
+
+.Pagination-Slider-Placeholder-v2 {
+  width: 100vw;
+  flex: 2;
+}
+
+.Temp-v2 {
+  width: 100vw;
+  flex: 2;
+}
+
+.Danceability-Pagination-Slider-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  flex: 2;
+}
+
+.Danceability-Pagination-Slider {
+  flex: 0 0 30vw;
+}
+
+.Danceability-Slider-Container-v2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+
+.Danceability-Slider-Item-v2 {
+  flex: 0 0 80vw;
+}
+
+.Danceability-No-Results-Container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100%;
+  flex: 2;
+}
+
+.Danceability-No-Results {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
+  font-size: 5rem;
+  background: linear-gradient(to right, #4f1efe  0%, #7c3bc5  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: default;
+}
+
+.Danceability-Result-Box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  flex: 2;
+}
+
+.Danceability-Result-Container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}

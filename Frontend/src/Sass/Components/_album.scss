@@ -1,0 +1,43 @@
+.Browse-Albums {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1 0 60vh;
+}
+
+.Album {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1 0 21%;
+  margin: 40px;
+}
+
+.Album-Name-Box {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 300px;
+  width: 300px;
+  background-color: #3800a7;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.Album-Name {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  z-index: 6;
+  margin: 5px 5px;
+}
