@@ -1,0 +1,48 @@
+.Artist-Artists {
+  background: linear-gradient(to right, #ff4bde 0%, #b84dfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Artist-Albums {
+  background: linear-gradient(to right, #fdc3df 0%, #b84dfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Artist-Tracks {
+  background: linear-gradient(to right, #6a2fdc 0%, #8943b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Artist-Language {
+  background: linear-gradient(to right, #bf00ff 0%, #e167fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Artist-Language-Text {
+  color: #dba3e6;
+}
+
+.Artist-Language-Button {
+  color: #dba3e6;
+}
+
+.Artist-Lyrics {
+  background: linear-gradient(to right, #4f1efe 0%, #7c3bc5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.Artist-Translation {
+  background: linear-gradient(to right, #7c3bc5 0%, #ce5b93 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}

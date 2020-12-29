@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Sass/App.scss';
 import {Spring} from 'react-spring/renderprops';
 import {useHistory} from "react-router-dom";
 //REDUX IMPORTS

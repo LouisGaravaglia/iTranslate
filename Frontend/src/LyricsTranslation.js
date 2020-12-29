@@ -1,6 +1,6 @@
 import React from 'react';
 import {Spring} from 'react-spring/renderprops';
-import './App.css';
+import './Sass/App.scss';
 //REDUX IMPORTS
 import {useSelector} from "react-redux";
 

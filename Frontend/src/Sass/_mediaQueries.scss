@@ -1,0 +1,148 @@
+/* //////////////////////////////////////  MAX WIDTH 768PX  ////////////////////////////////////// */
+
+@media only screen and (max-width: 768px) {
+
+  .Search-Field-Content h1 {
+    font-size: 4rem;
+  }
+
+  .Result-Header {
+    font-size: 4rem;
+  }
+
+  .Result-Subheader {
+    font-size: 1.5rem;
+  }
+
+  .Result-Main {
+    font-size: 4rem;
+  }
+
+  .Danceability-No-Results {
+    font-size: 4rem;
+  }
+
+  .Translation-Container {
+    margin: 0 10px 20px 5px;
+  }
+
+  .Lyrics-Container {
+    margin: 0 10px 20px 5px;
+  }
+
+  .Lyrics {
+    font-size: 1rem;
+    margin: 20px 20px;
+  }
+
+  .Translation {
+    font-size: 1rem;
+    margin: 20px 20px;
+  }
+
+  .FlashMessage p {
+    font-size: 1.5rem;
+  }
+
+}
+
+/* //////////////////////////////////////  MAX WIDTH 623PX  ////////////////////////////////////// */
+
+@media only screen and (max-width: 623px) {
+
+  .Search-Field-Content h1 {
+    font-size: 3rem;
+  }
+
+  .Result-Header {
+    font-size: 3rem;
+  }
+
+  .Result-Subheader {
+    font-size: 1rem;
+  }
+
+  .Result-Main {
+    font-size: 3rem;
+  }
+
+  .Danceability-No-Results {
+    font-size: 3rem;
+  }
+
+  .Browse-Landing p {
+    font-size: 3rem;
+  }
+
+  .Lyrics-Translation {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .Translation-Container {
+    flex: 1 0 100%;
+    margin: 0 10px 20px 5px;
+    max-width: 450px;
+  }
+
+  .Lyrics-Container {
+    flex: 1 0 100%;
+    margin: 0 10px 20px 5px;
+    max-width: 450px;
+  }
+
+  .Lyrics {
+    font-size: 1rem;
+    margin: 20px 20px;
+  }
+
+  .Translation {
+    font-size: 1rem;
+    margin: 20px 20px;
+  }
+
+  .FlashMessage p {
+    font-size: 1rem;
+  }
+
+}
+
+/* //////////////////////////////////////  MAX WIDTH 500PX  ////////////////////////////////////// */
+
+@media only screen and (max-width: 500px) {
+
+  .Search-Field-Content h1 {
+    font-size: 2.5rem;
+  }
+
+  .Browse-Landing p {
+    font-size: 2.5rem;
+  }
+
+  .Translation-Container {
+    flex: 1 0 100%;
+    margin: 0 10px 20px 5px;
+    max-width: 300px;
+  }
+
+  .Lyrics-Container {
+    flex: 1 0 100%;
+    margin: 0 10px 20px 5px;
+    max-width: 300px;
+  }
+
+  .Lyrics {
+    font-size: 1rem;
+    margin: 20px 20px;
+  }
+
+  .Translation {
+    font-size: 1rem;
+    margin: 20px 20px;
+  }
+
+  .FlashMessage p {
+    font-size: 1rem;
+  }
+
+}
