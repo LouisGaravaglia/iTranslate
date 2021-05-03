@@ -3,7 +3,7 @@
 
 **LINK**
 
-https://lyrcs.herokuapp.com/
+http://findlyrcs.herokuapp.com/
 
 **About**
 
