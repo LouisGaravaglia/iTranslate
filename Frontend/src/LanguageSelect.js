@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Spring} from 'react-spring/renderprops';
-import './Sass/App.scss';
+import './sass/App.scss';
 //COMPONENT IMPORTS
 import SearchBar from "./SearchBar";
 //REDUX IMPORTS

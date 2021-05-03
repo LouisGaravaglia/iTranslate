@@ -11,7 +11,7 @@ const startingState = {albums: [{albumId: 42}]};
 
 /**
  * reducer function to mimic the reducer used in Redux.
- * @param {object} state - holds an object of data used within the components
+ * @param {object} state - holds an object of data used within the components.
  * @param {object} action - object where the values are strings used to fire certain actions
  */
 function reducer(state = startingState, action) {

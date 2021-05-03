@@ -1,6 +1,6 @@
 import React from 'react';
 import {Spring} from 'react-spring/renderprops';
-import './Sass/App.scss';
+import './sass/App.scss';
 //COMPONENT IMPORTS
 import SearchResultList from "./SearchResultList";
 //REDUX IMPORTS
@@ -18,6 +18,7 @@ function Albums({typeOfAlbums}) {
   const {viewportWidth} = useViewport();
   let itemsPerPage;
   let albumKey;
+  let deleteVal;
 
   //VIEWPORT BREAKPOINTS TO DETERMINT HOW MANY ALBUM COVERS TO DISPLAY AT ONCE
   if (viewportWidth < 1180 && viewportWidth > 780) {

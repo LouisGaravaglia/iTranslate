@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
 import {useSpring, animated} from 'react-spring';
-import './Sass/App.scss';
+import './sass/App.scss';
 //COMPONENT IMPORTS
 import SearchResultList from "./SearchResultList";
 import LyricsTranslation from "./LyricsTranslation";
